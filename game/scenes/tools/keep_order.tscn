@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjlaxlvn4iabj"]
+
+[sub_resource type="GDScript" id="GDScript_gdxd3"]
+script/source = "@tool extends Node
+
+@export var keep_at_front : bool = true
+
+func _ready() -> void:
+	get_parent().get_parent().child_order_changed.connect(refresh, CONNECT_DEFERRED)
+	refresh.call_deferred()
+
+func refresh() -> void:
+	if not is_inside_tree(): return
+	get_parent().get_parent().move_child(get_parent(), -1 if keep_at_front else 0)
+"
+
+[node name="keep_order" type="Node"]
+script = SubResource("GDScript_gdxd3")

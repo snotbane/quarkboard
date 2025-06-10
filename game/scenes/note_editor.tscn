@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cckp0xcmsl721"]
+
+[ext_resource type="Theme" uid="uid://d2ud4ka26conv" path="res://game/themes/note_editor_theme.tres" id="1_cpj37"]
+[ext_resource type="Script" uid="uid://dt5ivtpkn4c16" path="res://game/scenes/arch_editor.gd" id="1_qnr3x"]
+[ext_resource type="PackedScene" uid="uid://bg2ld57jvvkyf" path="res://game/scenes/sticky_tag_list.tscn" id="3_cpj37"]
+
+[node name="note_editor" type="PanelContainer" node_paths=PackedStringArray("main_viewport", "title_edit", "text_edit", "last_modified_label")]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_cpj37")
+script = ExtResource("1_qnr3x")
+main_viewport = NodePath("v_box_container")
+title_edit = NodePath("v_box_container/margin_container/v_box_container/title_edit")
+text_edit = NodePath("v_box_container/margin_container/v_box_container/text_edit")
+last_modified_label = NodePath("v_box_container/last_modified")
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="margin_container" type="MarginContainer" parent="v_box_container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="v_box_container/margin_container"]
+layout_mode = 2
+
+[node name="title_edit" type="LineEdit" parent="v_box_container/margin_container/v_box_container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+placeholder_text = "New Note"
+
+[node name="sticky_tag_list" parent="v_box_container/margin_container/v_box_container" instance=ExtResource("3_cpj37")]
+layout_mode = 2
+
+[node name="text_edit" type="TextEdit" parent="v_box_container/margin_container/v_box_container"]
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+scroll_past_end_of_file = true
+scroll_fit_content_height = true
+
+[node name="last_modified" type="Label" parent="v_box_container"]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+text = "now"
+horizontal_alignment = 2
+
+[connection signal="text_changed" from="v_box_container/margin_container/v_box_container/title_edit" to="." method="_on_title_edit_text_changed" unbinds=1]
+[connection signal="text_changed" from="v_box_container/margin_container/v_box_container/text_edit" to="." method="_on_text_edit_text_changed"]

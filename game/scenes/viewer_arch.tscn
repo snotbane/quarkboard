@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2gr03het0im7"]
+
+[ext_resource type="Script" uid="uid://b5uok6lidwsf2" path="res://game/scenes/arch_sticky_list.gd" id="1_4gc2u"]
+[ext_resource type="PackedScene" uid="uid://daahh7834rymb" path="res://game/scenes/on_click.tscn" id="1_gdxd3"]
+[ext_resource type="PackedScene" uid="uid://dmqurdk2vcds0" path="res://game/scenes/arch_sticky.tscn" id="1_wwica"]
+[ext_resource type="PackedScene" uid="uid://cjlaxlvn4iabj" path="res://game/scenes/tools/keep_order.tscn" id="4_4gc2u"]
+[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/Add.svg" id="4_x4vq0"]
+[ext_resource type="PackedScene" uid="uid://cckp0xcmsl721" path="res://game/scenes/note_editor.tscn" id="7_gdxd3"]
+
+[node name="sticky_viewer_arch" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_tab_index = 0
+
+[node name="h_split_container" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+dragger_visibility = 2
+
+[node name="entry_list" type="PanelContainer" parent="h_split_container"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="h_split_container/entry_list"]
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="on_click" parent="h_split_container/entry_list/scroll_container" instance=ExtResource("1_gdxd3")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="margin_container" type="MarginContainer" parent="h_split_container/entry_list/scroll_container/on_click"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="sticky_list" type="VBoxContainer" parent="h_split_container/entry_list/scroll_container/on_click/margin_container" node_paths=PackedStringArray("arch_editor")]
+layout_mode = 2
+script = ExtResource("1_4gc2u")
+prefab_sticky = ExtResource("1_wwica")
+arch_editor = NodePath("../../../../../note_editor")
+
+[node name="create_new_button" type="Button" parent="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list"]
+layout_mode = 2
+text = "Create New"
+icon = ExtResource("4_x4vq0")
+
+[node name="keep_order" parent="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list/create_new_button" instance=ExtResource("4_4gc2u")]
+
+[node name="note_editor" parent="h_split_container" instance=ExtResource("7_gdxd3")]
+layout_mode = 2
+
+[connection signal="clicked" from="h_split_container/entry_list/scroll_container/on_click" to="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list" method="set_current_entry"]
+[connection signal="pressed" from="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list/create_new_button" to="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list" method="create_new_entry"]

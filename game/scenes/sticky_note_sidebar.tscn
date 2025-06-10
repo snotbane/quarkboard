@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cid3w3fvosd01"]
+
+[ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="1_6o8mx"]
+[ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="1_s15y1"]
+[ext_resource type="Script" uid="uid://cym5bbbr4b60g" path="res://game/scenes/sticky_note_sidebar.gd" id="2_ordqw"]
+[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/Add.svg" id="2_s15y1"]
+
+[node name="tags_sidebar" type="PanelContainer"]
+custom_minimum_size = Vector2(150, 400)
+theme = ExtResource("1_s15y1")
+script = ExtResource("2_ordqw")
+metadata/_tab_index = 0
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="v_box_container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="v_box_container/scroll_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="panel_container" parent="v_box_container/scroll_container/v_box_container" instance=ExtResource("1_6o8mx")]
+layout_mode = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
+layout_mode = 2
+
+[node name="line_edit" type="LineEdit" parent="v_box_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New label..."
+
+[node name="add_button" type="Button" parent="v_box_container/h_box_container"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+icon = ExtResource("2_s15y1")
+icon_alignment = 1
+
+[connection signal="text_submitted" from="v_box_container/h_box_container/line_edit" to="v_box_container/h_box_container/line_edit" method="clear" unbinds=1]

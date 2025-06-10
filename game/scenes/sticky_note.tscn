@@ -1,0 +1,141 @@
+[gd_scene load_steps=13 format=3 uid="uid://b4nhaa2r8jthk"]
+
+[ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="1_sbmrn"]
+[ext_resource type="Script" uid="uid://lx0vmpe76ggc" path="res://game/scenes/sticky_note.gd" id="2_oxult"]
+[ext_resource type="Script" uid="uid://dbt3ls1vgvkc1" path="res://game/scripts/entry_instance.gd" id="3_p3gr4"]
+[ext_resource type="Script" uid="uid://cym5bbbr4b60g" path="res://game/scenes/sticky_note_sidebar.gd" id="4_p3gr4"]
+[ext_resource type="Script" uid="uid://287sp8iyseac" path="res://game/scripts/entry.gd" id="4_psk6j"]
+[ext_resource type="Script" uid="uid://mt5mmsrwui67" path="res://game/scripts/tag.gd" id="5_7oieu"]
+[ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="5_psk6j"]
+[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/Add.svg" id="6_7oieu"]
+[ext_resource type="PackedScene" uid="uid://b0g13pcx1c6ep" path="res://game/scenes/note_tool_button.tscn" id="7_4nljj"]
+[ext_resource type="PackedScene" uid="uid://bg2ld57jvvkyf" path="res://game/scenes/sticky_tag_list.tscn" id="8_p3gr4"]
+[ext_resource type="Texture2D" uid="uid://h0jdfjxi7xn3" path="res://game/icons/Tag.svg" id="8_qdq7i"]
+
+[sub_resource type="Resource" id="Resource_4nljj"]
+script = ExtResource("4_psk6j")
+title = ""
+text = ""
+time_created = 0
+time_modified = 0
+tags = Array[ExtResource("5_7oieu")]([])
+metadata/_custom_type_script = "uid://287sp8iyseac"
+
+[node name="sticky_graph_node" type="GraphNode" node_paths=PackedStringArray("inline_text_editor", "sidebar", "add_to_title")]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 376.0
+offset_bottom = 395.0
+mouse_filter = 1
+theme = ExtResource("1_sbmrn")
+position_offset = Vector2(40, 40)
+resizable = true
+title = "New Note"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("2_oxult")
+inline_text_editor = NodePath("h_box_container/panel_container/v_box_container/editor")
+sidebar = NodePath("h_box_container/sidebar")
+add_to_title = NodePath("buttons")
+
+[node name="entry_instance" type="Node" parent="."]
+script = ExtResource("3_p3gr4")
+entry = SubResource("Resource_4nljj")
+
+[node name="buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="tag_view_button" parent="buttons" instance=ExtResource("7_4nljj")]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("8_qdq7i")
+
+[node name="archive_button" parent="buttons" instance=ExtResource("7_4nljj")]
+layout_mode = 2
+tooltip_text = "Archive."
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="panel_container" type="PanelContainer" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/panel_container"]
+layout_mode = 2
+
+[node name="editor" type="TextEdit" parent="h_box_container/panel_container/v_box_container"]
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+scroll_smooth = true
+scroll_past_end_of_file = true
+scroll_fit_content_height = true
+
+[node name="tag_container" parent="h_box_container/panel_container/v_box_container" instance=ExtResource("8_p3gr4")]
+layout_mode = 2
+
+[node name="label" type="Label" parent="h_box_container/panel_container"]
+layout_mode = 2
+
+[node name="sidebar" type="PanelContainer" parent="h_box_container"]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_sbmrn")
+script = ExtResource("4_p3gr4")
+
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/sidebar"]
+layout_mode = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="h_box_container/sidebar/v_box_container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/sidebar/v_box_container/scroll_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="panel_container" parent="h_box_container/sidebar/v_box_container/scroll_container/v_box_container" instance=ExtResource("5_psk6j")]
+layout_mode = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="h_box_container/sidebar/v_box_container"]
+layout_mode = 2
+
+[node name="line_edit" type="LineEdit" parent="h_box_container/sidebar/v_box_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New label..."
+
+[node name="add_button" type="Button" parent="h_box_container/sidebar/v_box_container/h_box_container"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+icon = ExtResource("6_7oieu")
+icon_alignment = 1
+
+[connection signal="pressed" from="buttons/tag_view_button" to="." method="move_to_front"]
+[connection signal="toggled" from="buttons/tag_view_button" to="h_box_container/sidebar" method="set_visible"]
+[connection signal="focus_entered" from="h_box_container/panel_container/v_box_container/editor" to="." method="move_to_front"]
+[connection signal="text_changed" from="h_box_container/panel_container/v_box_container/editor" to="." method="_on_text_changed"]
+[connection signal="visibility_changed" from="h_box_container/sidebar" to="." method="_on_sidebar_visibility_changed"]
+[connection signal="focus_entered" from="h_box_container/sidebar/v_box_container/h_box_container/line_edit" to="." method="move_to_front"]
+[connection signal="text_submitted" from="h_box_container/sidebar/v_box_container/h_box_container/line_edit" to="h_box_container/sidebar/v_box_container/h_box_container/line_edit" method="clear" unbinds=1]

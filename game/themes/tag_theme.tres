@@ -1,0 +1,120 @@
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://lycwmhaoguar"]
+
+[ext_resource type="FontFile" uid="uid://buuo3u7hcng1c" path="res://game/fonts/NotoSans-Italic.ttf" id="1_82emy"]
+[ext_resource type="FontFile" uid="uid://34f5dce22wfg" path="res://game/fonts/FiraCode-VariableFont_wght.ttf" id="2_p12a8"]
+
+[sub_resource type="FontVariation" id="FontVariation_a43aa"]
+base_font = ExtResource("1_82emy")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tthv0"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 6
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mu80l"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 6
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p12a8"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 0.690196)
+corner_radius_top_left = 6
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 6
+
+[sub_resource type="FontVariation" id="FontVariation_mu80l"]
+base_font = ExtResource("2_p12a8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye4ne"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.06, 0.06, 0.06, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3fqy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.37, 0.37, 0.37, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="FontVariation" id="FontVariation_82emy"]
+base_font = ExtResource("1_82emy")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82emy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nkr7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82emy"]
+content_margin_left = 2.0
+content_margin_right = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 6
+
+[sub_resource type="FontVariation" id="FontVariation_ciqla"]
+base_font = ExtResource("2_p12a8")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p12a8"]
+
+[resource]
+Button/colors/icon_normal_color = Color(1, 1, 1, 0.501961)
+Button/fonts/font = SubResource("FontVariation_a43aa")
+Button/styles/hover = SubResource("StyleBoxFlat_tthv0")
+Button/styles/normal = SubResource("StyleBoxFlat_mu80l")
+Button/styles/pressed = SubResource("StyleBoxFlat_p12a8")
+CodeEdit/font_sizes/font_size = 16
+CodeEdit/fonts/font = SubResource("FontVariation_mu80l")
+GraphNode/styles/titlebar = SubResource("StyleBoxFlat_ye4ne")
+GraphNode/styles/titlebar_selected = SubResource("StyleBoxFlat_s3fqy")
+LineEdit/fonts/font = SubResource("FontVariation_82emy")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_82emy")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_1nkr7")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_82emy")
+TextEdit/font_sizes/font_size = 16
+TextEdit/fonts/font = SubResource("FontVariation_ciqla")
+TextEdit/styles/normal = SubResource("StyleBoxEmpty_p12a8")

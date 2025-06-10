@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlkwpktvuiwqo"]
+
+[ext_resource type="Theme" uid="uid://lycwmhaoguar" path="res://game/themes/tag_theme.tres" id="1_0vly6"]
+[ext_resource type="Script" uid="uid://dmntti7vlqg63" path="res://game/scenes/tag_toggle.gd" id="2_jlkhy"]
+[ext_resource type="Texture2D" uid="uid://twh64cnf5rdo" path="res://game/icons/Edit.svg" id="3_jlkhy"]
+
+[sub_resource type="GDScript" id="GDScript_jlkhy"]
+resource_name = "line_edit"
+script/source = "extends LineEdit
+
+signal visibility_changed_to(visible: bool)
+
+
+func _on_visibility_changed() -> void:
+	visibility_changed_to.emit(self.visible)
+	if not self.visible: return
+	self.grab_focus()
+
+
+func _on_text_submitted(new_text: String) -> void:
+	self.set_visible(false)
+"
+
+[node name="tag_toggle" type="PanelContainer" node_paths=PackedStringArray("tag_label")]
+offset_right = 6.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+theme = ExtResource("1_0vly6")
+script = ExtResource("2_jlkhy")
+tag_label = NodePath("h_box_container/tag_label")
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="checkbox" type="CheckBox" parent="h_box_container"]
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="tag_label" type="Button" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("1_0vly6")
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0.501961)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
+toggle_mode = true
+text = "Tag"
+flat = true
+alignment = 0
+icon_alignment = 2
+
+[node name="line_edit" type="LineEdit" parent="h_box_container/tag_label"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+text = "Tag"
+select_all_on_focus = true
+script = SubResource("GDScript_jlkhy")
+
+[node name="rename_button" type="Button" parent="h_box_container"]
+layout_mode = 2
+tooltip_text = "Rename this label (everywhere)."
+focus_mode = 0
+toggle_mode = true
+icon = ExtResource("3_jlkhy")
+flat = true
+
+[connection signal="text_changed" from="." to="h_box_container/tag_label/line_edit" method="set_text"]
+[connection signal="toggled" from="h_box_container/checkbox" to="h_box_container/tag_label" method="set_pressed_no_signal"]
+[connection signal="toggled" from="h_box_container/tag_label" to="h_box_container/checkbox" method="set_pressed_no_signal"]
+[connection signal="text_submitted" from="h_box_container/tag_label/line_edit" to="." method="set_text"]
+[connection signal="text_submitted" from="h_box_container/tag_label/line_edit" to="h_box_container/tag_label/line_edit" method="_on_text_submitted"]
+[connection signal="visibility_changed" from="h_box_container/tag_label/line_edit" to="h_box_container/tag_label/line_edit" method="_on_visibility_changed"]
+[connection signal="visibility_changed_to" from="h_box_container/tag_label/line_edit" to="h_box_container/rename_button" method="set_pressed_no_signal"]
+[connection signal="toggled" from="h_box_container/rename_button" to="h_box_container/tag_label/line_edit" method="set_visible"]

@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=3 format=3 uid="uid://c0u7joo4tq8y3"]
+
+[ext_resource type="FontFile" uid="uid://buuo3u7hcng1c" path="res://game/fonts/NotoSans-Italic.ttf" id="1_i0bsj"]
+
+[sub_resource type="FontVariation" id="FontVariation_op47c"]
+base_font = ExtResource("1_i0bsj")
+
+[resource]
+font = SubResource("FontVariation_op47c")

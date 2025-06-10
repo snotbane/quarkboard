@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://daahh7834rymb"]
+
+[sub_resource type="GDScript" id="GDScript_4gc2u"]
+script/source = "extends Control
+
+signal clicked
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			clicked.emit()
+"
+
+[node name="on_click" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_4gc2u")
