@@ -1,6 +1,5 @@
-extends VBoxContainer
+extends StickyContainer
 
-@export var prefab_sticky : PackedScene
 @export var arch_editor : ArchEditor
 
 var current_entry : Entry :
@@ -30,10 +29,12 @@ var current_sticky : ArchSticky :
 	get: return _current_sticky
 	set(value): current_entry = value.entry
 
+func create_new_sticky(entry := Entry.new()) -> Node:
+	var result : ArchSticky = super.create_new_sticky(entry)
+	result.clicked.connect(set_current_entry)
+	set_current_entry.call_deferred(result.entry)
+	return result
 
-func create_new_entry() -> void:
-	var node : ArchSticky = prefab_sticky.instantiate()
-	self.add_child(node)
-	node.clicked.connect(set_current_entry)
-	node.entry = Entry.new()
-	set_current_entry.call_deferred(node.entry)
+
+func _ready() -> void:
+	super._ready()

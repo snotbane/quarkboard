@@ -57,8 +57,8 @@ theme_override_constants/margin_bottom = 8
 [node name="sticky_list" type="VBoxContainer" parent="h_split_container/entry_list/scroll_container/on_click/margin_container" node_paths=PackedStringArray("arch_editor")]
 layout_mode = 2
 script = ExtResource("1_4gc2u")
-prefab_sticky = ExtResource("1_wwica")
 arch_editor = NodePath("../../../../../note_editor")
+prefab_sticky = ExtResource("1_wwica")
 
 [node name="create_new_button" type="Button" parent="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list"]
 layout_mode = 2
@@ -71,4 +71,4 @@ icon = ExtResource("4_x4vq0")
 layout_mode = 2
 
 [connection signal="clicked" from="h_split_container/entry_list/scroll_container/on_click" to="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list" method="set_current_entry"]
-[connection signal="pressed" from="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list/create_new_button" to="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list" method="create_new_entry"]
+[connection signal="pressed" from="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list/create_new_button" to="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list" method="create_new_sticky"]

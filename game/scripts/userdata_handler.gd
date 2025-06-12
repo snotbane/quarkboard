@@ -6,8 +6,10 @@ static var inst : Master
 
 # static var userdata : Userdata
 
-# func _ready() -> void:
-# 	Master.inst = self
+func _ready() -> void:
+	Master.inst = self
+
+
 
 # 	userdata = Userdata.new()
 # 	if FileAccess.file_exists(PATH): load_json()

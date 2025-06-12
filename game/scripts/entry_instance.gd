@@ -1,7 +1,7 @@
 class_name EntryInstance extends Node
 
 var _entry : Entry
-@export var entry : Entry :
+var entry : Entry :
 	get: return _entry
 	set(value):
 		if _entry == value: return

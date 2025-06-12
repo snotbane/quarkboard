@@ -14,42 +14,50 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_cpj37")
 script = ExtResource("1_qnr3x")
-main_viewport = NodePath("v_box_container")
-title_edit = NodePath("v_box_container/margin_container/v_box_container/title_edit")
-text_edit = NodePath("v_box_container/margin_container/v_box_container/text_edit")
-last_modified_label = NodePath("v_box_container/last_modified")
+main_viewport = NodePath("margin_container")
+title_edit = NodePath("margin_container/v_box_container/title_edit")
+text_edit = NodePath("margin_container/v_box_container/text_edit")
+last_modified_label = NodePath("margin_container/v_box_container/text_edit/last_modified")
 
-[node name="v_box_container" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="margin_container" type="MarginContainer" parent="v_box_container"]
+[node name="margin_container" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="v_box_container" type="VBoxContainer" parent="v_box_container/margin_container"]
+[node name="v_box_container" type="VBoxContainer" parent="margin_container"]
 layout_mode = 2
 
-[node name="title_edit" type="LineEdit" parent="v_box_container/margin_container/v_box_container"]
+[node name="title_edit" type="LineEdit" parent="margin_container/v_box_container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 placeholder_text = "New Note"
 
-[node name="sticky_tag_list" parent="v_box_container/margin_container/v_box_container" instance=ExtResource("3_cpj37")]
+[node name="sticky_tag_list" parent="margin_container/v_box_container" instance=ExtResource("3_cpj37")]
 layout_mode = 2
 
-[node name="text_edit" type="TextEdit" parent="v_box_container/margin_container/v_box_container"]
+[node name="text_edit" type="TextEdit" parent="margin_container/v_box_container"]
 layout_mode = 2
 size_flags_vertical = 3
 wrap_mode = 1
 scroll_past_end_of_file = true
 scroll_fit_content_height = true
 
-[node name="last_modified" type="Label" parent="v_box_container"]
-layout_mode = 2
+[node name="last_modified" type="Label" parent="margin_container/v_box_container/text_edit"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -31.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 8
 mouse_filter = 1
 text = "now"
 horizontal_alignment = 2
 
-[connection signal="text_changed" from="v_box_container/margin_container/v_box_container/title_edit" to="." method="_on_title_edit_text_changed" unbinds=1]
-[connection signal="text_changed" from="v_box_container/margin_container/v_box_container/text_edit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="margin_container/v_box_container/title_edit" to="." method="_on_title_edit_text_changed" unbinds=1]
+[connection signal="text_changed" from="margin_container/v_box_container/text_edit" to="." method="_on_text_edit_text_changed"]

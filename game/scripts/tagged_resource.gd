@@ -15,7 +15,7 @@ func _export_json(json: Dictionary) -> void:
 
 func _import_json(json: Dictionary) -> void:
 	tags.clear()
-	for tag_json in json[K_TAGS]: tags.push_back(Tag.new_from_json(tag_json))
+	# for tag_json in json[K_TAGS]: tags.push_back(Tag.new_from_json(tag_json))
 
 @export var tags : Array[Tag]
 

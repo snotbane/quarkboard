@@ -1,11 +1,15 @@
 class_name Entry extends TaggedResource
 
 const SECONDS_IN_DAY := 86400
+const SECONDS_IN_HOUR := 3600
+const SECONDS_IN_MINUTE := 60
 
-const K_TITLE := &"title"
-const K_TEXT := &"text"
-const K_TIME_CREATED := &"time_created"
-const K_TIME_MODIFIED := &"time_modified"
+const FOLDER_PATH := "user://entry/"
+
+const K_TITLE := "title"
+const K_TEXT := "text"
+const K_TIME_CREATED := "time_created"
+const K_TIME_MODIFIED := "time_modified"
 
 const DEFAULT_TITLE := "New Note"
 
@@ -14,11 +18,23 @@ const TENSE_FUTURE := "...in the future?"
 const TENSE_NOW := "now"
 const TENSE_UNKNOWN := "...in a time unknown..."
 
+static var RE_JSON_PATH := RegEx.create_from_string(r"\.json$")
 static var RE_ANY_NON_WHITESPACE := RegEx.create_from_string(r"\S")
 static var RE_TRIM_WHITESPACE := RegEx.create_from_string(r"(?ms)^\s+|(?:\s+$(?=\S))")
 
 static var NOW : int :
 	get: return floori(Time.get_unix_time_from_system())
+
+
+static var REGISTRY : Array[Entry]
+
+static func _static_init() -> void:
+	var paths := MincuzUtils.get_paths_in_folder(FOLDER_PATH, RE_JSON_PATH)
+	for path in paths:
+		var entry := Entry.new()
+		entry.load_file(path)
+		REGISTRY.push_back(entry)
+
 
 signal modified
 
@@ -28,18 +44,16 @@ var _title : String
 	set(value):
 		if _title == value: return
 		_title = value
-		time_modified = NOW
-		modified.emit()
+		save_changes()
 var _text : String
 @export var text : String :
 	get: return _text
 	set(value):
 		if _text == value: return
 		_text = value
-		time_modified = NOW
-		modified.emit()
-@export_storage var time_created : int
-@export_storage var time_modified : int
+		save_changes()
+@export var time_created : int
+@export var time_modified : int
 
 var trimmed_text : String :
 	get: return RE_TRIM_WHITESPACE.sub(text, String(), true)
@@ -60,8 +74,8 @@ func _init() -> void:
 	super._init()
 	title = ""
 	text = ""
-	time_created = NOW
-	time_modified = time_created
+	time_created = 0
+	time_modified = 0
 
 
 func _export_json(json: Dictionary) -> void:
@@ -72,6 +86,7 @@ func _export_json(json: Dictionary) -> void:
 		K_TIME_CREATED: time_created,
 		K_TIME_MODIFIED: time_modified,
 	}, true)
+	print("export: ", json)
 
 func _import_json(json: Dictionary) -> void:
 	super._import_json(json)
@@ -80,6 +95,14 @@ func _import_json(json: Dictionary) -> void:
 	# self.tags = json[K_TAGS]
 	self.time_created = json[K_TIME_CREATED]
 	self.time_modified = json[K_TIME_MODIFIED]
+	print("import: ", json)
+	print("time_created: ", self.time_created)
+
+
+func save_changes() -> void:
+	time_modified = NOW
+	save_file(get_save_path(FOLDER_PATH))
+	modified.emit()
 
 
 func set_text(new_text: String) -> void:
@@ -90,11 +113,11 @@ static func string_is_blank(s: String) -> bool:
 
 ## Adapted from:	https://github.com/godotengine/godot-proposals/issues/5515#issuecomment-1409971613
 static func get_local_datetime(unix_time: int) -> int:
-	return unix_time + Time.get_time_zone_from_system().bias * 60
+	return unix_time + Time.get_time_zone_from_system().bias * SECONDS_IN_MINUTE
 
 
 static func datetime_long_blurb(unix_time: int) -> String:
-	return "%s %s" % [Time.get_datetime_string_from_unix_time(get_local_datetime(unix_time), true), Time.get_time_zone_from_system().name]
+	return Time.get_datetime_string_from_unix_time(get_local_datetime(unix_time), true)
 
 
 static func datetime_short_blurb(unix_time: int) -> String:
