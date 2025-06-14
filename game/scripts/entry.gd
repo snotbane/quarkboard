@@ -45,6 +45,8 @@ var placeholder_title : String :
 		return Entry.DEFAULT_TITLE if result.is_empty() else result
 
 
+func get_folder() -> String:
+	return "user://notes/"
 
 
 func _export_json(json: Dictionary) -> void:
