@@ -1,9 +1,21 @@
-[gd_scene format=3 uid="uid://d4bskt5ablf83"]
+[gd_scene load_steps=3 format=3 uid="uid://d4bskt5ablf83"]
 
-[node name="field" type="Control"]
-layout_mode = 3
-anchors_preset = 15
+[ext_resource type="Script" uid="uid://d6vkmrwkavuj" path="res://addons/tools_mincuz/scenes/field/field.gd" id="1_3nmml"]
+[ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_djqfu"]
+
+[node name="Field" type="PanelContainer"]
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 0
+theme = ExtResource("1_djqfu")
+theme_type_variation = &"Field"
+script = ExtResource("1_3nmml")
+label_text = "New Field"
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="label" type="Label" parent="hbox"]
+layout_mode = 2
+text = "New Field"
