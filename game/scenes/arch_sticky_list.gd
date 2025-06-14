@@ -29,6 +29,7 @@ var current_sticky : ArchSticky :
 	get: return _current_sticky
 	set(value): current_entry = value.entry
 
+
 func create_new_sticky(entry := Entry.new()) -> Node:
 	var result : ArchSticky = super.create_new_sticky(entry)
 	result.clicked.connect(set_current_entry)
