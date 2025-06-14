@@ -1,10 +1,10 @@
 class_name DebugGhostAutoload extends Node
 
-static var GHOST_2D_SCENE_PATH := "res://addons/tools_mincuz/scenes/debug_ghost_2d.tscn"
+static var GHOST_2D_SCENE_PATH := "res://addons/tools_mincuz/scenes/ghost/debug_ghost_2d.tscn"
 static var GHOST_2D_SCENE : PackedScene :
 	get: return load(GHOST_2D_SCENE_PATH)
 
-static var GHOST_3D_SCENE_PATH := "res://addons/tools_mincuz/scenes/debug_ghost_3d.tscn"
+static var GHOST_3D_SCENE_PATH := "res://addons/tools_mincuz/scenes/ghost/debug_ghost_3d.tscn"
 static var GHOST_3D_SCENE : PackedScene :
 	get: return load(GHOST_3D_SCENE_PATH)
 

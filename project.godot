@@ -17,7 +17,7 @@ config/icon="uid://dslsctocna5le"
 
 [autoload]
 
-debug_ghost_autoload="*res://addons/tools_mincuz/scripts/debug_ghost_autoload.gd"
+debug_ghost_autoload="*res://addons/tools_mincuz/scenes/ghost/debug_ghost_autoload.gd"
 debug_fullscreen_controller="*res://addons/tools_mincuz/scripts/debug_fullscreen_controller.gd"
 Autoload="*res://game/scripts/autoload.gd"
 

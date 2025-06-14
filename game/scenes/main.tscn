@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnrsahh22rx5v"]
+[gd_scene load_steps=11 format=3 uid="uid://bnrsahh22rx5v"]
 
 [ext_resource type="PackedScene" uid="uid://chlrcdsr2bm6a" path="res://game/scenes/tools/safe_margin_container.tscn" id="1_7j1va"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_20rwd"]
 [ext_resource type="Texture2D" uid="uid://cp5oeeonux0ic" path="res://game/icons/ViewerArch.svg" id="2_ejk4j"]
 [ext_resource type="PackedScene" uid="uid://bltxfxtyibkr8" path="res://game/scenes/viewer_canvas.tscn" id="2_jbjdl"]
 [ext_resource type="Texture2D" uid="uid://dvb17jhkdjx6y" path="res://game/icons/ViewerFlower.svg" id="3_l3qal"]
+[ext_resource type="Texture2D" uid="uid://8u2p3gyjf31w" path="res://game/icons/Tools.svg" id="3_rmvmd"]
 [ext_resource type="Texture2D" uid="uid://35hydc5hujv0" path="res://game/icons/ViewerCanvas.svg" id="4_l3qal"]
 [ext_resource type="PackedScene" uid="uid://d2gr03het0im7" path="res://game/scenes/viewer_arch.tscn" id="5_uk16q"]
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="10_aju45"]
@@ -23,10 +24,10 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
-add_margin_left = null
-add_margin_top = null
-add_margin_right = null
-add_margin_bottom = null
+add_margin_left = 0
+add_margin_top = 0
+add_margin_right = 0
+add_margin_bottom = 0
 
 [node name="main" type="Control" parent="safe_margin_container"]
 layout_mode = 2
@@ -42,10 +43,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container"]
+[node name="scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/scroll_container"]
 layout_mode = 2
 
-[node name="item_list" type="ItemList" parent="safe_margin_container/main/h_box_container/v_box_container"]
+[node name="item_list" type="ItemList" parent="safe_margin_container/main/h_box_container/scroll_container/v_box_container"]
 layout_mode = 2
 size_flags_vertical = 0
 focus_mode = 0
@@ -54,11 +61,18 @@ theme_override_constants/icon_margin = 0
 allow_search = false
 auto_width = true
 auto_height = true
-item_count = 3
+item_count = 4
 icon_mode = 0
-item_0/icon = ExtResource("2_ejk4j")
-item_1/icon = ExtResource("3_l3qal")
-item_2/icon = ExtResource("4_l3qal")
+item_0/text = "Settings"
+item_0/icon = ExtResource("3_rmvmd")
+item_1/text = "Arch"
+item_1/icon = ExtResource("2_ejk4j")
+item_2/text = "Flow"
+item_2/icon = ExtResource("3_l3qal")
+item_2/disabled = true
+item_3/text = "Canvas"
+item_3/icon = ExtResource("4_l3qal")
+item_3/disabled = true
 
 [node name="tab_container" type="TabContainer" parent="safe_margin_container/main/h_box_container"]
 layout_mode = 2
@@ -67,13 +81,32 @@ current_tab = 0
 tabs_visible = false
 tab_focus_mode = 0
 
-[node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
+[node name="settings" type="Control" parent="safe_margin_container/main/h_box_container/tab_container"]
 layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container/tab_container/settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/tab_container/settings/scroll_container"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="sticky_flower" type="Control" parent="safe_margin_container/main/h_box_container/tab_container"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="h_box_container" type="HSplitContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower"]
 layout_mode = 1
@@ -116,6 +149,6 @@ alignment = 1
 [node name="sticky_canvas" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("2_jbjdl")]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
-[connection signal="item_selected" from="safe_margin_container/main/h_box_container/v_box_container/item_list" to="safe_margin_container/main/h_box_container/tab_container" method="set_current_tab"]
+[connection signal="item_selected" from="safe_margin_container/main/h_box_container/scroll_container/v_box_container/item_list" to="safe_margin_container/main/h_box_container/tab_container" method="set_current_tab"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bte4xo8vh1jd6"]
 
-[ext_resource type="PackedScene" uid="uid://om4cv5l72pyt" path="res://addons/tools_mincuz/scenes/debug_play_from_view_3d.tscn" id="1_3rtx2"]
+[ext_resource type="PackedScene" uid="uid://om4cv5l72pyt" path="res://addons/tools_mincuz/scenes/ghost/debug_play_from_view_3d.tscn" id="1_3rtx2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hpx3p"]
 
