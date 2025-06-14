@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnrsahh22rx5v"]
+[gd_scene load_steps=10 format=3 uid="uid://bnrsahh22rx5v"]
 
+[ext_resource type="PackedScene" uid="uid://chlrcdsr2bm6a" path="res://game/scenes/tools/safe_margin_container.tscn" id="1_7j1va"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_20rwd"]
 [ext_resource type="Texture2D" uid="uid://cp5oeeonux0ic" path="res://game/icons/ViewerArch.svg" id="2_ejk4j"]
 [ext_resource type="PackedScene" uid="uid://bltxfxtyibkr8" path="res://game/scenes/viewer_canvas.tscn" id="2_jbjdl"]
@@ -15,18 +16,25 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.133196, 0.133196, 0.133196, 1)
 
-[node name="main" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="canvas_layer" type="CanvasLayer"]
+
+[node name="safe_margin_container" parent="." instance=ExtResource("1_7j1va")]
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+add_margin_left = null
+add_margin_top = null
+add_margin_right = null
+add_margin_bottom = null
+
+[node name="main" type="Control" parent="safe_margin_container"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_20rwd")
 
-[node name="h_box_container" type="HBoxContainer" parent="."]
+[node name="h_box_container" type="HBoxContainer" parent="safe_margin_container/main"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,10 +42,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="h_box_container"]
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container"]
 layout_mode = 2
 
-[node name="item_list" type="ItemList" parent="h_box_container/v_box_container"]
+[node name="item_list" type="ItemList" parent="safe_margin_container/main/h_box_container/v_box_container"]
 layout_mode = 2
 size_flags_vertical = 0
 focus_mode = 0
@@ -52,22 +60,22 @@ item_0/icon = ExtResource("2_ejk4j")
 item_1/icon = ExtResource("3_l3qal")
 item_2/icon = ExtResource("4_l3qal")
 
-[node name="tab_container" type="TabContainer" parent="h_box_container"]
+[node name="tab_container" type="TabContainer" parent="safe_margin_container/main/h_box_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 current_tab = 0
 tabs_visible = false
 tab_focus_mode = 0
 
-[node name="sticky_arch" parent="h_box_container/tab_container" instance=ExtResource("5_uk16q")]
+[node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
 layout_mode = 2
 
-[node name="sticky_flower" type="Control" parent="h_box_container/tab_container"]
+[node name="sticky_flower" type="Control" parent="safe_margin_container/main/h_box_container/tab_container"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="h_box_container" type="HSplitContainer" parent="h_box_container/tab_container/sticky_flower"]
+[node name="h_box_container" type="HSplitContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,25 +83,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="panel_container" type="PanelContainer" parent="h_box_container/tab_container/sticky_flower/h_box_container"]
+[node name="panel_container" type="PanelContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower/h_box_container"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gp8w2")
 
-[node name="scroll_container" type="ScrollContainer" parent="h_box_container/tab_container/sticky_flower/h_box_container/panel_container"]
+[node name="scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower/h_box_container/panel_container"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="v_box_container" type="VBoxContainer" parent="h_box_container/tab_container/sticky_flower/h_box_container/panel_container/scroll_container"]
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower/h_box_container/panel_container/scroll_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="tag_toggle" parent="h_box_container/tab_container/sticky_flower/h_box_container/panel_container/scroll_container/v_box_container" instance=ExtResource("10_aju45")]
+[node name="tag_toggle" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower/h_box_container/panel_container/scroll_container/v_box_container" instance=ExtResource("10_aju45")]
 layout_mode = 2
 
-[node name="margin_container" type="MarginContainer" parent="h_box_container/tab_container/sticky_flower/h_box_container"]
+[node name="margin_container" type="MarginContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower/h_box_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -101,13 +109,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="v_flow_container" type="VFlowContainer" parent="h_box_container/tab_container/sticky_flower/h_box_container/margin_container"]
+[node name="v_flow_container" type="VFlowContainer" parent="safe_margin_container/main/h_box_container/tab_container/sticky_flower/h_box_container/margin_container"]
 layout_mode = 2
 alignment = 1
 
-[node name="sticky_canvas" parent="h_box_container/tab_container" instance=ExtResource("2_jbjdl")]
+[node name="sticky_canvas" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("2_jbjdl")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[connection signal="item_selected" from="h_box_container/v_box_container/item_list" to="h_box_container/tab_container" method="set_current_tab"]
+[connection signal="item_selected" from="safe_margin_container/main/h_box_container/v_box_container/item_list" to="safe_margin_container/main/h_box_container/tab_container" method="set_current_tab"]
