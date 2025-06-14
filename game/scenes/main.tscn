@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnrsahh22rx5v"]
+[gd_scene load_steps=12 format=3 uid="uid://bnrsahh22rx5v"]
 
 [ext_resource type="PackedScene" uid="uid://chlrcdsr2bm6a" path="res://game/scenes/tools/safe_margin_container.tscn" id="1_7j1va"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_20rwd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://8u2p3gyjf31w" path="res://game/icons/Tools.svg" id="3_rmvmd"]
 [ext_resource type="Texture2D" uid="uid://35hydc5hujv0" path="res://game/icons/ViewerCanvas.svg" id="4_l3qal"]
 [ext_resource type="PackedScene" uid="uid://d2gr03het0im7" path="res://game/scenes/viewer_arch.tscn" id="5_uk16q"]
+[ext_resource type="PackedScene" uid="uid://cnd1uuegvvx34" path="res://addons/tools_mincuz/scenes/field/filepath_field.tscn" id="7_shkmv"]
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="10_aju45"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gp8w2"]
@@ -20,14 +21,6 @@ bg_color = Color(0.133196, 0.133196, 0.133196, 1)
 [node name="canvas_layer" type="CanvasLayer"]
 
 [node name="safe_margin_container" parent="." instance=ExtResource("1_7j1va")]
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-add_margin_left = 0
-add_margin_top = 0
-add_margin_right = 0
-add_margin_bottom = 0
 
 [node name="main" type="Control" parent="safe_margin_container"]
 layout_mode = 2
@@ -92,11 +85,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/tab_container/settings/scroll_container"]
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="local_data_path" parent="safe_margin_container/main/h_box_container/tab_container/settings/scroll_container/v_box_container" instance=ExtResource("7_shkmv")]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "This is the location where all your notes will be stored on this machine.
+Changing it will transfer all notes to that location."
+_field_value = "user://"
+store_in_user_config = true
+label_text = "Local Data Path"
 
 [node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
 visible = false

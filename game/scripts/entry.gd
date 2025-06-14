@@ -1,6 +1,6 @@
 class_name Entry extends TaggedResource
 
-const FOLDER_PATH := "user://entry/"
+const NOTES_SUBFOLDER_NAME := "notes"
 
 const K_TITLE := "title"
 const K_TEXT := "text"
@@ -13,8 +13,12 @@ static var RE_TRIM_WHITESPACE := RegEx.create_from_string(r"(?ms)^\s+|(?:\s+$(?=
 
 static var REGISTRY : Array[Entry]
 
+static var notes_folder_path : String :
+	get: return Field.get_global(&"", &"local_data_path").path_join(NOTES_SUBFOLDER_NAME)
+
 static func _static_init() -> void:
-	var paths := MincuzUtils.get_paths_in_folder(FOLDER_PATH, RE_JSON_PATH_LOCAL)
+	var paths := MincuzUtils.get_paths_in_folder(notes_folder_path, RE_JSON_PATH_LOCAL)
+	print(notes_folder_path)
 	for path in paths:
 		var entry := Entry.new(path)
 		# entry.load_file(path)
@@ -46,7 +50,7 @@ var placeholder_title : String :
 
 
 func get_folder() -> String:
-	return "user://notes/"
+	return notes_folder_path
 
 
 func _export_json(json: Dictionary) -> void:

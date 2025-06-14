@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5ebcafdycue4" path="res://addons/tools_mincuz/scenes/field/string_field.tscn" id="1_tkbrk"]
 [ext_resource type="Script" uid="uid://b6knvqhlvsf45" path="res://addons/tools_mincuz/scenes/field/filepath_field.gd" id="2_5mscg"]
-[ext_resource type="Texture2D" uid="uid://cj1f4n87gk6pt" path="res://game/icons/FileBrowse.svg" id="3_5mscg"]
+[ext_resource type="Texture2D" uid="uid://cj1f4n87gk6pt" path="res://addons/tools_mincuz/icons/FileBrowse.svg" id="3_5mscg"]
 
 [node name="FilepathField" instance=ExtResource("1_tkbrk")]
 script = ExtResource("2_5mscg")
@@ -18,7 +18,11 @@ icon_alignment = 1
 
 [node name="file_dialog" type="FileDialog" parent="." index="1"]
 title = "Open a File or Directory"
-ok_button_text = "Select This Folder"
+ok_button_text = "Open"
 file_mode = 3
 access = 2
 use_native_dialog = true
+
+[connection signal="pressed" from="hbox/button" to="file_dialog" method="show"]
+[connection signal="dir_selected" from="file_dialog" to="." method="set_field_value"]
+[connection signal="file_selected" from="file_dialog" to="." method="set_field_value"]
