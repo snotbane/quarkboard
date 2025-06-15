@@ -16,8 +16,8 @@ static func clear_all_config() -> void:
 static func get_global(section: StringName, key: StringName, default: Variant = null) -> Variant:
 	return CONFIG.get_value(section, key, default)
 
-
-signal value_changed(new_value: Variant)
+signal value_changed(new_value: Variant, old_value: Variant)
+signal value_changed_valid(new_value: Variant, old_value: Variant)
 
 @export var store_in_user_config : bool
 @export var user_config_section : StringName
@@ -77,12 +77,14 @@ func _get_validation() -> String: return String()
 ## Clears this value from the user config file.
 @export_tool_button("Clear") var __clear_all_config__ := clear_all_config
 
+var _previous_value : Variant
+var _previous_value_valid : Variant
 var field_value : Variant :
 	get: return get(&"_field_value")
 	set(value):
 		if field_value == value: return
 		set(&"_field_value", value)
-		save_to_config()
+		receive_internal_value_change()
 func set_field_value(value: Variant) -> void:
 	field_value = value
 
@@ -95,6 +97,9 @@ var field_value_as_cli_argument : String :
 
 func _ready() -> void:
 	_ok_tooltip = tooltip_text
+	_previous_value = field_value
+	_previous_value_valid = field_value
+
 	# print(get_theme_constant(&"label_minimum_width"))
 	# $hbox/label.custom_minimum_size.x = get_theme_constant(&"label_minimum_width")
 
@@ -103,8 +108,24 @@ func _ready() -> void:
 	validate()
 
 
-func emit_value_changed() -> void:
-	value_changed.emit(field_value)
+func receive_internal_value_change() -> void:
+	if field_value == _previous_value: return
+
+	validate()
+	save_to_config()
+
+	_value_changed(field_value, _previous_value)
+	value_changed.emit(field_value, _previous_value)
+	_previous_value = field_value
+
+	if not is_valid: return
+
+	_value_changed_valid(field_value, _previous_value_valid)
+	value_changed_valid.emit(field_value, _previous_value_valid)
+	_previous_value_valid = field_value
+
+func _value_changed(new_value: Variant, old_value: Variant) -> void: pass
+func _value_changed_valid(new_value: Variant, old_value: Variant) -> void: pass
 
 
 func load_from_config() -> void:

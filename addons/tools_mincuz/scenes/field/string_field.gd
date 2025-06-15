@@ -18,9 +18,3 @@ var _allow_empty : bool
 func _get_validation() -> String :
 	if allow_empty or not field_value.is_empty(): return String()
 	return "This field cannot be empty."
-
-
-func _on_line_edit_text_changed() -> void:
-	validate()
-	save_to_config()
-	emit_value_changed()

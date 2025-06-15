@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnrsahh22rx5v"]
+[gd_scene load_steps=13 format=3 uid="uid://bnrsahh22rx5v"]
 
 [ext_resource type="PackedScene" uid="uid://chlrcdsr2bm6a" path="res://game/scenes/tools/safe_margin_container.tscn" id="1_7j1va"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_20rwd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://35hydc5hujv0" path="res://game/icons/ViewerCanvas.svg" id="4_l3qal"]
 [ext_resource type="PackedScene" uid="uid://d2gr03het0im7" path="res://game/scenes/viewer_arch.tscn" id="5_uk16q"]
 [ext_resource type="PackedScene" uid="uid://cnd1uuegvvx34" path="res://addons/tools_mincuz/scenes/field/filepath_field.tscn" id="7_shkmv"]
+[ext_resource type="Script" uid="uid://cka4fbepdak2k" path="res://game/scenes/tools/local_data_path_field.gd" id="8_j51q3"]
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="10_aju45"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gp8w2"]
@@ -100,7 +101,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 tooltip_text = "This is the location where all your notes will be stored on this machine.
 Changing it will transfer all notes to that location."
-_field_value = "user://"
+script = ExtResource("8_j51q3")
+allow_empty = null
 store_in_user_config = true
 label_text = "Local Data Path"
 
