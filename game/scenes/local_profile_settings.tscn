@@ -1,0 +1,126 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsjhin1t55k4x"]
+
+[ext_resource type="Script" uid="uid://bormp4e18ffbl" path="res://game/scenes/local_profile_settings.gd" id="1_0e4lp"]
+[ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="2_hddxn"]
+[ext_resource type="Script" uid="uid://bjjci1kvehwhj" path="res://game/scenes/local_profile.gd" id="2_hlpis"]
+[ext_resource type="Texture2D" uid="uid://ba48iww3rhcy0" path="res://game/icons/godot/local_profile_hide.svg" id="7_hlpis"]
+[ext_resource type="PackedScene" uid="uid://b52qwjwx2voq7" path="res://game/scenes/tools/qrk_file_dialog.tscn" id="7_pgto5"]
+[ext_resource type="Texture2D" uid="uid://by2g066teb4y1" path="res://game/icons/godot/local_profile_reveal.svg" id="8_hddxn"]
+[ext_resource type="Texture2D" uid="uid://ddp3hemodikw7" path="res://game/icons/godot/local_profile_copy.svg" id="10_u8b4r"]
+[ext_resource type="Texture2D" uid="uid://dnit4wm00t2op" path="res://game/icons/godot/local_profile_move.svg" id="11_e3udp"]
+
+[sub_resource type="Resource" id="Resource_swhto"]
+script = ExtResource("2_hlpis")
+path = ""
+time_created = 0
+time_modified = 0
+metadata/_custom_type_script = "uid://bjjci1kvehwhj"
+
+[sub_resource type="LabelSettings" id="LabelSettings_pgto5"]
+font_size = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgto5"]
+
+[node name="local_profile_settings" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -73.5
+offset_right = 400.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hddxn")
+script = ExtResource("1_0e4lp")
+profile = SubResource("Resource_swhto")
+metadata/_tab_index = 0
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="name" type="Label" parent="v_box_container"]
+layout_mode = 2
+text = "Default"
+label_settings = SubResource("LabelSettings_pgto5")
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="location" type="Label" parent="v_box_container"]
+layout_mode = 2
+text = "user://default.qrk"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="h_separator" type="HSeparator" parent="v_box_container"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pgto5")
+
+[node name="grid" type="GridContainer" parent="v_box_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="reveal_button" type="Button" parent="v_box_container/grid"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Reveal"
+icon = ExtResource("8_hddxn")
+
+[node name="move_button" type="Button" parent="v_box_container/grid"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Move or Rename"
+icon = ExtResource("11_e3udp")
+
+[node name="move_dialog" parent="v_box_container/grid/move_button" instance=ExtResource("7_pgto5")]
+title = "Duplicate Profile"
+mode_overrides_title = false
+
+[node name="hide_button" type="Button" parent="v_box_container/grid"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+tooltip_text = "Removes the profile from the local profile list without deleting any notes."
+text = "Disconnect"
+icon = ExtResource("7_hlpis")
+
+[node name="hide_dialog" type="ConfirmationDialog" parent="v_box_container/grid/hide_button"]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(400, 236)
+ok_button_text = "Hide"
+dialog_text = "Hiding this profile will not delete notes from the system. It will only remove it from the local profile list. You can add an existing profile again at any time.
+
+(To completely delete a profile and all of its contents, delete the folder in the file system.)"
+dialog_autowrap = true
+
+[node name="duplicate_button" type="Button" parent="v_box_container/grid"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Duplicate"
+icon = ExtResource("10_u8b4r")
+
+[node name="duplicate_dialog" parent="v_box_container/grid/duplicate_button" instance=ExtResource("7_pgto5")]
+title = "Duplicate Profile"
+mode_overrides_title = false
+
+[node name="error_dialog" type="AcceptDialog" parent="."]
+title = "Error!"
+initial_position = 1
+size = Vector2i(216, 100)
+dialog_text = "Something went wrong...?"
+
+[connection signal="pressed" from="v_box_container/grid/reveal_button" to="." method="_on_reveal_button_pressed"]
+[connection signal="pressed" from="v_box_container/grid/move_button" to="v_box_container/grid/move_button/move_dialog" method="show"]
+[connection signal="dir_selected" from="v_box_container/grid/move_button/move_dialog" to="." method="_on_move_dialog_dir_selected"]
+[connection signal="pressed" from="v_box_container/grid/hide_button" to="v_box_container/grid/hide_button/hide_dialog" method="show"]
+[connection signal="confirmed" from="v_box_container/grid/hide_button/hide_dialog" to="." method="_on_hide_dialog_confirmed"]
+[connection signal="pressed" from="v_box_container/grid/duplicate_button" to="v_box_container/grid/duplicate_button/duplicate_dialog" method="show"]
+[connection signal="dir_selected" from="v_box_container/grid/duplicate_button/duplicate_dialog" to="." method="_on_duplicate_dialog_dir_selected"]

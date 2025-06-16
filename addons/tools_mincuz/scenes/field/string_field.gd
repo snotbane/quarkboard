@@ -9,11 +9,11 @@ var _allow_empty : bool
 		validate()
 
 @export var _field_value : String :
-	get: return $hbox/line_edit.text if self.find_child("line_edit") else ""
+	get: return $hbox/input_area/line_edit.text if self.find_child("line_edit") else ""
 	set(value):
 		if not self.find_child("line_edit"): return
-		$hbox/line_edit.text = value
-		$hbox/line_edit.tooltip_text = value
+		$hbox/input_area/line_edit.text = value
+		$hbox/input_area/line_edit.tooltip_text = value
 
 func _get_validation() -> String :
 	if allow_empty or not field_value.is_empty(): return String()

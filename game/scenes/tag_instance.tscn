@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://lycwmhaoguar" path="res://game/themes/tag_theme.tres" id="1_jdwjp"]
 [ext_resource type="Script" uid="uid://c5mfejn71i283" path="res://game/scenes/tag_instance.gd" id="2_pebfx"]
-[ext_resource type="Texture2D" uid="uid://ddk5m8gk3750e" path="res://game/icons/Close.svg" id="3_a8jhd"]
+[ext_resource type="Texture2D" uid="uid://ddk5m8gk3750e" path="res://game/icons/godot/Close.svg" id="3_a8jhd"]
 [ext_resource type="Script" uid="uid://mt5mmsrwui67" path="res://game/scripts/tag.gd" id="3_pebfx"]
 
 [sub_resource type="Resource" id="Resource_pebfx"]

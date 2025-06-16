@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bplhtwvhxpngy"]
+
+[ext_resource type="Texture2D" uid="uid://b6prhj70p02ks" path="res://game/icons/godot/Info.svg" id="1_6f0gs"]
+
+[node name="button" type="Button"]
+custom_minimum_size = Vector2(120, 74)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 54.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+text = "Button"
+icon = ExtResource("1_6f0gs")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true

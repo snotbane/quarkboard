@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://daahh7834rymb" path="res://game/scenes/on_click.tscn" id="1_gdxd3"]
 [ext_resource type="PackedScene" uid="uid://dmqurdk2vcds0" path="res://game/scenes/arch_sticky.tscn" id="1_wwica"]
 [ext_resource type="PackedScene" uid="uid://cjlaxlvn4iabj" path="res://game/scenes/tools/keep_order.tscn" id="4_4gc2u"]
-[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/Add.svg" id="4_x4vq0"]
+[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/godot/Add.svg" id="4_x4vq0"]
 [ext_resource type="PackedScene" uid="uid://cckp0xcmsl721" path="res://game/scenes/note_editor.tscn" id="7_gdxd3"]
 
 [node name="sticky_viewer_arch" type="Control"]

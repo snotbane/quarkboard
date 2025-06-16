@@ -1,4 +1,7 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://x0jqbgeqbi05"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://x0jqbgeqbi05"]
+
+[ext_resource type="FontFile" uid="uid://buuo3u7hcng1c" path="res://game/fonts/NotoSans-Italic.ttf" id="1_je7s3"]
+[ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="2_hafvu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upy3b"]
 bg_color = Color(0.658824, 0.133333, 0.219608, 1)
@@ -7,13 +10,24 @@ bg_color = Color(0.658824, 0.133333, 0.219608, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7b3us"]
 content_margin_left = 8.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [resource]
+Button/colors/icon_normal_color = Color(0.878431, 0.878431, 0.878431, 1)
+Button/fonts/font = ExtResource("1_je7s3")
+Button/styles/normal = null
 Field/constants/label_minimum_width = 180
 Field/styles/panel_error = SubResource("StyleBoxFlat_upy3b")
 Field/styles/panel_ok = SubResource("StyleBoxEmpty_7b3us")
+GridContainer/constants/h_separation = 8
+GridContainer/constants/v_separation = 8
+Label/fonts/font = ExtResource("2_hafvu")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7b3us")
+VBoxContainer/constants/separation = 8

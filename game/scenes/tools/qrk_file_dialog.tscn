@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b52qwjwx2voq7"]
+
+[node name="qrk_file_dialog" type="FileDialog"]
+auto_translate_mode = 1
+initial_position = 1
+access = 2
+filters = PackedStringArray("*.qrk")
+use_native_dialog = true

@@ -9,8 +9,12 @@ script = ExtResource("2_5mscg")
 file_mode = 3
 access = 2
 
+[node name="line_edit" parent="hbox/input_area" index="0"]
+editable = false
+flat = true
+
 [node name="button" type="Button" parent="hbox" index="2"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 icon = ExtResource("3_5mscg")
 flat = true

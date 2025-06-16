@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnrsahh22rx5v"]
+[gd_scene load_steps=12 format=3 uid="uid://bnrsahh22rx5v"]
 
 [ext_resource type="PackedScene" uid="uid://chlrcdsr2bm6a" path="res://game/scenes/tools/safe_margin_container.tscn" id="1_7j1va"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_20rwd"]
-[ext_resource type="Texture2D" uid="uid://cp5oeeonux0ic" path="res://game/icons/ViewerArch.svg" id="2_ejk4j"]
+[ext_resource type="Texture2D" uid="uid://cp5oeeonux0ic" path="res://game/icons/godot/ViewerArch.svg" id="2_ejk4j"]
 [ext_resource type="PackedScene" uid="uid://bltxfxtyibkr8" path="res://game/scenes/viewer_canvas.tscn" id="2_jbjdl"]
-[ext_resource type="Texture2D" uid="uid://dvb17jhkdjx6y" path="res://game/icons/ViewerFlower.svg" id="3_l3qal"]
-[ext_resource type="Texture2D" uid="uid://8u2p3gyjf31w" path="res://game/icons/Tools.svg" id="3_rmvmd"]
-[ext_resource type="Texture2D" uid="uid://35hydc5hujv0" path="res://game/icons/ViewerCanvas.svg" id="4_l3qal"]
+[ext_resource type="Texture2D" uid="uid://dvb17jhkdjx6y" path="res://game/icons/godot/ViewerFlower.svg" id="3_l3qal"]
+[ext_resource type="Texture2D" uid="uid://8u2p3gyjf31w" path="res://game/icons/godot/Tools.svg" id="3_rmvmd"]
+[ext_resource type="Texture2D" uid="uid://35hydc5hujv0" path="res://game/icons/godot/ViewerCanvas.svg" id="4_l3qal"]
 [ext_resource type="PackedScene" uid="uid://d2gr03het0im7" path="res://game/scenes/viewer_arch.tscn" id="5_uk16q"]
-[ext_resource type="PackedScene" uid="uid://cnd1uuegvvx34" path="res://addons/tools_mincuz/scenes/field/filepath_field.tscn" id="7_shkmv"]
-[ext_resource type="Script" uid="uid://cka4fbepdak2k" path="res://game/scenes/tools/local_data_path_field.gd" id="8_j51q3"]
+[ext_resource type="PackedScene" uid="uid://d0glaev0c1woe" path="res://game/scenes/local_profile_manager.tscn" id="7_shkmv"]
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="10_aju45"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gp8w2"]
@@ -75,36 +74,8 @@ current_tab = 0
 tabs_visible = false
 tab_focus_mode = 0
 
-[node name="settings" type="Control" parent="safe_margin_container/main/h_box_container/tab_container"]
+[node name="local_profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("7_shkmv")]
 layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container/tab_container/settings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/tab_container/settings/scroll_container"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-alignment = 1
-
-[node name="local_data_path" parent="safe_margin_container/main/h_box_container/tab_container/settings/scroll_container/v_box_container" instance=ExtResource("7_shkmv")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "This is the location where all your notes will be stored on this machine.
-Changing it will transfer all notes to that location."
-script = ExtResource("8_j51q3")
-allow_empty = null
-store_in_user_config = true
-label_text = "Local Data Path"
 
 [node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
 visible = false

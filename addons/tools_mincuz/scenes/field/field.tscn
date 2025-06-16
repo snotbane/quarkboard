@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4bskt5ablf83"]
+[gd_scene load_steps=4 format=3 uid="uid://d4bskt5ablf83"]
 
 [ext_resource type="Script" uid="uid://d6vkmrwkavuj" path="res://addons/tools_mincuz/scenes/field/field.gd" id="1_3nmml"]
-[ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_djqfu"]
+[ext_resource type="Texture2D" uid="uid://b6prhj70p02ks" path="res://game/icons/godot/Info.svg" id="3_kvxyy"]
+[ext_resource type="PackedScene" uid="uid://cjlaxlvn4iabj" path="res://game/scenes/tools/keep_order.tscn" id="4_osy88"]
 
 [node name="Field" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 32)
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 32.0
 grow_horizontal = 2
-size_flags_vertical = 0
-theme = ExtResource("1_djqfu")
-theme_type_variation = &"Field"
+size_flags_horizontal = 3
 script = ExtResource("1_3nmml")
 label_text = "New Field"
 
@@ -19,3 +20,17 @@ layout_mode = 2
 [node name="label" type="Label" parent="hbox"]
 layout_mode = 2
 text = "New Field"
+
+[node name="input_area" type="Control" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="info" type="Button" parent="hbox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_kvxyy")
+flat = true
+
+[node name="keep_order" parent="hbox/info" instance=ExtResource("4_osy88")]

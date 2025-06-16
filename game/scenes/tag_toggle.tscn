@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://lycwmhaoguar" path="res://game/themes/tag_theme.tres" id="1_0vly6"]
 [ext_resource type="Script" uid="uid://dmntti7vlqg63" path="res://game/scenes/tag_toggle.gd" id="2_jlkhy"]
-[ext_resource type="Texture2D" uid="uid://twh64cnf5rdo" path="res://game/icons/Edit.svg" id="3_jlkhy"]
+[ext_resource type="Texture2D" uid="uid://twh64cnf5rdo" path="res://game/icons/godot/Edit.svg" id="3_jlkhy"]
 
 [sub_resource type="GDScript" id="GDScript_jlkhy"]
 resource_name = "line_edit"

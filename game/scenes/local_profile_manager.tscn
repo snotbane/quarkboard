@@ -1,0 +1,222 @@
+[gd_scene load_steps=17 format=3 uid="uid://d0glaev0c1woe"]
+
+[ext_resource type="PackedScene" uid="uid://b52qwjwx2voq7" path="res://game/scenes/tools/qrk_file_dialog.tscn" id="2_11f5m"]
+[ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="2_ukn44"]
+[ext_resource type="Texture2D" uid="uid://dr2cpei5ronpv" path="res://game/icons/atom.svg" id="3_ig5o4"]
+[ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="3_tmu72"]
+[ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="4_q6kiy"]
+[ext_resource type="Script" uid="uid://bormp4e18ffbl" path="res://game/scenes/local_profile_settings.gd" id="5_mjjhy"]
+[ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://game/icons/star_alt_2.svg" id="6_ig5o4"]
+[ext_resource type="PackedScene" uid="uid://bplhtwvhxpngy" path="res://game/scenes/tools/profile_action_button.tscn" id="6_udgad"]
+[ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://game/icons/folder.svg" id="8_emlen"]
+[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://game/icons/pen.svg" id="10_ig5o4"]
+[ext_resource type="Texture2D" uid="uid://ln4avyrtpw6s" path="res://game/icons/file_copy.svg" id="11_emlen"]
+[ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://game/icons/arrow_up_right_from_square.svg" id="12_gqicv"]
+[ext_resource type="Texture2D" uid="uid://b4nkssn6nhqo0" path="res://game/icons/link_slash_alt.svg" id="13_8vm1s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ig5o4"]
+font = ExtResource("3_tmu72")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_pgto5"]
+font_size = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgto5"]
+
+[node name="local_profile_manager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_q6kiy")
+metadata/_tab_index = 0
+
+[node name="hsplit" type="HSplitContainer" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1912.0
+offset_bottom = 1072.0
+
+[node name="selector" type="Control" parent="hsplit"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="vbox" type="VBoxContainer" parent="hsplit/selector"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 1056.0
+
+[node name="panel_container" type="PanelContainer" parent="hsplit/selector/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="scroll_container" type="ScrollContainer" parent="hsplit/selector/vbox/panel_container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="profile_selector" type="PanelContainer" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox"]
+layout_mode = 2
+theme = ExtResource("2_ukn44")
+
+[node name="hbox" type="HBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.878431, 0.878431, 0.878431, 1)
+toggle_mode = true
+icon = ExtResource("3_ig5o4")
+icon_alignment = 1
+
+[node name="vbox" type="VBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox/vbox"]
+layout_mode = 2
+text = "Default"
+label_settings = SubResource("LabelSettings_ig5o4")
+
+[node name="location" type="Label" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox/vbox"]
+layout_mode = 2
+text = "user://default.qrk"
+
+[node name="grid_container" type="GridContainer" parent="hsplit/selector/vbox"]
+layout_mode = 2
+columns = 2
+
+[node name="create_button" parent="hsplit/selector/vbox/grid_container" instance=ExtResource("6_udgad")]
+layout_mode = 2
+text = "Create New"
+icon = ExtResource("6_ig5o4")
+
+[node name="create_dialog" parent="hsplit/selector/vbox/grid_container/create_button" instance=ExtResource("2_11f5m")]
+title = "Create New Profile"
+mode_overrides_title = false
+
+[node name="import_button" parent="hsplit/selector/vbox/grid_container" instance=ExtResource("6_udgad")]
+layout_mode = 2
+text = "Import
+"
+icon = ExtResource("8_emlen")
+
+[node name="import_dialog" parent="hsplit/selector/vbox/grid_container/import_button" instance=ExtResource("2_11f5m")]
+title = "Import Profile"
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+
+[node name="editor" type="PanelContainer" parent="hsplit"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="vbox" type="VBoxContainer" parent="hsplit/editor"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="static" type="PanelContainer" parent="hsplit/editor/vbox"]
+layout_mode = 2
+
+[node name="active_profile_panel" type="PanelContainer" parent="hsplit/editor/vbox"]
+layout_mode = 2
+theme = ExtResource("4_q6kiy")
+script = ExtResource("5_mjjhy")
+metadata/_tab_index = 0
+
+[node name="vbox" type="VBoxContainer" parent="hsplit/editor/vbox/active_profile_panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="name" type="Label" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
+layout_mode = 2
+text = "Default"
+label_settings = SubResource("LabelSettings_pgto5")
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="location" type="Label" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
+layout_mode = 2
+text = "user://default.qrk"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="h_separator" type="HSeparator" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pgto5")
+
+[node name="grid" type="GridContainer" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
+layout_mode = 2
+columns = 2
+
+[node name="move_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
+layout_mode = 2
+text = "Move / Rename"
+icon = ExtResource("10_ig5o4")
+
+[node name="move_dialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button" instance=ExtResource("2_11f5m")]
+title = "Duplicate Profile"
+mode_overrides_title = false
+
+[node name="copy_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
+layout_mode = 2
+text = "Duplicate"
+icon = ExtResource("11_emlen")
+
+[node name="copy_dialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button" instance=ExtResource("2_11f5m")]
+title = "Duplicate Profile"
+mode_overrides_title = false
+
+[node name="reveal_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
+layout_mode = 2
+text = "Reveal
+"
+icon = ExtResource("12_gqicv")
+
+[node name="hide_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
+layout_mode = 2
+text = "Disconnect"
+icon = ExtResource("13_8vm1s")
+
+[node name="hide_dialog" type="ConfirmationDialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button"]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(400, 236)
+ok_button_text = "Hide"
+dialog_text = "Hiding this profile will not delete notes from the system. It will only remove it from the local profile list. You can add an existing profile again at any time.
+
+(To completely delete a profile and all of its contents, delete the folder in the file system.)"
+dialog_autowrap = true
+
+[node name="error_dialog" type="AcceptDialog" parent="."]
+title = "Error!"
+initial_position = 1
+size = Vector2i(216, 100)
+dialog_text = "Something went wrong...?"
+
+[connection signal="pressed" from="hsplit/selector/vbox/grid_container/create_button" to="hsplit/selector/vbox/grid_container/create_button/create_dialog" method="show"]
+[connection signal="file_selected" from="hsplit/selector/vbox/grid_container/create_button/create_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_create_dialog_file_selected"]
+[connection signal="pressed" from="hsplit/selector/vbox/grid_container/import_button" to="hsplit/selector/vbox/grid_container/import_button/import_dialog" method="show"]
+[connection signal="dir_selected" from="hsplit/selector/vbox/grid_container/import_button/import_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_import_dialog_dir_selected"]
+[connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button/move_dialog" method="show"]
+[connection signal="dir_selected" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button/move_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_move_dialog_dir_selected"]
+[connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button/copy_dialog" method="show"]
+[connection signal="dir_selected" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button/copy_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_duplicate_dialog_dir_selected"]
+[connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/reveal_button" to="hsplit/editor/vbox/active_profile_panel" method="_on_reveal_button_pressed"]
+[connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button/hide_dialog" method="show"]
+[connection signal="confirmed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button/hide_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_hide_dialog_confirmed"]

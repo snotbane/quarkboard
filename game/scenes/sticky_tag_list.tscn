@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://et4mipt58fbm" path="res://game/scenes/tag_instance.tscn" id="1_1xgxu"]
 [ext_resource type="Script" uid="uid://m5n317iu2h6" path="res://game/scenes/sticky_tag_list.gd" id="1_ebxt0"]
-[ext_resource type="Texture2D" uid="uid://h0jdfjxi7xn3" path="res://game/icons/Tag.svg" id="2_utwb1"]
+[ext_resource type="Texture2D" uid="uid://h0jdfjxi7xn3" path="res://game/icons/godot/Tag.svg" id="2_utwb1"]
 [ext_resource type="PackedScene" uid="uid://cjlaxlvn4iabj" path="res://game/scenes/tools/keep_order.tscn" id="4_pjl4g"]
 
 [node name="sticky_tag_list" type="HFlowContainer"]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="1_6o8mx"]
 [ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="1_s15y1"]
 [ext_resource type="Script" uid="uid://cym5bbbr4b60g" path="res://game/scenes/sticky_note_sidebar.gd" id="2_ordqw"]
-[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/Add.svg" id="2_s15y1"]
+[ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/godot/Add.svg" id="2_s15y1"]
 
 [node name="tags_sidebar" type="PanelContainer"]
 custom_minimum_size = Vector2(150, 400)

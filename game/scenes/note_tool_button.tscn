@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0g13pcx1c6ep"]
 
-[ext_resource type="Texture2D" uid="uid://c6sjajuwx2vd3" path="res://game/icons/Archive.svg" id="1_28akv"]
+[ext_resource type="Texture2D" uid="uid://c6sjajuwx2vd3" path="res://game/icons/godot/Archive.svg" id="1_28akv"]
 
 [node name="note_tool_button" type="Button"]
 focus_mode = 0

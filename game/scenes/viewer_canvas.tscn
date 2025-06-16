@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b4nhaa2r8jthk" path="res://game/scenes/sticky_note.tscn" id="1_0ksv8"]
 [ext_resource type="Script" uid="uid://dru2mnscjjofh" path="res://game/scenes/sticky_canvas.gd" id="1_nkhl6"]
-[ext_resource type="Texture2D" uid="uid://d08bugyqliu4y" path="res://game/icons/AddBig.svg" id="3_b7ms8"]
+[ext_resource type="Texture2D" uid="uid://d08bugyqliu4y" path="res://game/icons/godot/AddBig.svg" id="3_b7ms8"]
 
 [node name="sticky_canvas" type="Control"]
 layout_mode = 3
