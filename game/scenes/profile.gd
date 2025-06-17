@@ -37,8 +37,16 @@ var _icon : Texture2D
 		commit_changes()
 
 
+var display_name : String :
+	get:
+		var start := save_dir.rfind("/") + 1
+		var end := save_dir.rfind(Profile.FOLDER_EXT) - start
+		return save_dir.substr(start, end)
+var display_dir_path : String :
+	get: return save_dir.substr(0, save_dir.rfind("/"))
 
-func _init(__save_path__: String = generate_save_path()) -> void:
+
+func _init(__save_path__: String) -> void:
 	super._init(__save_path__)
 	ProfileList.add_profile(self)
 

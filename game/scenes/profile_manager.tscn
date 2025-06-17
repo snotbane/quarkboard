@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0glaev0c1woe"]
+[gd_scene load_steps=15 format=3 uid="uid://d0glaev0c1woe"]
 
 [ext_resource type="PackedScene" uid="uid://b52qwjwx2voq7" path="res://game/scenes/tools/qrk_file_dialog.tscn" id="2_11f5m"]
+[ext_resource type="PackedScene" uid="uid://xj7ijd4q1fvp" path="res://game/scenes/profile_selector.tscn" id="2_ukn44"]
 [ext_resource type="Script" uid="uid://b78e6dpyh8u16" path="res://game/scenes/select_list.gd" id="2_wdid4"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="4_q6kiy"]
 [ext_resource type="Script" uid="uid://bormp4e18ffbl" path="res://game/scenes/profile_settings.gd" id="5_mjjhy"]
@@ -59,6 +60,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("2_wdid4")
+selector_scene = ExtResource("2_ukn44")
 
 [node name="grid_container" type="GridContainer" parent="hsplit/selector/vbox"]
 layout_mode = 2

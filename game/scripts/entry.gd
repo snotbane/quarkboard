@@ -14,7 +14,7 @@ static var RE_TRIM_WHITESPACE := RegEx.create_from_string(r"(?ms)^\s+|(?:\s+$(?=
 static var REGISTRY : Array[Entry]
 
 static var notes_folder_path : String :
-	get: return Quarkboard.global_root.path_join(NOTES_SUBFOLDER_NAME)
+	get: return (Profile.active.save_dir if Profile.active else "user://").path_join(NOTES_SUBFOLDER_NAME)
 
 static func _static_init() -> void:
 	var paths := MincuzUtils.get_paths_in_folder(notes_folder_path, RE_JSON_PATH_LOCAL)
