@@ -7,6 +7,8 @@ var _profile : Profile
 		if _profile == value: return
 		_profile = value
 		visible = _profile != null
+func set_profile(__profile__: Profile) -> void:
+	profile = __profile__
 
 
 func _ready() -> void:
