@@ -19,6 +19,7 @@ static var RE_JSON_PATH := RegEx.create_from_string(r"\.json$")
 
 
 static func get_resource_uid_path(resource: Resource) -> String:
+	if resource == null: return ""
 	return ResourceUID.id_to_text(ResourceLoader.get_resource_uid(resource.resource_path))
 
 
@@ -83,6 +84,16 @@ func get_folder() -> String:
 	return "user://"
 
 
+var save_name : String :
+	get: return save_path.substr(save_path.rfind("/") + 1)
+
+var save_dir : String :
+	get: return save_path.substr(0, save_path.rfind("/"))
+
+var save_dir_slash : String :
+	get: return save_dir.path_join("")
+
+
 var last_modified_short_blurb : String :
 	get: return JsonResource.datetime_relative_blurb(time_modified)
 
@@ -104,18 +115,6 @@ func commit_changes() -> void:
 	save_to_file()
 	modified.emit()
 
-func save_to_file(path: String = save_path) -> void:
-	var file := FileAccess.open(save_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(self.export_json()))
-func export_json() -> Dictionary:
-	var result := {
-		K_TIME_CREATED: time_created,
-		K_TIME_MODIFIED: time_modified,
-	}
-	_export_json(result)
-	return result
-func _export_json(json: Dictionary) -> void: pass
-
 
 func load_from_file(path: String = save_path) -> void:
 	save_path = path
@@ -128,5 +127,18 @@ func import_json(json: Dictionary) -> void:
 	print("time_created: ", self.time_created)
 	_import_json(json)
 func _import_json(json: Dictionary) -> void: pass
+
+
+func save_to_file(path: String = save_path) -> void:
+	var file := FileAccess.open(save_path, FileAccess.WRITE)
+	file.store_string(JSON.stringify(self.export_json()))
+func export_json() -> Dictionary:
+	var result := {
+		K_TIME_CREATED: time_created,
+		K_TIME_MODIFIED: time_modified,
+	}
+	_export_json(result)
+	return result
+func _export_json(json: Dictionary) -> void: pass
 
 #endregion

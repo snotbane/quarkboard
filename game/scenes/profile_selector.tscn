@@ -8,7 +8,6 @@
 
 [sub_resource type="Resource" id="Resource_hgj2g"]
 script = ExtResource("4_7ancs")
-path = "/Users/snotbane/Library/CloudStorage/ProtonDrive-liam.wofford@proton.me-folder/projects/godot/active/quarkboard/q.qrk"
 icon = ExtResource("2_bjflb")
 time_created = 0
 time_modified = 0

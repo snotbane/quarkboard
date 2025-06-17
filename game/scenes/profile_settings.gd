@@ -14,7 +14,12 @@ func _ready() -> void:
 
 
 func _on_create_dialog_file_selected(path: String) -> void:
-	pass # Replace with function body.
+	if DirAccess.dir_exists_absolute(path): ErrorOverlay.global_push("Can't create new profile. A profile with the same name already exists."); return
+	var err := DirAccess.make_dir_recursive_absolute(path)
+	if err != OK: ErrorOverlay.global_push("Something went wrong? (code %s)" % err); return
+
+	var profile_path := path.path_join(Profile.PATH)
+	Profile.new(profile_path)
 
 
 func _on_import_dialog_dir_selected(dir: String) -> void:

@@ -161,7 +161,6 @@ Quarkboard will always be 100% free and open-source, forever. There are no ads a
 fit_content = true
 
 [node name="error_overlay" parent="." instance=ExtResource("11_j51q3")]
-visible = false
 mouse_force_pass_scroll_events = false
 
 [connection signal="item_selected" from="safe_margin_container/main/h_box_container/scroll_container/v_box_container/item_list" to="safe_margin_container/main/h_box_container/tab_container" method="set_current_tab"]

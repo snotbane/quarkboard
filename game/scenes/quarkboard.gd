@@ -22,5 +22,3 @@ static func _static_init() -> void:
 		if err != OK: ErrorOverlay.global.push("Something went wrong while loading Quarkboard.CONFIG - Error code %s" % err)
 	else:
 		CONFIG.save(CONFIG_PATH)
-
-	ErrorOverlay.global_push("Test!")

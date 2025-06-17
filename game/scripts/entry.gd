@@ -31,6 +31,7 @@ var _title : String
 		if _title == value: return
 		_title = value
 		commit_changes()
+
 var _text : String
 @export var text : String :
 	get: return _text
@@ -53,6 +54,13 @@ func get_folder() -> String:
 	return notes_folder_path
 
 
+func _import_json(json: Dictionary) -> void:
+	super._import_json(json)
+	self._title = json[K_TITLE]
+	self._text = json[K_TEXT]
+	# self.tags = json[K_TAGS]
+
+
 func _export_json(json: Dictionary) -> void:
 	json.merge({
 		K_TITLE: title,
@@ -60,12 +68,6 @@ func _export_json(json: Dictionary) -> void:
 		# K_TAGS: tags.map(func(tag: Tag): return tag.name),
 	}, true)
 	print("export: ", json)
-
-func _import_json(json: Dictionary) -> void:
-	super._import_json(json)
-	self._title = json[K_TITLE]
-	self._text = json[K_TEXT]
-	# self.tags = json[K_TAGS]
 
 
 func set_text(new_text: String) -> void:
