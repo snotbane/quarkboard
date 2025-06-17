@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://xj7ijd4q1fvp"]
+
+[ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="1_pfjc3"]
+[ext_resource type="Script" uid="uid://ciq0hra7h3nyt" path="res://game/scenes/profile_selector.gd" id="2_7ancs"]
+[ext_resource type="Texture2D" uid="uid://dr2cpei5ronpv" path="res://game/icons/atom.svg" id="2_bjflb"]
+[ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="3_7ancs"]
+[ext_resource type="Script" uid="uid://bjjci1kvehwhj" path="res://game/scenes/profile.gd" id="4_7ancs"]
+
+[sub_resource type="Resource" id="Resource_hgj2g"]
+script = ExtResource("4_7ancs")
+path = "/Users/snotbane/Library/CloudStorage/ProtonDrive-liam.wofford@proton.me-folder/projects/godot/active/quarkboard/q.qrk"
+icon = ExtResource("2_bjflb")
+time_created = 0
+time_modified = 0
+metadata/_custom_type_script = "uid://bjjci1kvehwhj"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ig5o4"]
+font = ExtResource("3_7ancs")
+font_size = 24
+
+[node name="profile_selector" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 76.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_pfjc3")
+script = ExtResource("2_7ancs")
+profile = SubResource("Resource_hgj2g")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="icon" type="TextureRect" parent="hbox"]
+layout_mode = 2
+texture = ExtResource("2_bjflb")
+stretch_mode = 2
+
+[node name="vbox" type="VBoxContainer" parent="hbox"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="hbox/vbox"]
+layout_mode = 2
+text = "Name"
+label_settings = SubResource("LabelSettings_ig5o4")
+
+[node name="location" type="Label" parent="hbox/vbox"]
+layout_mode = 2
+text = "C:/Location"

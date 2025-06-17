@@ -18,6 +18,52 @@ const FILE_EXT := ".json"
 static var RE_JSON_PATH := RegEx.create_from_string(r"\.json$")
 
 
+static func get_resource_uid_path(resource: Resource) -> String:
+	return ResourceUID.id_to_text(ResourceLoader.get_resource_uid(resource.resource_path))
+
+
+# static func new_from_json(json: Dictionary) -> JsonResource:
+# 	var result := JsonResource.new()
+# 	result.import_json(json)
+# 	return result
+
+# static func new_from_load(path: String, template := JsonResource.new()) -> JsonResource:
+# 	template.load_from_file(path)
+# 	return template
+
+
+## Adapted from:	https://github.com/godotengine/godot-proposals/issues/5515#issuecomment-1409971613
+static func get_local_datetime(unix_time: int) -> int:
+	return unix_time + Time.get_time_zone_from_system().bias * SECONDS_IN_MINUTE
+
+
+static func datetime_long_blurb(unix_time: int) -> String:
+	return Time.get_datetime_string_from_unix_time(get_local_datetime(unix_time), true)
+
+
+static func datetime_short_blurb(unix_time: int) -> String:
+	if absi(MincuzUtils.NOW - unix_time) > SECONDS_IN_DAY:
+		return Time.get_date_string_from_unix_time(get_local_datetime(unix_time))
+	else:
+		return Time.get_time_string_from_unix_time(get_local_datetime(unix_time))
+
+
+static func datetime_relative_blurb(unix_time: int) -> String:
+	var now := MincuzUtils.NOW
+	var tense : String = TENSE_PAST if now - unix_time > 0 else TENSE_FUTURE
+
+	var now_dict := Time.get_datetime_dict_from_unix_time(now)
+	var then_dict := Time.get_datetime_dict_from_unix_time(unix_time)
+	now_dict.erase(&"second")
+
+	for k in now_dict.keys():
+		var diff : int = absi(now_dict[k] - then_dict[k])
+		if diff == 0: continue
+		return "%s %s%s %s" % [diff, k, "s" if diff != 1 else "", tense]
+
+	return TENSE_NOW
+
+
 #endregion
 #region Instance
 
@@ -82,47 +128,5 @@ func import_json(json: Dictionary) -> void:
 	print("time_created: ", self.time_created)
 	_import_json(json)
 func _import_json(json: Dictionary) -> void: pass
-
-
-# static func new_from_json(json: Dictionary) -> JsonResource:
-# 	var result := JsonResource.new()
-# 	result.import_json(json)
-# 	return result
-
-# static func new_from_load(path: String, template := JsonResource.new()) -> JsonResource:
-# 	template.load_from_file(path)
-# 	return template
-
-
-## Adapted from:	https://github.com/godotengine/godot-proposals/issues/5515#issuecomment-1409971613
-static func get_local_datetime(unix_time: int) -> int:
-	return unix_time + Time.get_time_zone_from_system().bias * SECONDS_IN_MINUTE
-
-
-static func datetime_long_blurb(unix_time: int) -> String:
-	return Time.get_datetime_string_from_unix_time(get_local_datetime(unix_time), true)
-
-
-static func datetime_short_blurb(unix_time: int) -> String:
-	if absi(MincuzUtils.NOW - unix_time) > SECONDS_IN_DAY:
-		return Time.get_date_string_from_unix_time(get_local_datetime(unix_time))
-	else:
-		return Time.get_time_string_from_unix_time(get_local_datetime(unix_time))
-
-
-static func datetime_relative_blurb(unix_time: int) -> String:
-	var now := MincuzUtils.NOW
-	var tense : String = TENSE_PAST if now - unix_time > 0 else TENSE_FUTURE
-
-	var now_dict := Time.get_datetime_dict_from_unix_time(now)
-	var then_dict := Time.get_datetime_dict_from_unix_time(unix_time)
-	now_dict.erase(&"second")
-
-	for k in now_dict.keys():
-		var diff : int = absi(now_dict[k] - then_dict[k])
-		if diff == 0: continue
-		return "%s %s%s %s" % [diff, k, "s" if diff != 1 else "", tense]
-
-	return TENSE_NOW
 
 #endregion

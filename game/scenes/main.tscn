@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnrsahh22rx5v"]
+[gd_scene load_steps=13 format=3 uid="uid://bnrsahh22rx5v"]
 
 [ext_resource type="PackedScene" uid="uid://chlrcdsr2bm6a" path="res://game/scenes/tools/safe_margin_container.tscn" id="1_7j1va"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_20rwd"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://8u2p3gyjf31w" path="res://game/icons/godot/Tools.svg" id="3_rmvmd"]
 [ext_resource type="Texture2D" uid="uid://35hydc5hujv0" path="res://game/icons/godot/ViewerCanvas.svg" id="4_l3qal"]
 [ext_resource type="PackedScene" uid="uid://d2gr03het0im7" path="res://game/scenes/viewer_arch.tscn" id="5_uk16q"]
-[ext_resource type="PackedScene" uid="uid://d0glaev0c1woe" path="res://game/scenes/local_profile_manager.tscn" id="7_shkmv"]
+[ext_resource type="PackedScene" uid="uid://d0glaev0c1woe" path="res://game/scenes/profile_manager.tscn" id="7_shkmv"]
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="10_aju45"]
+[ext_resource type="PackedScene" uid="uid://bobhyo0yvhbl" path="res://game/scenes/tools/error_overlay.tscn" id="11_j51q3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gp8w2"]
 content_margin_left = 8.0
@@ -74,7 +75,7 @@ current_tab = 0
 tabs_visible = false
 tab_focus_mode = 0
 
-[node name="local_profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("7_shkmv")]
+[node name="profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("7_shkmv")]
 layout_mode = 2
 
 [node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
@@ -129,5 +130,38 @@ alignment = 1
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
+
+[node name="control" type="Control" parent="safe_margin_container/main/h_box_container/tab_container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="rich_text_label" type="RichTextLabel" parent="safe_margin_container/main/h_box_container/tab_container/control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_right = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Quarkboard is a simple note taking app with powerful capabilities.
+
+Quarkboard communicates only with your device's file system. We cannot track any data entered into the Quarkboard app.
+
+Quarkboard is FOSS (free, open-source software) and the entire source code is available to view or modify.
+
+Quarkboard will always be 100% free and open-source, forever. There are no ads and no premiums. If you appreciate Quarkboard, please consider donating to my Ko-Fi.
+
+"
+fit_content = true
+
+[node name="error_overlay" parent="." instance=ExtResource("11_j51q3")]
+visible = false
+mouse_force_pass_scroll_events = false
 
 [connection signal="item_selected" from="safe_margin_container/main/h_box_container/scroll_container/v_box_container/item_list" to="safe_margin_container/main/h_box_container/tab_container" method="set_current_tab"]

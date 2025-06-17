@@ -1,11 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0glaev0c1woe"]
+[gd_scene load_steps=14 format=3 uid="uid://d0glaev0c1woe"]
 
 [ext_resource type="PackedScene" uid="uid://b52qwjwx2voq7" path="res://game/scenes/tools/qrk_file_dialog.tscn" id="2_11f5m"]
-[ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="2_ukn44"]
-[ext_resource type="Texture2D" uid="uid://dr2cpei5ronpv" path="res://game/icons/atom.svg" id="3_ig5o4"]
-[ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="3_tmu72"]
+[ext_resource type="Script" uid="uid://b78e6dpyh8u16" path="res://game/scenes/select_list.gd" id="2_wdid4"]
 [ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="4_q6kiy"]
-[ext_resource type="Script" uid="uid://bormp4e18ffbl" path="res://game/scenes/local_profile_settings.gd" id="5_mjjhy"]
+[ext_resource type="Script" uid="uid://bormp4e18ffbl" path="res://game/scenes/profile_settings.gd" id="5_mjjhy"]
 [ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://game/icons/star_alt_2.svg" id="6_ig5o4"]
 [ext_resource type="PackedScene" uid="uid://bplhtwvhxpngy" path="res://game/scenes/tools/profile_action_button.tscn" id="6_udgad"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://game/icons/folder.svg" id="8_emlen"]
@@ -14,16 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://game/icons/arrow_up_right_from_square.svg" id="12_gqicv"]
 [ext_resource type="Texture2D" uid="uid://b4nkssn6nhqo0" path="res://game/icons/link_slash_alt.svg" id="13_8vm1s"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ig5o4"]
-font = ExtResource("3_tmu72")
-font_size = 24
-
 [sub_resource type="LabelSettings" id="LabelSettings_pgto5"]
 font_size = 24
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgto5"]
 
-[node name="local_profile_manager" type="Control"]
+[node name="profile_manager" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,12 +39,12 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
 [node name="vbox" type="VBoxContainer" parent="hsplit/selector"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 392.0
-offset_bottom = 1056.0
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 248.0
+grow_vertical = 2
 
 [node name="panel_container" type="PanelContainer" parent="hsplit/selector/vbox"]
 layout_mode = 2
@@ -60,35 +54,10 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container"]
+[node name="select_list" type="VBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="profile_selector" type="PanelContainer" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox"]
-layout_mode = 2
-theme = ExtResource("2_ukn44")
-
-[node name="hbox" type="HBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector"]
-layout_mode = 2
-
-[node name="button" type="Button" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox"]
-layout_mode = 2
-theme_override_colors/icon_normal_color = Color(0.878431, 0.878431, 0.878431, 1)
-toggle_mode = true
-icon = ExtResource("3_ig5o4")
-icon_alignment = 1
-
-[node name="vbox" type="VBoxContainer" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox"]
-layout_mode = 2
-
-[node name="name" type="Label" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox/vbox"]
-layout_mode = 2
-text = "Default"
-label_settings = SubResource("LabelSettings_ig5o4")
-
-[node name="location" type="Label" parent="hsplit/selector/vbox/panel_container/scroll_container/vbox/profile_selector/hbox/vbox"]
-layout_mode = 2
-text = "user://default.qrk"
+script = ExtResource("2_wdid4")
 
 [node name="grid_container" type="GridContainer" parent="hsplit/selector/vbox"]
 layout_mode = 2
@@ -202,12 +171,6 @@ dialog_text = "Hiding this profile will not delete notes from the system. It wil
 
 (To completely delete a profile and all of its contents, delete the folder in the file system.)"
 dialog_autowrap = true
-
-[node name="error_dialog" type="AcceptDialog" parent="."]
-title = "Error!"
-initial_position = 1
-size = Vector2i(216, 100)
-dialog_text = "Something went wrong...?"
 
 [connection signal="pressed" from="hsplit/selector/vbox/grid_container/create_button" to="hsplit/selector/vbox/grid_container/create_button/create_dialog" method="show"]
 [connection signal="file_selected" from="hsplit/selector/vbox/grid_container/create_button/create_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_create_dialog_file_selected"]

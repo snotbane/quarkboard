@@ -1,33 +1,16 @@
 extends Control
 
-var _profile : LocalProfile
-@export var profile : LocalProfile :
+var _profile : Profile
+@export var profile : Profile :
 	get: return _profile
 	set(value):
 		if _profile == value: return
-
-		if _profile:
-			_profile.move_failed.disconnect(show_error)
-			_profile.copy_failed.disconnect(show_error)
-
 		_profile = value
 		visible = _profile != null
-
-		if _profile:
-			_profile.move_failed.connect(show_error)
-			_profile.copy_failed.connect(show_error)
-
-
-@onready var error_dialog : AcceptDialog = $error_dialog
 
 
 func _ready() -> void:
 	visible = _profile != null
-
-
-func show_error(message: String) -> void:
-	error_dialog.dialog_text = message
-	error_dialog.show()
 
 
 func _on_create_dialog_file_selected(path: String) -> void:

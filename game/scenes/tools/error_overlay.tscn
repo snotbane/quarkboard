@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bobhyo0yvhbl"]
+
+[ext_resource type="Script" uid="uid://wsjbfdnc1n84" path="res://game/scenes/tools/error_overlay.gd" id="1_cqspi"]
+
+[node name="error_overlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cqspi")
+
+[node name="color_rect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.12549)
+
+[node name="dialog" type="AcceptDialog" parent="."]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(400, 100)
+dialog_text = "Something went wrong!"
+dialog_autowrap = true
+
+[connection signal="visibility_changed" from="dialog" to="." method="_on_dialog_visibility_changed"]
