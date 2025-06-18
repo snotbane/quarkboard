@@ -18,8 +18,8 @@ func refresh_profile() -> void:
 	visible = _profile != null
 	if not _profile: return
 
-	if not $vbox/name.is_editing():
-		$vbox/name.text = _profile.name
+	if not $vbox/h_box_container/name.is_editing():
+		$vbox/h_box_container/name.text = _profile.name
 	$vbox/location.text = _profile.save_dir
 	# $vbox/icon.texture = _profile.icon if _profile.icon else null
 	# $vbox/grid/move_button/move_dialog.default_path = _profile.save_dir
@@ -59,8 +59,12 @@ func _on_move_dialog_dir_selected(dir: String) -> void:
 	profile.move(dir)
 
 
-func _on_duplicate_dialog_dir_selected(dir: String) -> void:
+func _on_copy_dialog_dir_selected(dir: String) -> void:
 	profile.copy(dir)
+
+
+func _on_hardcopy_dialog_dir_selected(dir: String) -> void:
+	profile.hardcopy(dir)
 
 
 func _on_reveal_button_pressed() -> void:
@@ -69,6 +73,10 @@ func _on_reveal_button_pressed() -> void:
 
 func _on_hide_dialog_confirmed() -> void:
 	profile.hide()
+
+
+func _on_delete_dialog_confirmed() -> void:
+	profile.delete()
 
 
 func _on_name_text_changed(new_text: String) -> void:

@@ -81,19 +81,43 @@ func move(to_dir: String) -> void:
 
 
 func copy(to_dir: String) -> Profile:
-	if save_path == to_dir:
-		ErrorOverlay.global_push("Can't duplicate to the same path '%s'" % [ to_dir ])
-		return
-	var err := DirAccess.copy_absolute(save_dir_slash, to_dir.path_join(""))
+	var result := hardcopy(to_dir)
+
+	if result == null:
+		return null
+
+	# if FileAccess.file_exists(result.save_dir.path_join(Entry.NOTES_SUBFOLDER_NAME)):
+	var err := DirAccess.remove_absolute(result.save_dir.path_join(Entry.NOTES_SUBFOLDER_NAME))
 	if err != OK:
-		ErrorOverlay.global_push("Error code (%s) while copying profile from '%s' to '%s'" % [ err, save_path, to_dir ])
+		ErrorOverlay.global_push("Error code (%s) while removing notes folder from copied profile '%s'" % [ err, result.save_path ])
+
+	return result
+
+
+func hardcopy(to_dir: String) -> Profile:
+	if save_dir == to_dir:
+		ErrorOverlay.global_push("Can't duplicate to the same path '%s'" % [ to_dir ])
+		return null
+	var err := DirAccess.copy_absolute(save_dir, to_dir)
+	if err != OK:
+		ErrorOverlay.global_push("Error code (%s) while copying profile from '%s' to '%s'" % [ err, save_dir, to_dir ])
+		return null
 	return Profile.new(to_dir.path_join(Profile.PATH))
 
 
 func reveal() -> void:
 	var err := OS.shell_show_in_file_manager(save_dir)
-	if err != OK: ErrorOverlay.global_push("Error code (%s) while revealing profile '%s' in file manager." % [ err, save_path ])
+	if err != OK:
+		ErrorOverlay.global_push("Error code (%s) while revealing profile '%s' in file manager." % [ err, save_path ])
 
 
 func hide() -> void:
 	ProfileList.remove_profile(self)
+	Profile.active = null
+
+
+func delete() -> void:
+	hide()
+	var err := DirAccess.remove_absolute(save_dir)
+	if err != OK:
+		ErrorOverlay.global_push("Error code (%s) while deleting profile '%s'" % [ err, save_path ])
