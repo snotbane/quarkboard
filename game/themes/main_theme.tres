@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://x0jqbgeqbi05"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://x0jqbgeqbi05"]
 
 [ext_resource type="FontFile" uid="uid://buuo3u7hcng1c" path="res://game/fonts/NotoSans-Italic.ttf" id="1_je7s3"]
 [ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="2_hafvu"]
@@ -7,6 +7,8 @@
 bg_color = Color(0.658824, 0.133333, 0.219608, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7b3us"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_je7s3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7b3us"]
 content_margin_left = 8.0
@@ -29,5 +31,8 @@ Field/styles/panel_ok = SubResource("StyleBoxEmpty_7b3us")
 GridContainer/constants/h_separation = 8
 GridContainer/constants/v_separation = 8
 Label/fonts/font = ExtResource("2_hafvu")
+LineEdit/font_sizes/font_size = 22
+LineEdit/fonts/font = ExtResource("2_hafvu")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_je7s3")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7b3us")
 VBoxContainer/constants/separation = 8

@@ -88,7 +88,7 @@ var save_name : String :
 	get: return save_path.substr(save_path.rfind("/") + 1)
 
 var save_dir : String :
-	get: return save_path.substr(0, save_path.rfind("/"))
+	get: return get_parent_folder(1)
 
 var save_dir_slash : String :
 	get: return save_dir.path_join("")
@@ -140,5 +140,11 @@ func export_json() -> Dictionary:
 	_export_json(result)
 	return result
 func _export_json(json: Dictionary) -> void: pass
+
+
+func get_parent_folder(levels: int = 1, path: String = save_path) -> String:
+	if path.is_empty(): return String()
+	if levels <= 0: return path
+	return get_parent_folder(levels - 1, path.substr(0, path.rfind("/")))
 
 #endregion

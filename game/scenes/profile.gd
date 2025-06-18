@@ -8,25 +8,24 @@ const ICONS : Array[Texture2D] = [
 
 const FOLDER_EXT := ".qrk"
 const PATH := "profile.json"
+
+const K_NAME := "name"
 const K_ICON := "icon_uid"
+
+static var RE_PROFILE_PATH : RegEx = RegEx.create_from_string(r".*\.qrk$")
 
 static var active : Profile
 
 #endregion
 
-# signal move_passed(destination: String)
-# signal move_failed(message: String)
-
-# signal copy_passed(destination: String)
-# signal copy_failed(message: String)
-
-# var _path : String
-# @export_global_file(("*" + FOLDER_EXT)) var path : String :
-# 	get: return _path
-# 	set(value):
-# 		if _path == value: return
-# 		_path = value
-# 		commit_changes()
+var _name : String
+@export var name : String :
+	get: return _name
+	set(value):
+		if _name == value: return
+		_name = value
+		commit_changes()
+		ProfileList.global.commit_changes()
 
 var _icon : Texture2D
 @export var icon : Texture2D :
@@ -37,27 +36,28 @@ var _icon : Texture2D
 		commit_changes()
 
 
-var display_name : String :
+var name_from_save_dir : String :
 	get:
 		var start := save_dir.rfind("/") + 1
 		var end := save_dir.rfind(Profile.FOLDER_EXT) - start
 		return save_dir.substr(start, end)
-var display_dir_path : String :
-	get: return save_dir.substr(0, save_dir.rfind("/"))
 
 
 func _init(__save_path__: String) -> void:
 	super._init(__save_path__)
+	if name.is_empty():	name = name_from_save_dir
 	ProfileList.add_profile(self)
 
 
 func _import_json(json: Dictionary) -> void:
-	_icon = load(json[K_ICON])
+	_name = json[K_NAME]
+	_icon = load(json[K_ICON]) if ResourceLoader.exists(json[K_ICON]) else ICONS[0]
 
 
 func _export_json(json: Dictionary) -> void:
 	json.merge({
-		K_ICON: JsonResource.get_resource_uid_path(icon)
+		K_NAME: name,
+		K_ICON: JsonResource.get_resource_uid_path(icon),
 	})
 
 
@@ -65,41 +65,35 @@ func make_active() -> void:
 	active = self
 
 
-func move(to_dir: String) -> int:
-	if save_path == to_dir: return OK
-	var err := DirAccess.rename_absolute(save_dir_slash, to_dir.path_join(""))
-	if err == OK:
-		save_path = to_dir.path_join(save_name)
-		# move_passed.emit(to_dir)
-	else:
+func move(to_dir: String) -> void:
+	if save_path == to_dir: return
+
+	print("Moving profile '%s' to '%s'" % [ save_path, to_dir ])
+
+	var err := DirAccess.rename_absolute(save_dir_slash, to_dir)
+	if err != OK:
 		ErrorOverlay.global_push("Error code (%s) while moving profile from '%s' to '%s'" % [ err, save_path, to_dir ])
-		# move_failed.emit("Error code (%s) while moving profile from '%s' to '%s'" % [ err, save_path, to_dir ])
+		return
 
-	return err
+	save_path = to_dir.path_join(save_name)
+	commit_changes()
+	ProfileList.global.commit_changes()
 
 
-func copy(to_dir: String) -> int:
+func copy(to_dir: String) -> Profile:
 	if save_path == to_dir:
-		# copy_failed.emit("Can't duplicate to the same path '%s'" % [ to_dir ])
-		return ERR_ALREADY_EXISTS
+		ErrorOverlay.global_push("Can't duplicate to the same path '%s'" % [ to_dir ])
+		return
 	var err := DirAccess.copy_absolute(save_dir_slash, to_dir.path_join(""))
 	if err != OK:
-		pass
-		# copy_passed.emit(to_dir)
-	else:
-		ErrorOverlay.global_push("Unknown error (%s)." % err)
-		# copy_failed.emit("Unknown error (%s)." % err)
-	return err
+		ErrorOverlay.global_push("Error code (%s) while copying profile from '%s' to '%s'" % [ err, save_path, to_dir ])
+	return Profile.new(to_dir.path_join(Profile.PATH))
 
 
-func reveal() -> int:
+func reveal() -> void:
 	var err := OS.shell_show_in_file_manager(save_dir)
-	if err == OK:
-		pass
-	else:
-		pass
-	return err
+	if err != OK: ErrorOverlay.global_push("Error code (%s) while revealing profile '%s' in file manager." % [ err, save_path ])
 
 
 func hide() -> void:
-	pass
+	ProfileList.remove_profile(self)

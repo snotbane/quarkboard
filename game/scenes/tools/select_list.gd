@@ -1,7 +1,7 @@
 class_name SelectList extends BoxContainer
 
-signal selected(item: SelectItem)
-signal selected_object(object: Variant)
+signal item_selected(item: SelectItem)
+signal object_selected(object: Variant)
 
 @export var selector_scene : PackedScene
 
@@ -24,14 +24,24 @@ var selected_index : int = -1 :
 		if selected_item:
 			selected_item._on_selected()
 
-		selected.emit(selected_item)
-		selected_object.emit(selected_item.selection_object if selected_item else null)
+		item_selected.emit(selected_item)
+		object_selected.emit(selected_object)
 
 var selected_item : SelectItem :
 	get: return get_child(selected_index) if selected_index != -1 else null
 	set(value):
 		if selected_item == value: return
 		selected_index = value.index_in_list if value else -1
+
+var selected_object : Variant :
+	get: return selected_item.selection_object if selected_item else null
+	set(value):
+		if selected_object == value: return
+		for child in get_children():
+			if child.selection_object == value:
+				selected_item = child
+				return
+		selected_index = -1
 
 func _ready() -> void:
 	refresh_list()

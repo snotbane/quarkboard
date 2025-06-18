@@ -5,8 +5,25 @@ var _profile : Profile
 	get: return _profile
 	set(value):
 		if _profile == value: return
+
+		if _profile:
+			_profile.modified.disconnect(refresh_profile)
+
 		_profile = value
-		visible = _profile != null
+		refresh_profile()
+
+		if _profile:
+			_profile.modified.connect(refresh_profile)
+func refresh_profile() -> void:
+	visible = _profile != null
+	if not _profile: return
+
+	if not $vbox/name.is_editing():
+		$vbox/name.text = _profile.name
+	$vbox/location.text = _profile.save_dir
+	# $vbox/icon.texture = _profile.icon if _profile.icon else null
+	# $vbox/grid/move_button/move_dialog.default_path = _profile.save_dir
+
 func set_profile(__profile__: Profile) -> void:
 	profile = __profile__
 
@@ -17,6 +34,7 @@ func _ready() -> void:
 
 func _on_create_dialog_file_selected(path: String) -> void:
 	if DirAccess.dir_exists_absolute(path): ErrorOverlay.global_push("Can't create new profile. A profile with the same name already exists."); return
+
 	var err := DirAccess.make_dir_recursive_absolute(path)
 	if err != OK: ErrorOverlay.global_push("Something went wrong? (code %s)" % err); return
 
@@ -25,20 +43,33 @@ func _on_create_dialog_file_selected(path: String) -> void:
 
 
 func _on_import_dialog_dir_selected(dir: String) -> void:
-	pass # Replace with function body.
+	if not DirAccess.dir_exists_absolute(dir): ErrorOverlay.global_push("The selected directory does not exist."); return
+
+	var profile_paths_found := MincuzUtils.get_paths_in_folder(dir, Profile.RE_PROFILE_PATH)
+
+	var last_imported : Profile
+	for profile_path in profile_paths_found:
+		last_imported = Profile.new(profile_path.path_join(Profile.PATH))
+
+	if profile_paths_found.size() == 1:
+		last_imported.make_active()
 
 
-func _on_move_dialog_dir_selected(dir:String) -> void:
-	pass # Replace with function body.
+func _on_move_dialog_dir_selected(dir: String) -> void:
+	profile.move(dir)
 
 
-func _on_duplicate_dialog_dir_selected(dir:String) -> void:
-	pass # Replace with function body.
+func _on_duplicate_dialog_dir_selected(dir: String) -> void:
+	profile.copy(dir)
 
 
 func _on_reveal_button_pressed() -> void:
-	OS.shell_show_in_file_manager(profile.path)
+	profile.reveal()
 
 
 func _on_hide_dialog_confirmed() -> void:
-	pass # Replace with function body.
+	profile.hide()
+
+
+func _on_name_text_changed(new_text: String) -> void:
+	profile.name = new_text

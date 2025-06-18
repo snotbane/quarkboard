@@ -9,14 +9,18 @@ static func get_paths_in_folder(root := "res://", include := RegEx.create_from_s
 	if not dir: return []
 
 	var result : PackedStringArray = []
+
+	if include.search(root):
+		result.push_back(root)
+
 	dir.list_dir_begin()
 	var file : String = dir.get_next()
 	while file:
 		var next := root.path_join(file)
+		if include.search(file):
+			result.push_back(next)
 		if dir.current_is_dir():
 			result.append_array(get_paths_in_folder(next, include))
-		elif include.search(file):
-			result.push_back(next)
 		file = dir.get_next()
 	return result
 

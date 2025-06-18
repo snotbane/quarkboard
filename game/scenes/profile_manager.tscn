@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0glaev0c1woe"]
+[gd_scene load_steps=16 format=3 uid="uid://d0glaev0c1woe"]
 
 [ext_resource type="PackedScene" uid="uid://b52qwjwx2voq7" path="res://game/scenes/tools/qrk_file_dialog.tscn" id="2_11f5m"]
 [ext_resource type="PackedScene" uid="uid://xj7ijd4q1fvp" path="res://game/scenes/profile_item.tscn" id="2_ukn44"]
@@ -8,15 +8,43 @@
 [ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://game/icons/star_alt_2.svg" id="6_ig5o4"]
 [ext_resource type="PackedScene" uid="uid://bplhtwvhxpngy" path="res://game/scenes/tools/profile_action_button.tscn" id="6_udgad"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://game/icons/folder.svg" id="8_emlen"]
-[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://game/icons/pen.svg" id="10_ig5o4"]
+[ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://game/icons/inbox_arrow_right.svg" id="9_h1mts"]
 [ext_resource type="Texture2D" uid="uid://ln4avyrtpw6s" path="res://game/icons/file_copy.svg" id="11_emlen"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://game/icons/arrow_up_right_from_square.svg" id="12_gqicv"]
 [ext_resource type="Texture2D" uid="uid://b4nkssn6nhqo0" path="res://game/icons/link_slash_alt.svg" id="13_8vm1s"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_pgto5"]
-font_size = 24
+[ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://game/icons/trash.svg" id="13_si7jm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgto5"]
+
+[sub_resource type="GDScript" id="GDScript_si7jm"]
+resource_name = "grid"
+script/source = "extends GridContainer
+
+@export var show_on_shift : Array[Node]
+@export var hide_on_shift : Array[Node]
+
+var _toggle_shift : bool
+var toggle_shift : bool :
+	get: return _toggle_shift
+	set(value):
+		if _toggle_shift == value: return
+		_toggle_shift = value
+		
+		for node in show_on_shift:
+			node.visible = _toggle_shift
+		for node in hide_on_shift:
+			node.visible = not _toggle_shift
+
+
+func _ready() -> void:
+	for node in hide_on_shift:
+		node.visible = not _toggle_shift
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.keycode == KEY_SHIFT:
+		toggle_shift = event.is_pressed()
+			
+"
 
 [node name="profile_manager" type="Control"]
 layout_mode = 3
@@ -83,9 +111,9 @@ icon = ExtResource("8_emlen")
 
 [node name="import_dialog" parent="hsplit/selector/vbox/grid_container/import_button" instance=ExtResource("2_11f5m")]
 title = "Import Profile"
-ok_button_text = "Open"
+ok_button_text = "Select Current Folder"
 mode_overrides_title = false
-file_mode = 0
+file_mode = 2
 
 [node name="editor" type="PanelContainer" parent="hsplit"]
 layout_mode = 2
@@ -113,13 +141,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="name" type="Label" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
+[node name="name" type="LineEdit" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
 layout_mode = 2
-text = "Default"
-label_settings = SubResource("LabelSettings_pgto5")
-horizontal_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
+size_flags_horizontal = 4
+placeholder_text = "Enter Name..."
+alignment = 1
+expand_to_text_length = true
+flat = true
+select_all_on_focus = true
 
 [node name="location" type="Label" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
 layout_mode = 2
@@ -132,14 +161,18 @@ text_overrun_behavior = 3
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_pgto5")
 
-[node name="grid" type="GridContainer" parent="hsplit/editor/vbox/active_profile_panel/vbox"]
+[node name="grid" type="GridContainer" parent="hsplit/editor/vbox/active_profile_panel/vbox" node_paths=PackedStringArray("show_on_shift", "hide_on_shift")]
 layout_mode = 2
 columns = 2
+script = SubResource("GDScript_si7jm")
+show_on_shift = [NodePath("hardcopy_button"), NodePath("delete_button")]
+hide_on_shift = [NodePath("copy_button"), NodePath("hide_button")]
 
 [node name="move_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
 layout_mode = 2
-text = "Move / Rename"
-icon = ExtResource("10_ig5o4")
+tooltip_text = "Moves (or renames) the profile folder to a new location in the file system."
+text = "Transfer"
+icon = ExtResource("9_h1mts")
 
 [node name="move_dialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button" instance=ExtResource("2_11f5m")]
 title = "Duplicate Profile"
@@ -147,21 +180,35 @@ mode_overrides_title = false
 
 [node name="copy_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
 layout_mode = 2
-text = "Duplicate"
+tooltip_text = "Creates a shallow clone of the profile. Notes are not copied; Only settings, views, tags, etc. are copied."
+text = "Clone"
 icon = ExtResource("11_emlen")
 
 [node name="copy_dialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button" instance=ExtResource("2_11f5m")]
 title = "Duplicate Profile"
 mode_overrides_title = false
 
+[node name="hardcopy_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
+visible = false
+layout_mode = 2
+tooltip_text = "Creates a copy of the profile, including all notes, in the selected location."
+text = "Clone Everything"
+icon = ExtResource("11_emlen")
+
+[node name="hardcopy_dialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/hardcopy_button" instance=ExtResource("2_11f5m")]
+title = "Duplicate Profile"
+mode_overrides_title = false
+
 [node name="reveal_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
 layout_mode = 2
+tooltip_text = "Opens the profile folder in the file system."
 text = "Reveal
 "
 icon = ExtResource("12_gqicv")
 
 [node name="hide_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
 layout_mode = 2
+tooltip_text = "Removes the profile from the profile list without deleting any data."
 text = "Disconnect"
 icon = ExtResource("13_8vm1s")
 
@@ -175,15 +222,36 @@ dialog_text = "Hiding this profile will not delete notes from the system. It wil
 (To completely delete a profile and all of its contents, delete the folder in the file system.)"
 dialog_autowrap = true
 
-[connection signal="selected_object" from="hsplit/selector/vbox/panel_container/scroll_container/select_list" to="hsplit/editor/vbox/active_profile_panel" method="set_profile"]
+[node name="delete_button" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid" instance=ExtResource("6_udgad")]
+visible = false
+layout_mode = 2
+tooltip_text = "Removes the profile from the profile list without deleting any data."
+text = "Delete"
+icon = ExtResource("13_si7jm")
+
+[node name="delete_dialog" type="ConfirmationDialog" parent="hsplit/editor/vbox/active_profile_panel/vbox/grid/delete_button"]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(400, 106)
+ok_button_text = "Hide"
+dialog_text = "This will delete the profile AND all notes inside of it immediately! Are you SURE you want to do that?"
+dialog_autowrap = true
+
+[connection signal="object_selected" from="hsplit/selector/vbox/panel_container/scroll_container/select_list" to="hsplit/editor/vbox/active_profile_panel" method="set_profile"]
 [connection signal="pressed" from="hsplit/selector/vbox/grid_container/create_button" to="hsplit/selector/vbox/grid_container/create_button/create_dialog" method="show"]
 [connection signal="file_selected" from="hsplit/selector/vbox/grid_container/create_button/create_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_create_dialog_file_selected"]
 [connection signal="pressed" from="hsplit/selector/vbox/grid_container/import_button" to="hsplit/selector/vbox/grid_container/import_button/import_dialog" method="show"]
 [connection signal="dir_selected" from="hsplit/selector/vbox/grid_container/import_button/import_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_import_dialog_dir_selected"]
+[connection signal="text_changed" from="hsplit/editor/vbox/active_profile_panel/vbox/name" to="hsplit/editor/vbox/active_profile_panel" method="_on_name_text_changed"]
 [connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button/move_dialog" method="show"]
 [connection signal="dir_selected" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button/move_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_move_dialog_dir_selected"]
+[connection signal="file_selected" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/move_button/move_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_move_dialog_dir_selected"]
 [connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button/copy_dialog" method="show"]
 [connection signal="dir_selected" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/copy_button/copy_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_duplicate_dialog_dir_selected"]
+[connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/hardcopy_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/hardcopy_button/hardcopy_dialog" method="show"]
+[connection signal="dir_selected" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/hardcopy_button/hardcopy_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_duplicate_dialog_dir_selected"]
 [connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/reveal_button" to="hsplit/editor/vbox/active_profile_panel" method="_on_reveal_button_pressed"]
 [connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button/hide_dialog" method="show"]
 [connection signal="confirmed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/hide_button/hide_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_hide_dialog_confirmed"]
+[connection signal="pressed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/delete_button" to="hsplit/editor/vbox/active_profile_panel/vbox/grid/delete_button/delete_dialog" method="show"]
+[connection signal="confirmed" from="hsplit/editor/vbox/active_profile_panel/vbox/grid/delete_button/delete_dialog" to="hsplit/editor/vbox/active_profile_panel" method="_on_hide_dialog_confirmed"]
