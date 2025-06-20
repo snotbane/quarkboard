@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmqurdk2vcds0"]
+[gd_scene load_steps=8 format=3 uid="uid://da3b2j40gqcwp"]
 
-[ext_resource type="PackedScene" uid="uid://bg2ld57jvvkyf" path="res://game/scenes/sticky_tag_list.tscn" id="1_h4r2f"]
+[ext_resource type="PackedScene" uid="uid://bg2ld57jvvkyf" path="res://game/scenes/tag_list.tscn" id="1_h4r2f"]
 [ext_resource type="Theme" uid="uid://mfru166yqjvp" path="res://game/themes/note_theme.tres" id="1_poewy"]
-[ext_resource type="Script" uid="uid://dx5y63elcslx5" path="res://game/scenes/arch_sticky.gd" id="2_ly2f1"]
+[ext_resource type="Script" uid="uid://dx5y63elcslx5" path="res://game/scenes/note_item.gd" id="2_ly2f1"]
+[ext_resource type="Script" uid="uid://bx6v5ahneahwe" path="res://game/scenes/note_small.gd" id="3_bj3q4"]
 [ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="5_tu6hn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu6hn"]
@@ -17,15 +18,13 @@ corner_radius_bottom_left = 8
 font = ExtResource("5_tu6hn")
 font_size = 20
 
-[node name="arch_sticky" type="PanelContainer" node_paths=PackedStringArray("button", "title_label", "text_label")]
+[node name="arch_note" type="PanelContainer" node_paths=PackedStringArray("entry_instance")]
 offset_right = 258.0
 offset_bottom = 82.0
 theme = ExtResource("1_poewy")
 theme_override_styles/panel = SubResource("StyleBoxFlat_tu6hn")
 script = ExtResource("2_ly2f1")
-button = NodePath("select_button")
-title_label = NodePath("margin_container/v_box_container/title")
-text_label = NodePath("margin_container/v_box_container/text")
+entry_instance = NodePath("margin_container/v_box_container")
 
 [node name="select_button" type="Button" parent="."]
 layout_mode = 2
@@ -36,9 +35,12 @@ toggle_mode = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="margin_container"]
+[node name="v_box_container" type="VBoxContainer" parent="margin_container" node_paths=PackedStringArray("title_label", "text_label")]
 layout_mode = 2
 mouse_filter = 2
+script = ExtResource("3_bj3q4")
+title_label = NodePath("title")
+text_label = NodePath("text")
 
 [node name="title" type="Label" parent="margin_container/v_box_container"]
 layout_mode = 2
@@ -53,12 +55,7 @@ custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_constants/line_spacing = -4
-text = "I want this to be very bright right in here.
-That rascal's sneaky! Just let it blend up. Maybe we will have a little moon up here. I like the mountains -- they're my favorite. Don't get carried away. Trees are nice people.
-
-Take your time and play with these things. Painting used to drive me crazy. You make the big decisions. Let's build a happy little cloud in the sky. We're gonna have a light source right in here. All kinds of beautiful little things just happen. You're gonna have one WILD day!
-
-See how far away that looks already? I think we'll just do a happy little picture today. Of course he's a happy little stone; we don't have any other kind! Just sort of blend it around. The just do nice things for you. Go out and spend some time talking to a tree. If you comply with that rule, how can you go wrong?"
+text = "Description"
 autowrap_mode = 3
 max_lines_visible = 3
 

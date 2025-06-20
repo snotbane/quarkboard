@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg2ld57jvvkyf"]
+
+[ext_resource type="Script" uid="uid://m5n317iu2h6" path="res://game/scenes/tag_list.gd" id="1_gh6ql"]
+[ext_resource type="PackedScene" uid="uid://et4mipt58fbm" path="res://game/scenes/tag_instance.tscn" id="2_8hq6k"]
+[ext_resource type="Texture2D" uid="uid://h0jdfjxi7xn3" path="res://game/icons/godot/Tag.svg" id="3_2apec"]
+[ext_resource type="PackedScene" uid="uid://cjlaxlvn4iabj" path="res://game/scenes/tools/keep_order.tscn" id="4_05bfk"]
+
+[node name="tag_list" type="HFlowContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+alignment = 2
+reverse_fill = true
+script = ExtResource("1_gh6ql")
+prefab_tag_instance = ExtResource("2_8hq6k")
+
+[node name="add_button" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("3_2apec")
+flat = true
+icon_alignment = 1
+
+[node name="keep_order" parent="add_button" instance=ExtResource("4_05bfk")]
+
+[connection signal="child_order_changed" from="." to="." method="_on_child_order_changed"]

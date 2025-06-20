@@ -1,7 +1,7 @@
 extends SelectItem
 
 var _profile : Profile
-@export var profile : Profile :
+var profile : Profile :
 	get: return _profile
 	set(value):
 		if _profile == value: return
@@ -23,6 +23,8 @@ func refresh() -> void:
 
 func _get_selection_object() -> Variant:
 	return _profile
+func _set_selection_object(value: Variant) -> void:
+	_profile = value
 
 
 func _on_selected() -> void:

@@ -18,6 +18,7 @@ var entry : Entry :
 func set_entry(value: Entry) -> void: entry = value
 func _on_set_entry() -> void: pass
 
+
 func _on_entry_modified() -> void: pass
 
 

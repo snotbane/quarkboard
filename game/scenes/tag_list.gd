@@ -1,4 +1,4 @@
-class_name StickyTagList extends HFlowContainer
+class_name TagList extends HFlowContainer
 
 @export var prefab_tag_instance : PackedScene
 

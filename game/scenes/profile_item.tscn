@@ -1,61 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://xj7ijd4q1fvp"]
+[gd_scene load_steps=6 format=3 uid="uid://xj7ijd4q1fvp"]
 
-[ext_resource type="Theme" uid="uid://x0jqbgeqbi05" path="res://game/themes/main_theme.tres" id="1_em5iw"]
-[ext_resource type="Script" uid="uid://ciq0hra7h3nyt" path="res://game/scenes/profile_item.gd" id="2_jae1s"]
-[ext_resource type="Texture2D" uid="uid://dr2cpei5ronpv" path="res://game/icons/atom.svg" id="3_87r1h"]
-[ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="4_1onu6"]
+[ext_resource type="PackedScene" uid="uid://7kmsofkbjs0r" path="res://game/scenes/select_item.tscn" id="1_x5e4w"]
+[ext_resource type="Script" uid="uid://ciq0hra7h3nyt" path="res://game/scenes/profile_item.gd" id="2_hccsi"]
+[ext_resource type="Texture2D" uid="uid://dr2cpei5ronpv" path="res://game/icons/atom.svg" id="2_uonq3"]
+[ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="3_hccsi"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_em5iw"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ig5o4"]
-font = ExtResource("4_1onu6")
+[sub_resource type="LabelSettings" id="LabelSettings_fuv7k"]
+font = ExtResource("3_hccsi")
 font_size = 24
 
-[node name="profile_item" type="Button"]
-custom_minimum_size = Vector2(0, 80)
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 8.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_em5iw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_em5iw")
-toggle_mode = true
-script = ExtResource("2_jae1s")
+[node name="profile_item" instance=ExtResource("1_x5e4w")]
+script = ExtResource("2_hccsi")
 
-[node name="margin_container" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="hbox" type="HBoxContainer" parent="margin_container"]
+[node name="hbox" type="HBoxContainer" parent="margin_container" index="0"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="icon" type="TextureRect" parent="margin_container/hbox"]
+[node name="icon" type="TextureRect" parent="margin_container/hbox" index="0"]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("3_87r1h")
+texture = ExtResource("2_uonq3")
 stretch_mode = 2
 
-[node name="vbox" type="VBoxContainer" parent="margin_container/hbox"]
+[node name="vbox" type="VBoxContainer" parent="margin_container/hbox" index="1"]
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="name" type="Label" parent="margin_container/hbox/vbox"]
+[node name="name" type="Label" parent="margin_container/hbox/vbox" index="0"]
 layout_mode = 2
 text = "Name"
-label_settings = SubResource("LabelSettings_ig5o4")
+label_settings = SubResource("LabelSettings_fuv7k")
 
-[node name="location" type="Label" parent="margin_container/hbox/vbox"]
+[node name="location" type="Label" parent="margin_container/hbox/vbox" index="1"]
 layout_mode = 2
 text = "C:/Location"

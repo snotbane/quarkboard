@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://7kmsofkbjs0r"]
+
+[ext_resource type="Script" uid="uid://blkjn5sx3suvo" path="res://game/scenes/tools/select_item.gd" id="1_1n0o1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1n0o1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dpo7v"]
+
+[node name="select_item" type="PanelContainer" node_paths=PackedStringArray("button")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1n0o1")
+script = ExtResource("1_1n0o1")
+button = NodePath("button")
+
+[node name="button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dpo7v")
+toggle_mode = true
+
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[connection signal="toggled" from="button" to="." method="_toggled"]

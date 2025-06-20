@@ -50,7 +50,6 @@ func _export_json(json: Dictionary) -> void:
 		K_TEXT: text,
 		# K_TAGS: tags.map(func(tag: Tag): return tag.name),
 	}, true)
-	print("export: ", json)
 
 
 func set_text(new_text: String) -> void:

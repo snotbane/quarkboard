@@ -1,4 +1,4 @@
-extends StickyContainer
+extends NoteList
 
 # @export var arch_editor : ArchEditor
 

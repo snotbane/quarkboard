@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://d2gr03het0im7"]
 
-[ext_resource type="Script" uid="uid://b5uok6lidwsf2" path="res://game/scenes/arch_sticky_list.gd" id="1_4gc2u"]
-[ext_resource type="PackedScene" uid="uid://daahh7834rymb" path="res://game/scenes/on_click.tscn" id="1_gdxd3"]
-[ext_resource type="PackedScene" uid="uid://dmqurdk2vcds0" path="res://game/scenes/arch_sticky.tscn" id="1_wwica"]
+[ext_resource type="Script" uid="uid://b5uok6lidwsf2" path="res://game/scenes/arch/arch_note_list.gd" id="1_4gc2u"]
+[ext_resource type="PackedScene" uid="uid://daahh7834rymb" path="res://game/scenes/tools/on_click.tscn" id="1_gdxd3"]
+[ext_resource type="PackedScene" uid="uid://bq1qmlll2jbu0" path="res://game/scenes/note_item.tscn" id="3_racaw"]
 [ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/godot/Add.svg" id="4_x4vq0"]
 [ext_resource type="PackedScene" uid="uid://cckp0xcmsl721" path="res://game/scenes/note_editor.tscn" id="7_gdxd3"]
 
@@ -69,7 +69,7 @@ theme_override_constants/margin_bottom = 8
 [node name="sticky_list" type="VBoxContainer" parent="h_split_container/entry_list/v_box_container/scroll_container/on_click/margin_container"]
 layout_mode = 2
 script = ExtResource("1_4gc2u")
-selector_scene = ExtResource("1_wwica")
+selector_scene = ExtResource("3_racaw")
 can_unselect = true
 
 [node name="create_new_button" type="Button" parent="h_split_container/entry_list/v_box_container"]
@@ -83,3 +83,4 @@ icon = ExtResource("4_x4vq0")
 layout_mode = 2
 
 [connection signal="clicked" from="h_split_container/entry_list/v_box_container/scroll_container/on_click" to="h_split_container/entry_list/v_box_container/scroll_container/on_click/margin_container/sticky_list" method="set_current_entry"]
+[connection signal="object_selected" from="h_split_container/entry_list/v_box_container/scroll_container/on_click/margin_container/sticky_list" to="h_split_container/note_editor" method="set_entry"]

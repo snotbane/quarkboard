@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://cym5bbbr4b60g" path="res://game/scenes/sticky_note_sidebar.gd" id="4_p3gr4"]
 [ext_resource type="PackedScene" uid="uid://dlkwpktvuiwqo" path="res://game/scenes/tag_toggle.tscn" id="5_psk6j"]
 [ext_resource type="Texture2D" uid="uid://de2y2w3bk8c8y" path="res://game/icons/godot/Add.svg" id="6_7oieu"]
-[ext_resource type="PackedScene" uid="uid://b0g13pcx1c6ep" path="res://game/scenes/note_tool_button.tscn" id="7_4nljj"]
-[ext_resource type="PackedScene" uid="uid://bg2ld57jvvkyf" path="res://game/scenes/sticky_tag_list.tscn" id="8_p3gr4"]
+[ext_resource type="PackedScene" uid="uid://b0g13pcx1c6ep" path="res://game/scenes/tools/note_tool_button.tscn" id="7_4nljj"]
+[ext_resource type="PackedScene" uid="uid://bg2ld57jvvkyf" path="res://game/scenes/tag_list.tscn" id="8_p3gr4"]
 [ext_resource type="Texture2D" uid="uid://h0jdfjxi7xn3" path="res://game/icons/godot/Tag.svg" id="8_qdq7i"]
 
 [node name="sticky_graph_node" type="GraphNode" node_paths=PackedStringArray("inline_text_editor", "sidebar", "add_to_title")]

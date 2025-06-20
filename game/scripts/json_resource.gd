@@ -123,8 +123,8 @@ func load_from_file(path: String = save_path) -> void:
 func import_json(json: Dictionary) -> void:
 	self.time_created = json[K_TIME_CREATED]
 	self.time_modified = json[K_TIME_MODIFIED]
-	print("import: ", json)
-	print("time_created: ", self.time_created)
+	# print("import: ", json)
+	# print("time_created: ", self.time_created)
 	_import_json(json)
 func _import_json(json: Dictionary) -> void: pass
 
@@ -137,6 +137,7 @@ func export_json() -> Dictionary:
 		K_TIME_CREATED: time_created,
 		K_TIME_MODIFIED: time_modified,
 	}
+	# print("export: ", result)
 	_export_json(result)
 	return result
 func _export_json(json: Dictionary) -> void: pass

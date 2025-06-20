@@ -1,4 +1,4 @@
-class_name StickyContainer extends SelectList
+class_name NoteList extends SelectList
 
 # @export var prefab_sticky : PackedScene
 
@@ -16,7 +16,8 @@ func _ready() -> void:
 
 
 func _refresh_list() -> void:
-	print("Refreshing sticky list")
 	if not Host.global.active_profile: return
 	for entry in Host.global.active_profile.entries:
-		print("Adding sticky for entry: ", entry.title)
+		var result : SelectItem = selector_scene.instantiate()
+		self.add_child(result)
+		result.selection_object = entry
