@@ -26,6 +26,6 @@ func _on_text_changed() -> void:
 	update_title()
 
 func update_title() -> void:
-	# self.title = entry.placeholder_title
+	# self.title = note.placeholder_title
 	# self.title = ArchEditor.get_title_from_text(inline_text_editor.text)
 	pass

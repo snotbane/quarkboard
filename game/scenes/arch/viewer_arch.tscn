@@ -33,26 +33,26 @@ grow_horizontal = 2
 grow_vertical = 2
 dragger_visibility = 2
 
-[node name="entry_list" type="PanelContainer" parent="h_split_container"]
+[node name="note_list" type="PanelContainer" parent="h_split_container"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="h_split_container/entry_list"]
+[node name="v_box_container" type="VBoxContainer" parent="h_split_container/note_list"]
 layout_mode = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="h_split_container/entry_list/v_box_container"]
+[node name="scroll_container" type="ScrollContainer" parent="h_split_container/note_list/v_box_container"]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="on_click" parent="h_split_container/entry_list/v_box_container/scroll_container" instance=ExtResource("1_gdxd3")]
+[node name="on_click" parent="h_split_container/note_list/v_box_container/scroll_container" instance=ExtResource("1_gdxd3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="margin_container" type="MarginContainer" parent="h_split_container/entry_list/v_box_container/scroll_container/on_click"]
+[node name="margin_container" type="MarginContainer" parent="h_split_container/note_list/v_box_container/scroll_container/on_click"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,13 +66,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="sticky_list" type="VBoxContainer" parent="h_split_container/entry_list/v_box_container/scroll_container/on_click/margin_container"]
+[node name="sticky_list" type="VBoxContainer" parent="h_split_container/note_list/v_box_container/scroll_container/on_click/margin_container"]
 layout_mode = 2
 script = ExtResource("1_4gc2u")
 selector_scene = ExtResource("3_racaw")
 can_unselect = true
 
-[node name="create_new_button" type="Button" parent="h_split_container/entry_list/v_box_container"]
+[node name="create_new_button" type="Button" parent="h_split_container/note_list/v_box_container"]
 layout_mode = 2
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_4gc2u")
@@ -82,5 +82,5 @@ icon = ExtResource("4_x4vq0")
 [node name="note_editor" parent="h_split_container" instance=ExtResource("7_gdxd3")]
 layout_mode = 2
 
-[connection signal="clicked" from="h_split_container/entry_list/v_box_container/scroll_container/on_click" to="h_split_container/entry_list/v_box_container/scroll_container/on_click/margin_container/sticky_list" method="set_current_entry"]
-[connection signal="object_selected" from="h_split_container/entry_list/v_box_container/scroll_container/on_click/margin_container/sticky_list" to="h_split_container/note_editor" method="set_entry"]
+[connection signal="clicked" from="h_split_container/note_list/v_box_container/scroll_container/on_click" to="h_split_container/note_list/v_box_container/scroll_container/on_click/margin_container/sticky_list" method="set_current_note"]
+[connection signal="object_selected" from="h_split_container/note_list/v_box_container/scroll_container/on_click/margin_container/sticky_list" to="h_split_container/note_editor" method="set_note"]

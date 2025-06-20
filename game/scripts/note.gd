@@ -1,4 +1,4 @@
-class_name Entry extends TaggedResource
+class_name Note extends TaggedResource
 
 const NOTES_SUBFOLDER_NAME := "notes"
 
@@ -34,7 +34,7 @@ var placeholder_title : String :
 	get:
 		var trim := trimmed_text
 		var result := trim.substr(0, trim.find("\n"))
-		return Entry.DEFAULT_TITLE if result.is_empty() else result
+		return Note.DEFAULT_TITLE if result.is_empty() else result
 
 
 func _import_json(json: Dictionary) -> void:

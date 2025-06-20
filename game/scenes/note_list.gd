@@ -3,10 +3,10 @@ class_name NoteList extends SelectList
 # @export var prefab_sticky : PackedScene
 
 
-# func create_new_sticky(entry := Entry.new()) -> Node:
-# 	var result : EntryInstance = prefab_sticky.instantiate()
+# func create_new_sticky(note := Note.new()) -> Node:
+# 	var result : NoteInstance = prefab_sticky.instantiate()
 # 	self.add_child(result)
-# 	result.entry = entry
+# 	result.note = note
 # 	return result
 
 
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _refresh_list() -> void:
 	if not Host.global.active_profile: return
-	for entry in Host.global.active_profile.entries:
+	for note in Host.global.active_profile.entries:
 		var result : SelectItem = selector_scene.instantiate()
 		self.add_child(result)
-		result.selection_object = entry
+		result.selection_object = note

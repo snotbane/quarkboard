@@ -18,13 +18,13 @@ corner_radius_bottom_left = 8
 font = ExtResource("5_tu6hn")
 font_size = 20
 
-[node name="arch_note" type="PanelContainer" node_paths=PackedStringArray("entry_instance")]
+[node name="arch_note" type="PanelContainer" node_paths=PackedStringArray("note_instance")]
 offset_right = 258.0
 offset_bottom = 82.0
 theme = ExtResource("1_poewy")
 theme_override_styles/panel = SubResource("StyleBoxFlat_tu6hn")
 script = ExtResource("2_ly2f1")
-entry_instance = NodePath("margin_container/v_box_container")
+note_instance = NodePath("margin_container/v_box_container")
 
 [node name="select_button" type="Button" parent="."]
 layout_mode = 2

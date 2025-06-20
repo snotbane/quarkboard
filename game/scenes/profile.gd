@@ -33,7 +33,7 @@ var _icon : Texture2D
 		_icon = value
 		commit_changes()
 
-var entries : Array[Entry]
+var entries : Array[Note]
 
 
 var name_from_save_dir : String :
@@ -47,11 +47,11 @@ func _init(__save_path__: String) -> void:
 	super._init(__save_path__)
 	if name.is_empty():	name = name_from_save_dir
 
-	var entry_paths := MincuzUtils.get_paths_in_folder( save_dir.path_join(Entry.NOTES_SUBFOLDER_NAME), RegEx.create_from_string(r"\.json$"))
-	print("Found %s entries in profile '%s'" % [ entry_paths.size(), save_path ])
-	for path in entry_paths:
-		var entry := Entry.new(path)
-		entries.push_back(entry)
+	var note_paths := MincuzUtils.get_paths_in_folder( save_dir.path_join(Note.NOTES_SUBFOLDER_NAME), RegEx.create_from_string(r"\.json$"))
+	print("Found %s entries in profile '%s'" % [ note_paths.size(), save_path ])
+	for path in note_paths:
+		var note := Note.new(path)
+		entries.push_back(note)
 
 	Machine.add_profile(self)
 
@@ -93,8 +93,8 @@ func copy(to_dir: String) -> Profile:
 	if result == null:
 		return null
 
-	# if FileAccess.file_exists(result.save_dir.path_join(Entry.NOTES_SUBFOLDER_NAME)):
-	var err := DirAccess.remove_absolute(result.save_dir.path_join(Entry.NOTES_SUBFOLDER_NAME))
+	# if FileAccess.file_exists(result.save_dir.path_join(Note.NOTES_SUBFOLDER_NAME)):
+	var err := DirAccess.remove_absolute(result.save_dir.path_join(Note.NOTES_SUBFOLDER_NAME))
 	if err != OK:
 		ErrorOverlay.global_push("Error code (%s) while removing notes folder from copied profile '%s'" % [ err, result.save_path ])
 

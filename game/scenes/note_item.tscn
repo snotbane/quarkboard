@@ -10,9 +10,9 @@
 font = ExtResource("4_drow1")
 font_size = 20
 
-[node name="note_item" node_paths=PackedStringArray("entry_instance") instance=ExtResource("1_ml8xw")]
+[node name="note_item" node_paths=PackedStringArray("note_instance") instance=ExtResource("1_ml8xw")]
 script = ExtResource("2_fsder")
-entry_instance = NodePath("margin_container/v_box_container")
+note_instance = NodePath("margin_container/v_box_container")
 
 [node name="v_box_container" type="VBoxContainer" parent="margin_container" index="0" node_paths=PackedStringArray("title_label", "text_label")]
 layout_mode = 2

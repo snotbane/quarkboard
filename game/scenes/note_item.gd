@@ -1,8 +1,8 @@
 extends SelectItem
 
-@export var entry_instance : EntryInstance
+@export var note_instance : NoteInstance
 
 func _get_selection_object() -> Variant:
-	return entry_instance.entry
+	return note_instance.note
 func _set_selection_object(value: Variant) -> void:
-	entry_instance.entry = value
+	note_instance.note = value
