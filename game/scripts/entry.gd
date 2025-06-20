@@ -11,19 +11,6 @@ static var RE_JSON_PATH_LOCAL := RegEx.create_from_string(r"\.json$")
 static var RE_ANY_NON_WHITESPACE := RegEx.create_from_string(r"\S")
 static var RE_TRIM_WHITESPACE := RegEx.create_from_string(r"(?ms)^\s+|(?:\s+$(?=\S))")
 
-static var REGISTRY : Array[Entry]
-
-static var notes_folder_path : String :
-	get: return (Profile.active.save_dir if Profile.active else "user://").path_join(NOTES_SUBFOLDER_NAME)
-
-static func _static_init() -> void:
-	var paths := MincuzUtils.get_paths_in_folder(notes_folder_path, RE_JSON_PATH_LOCAL)
-	print(notes_folder_path)
-	for path in paths:
-		var entry := Entry.new(path)
-		# entry.load_file(path)
-		REGISTRY.push_back(entry)
-
 var _title : String
 @export var title : String :
 	get: return _title
@@ -48,10 +35,6 @@ var placeholder_title : String :
 		var trim := trimmed_text
 		var result := trim.substr(0, trim.find("\n"))
 		return Entry.DEFAULT_TITLE if result.is_empty() else result
-
-
-func get_folder() -> String:
-	return notes_folder_path
 
 
 func _import_json(json: Dictionary) -> void:

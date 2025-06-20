@@ -22,13 +22,13 @@ func _import_json(json: Dictionary) -> void:
 		if not profile: continue
 
 		if profile.save_dir == json.get(K_PROFILE_ACTIVE, ""):
-			Profile.active = profile
+			Host.global.active_profile = profile
 			break
 
 func _export_json(json: Dictionary) -> void:
 	json.merge({
 		K_PROFILE_LOCATIONS: global_profiles.map(func(profile: Profile) -> String : return profile.save_dir),
-		K_PROFILE_ACTIVE: Profile.active.save_dir if Profile.active else "",
+		K_PROFILE_ACTIVE: Host.global.active_profile.save_dir if Host.global.active_profile else "",
 	})
 
 static func add_profile(profile: Profile) -> void:

@@ -19,13 +19,17 @@ func _get_selection_object() -> Variant: return null
 
 func select() -> void:
 	parent_list.selected_item = self
-func _on_selected() -> void:
+func on_selected() -> void:
 	set_pressed_no_signal(true)
+	_on_selected()
 	selected.emit()
+func _on_selected() -> void: pass
 
 func unselect() -> void:
 	if parent_list.selected_item != self: return
 	parent_list.selected_index = -1
-func _on_unselected() -> void:
+func on_unselected() -> void:
 	set_pressed_no_signal(false)
+	_on_unselected()
 	unselected.emit()
+func _on_unselected() -> void: pass

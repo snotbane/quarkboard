@@ -1,5 +1,10 @@
 extends SelectList
 
+func _ready() -> void:
+	super._ready()
+	Machine.global.modified.connect(refresh_list)
+
+
 func _refresh_list() -> void:
 	for profile in Machine.global_profiles:
 		if not profile: continue

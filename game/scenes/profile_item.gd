@@ -23,3 +23,12 @@ func refresh() -> void:
 
 func _get_selection_object() -> Variant:
 	return _profile
+
+
+func _on_selected() -> void:
+	profile.make_active()
+
+func _on_unselected() -> void:
+	if Host.global.active_profile == profile:
+		Host.global.active_profile = null
+

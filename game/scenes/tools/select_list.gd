@@ -1,4 +1,4 @@
-class_name SelectList extends BoxContainer
+class_name SelectList extends Container
 
 signal item_selected(item: SelectItem)
 signal object_selected(object: Variant)
@@ -17,12 +17,12 @@ var selected_index : int = -1 :
 			if not can_unselect and _selected_index == -1:
 				selected_item.set_pressed_no_signal(true)
 				return
-			selected_item._on_unselected()
+			selected_item.on_unselected()
 
 		_selected_index = value
 
 		if selected_item:
-			selected_item._on_selected()
+			selected_item.on_selected()
 
 		item_selected.emit(selected_item)
 		object_selected.emit(selected_object)
@@ -45,7 +45,6 @@ var selected_object : Variant :
 
 func _ready() -> void:
 	refresh_list()
-	Machine.global.modified.connect(refresh_list)
 
 func refresh_list() -> void:
 	for child in get_children(): child.queue_free()

@@ -14,8 +14,6 @@ const K_ICON := "icon_uid"
 
 static var RE_PROFILE_PATH : RegEx = RegEx.create_from_string(r".*\.qrk$")
 
-static var active : Profile
-
 #endregion
 
 var _name : String
@@ -35,6 +33,8 @@ var _icon : Texture2D
 		_icon = value
 		commit_changes()
 
+var entries : Array[Entry]
+
 
 var name_from_save_dir : String :
 	get:
@@ -46,6 +46,13 @@ var name_from_save_dir : String :
 func _init(__save_path__: String) -> void:
 	super._init(__save_path__)
 	if name.is_empty():	name = name_from_save_dir
+
+	var entry_paths := MincuzUtils.get_paths_in_folder( save_dir.path_join(Entry.NOTES_SUBFOLDER_NAME), RegEx.create_from_string(r"\.json$"))
+	print("Found %s entries in profile '%s'" % [ entry_paths.size(), save_path ])
+	for path in entry_paths:
+		var entry := Entry.new(path)
+		entries.push_back(entry)
+
 	Machine.add_profile(self)
 
 
@@ -62,7 +69,7 @@ func _export_json(json: Dictionary) -> void:
 
 
 func make_active() -> void:
-	active = self
+	Host.global.active_profile = self
 
 
 func move(to_dir: String) -> void:
@@ -113,7 +120,7 @@ func reveal() -> void:
 
 func hide() -> void:
 	Machine.remove_profile(self)
-	Profile.active = null
+	Host.global.active_profile = null
 
 
 func delete() -> void:
