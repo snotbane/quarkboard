@@ -25,7 +25,7 @@ var _name : String
 		if _name == value: return
 		_name = value
 		commit_changes()
-		ProfileList.global.commit_changes()
+		Machine.global.commit_changes()
 
 var _icon : Texture2D
 @export var icon : Texture2D :
@@ -46,7 +46,7 @@ var name_from_save_dir : String :
 func _init(__save_path__: String) -> void:
 	super._init(__save_path__)
 	if name.is_empty():	name = name_from_save_dir
-	ProfileList.add_profile(self)
+	Machine.add_profile(self)
 
 
 func _import_json(json: Dictionary) -> void:
@@ -77,7 +77,7 @@ func move(to_dir: String) -> void:
 
 	save_path = to_dir.path_join(save_name)
 	commit_changes()
-	ProfileList.global.commit_changes()
+	Machine.global.commit_changes()
 
 
 func copy(to_dir: String) -> Profile:
@@ -112,7 +112,7 @@ func reveal() -> void:
 
 
 func hide() -> void:
-	ProfileList.remove_profile(self)
+	Machine.remove_profile(self)
 	Profile.active = null
 
 

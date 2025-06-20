@@ -62,6 +62,7 @@ prefab_sticky = ExtResource("1_wwica")
 
 [node name="create_new_button" type="Button" parent="h_split_container/entry_list/scroll_container/on_click/margin_container/sticky_list"]
 layout_mode = 2
+size_flags_vertical = 10
 text = "Create New"
 icon = ExtResource("4_x4vq0")
 

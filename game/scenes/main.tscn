@@ -78,7 +78,7 @@ tab_focus_mode = 0
 [node name="profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("7_shkmv")]
 layout_mode = 2
 
-[node name="sticky_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
+[node name="viewer_arch" parent="safe_margin_container/main/h_box_container/tab_container" instance=ExtResource("5_uk16q")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
