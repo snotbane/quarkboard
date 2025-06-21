@@ -12,12 +12,7 @@ static var initial_profile : Profile
 func _import_json(json: Dictionary) -> void:
 	global_profiles = json.get(K_PROFILE_LOCATIONS, []).map(func(profile_path: String) -> Profile :
 		var path := profile_path.path_join(Profile.PATH)
-
-		if not FileAccess.file_exists(path):
-			ErrorOverlay.global_push("Couldn't find profile at '%s'." % path)
-			return null
-
-		return Profile.new(profile_path.path_join(Profile.PATH))
+		return Profile.new(path)
 	)
 
 	for profile in global_profiles:

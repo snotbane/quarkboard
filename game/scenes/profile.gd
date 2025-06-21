@@ -45,13 +45,16 @@ var name_from_save_dir : String :
 
 func _init(__save_path__: String) -> void:
 	super._init(__save_path__)
-	if name.is_empty():	name = name_from_save_dir
 
-	var note_paths := MincuzUtils.get_paths_in_folder( save_dir.path_join(Note.NOTES_SUBFOLDER_NAME), RegEx.create_from_string(r"\.json$"))
-	print("Found %s entries in profile '%s'" % [ note_paths.size(), save_path ])
-	for path in note_paths:
-		var note := Note.new(path)
-		entries.push_back(note)
+	if is_valid:
+		if name.is_empty():	name = name_from_save_dir
+		var note_paths := MincuzUtils.get_paths_in_folder( save_dir.path_join(Note.NOTES_SUBFOLDER_NAME), RegEx.create_from_string(r"\.json$"))
+		print("Found %s entries in profile '%s'" % [ note_paths.size(), save_path ])
+		for path in note_paths:
+			var note := Note.new(path)
+			entries.push_back(note)
+	# else:
+	# 	ErrorOverlay.global_push("Couldn't find profile at '%s'." % save_dir)
 
 	Machine.add_profile(self)
 

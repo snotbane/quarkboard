@@ -73,6 +73,10 @@ signal modified
 @export var time_created : int
 @export var time_modified : int
 
+var is_valid : bool :
+	get: return FileAccess.file_exists(save_path) and _get_is_valid()
+func _get_is_valid() -> bool: return true
+
 var save_path : String
 func generate_save_path(folder := get_folder(), ext := FILE_EXT) -> String:
 	var result := ""
@@ -118,6 +122,9 @@ func commit_changes() -> void:
 
 func load_from_file(path: String = save_path) -> void:
 	save_path = path
+	if not is_valid:
+		push_error("Cannot load from file, file does not exist: %s" % save_path)
+		return
 	var file := FileAccess.open(path, FileAccess.READ)
 	self.import_json(JSON.parse_string(file.get_as_text()))
 func import_json(json: Dictionary) -> void:
@@ -131,6 +138,9 @@ func _import_json(json: Dictionary) -> void: pass
 
 func save_to_file(path: String = save_path) -> void:
 	var file := FileAccess.open(save_path, FileAccess.WRITE)
+	if not file:
+		printerr("Cannot save to file, file does not exist: %s" % save_path)
+		return
 	file.store_string(JSON.stringify(self.export_json()))
 func export_json() -> Dictionary:
 	var result := {

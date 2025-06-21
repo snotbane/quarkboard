@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://xj7ijd4q1fvp"]
+[gd_scene load_steps=7 format=3 uid="uid://xj7ijd4q1fvp"]
 
 [ext_resource type="PackedScene" uid="uid://7kmsofkbjs0r" path="res://game/scenes/select_item.tscn" id="1_x5e4w"]
 [ext_resource type="Script" uid="uid://ciq0hra7h3nyt" path="res://game/scenes/profile_item.gd" id="2_hccsi"]
 [ext_resource type="Texture2D" uid="uid://dr2cpei5ronpv" path="res://game/icons/atom.svg" id="2_uonq3"]
 [ext_resource type="FontFile" uid="uid://bh0i3s6bd1c3o" path="res://game/fonts/NotoSans_SemiCondensed-BoldItalic.ttf" id="3_hccsi"]
+[ext_resource type="Texture2D" uid="uid://b0ov022ctxb3c" path="res://game/icons/triangle_exclamation.svg" id="4_jae1s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fuv7k"]
 font = ExtResource("3_hccsi")
@@ -22,7 +23,15 @@ mouse_filter = 2
 texture = ExtResource("2_uonq3")
 stretch_mode = 2
 
-[node name="vbox" type="VBoxContainer" parent="margin_container/hbox" index="1"]
+[node name="icon_error" type="TextureRect" parent="margin_container/hbox" index="1"]
+visible = false
+self_modulate = Color(1, 0.2, 0.2, 1)
+layout_mode = 2
+tooltip_text = "This profile is missing from the file system."
+texture = ExtResource("4_jae1s")
+stretch_mode = 2
+
+[node name="vbox" type="VBoxContainer" parent="margin_container/hbox" index="2"]
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -35,4 +44,5 @@ label_settings = SubResource("LabelSettings_fuv7k")
 
 [node name="location" type="Label" parent="margin_container/hbox/vbox" index="1"]
 layout_mode = 2
+mouse_filter = 1
 text = "C:/Location"

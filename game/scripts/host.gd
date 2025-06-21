@@ -11,6 +11,10 @@ var _active_profile : Profile
 	get: return _active_profile
 	set(value):
 		if _active_profile == value: return
+		if value and not value.is_valid:
+			push_error("Cannot set active profile to an invalid profile.")
+			return
+
 		_active_profile = value
 
 		profile_changed.emit()
