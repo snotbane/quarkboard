@@ -23,3 +23,9 @@ func _ready() -> void:
 
 	global = self
 
+	active_profile = Machine.initial_profile
+
+
+func _exit_tree() -> void:
+	Machine.global.commit_changes()
+

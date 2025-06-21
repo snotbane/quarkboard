@@ -3,9 +3,11 @@ class_name Machine extends JsonResource
 const PATH := "user://machine_settings.json"
 const K_PROFILE_LOCATIONS := "profile_locations"
 const K_PROFILE_ACTIVE := "active_profile"
+const K_VIEW_ACTIVE := "active_view"
 
 static var global : Machine = Machine.new(PATH)
 static var global_profiles : Array
+static var initial_profile : Profile
 
 func _import_json(json: Dictionary) -> void:
 	global_profiles = json.get(K_PROFILE_LOCATIONS, []).map(func(profile_path: String) -> Profile :
@@ -22,14 +24,28 @@ func _import_json(json: Dictionary) -> void:
 		if not profile: continue
 
 		if profile.save_dir == json.get(K_PROFILE_ACTIVE, ""):
-			Host.global.active_profile = profile
+			initial_profile = profile
 			break
 
 func _export_json(json: Dictionary) -> void:
-	json.merge({
-		K_PROFILE_LOCATIONS: global_profiles.map(func(profile: Profile) -> String : return profile.save_dir),
-		K_PROFILE_ACTIVE: Host.global.active_profile.save_dir if Host.global.active_profile else "",
-	})
+	if not Host.global:
+		## This occurs if the machine settings have been deleted, or on the very first run.
+		json.merge({
+			K_PROFILE_LOCATIONS: [],
+			K_PROFILE_ACTIVE: null,
+			K_VIEW_ACTIVE: 0,
+		})
+	else:
+		json.merge({
+			K_PROFILE_LOCATIONS: global_profiles
+				.filter( func(profile: Profile) -> bool :
+					return profile != null )
+				.map( func(profile: Profile) -> String :
+					return profile.save_dir)
+				,
+			K_PROFILE_ACTIVE: Host.global.active_profile.save_dir if Host.global.active_profile else "",
+			K_VIEW_ACTIVE: 0,
+		})
 
 static func add_profile(profile: Profile) -> void:
 	if Machine.global:

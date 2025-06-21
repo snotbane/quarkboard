@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgpp20x5ejeje"
-path="res://.godot/imported/folder.svg-b2830b9a4b25930ae5326a8cde89266f.ctex"
+uid="uid://cn8b3j3tha5ls"
+path="res://.godot/imported/calendar.svg-314e9112f2594420f8f427752e4a3d58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/icons/folder.svg"
-dest_files=["res://.godot/imported/folder.svg-b2830b9a4b25930ae5326a8cde89266f.ctex"]
+source_file="res://game/icons/calendar.svg"
+dest_files=["res://.godot/imported/calendar.svg-314e9112f2594420f8f427752e4a3d58.ctex"]
 
 [params]
 

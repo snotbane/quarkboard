@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgpp20x5ejeje"
-path="res://.godot/imported/folder.svg-b2830b9a4b25930ae5326a8cde89266f.ctex"
+uid="uid://00sabjsq54x1"
+path="res://.godot/imported/floppy_disk_alt.svg-8d52bc503d4c601f40536aa77e2d12a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/icons/folder.svg"
-dest_files=["res://.godot/imported/folder.svg-b2830b9a4b25930ae5326a8cde89266f.ctex"]
+source_file="res://game/icons/floppy_disk_alt.svg"
+dest_files=["res://.godot/imported/floppy_disk_alt.svg-8d52bc503d4c601f40536aa77e2d12a9.ctex"]
 
 [params]
 

@@ -10,4 +10,9 @@ func _refresh_list() -> void:
 		if not profile: continue
 		var node := selector_scene.instantiate()
 		add_child(node)
-		node.set.call_deferred(&"profile", profile)
+		node.profile = profile
+		# node.set.call_deferred(&"profile", profile)
+
+		if profile == Host.global.active_profile:
+			selected_item = node
+

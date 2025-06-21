@@ -8,6 +8,7 @@ signal unselected
 
 var index_in_list : int :
 	get:
+		if not parent_list: return -1
 		for i in parent_list.get_child_count(): if parent_list.get_child(i) == self: return i
 		return -1
 
