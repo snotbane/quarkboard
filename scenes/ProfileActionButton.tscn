@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://gbmyoetclqr4"]
+
+[ext_resource type="Texture2D" uid="uid://uh3pt61ejjbp" path="res://icons/circle_question.svg" id="1_gwun8"]
+
+[node name="profile_action_button" type="Button" unique_id=471194668]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 102.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+text = "Button"
+icon = ExtResource("1_gwun8")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+metadata/_edit_use_anchors_ = true

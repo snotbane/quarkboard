@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dp76t3aegbnha"]
+
+[ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
+[ext_resource type="Texture2D" uid="uid://dy456122l6pe5" path="res://icons/profile_icons/dna.svg" id="2_jlsqs"]
+[ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/grid.svg" id="4_c01mt"]
+[ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/plus.svg" id="6_nxtc6"]
+[ext_resource type="Script" uid="uid://d2tuw5ftakgg5" path="res://scenes/ViewsItemList.gd" id="7_q8u5g"]
+[ext_resource type="PackedScene" uid="uid://dtga2xtjs61g8" path="res://scenes/ProfileManager.tscn" id="8_jlsqs"]
+
+[node name="canvas_layer" type="CanvasLayer" unique_id=1932569945]
+
+[node name="safe_margin_container" type="MarginContainer" parent="." unique_id=1507910763]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_elqb8")
+metadata/_custom_type_script = "uid://cjwdhgbhm3d5y"
+
+[node name="main" type="Control" parent="safe_margin_container" unique_id=163587127]
+layout_mode = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="safe_margin_container/main" unique_id=1115516237]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="views_scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container" unique_id=1982896753]
+layout_mode = 2
+size_flags_horizontal = 0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/views_scroll_container" unique_id=1363743094]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="views_item_list" type="ItemList" parent="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container" unique_id=491724013]
+layout_mode = 2
+allow_search = false
+auto_width = true
+auto_height = true
+item_count = 2
+same_column_width = true
+icon_mode = 0
+icon_scale = 1.5
+item_0/icon = ExtResource("2_jlsqs")
+item_1/icon = ExtResource("4_c01mt")
+script = ExtResource("7_q8u5g")
+
+[node name="add" type="Button" parent="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container" unique_id=1810103753]
+layout_mode = 2
+icon = ExtResource("6_nxtc6")
+flat = true
+icon_alignment = 1
+
+[node name="tab_container" type="TabContainer" parent="safe_margin_container/main/h_box_container" unique_id=38367856]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+tabs_visible = false
+tab_focus_mode = 0
+
+[node name="profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" unique_id=1920642639 instance=ExtResource("8_jlsqs")]
+layout_mode = 2

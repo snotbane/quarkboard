@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourceCollection" format=3 uid="uid://bm0lj0e3t6h35"]
+
+[ext_resource type="Script" uid="uid://vmjbvdubhg14" path="res://addons/myth/modules/misc/ResourceCollection.gd" id="1_fj53i"]
+
+[resource]
+script = ExtResource("1_fj53i")
+type_filter = "Texture2D"
+path = "res://icons/profile_icons"
+metadata/_custom_type_script = "uid://vmjbvdubhg14"

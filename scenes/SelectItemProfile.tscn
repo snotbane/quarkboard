@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bl4ti8lf6hvfo"]
+
+[ext_resource type="PackedScene" uid="uid://ce0lxeh6u1exy" path="res://scenes/SelectItem.tscn" id="1_vfhii"]
+[ext_resource type="Script" uid="uid://cwflfkufhyeew" path="res://scenes/SelectItemProfile.gd" id="2_l0kr3"]
+[ext_resource type="Texture2D" uid="uid://b0ov022ctxb3c" path="res://icons/triangle_exclamation.svg" id="3_8avbe"]
+[ext_resource type="Texture2D" uid="uid://bv2b3vanjk2wi" path="res://icons/dazzle/atom.svg" id="3_x5me3"]
+
+[node name="select_item_profile" unique_id=610522657 instance=ExtResource("1_vfhii")]
+script = ExtResource("2_l0kr3")
+
+[node name="h_box_container" type="HBoxContainer" parent="margin_container" parent_id_path=PackedInt32Array(2946062) index="0" unique_id=1697090615]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="icon" type="TextureRect" parent="margin_container/h_box_container" index="0" unique_id=1798939089]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_x5me3")
+expand_mode = 2
+
+[node name="error" type="TextureRect" parent="margin_container/h_box_container" index="1" unique_id=1388885230]
+visible = false
+self_modulate = Color(1, 0.2, 0.2, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_8avbe")
+expand_mode = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="margin_container/h_box_container" index="2" unique_id=1214207929]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="name" type="Label" parent="margin_container/h_box_container/v_box_container" index="0" unique_id=1296143138]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Name"
+
+[node name="location" type="Label" parent="margin_container/h_box_container/v_box_container" index="1" unique_id=879317406]
+layout_mode = 2
+text = "C:/Location"
+text_overrun_behavior = 4

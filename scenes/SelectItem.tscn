@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ce0lxeh6u1exy"]
+
+[ext_resource type="Script" uid="uid://bjtsipybwn7kx" path="res://scripts/ui/SelectItem.gd" id="1_3rrqi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3rrqi"]
+
+[node name="select_item" type="PanelContainer" unique_id=610522657]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3rrqi")
+script = ExtResource("1_3rrqi")
+
+[node name="button" type="Button" parent="." unique_id=1952971949]
+layout_mode = 2
+toggle_mode = true
+
+[node name="margin_container" type="MarginContainer" parent="." unique_id=2946062]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6

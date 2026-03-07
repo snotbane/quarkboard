@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://dtga2xtjs61g8"]
+
+[ext_resource type="Script" uid="uid://dvah5oxfhs5bp" path="res://scenes/ProfileList.gd" id="1_4oep2"]
+[ext_resource type="PackedScene" uid="uid://gbmyoetclqr4" path="res://scenes/ProfileActionButton.tscn" id="1_l71mk"]
+[ext_resource type="PackedScene" uid="uid://bl4ti8lf6hvfo" path="res://scenes/SelectItemProfile.tscn" id="2_7tsq7"]
+[ext_resource type="PackedScene" uid="uid://b2dk7atb3rlnu" path="res://scenes/QrkFileDialog.tscn" id="2_dgt7i"]
+[ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/star_alt_2.svg" id="2_kb1f2"]
+[ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/folder.svg" id="4_d8row"]
+[ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="5_noygu"]
+[ext_resource type="Script" uid="uid://45adv1w12mtd" path="res://addons/myth/modules/setting/SettingText.gd" id="5_ybb1a"]
+[ext_resource type="Script" uid="uid://cj3goivmfacwh" path="res://addons/myth/modules/setting/Setting_GroupLayout.gd" id="6_subl0"]
+[ext_resource type="Script" uid="uid://davnl5ty1puty" path="res://addons/myth/modules/setting/SettingImage.gd" id="7_q71o8"]
+[ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/profile_icons.tres" id="8_71axf"]
+[ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://icons/inbox_arrow_right.svg" id="8_fxjd5"]
+[ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/clone.svg" id="9_q71o8"]
+[ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/arrow_up_right_from_square.svg" id="10_71axf"]
+[ext_resource type="Texture2D" uid="uid://b4nkssn6nhqo0" path="res://icons/link_slash_alt.svg" id="11_noygu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
+
+[sub_resource type="GDScript" id="GDScript_4oep2"]
+script/source = "extends Node
+
+
+func _ready() -> void:
+	get_parent().visible = false
+
+
+func _on_resource_socket_resource_value_changed(new_resource: Resource) -> void:
+	get_parent().visible = new_resource != null
+"
+
+[sub_resource type="Resource" id="Resource_dp6ht"]
+resource_local_to_scene = true
+script = ExtResource("6_subl0")
+metadata/_custom_type_script = "uid://cj3goivmfacwh"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oep2"]
+
+[node name="profile_manager" type="Control" unique_id=1920642639]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_tab_index = 0
+
+[node name="h_split_container" type="HSplitContainer" parent="." unique_id=517586704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="h_split_container" unique_id=981446522]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="panel_container" type="PanelContainer" parent="h_split_container/v_box_container" unique_id=1059343152]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="scroll_container" type="ScrollContainer" parent="h_split_container/v_box_container/panel_container" unique_id=705729222]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="select_list" type="VBoxContainer" parent="h_split_container/v_box_container/panel_container/scroll_container" unique_id=1756719500]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_4oep2")
+selector_scene = ExtResource("2_7tsq7")
+
+[node name="grid_container" type="GridContainer" parent="h_split_container/v_box_container" unique_id=836973193]
+layout_mode = 2
+columns = 2
+
+[node name="create" parent="h_split_container/v_box_container/grid_container" unique_id=471194668 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Create"
+icon = ExtResource("2_kb1f2")
+
+[node name="create_dialog" parent="h_split_container/v_box_container/grid_container/create" unique_id=1611117896 instance=ExtResource("2_dgt7i")]
+
+[node name="import" parent="h_split_container/v_box_container/grid_container" unique_id=979856817 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Import"
+icon = ExtResource("4_d8row")
+
+[node name="import_dialog" parent="h_split_container/v_box_container/grid_container/import" unique_id=1208019437 instance=ExtResource("2_dgt7i")]
+title = "Open a Directory"
+file_mode = 2
+
+[node name="panel_container" type="PanelContainer" parent="h_split_container" unique_id=1026236677]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_71axf")
+
+[node name="profile_editor" type="PanelContainer" parent="h_split_container/panel_container" unique_id=1570939945]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="visibility_controller" type="Node" parent="h_split_container/panel_container/profile_editor" unique_id=1751573922]
+script = SubResource("GDScript_4oep2")
+
+[node name="resource_socket" type="Node" parent="h_split_container/panel_container/profile_editor" unique_id=1877742069]
+script = ExtResource("5_noygu")
+metadata/_custom_type_script = "uid://cg26odhngglnc"
+
+[node name="v_box_container" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor" unique_id=1287438185]
+layout_mode = 2
+
+[node name="name" type="Control" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=396330585]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_ybb1a")
+handle_minimum_width = 200.0
+label_text = "Name"
+reset_button_enabled = false
+layout_group = SubResource("Resource_dp6ht")
+metadata/_custom_type_script = "uid://45adv1w12mtd"
+
+[node name="icon" type="Control" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=677000883]
+layout_mode = 2
+script = ExtResource("7_q71o8")
+collection = ExtResource("8_71axf")
+button_size_min = Vector2(48, 48)
+label_text = "Icon"
+reset_button_enabled = false
+metadata/_custom_type_script = "uid://davnl5ty1puty"
+
+[node name="label" type="Label" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=264634607]
+layout_mode = 2
+text = "user://default.qrk"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="h_separator" type="HSeparator" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=426392910]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4oep2")
+
+[node name="grid_container" type="GridContainer" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=826179487]
+layout_mode = 2
+columns = 2
+
+[node name="move" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1193590418 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Transfer"
+icon = ExtResource("8_fxjd5")
+
+[node name="copy" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=210246179 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Copy"
+icon = ExtResource("9_q71o8")
+
+[node name="reveal" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1727461590 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Reveal"
+icon = ExtResource("10_71axf")
+
+[node name="hide" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1151163680 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Hide"
+icon = ExtResource("11_noygu")
+
+[connection signal="object_selected" from="h_split_container/v_box_container/panel_container/scroll_container/select_list" to="h_split_container/panel_container/profile_editor/resource_socket" method="set_resource"]
+[connection signal="pressed" from="h_split_container/v_box_container/grid_container/create" to="h_split_container/v_box_container/grid_container/create/create_dialog" method="popup_file_dialog"]
+[connection signal="file_selected" from="h_split_container/v_box_container/grid_container/create/create_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_create_dialog_file_selected"]
+[connection signal="pressed" from="h_split_container/v_box_container/grid_container/import" to="h_split_container/v_box_container/grid_container/import/import_dialog" method="popup_file_dialog"]
+[connection signal="file_selected" from="h_split_container/v_box_container/grid_container/import/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_import_dialog_file_selected"]
+[connection signal="resource_value_changed" from="h_split_container/panel_container/profile_editor/resource_socket" to="h_split_container/panel_container/profile_editor/visibility_controller" method="_on_resource_socket_resource_value_changed"]
