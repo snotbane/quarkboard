@@ -14,12 +14,12 @@ func _refresh_list() -> void:
 		add_child(node)
 		node.profile = profile
 
-		if profile == Host.inst.active_profile:
+		if profile == Host.active_profile:
 			selected_item = node
 
 
 func _profile_changed() -> void:
-	selected_object = Host.inst.active_profile
+	selected_object = Host.active_profile
 
 
 

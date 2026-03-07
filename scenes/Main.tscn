@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://dp76t3aegbnha"]
 
 [ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
-[ext_resource type="Texture2D" uid="uid://dy456122l6pe5" path="res://icons/profile_icons/dna.svg" id="2_jlsqs"]
-[ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/grid.svg" id="4_c01mt"]
+[ext_resource type="Texture2D" uid="uid://uh3pt61ejjbp" path="res://icons/circle_question.svg" id="2_vcsgt"]
 [ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/plus.svg" id="6_nxtc6"]
 [ext_resource type="Script" uid="uid://d2tuw5ftakgg5" path="res://scenes/ViewsItemList.gd" id="7_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://dtga2xtjs61g8" path="res://scenes/ProfileManager.tscn" id="8_jlsqs"]
@@ -48,12 +47,12 @@ layout_mode = 2
 allow_search = false
 auto_width = true
 auto_height = true
-item_count = 2
+item_count = 1
 same_column_width = true
 icon_mode = 0
 icon_scale = 1.5
-item_0/icon = ExtResource("2_jlsqs")
-item_1/icon = ExtResource("4_c01mt")
+item_0/icon = ExtResource("2_vcsgt")
+item_0/disabled = true
 script = ExtResource("7_q8u5g")
 
 [node name="add" type="Button" parent="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container" unique_id=1810103753]

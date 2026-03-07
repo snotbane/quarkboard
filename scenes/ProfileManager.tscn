@@ -71,6 +71,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_4oep2")
 selector_scene = ExtResource("2_7tsq7")
+can_unselect = true
 
 [node name="grid_container" type="GridContainer" parent="h_split_container/v_box_container" unique_id=836973193]
 layout_mode = 2
@@ -170,5 +171,5 @@ icon = ExtResource("11_noygu")
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/create" to="h_split_container/v_box_container/grid_container/create/create_dialog" method="popup_file_dialog"]
 [connection signal="file_selected" from="h_split_container/v_box_container/grid_container/create/create_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_create_dialog_file_selected"]
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/import" to="h_split_container/v_box_container/grid_container/import/import_dialog" method="popup_file_dialog"]
-[connection signal="file_selected" from="h_split_container/v_box_container/grid_container/import/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_import_dialog_file_selected"]
+[connection signal="dir_selected" from="h_split_container/v_box_container/grid_container/import/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_import_dialog_file_selected"]
 [connection signal="resource_value_changed" from="h_split_container/panel_container/profile_editor/resource_socket" to="h_split_container/panel_container/profile_editor/visibility_controller" method="_on_resource_socket_resource_value_changed"]

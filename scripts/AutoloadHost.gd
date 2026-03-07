@@ -5,9 +5,9 @@ static var inst : Host
 
 signal profile_changed
 
-var _active_profile : Profile
-@export var active_profile : Profile :
-	get: return _active_profile
+static var _active_profile : Profile
+static var active_profile : Profile :
+	get: return _active_profile if inst else null
 	set(value):
 		if _active_profile == value: return
 		if value and not value.is_valid:
@@ -16,12 +16,13 @@ var _active_profile : Profile
 
 		_active_profile = value
 
-		profile_changed.emit()
+		if inst:
+			inst.profile_changed.emit()
 
 
 func _ready() -> void:
 	inst = self
 
 
-func _exit_tree() -> void:
-	Machine.inst.save()
+# func _exit_tree() -> void:
+# 	Machine.inst.save()

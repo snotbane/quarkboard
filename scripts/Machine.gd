@@ -28,9 +28,7 @@ func json_import(json: Variant) -> void:
 		return Profile.new(path)
 	)
 
-	if profiles.is_empty():
-		printerr("No profiles exist! Auto create one please!")
-		return
+	if profiles.is_empty(): return
 
 	profiles[json.get(K_PROFILE_ACTIVE, 0)].make_active.call_deferred()
 
@@ -54,7 +52,7 @@ func json_export() -> Dictionary:
 					return profile.save_dir
 					)
 				,
-			K_PROFILE_ACTIVE: maxi(0, profiles.find(Host.inst.active_profile)),
+			K_PROFILE_ACTIVE: maxi(0, profiles.find(Host.active_profile)),
 			K_VIEW_ACTIVE: 0,
 		}
 

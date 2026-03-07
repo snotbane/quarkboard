@@ -66,7 +66,7 @@ func json_import(json: Variant) -> void:
 
 
 func make_active() -> void:
-	Host.inst.active_profile = self
+	Host.active_profile = self
 
 func move(to_dir: String) -> void:
 	pass
@@ -85,7 +85,7 @@ func hide() -> void:
 		Machine.inst.profiles.erase(self)
 		Machine.inst.save()
 
-	Host.inst.active_profile = null
+	Host.active_profile = null
 
 func delete() -> void:
 	hide()
