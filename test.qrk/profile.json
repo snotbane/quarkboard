@@ -16,7 +16,7 @@
 		},
 		"name": {
 			"type": 4,
-			"value": "Farts a lot"
+			"value": "Core"
 		},
 		"resource_local_to_scene": {
 			"type": 1,
@@ -41,7 +41,7 @@
 		},
 		"time_modified": {
 			"type": 2,
-			"value": 1772909898
+			"value": 1772917736
 		}
 	}
 }

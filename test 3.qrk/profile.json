@@ -10,13 +10,12 @@
 			}
 		},
 		"icon": {
-			"class": "DPITexture",
-			"type": 24,
-			"value": "uid://dr2cpei5ronpv"
+			"type": 0,
+			"value": null
 		},
 		"name": {
 			"type": 4,
-			"value": "Your mom"
+			"value": "test 3"
 		},
 		"resource_local_to_scene": {
 			"type": 1,
@@ -28,7 +27,7 @@
 		},
 		"save_path": {
 			"type": 4,
-			"value": "/Users/snotbane/Library/CloudStorage/ProtonDrive-liam.wofford@proton.me-folder/projects/godot/quarkboard/test 2.qrk/profile.json"
+			"value": "/Users/snotbane/Library/CloudStorage/ProtonDrive-liam.wofford@proton.me-folder/projects/godot/quarkboard/test 3.qrk/profile.json"
 		},
 		"script": {
 			"class": "GDScript",
@@ -37,11 +36,11 @@
 		},
 		"time_created": {
 			"type": 2,
-			"value": 1772902817
+			"value": 1772916797
 		},
 		"time_modified": {
 			"type": 2,
-			"value": 1772917735
+			"value": 1772917195
 		}
 	}
 }

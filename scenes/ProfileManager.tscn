@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://icons/inbox_arrow_right.svg" id="8_fxjd5"]
 [ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/clone.svg" id="9_q71o8"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/arrow_up_right_from_square.svg" id="10_71axf"]
-[ext_resource type="Texture2D" uid="uid://b4nkssn6nhqo0" path="res://icons/link_slash_alt.svg" id="11_noygu"]
+[ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/circle_dashed.svg" id="15_4oep2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
 
@@ -34,6 +34,24 @@ func _on_resource_socket_resource_value_changed(new_resource: Resource) -> void:
 resource_local_to_scene = true
 script = ExtResource("6_subl0")
 metadata/_custom_type_script = "uid://cj3goivmfacwh"
+
+[sub_resource type="GDScript" id="GDScript_7tsq7"]
+script/source = "extends Button
+
+var profile : Profile
+
+func _on_resource_socket_resource_value_changed(new_resource: Resource) -> void:
+	if new_resource is not Profile: return
+	profile = new_resource
+	
+	text = new_resource.save_path
+	tooltip_text = text
+
+
+func _pressed() -> void:
+	if profile == null: return
+	profile.reveal()
+"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oep2"]
 
@@ -71,7 +89,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_4oep2")
 selector_scene = ExtResource("2_7tsq7")
-can_unselect = true
 
 [node name="grid_container" type="GridContainer" parent="h_split_container/v_box_container" unique_id=836973193]
 layout_mode = 2
@@ -131,13 +148,16 @@ label_text = "Icon"
 reset_button_enabled = false
 metadata/_custom_type_script = "uid://davnl5ty1puty"
 
-[node name="label" type="Label" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=264634607]
+[node name="location" type="Button" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=841485372]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "user://default.qrk"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
+icon = ExtResource("10_71axf")
+flat = true
+text_overrun_behavior = 4
+icon_alignment = 2
+expand_icon = true
+script = SubResource("GDScript_7tsq7")
 
 [node name="h_separator" type="HSeparator" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=426392910]
 layout_mode = 2
@@ -149,23 +169,46 @@ columns = 2
 
 [node name="move" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1193590418 instance=ExtResource("1_l71mk")]
 layout_mode = 2
-text = "Transfer"
+tooltip_text = "Moves the profile and all its notes to a new location on this machine."
+text = "Move"
 icon = ExtResource("8_fxjd5")
 
+[node name="move_dialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move" unique_id=1021428856 instance=ExtResource("2_dgt7i")]
+title = "Open a Directory"
+file_mode = 2
+
 [node name="copy" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=210246179 instance=ExtResource("1_l71mk")]
+visible = false
 layout_mode = 2
+tooltip_text = "Copies the profile and its settings without copying any of its contents."
 text = "Copy"
 icon = ExtResource("9_q71o8")
 
+[node name="copy_dialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy" unique_id=1105291956 instance=ExtResource("2_dgt7i")]
+title = "Open a Directory"
+file_mode = 2
+
 [node name="reveal" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1727461590 instance=ExtResource("1_l71mk")]
+visible = false
 layout_mode = 2
 text = "Reveal"
 icon = ExtResource("10_71axf")
 
 [node name="hide" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1151163680 instance=ExtResource("1_l71mk")]
 layout_mode = 2
+tooltip_text = "Removes the profile from the application without deleting anything."
 text = "Hide"
-icon = ExtResource("11_noygu")
+icon = ExtResource("15_4oep2")
+
+[node name="hide_dialog" type="ConfirmationDialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide" unique_id=724943703]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(400, 262)
+ok_button_text = "Hide"
+dialog_text = "Hiding this profile will not delete notes from the system. It will only remove it from the local profile list. You can add an existing profile again at any time.
+
+(To completely delete a profile and all of its contents, delete the .qrk folder in the file system.)"
+dialog_autowrap = true
 
 [connection signal="object_selected" from="h_split_container/v_box_container/panel_container/scroll_container/select_list" to="h_split_container/panel_container/profile_editor/resource_socket" method="set_resource"]
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/create" to="h_split_container/v_box_container/grid_container/create/create_dialog" method="popup_file_dialog"]
@@ -173,3 +216,10 @@ icon = ExtResource("11_noygu")
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/import" to="h_split_container/v_box_container/grid_container/import/import_dialog" method="popup_file_dialog"]
 [connection signal="dir_selected" from="h_split_container/v_box_container/grid_container/import/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_import_dialog_file_selected"]
 [connection signal="resource_value_changed" from="h_split_container/panel_container/profile_editor/resource_socket" to="h_split_container/panel_container/profile_editor/visibility_controller" method="_on_resource_socket_resource_value_changed"]
+[connection signal="resource_value_changed" from="h_split_container/panel_container/profile_editor/resource_socket" to="h_split_container/panel_container/profile_editor/v_box_container/location" method="_on_resource_socket_resource_value_changed"]
+[connection signal="pressed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move" to="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move/move_dialog" method="show"]
+[connection signal="dir_selected" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move/move_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_move_dialog_dir_selected"]
+[connection signal="pressed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy" to="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy/copy_dialog" method="show"]
+[connection signal="dir_selected" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy/copy_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_copy_dialog_dir_selected"]
+[connection signal="pressed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide" to="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide/hide_dialog" method="show"]
+[connection signal="confirmed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide/hide_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_hide_dialog_confirmed"]

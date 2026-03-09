@@ -8,7 +8,10 @@ signal unselected
 var index_in_list : int :
 	get:
 		if not parent_list: return -1
-		for i in parent_list.get_child_count(): if parent_list.get_child(i) == self: return i
+
+		for i in parent_list.get_child_count():
+			if parent_list.get_child(i) == self:
+				return i
 		return -1
 
 var selection_object : Variant :
@@ -28,19 +31,23 @@ func _ready() -> void:
 	button.toggled.connect(_toggled)
 
 
+func select_single() -> void:
+	parent_list.single_select(self)
+func select_series() -> void:
+	parent_list.add_series_to_selection(self)
 func select() -> void:
-	parent_list.selected_item = self
+	parent_list.add_item_to_selection(self)
 func on_selected() -> void:
 	button.set_pressed_no_signal(true)
 	_on_selected()
 	selected.emit()
 func _on_selected() -> void: pass
 
+
 func unselect() -> void:
-	if parent_list.selected_item != self or not parent_list.can_unselect:
+	var err := parent_list.remove_item_from_selection(self)
+	if err != OK:
 		button.set_pressed_no_signal(true)
-		return
-	parent_list.selected_index = -1
 func on_unselected() -> void:
 	button.set_pressed_no_signal(false)
 	_on_unselected()
@@ -50,6 +57,6 @@ func _on_unselected() -> void: pass
 
 func _toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		select()
+		select_single()
 	else:
 		unselect()

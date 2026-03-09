@@ -18,19 +18,21 @@ static func _static_init() -> void:
 func profile_path_exists(path: String) -> bool:
 	for profile : Profile in profiles:
 		if profile.save_path == path:
-			return profile.save_file_exists
+			return profile.save_path_exists
 	return false
 
 
 func json_import(json: Variant) -> void:
 	profiles = json.get(K_PROFILE_LOCATIONS, []).map(func(profile_path: String) -> Profile:
 		var path := profile_path.path_join(Profile.PATH)
+
 		return Profile.new(path)
 	)
 
-	if profiles.is_empty(): return
+	var idx : int = json.get(K_PROFILE_ACTIVE, 0)
+	if idx > profiles.size(): return
 
-	profiles[json.get(K_PROFILE_ACTIVE, 0)].make_active.call_deferred()
+	profiles[idx].make_active.call_deferred()
 
 
 func json_export() -> Dictionary:
