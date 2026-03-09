@@ -16,7 +16,7 @@
 		},
 		"name": {
 			"type": 4,
-			"value": "Your mom"
+			"value": "Atom"
 		},
 		"resource_local_to_scene": {
 			"type": 1,
@@ -41,7 +41,7 @@
 		},
 		"time_modified": {
 			"type": 2,
-			"value": 1772917735
+			"value": 1773047735
 		}
 	}
 }

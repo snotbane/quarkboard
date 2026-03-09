@@ -47,8 +47,4 @@ func _on_selected() -> void:
 	profile.make_active()
 
 func _on_unselected() -> void:
-	if Host.active_profile == profile:
-		Host.active_profile = null
-
-
-
+	pass

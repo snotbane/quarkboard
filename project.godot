@@ -18,11 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 myth_terminal_autoload="*uid://skiqkluncsub"
-host_autoload="*uid://ip18lxcukelp"
 
 [debug]
 
 gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
+gdscript/warnings/incompatible_ternary=0
 
 [display]
 

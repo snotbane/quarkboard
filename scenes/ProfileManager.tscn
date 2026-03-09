@@ -88,7 +88,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_4oep2")
-selector_scene = ExtResource("2_7tsq7")
+item_scene = ExtResource("2_7tsq7")
 
 [node name="grid_container" type="GridContainer" parent="h_split_container/v_box_container" unique_id=836973193]
 layout_mode = 2

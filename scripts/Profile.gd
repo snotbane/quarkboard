@@ -58,6 +58,8 @@ func _init_deferred() -> void:
 	if not Machine.inst.profiles.has(self):
 		Machine.inst.profiles.push_back(self)
 		Machine.inst.save()
+		Machine.inst.profile_added.emit(self)
+
 
 func json_import(json: Variant) -> void:
 	super.json_import(json)
@@ -67,7 +69,7 @@ func json_import(json: Variant) -> void:
 
 
 func make_active() -> void:
-	Host.active_profile = self
+	Machine.active_profile = self
 
 
 func move(to_dir: String) -> void:
@@ -85,6 +87,7 @@ func move(to_dir: String) -> void:
 	Machine.inst.save()
 
 
+## Copies settings only; not contents (notes).
 func copy(to_dir: String) -> Profile:
 	var result := copy_hard(to_dir)
 
@@ -98,6 +101,8 @@ func copy(to_dir: String) -> Profile:
 
 	return result
 
+
+## Copies settings and contents (notes).
 func copy_hard(to_dir: String) -> Profile:
 	if save_dir == to_dir:
 
@@ -109,17 +114,20 @@ func copy_hard(to_dir: String) -> Profile:
 		return null
 	return Profile.new(to_dir.path_join(Profile.PATH))
 
+
 func reveal() -> void:
 	var err := OS.shell_show_in_file_manager(save_dir)
 	if err != OK:
 		printerr("Error code (%s) while revealing profile '%s' in file manager." % [ err, save_path ])
 
+
 func hide() -> void:
 	if Machine.inst.profiles.has(self):
 		Machine.inst.profiles.erase(self)
 		Machine.inst.save()
+		Machine.inst.profile_removed.emit(self)
+		Machine.active_profile = null
 
-	Host.active_profile = null
 
 func delete() -> void:
 	hide()

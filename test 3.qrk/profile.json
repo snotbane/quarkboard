@@ -10,8 +10,9 @@
 			}
 		},
 		"icon": {
-			"type": 0,
-			"value": null
+			"class": "DPITexture",
+			"type": 24,
+			"value": "uid://dy456122l6pe5"
 		},
 		"name": {
 			"type": 4,
@@ -40,7 +41,7 @@
 		},
 		"time_modified": {
 			"type": 2,
-			"value": 1772917195
+			"value": 1773047730
 		}
 	}
 }

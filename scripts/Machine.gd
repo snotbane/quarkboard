@@ -10,9 +10,27 @@ static var inst : Machine
 static var profiles : Array
 
 
+static var _active_profile : Profile
+static var active_profile : Profile :
+	get: return _active_profile if inst else null
+	set(value):
+		if _active_profile == value: return
+		if value and not value.is_valid:
+			push_error("Cannot set active profile to an invalid profile.")
+			return
+
+		_active_profile = value
+		inst.active_profile_changed.emit()
+
+
 static func _static_init() -> void:
-	inst = Machine.new(PATH)
+	inst = Machine.new(PATH, false)
 	inst.load()
+
+
+signal profile_added(profile: Profile)
+signal profile_removed(profile: Profile)
+signal active_profile_changed
 
 
 func profile_path_exists(path: String) -> bool:
@@ -54,7 +72,7 @@ func json_export() -> Dictionary:
 					return profile.save_dir
 					)
 				,
-			K_PROFILE_ACTIVE: maxi(0, profiles.find(Host.active_profile)),
+			K_PROFILE_ACTIVE: maxi(0, profiles.find(active_profile)),
 			K_VIEW_ACTIVE: 0,
 		}
 
