@@ -7,7 +7,7 @@ const K_PROFILE_ACTIVE := "active_profile"
 const K_VIEW_ACTIVE := "active_view"
 
 static var inst : Machine
-static var profiles : Array
+static var profiles_locations : Dictionary
 
 
 static var _active_profile : Profile
@@ -34,23 +34,10 @@ signal active_profile_changed
 
 
 func profile_path_exists(path: String) -> bool:
-	for profile : Profile in profiles:
+	for profile : Profile in profiles_locations.keys():
 		if profile.save_path == path:
 			return profile.save_path_exists
 	return false
-
-
-func json_import(json: Variant) -> void:
-	profiles = json.get(K_PROFILE_LOCATIONS, []).map(func(profile_path: String) -> Profile:
-		var path := profile_path.path_join(Profile.PATH)
-
-		return Profile.new(path)
-	)
-
-	var idx : int = json.get(K_PROFILE_ACTIVE, 0)
-	if idx > profiles.size(): return
-
-	profiles[idx].make_active.call_deferred()
 
 
 func json_export() -> Dictionary:
@@ -64,7 +51,7 @@ func json_export() -> Dictionary:
 		}
 	else:
 		return {
-			K_PROFILE_LOCATIONS: profiles
+			K_PROFILE_LOCATIONS: profiles_locations.keys()
 				.filter( func(profile: Profile) -> bool:
 					return profile != null
 					)
@@ -72,8 +59,18 @@ func json_export() -> Dictionary:
 					return profile.save_dir
 					)
 				,
-			K_PROFILE_ACTIVE: maxi(0, profiles.find(active_profile)),
+			K_PROFILE_ACTIVE: maxi(0, profiles_locations.keys().find(active_profile)),
 			K_VIEW_ACTIVE: 0,
 		}
 
+
+func json_import(json: Variant) -> void:
+	for path : String in json.get(K_PROFILE_LOCATIONS, []):
+		var profile := Profile.new(path.path_join(Profile.PATH))
+		profiles_locations[profile] = path
+
+	var idx : int = json.get(K_PROFILE_ACTIVE, 0)
+	if idx > profiles_locations.size(): return
+
+	profiles_locations.keys()[idx].make_active.call_deferred()
 

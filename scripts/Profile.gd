@@ -2,18 +2,16 @@
 class_name Profile extends JsonResource
 
 const DIR_EXT := ".qrk"
-const PATH := "profile.json"
+const PATH := "__PROFILE__.json"
 
-const ICONS : Array[Texture2D] = [
-	null
-	# preload("uid://dr2cpei5ronpv"),
-]
-
-static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(r".*\.qrk$")
+static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DIR_EXT)
 
 @export_storage var name : String
 @export_storage var icon : Texture2D
+@export_storage var tags : PackedStringArray
 
+var quarks : Array
+var boards : Array
 
 var name_from_save_dir : String :
 	get:
@@ -35,18 +33,16 @@ func _init(__save_path__: String = generate_save_path()) -> void:
 			name = name_from_save_dir
 			self.save()
 
-		var note_paths := Myth.get_paths_in_folder(
-			save_dir.path_join(Quark.DIR_NAME),
-			RegEx.create_from_string("\\%s$" % note_ext)
-		)
+		quarks.clear()
+		for path in Myth.get_paths_in_folder(save_dir.path_join(Quark.DIR_NAME)):
+			quarks.push_back(Quark.new(path))
 
-		# assert(false)
+		boards.clear()
+		for path in Myth.get_paths_in_folder(save_dir.path_join(Board.DIR_NAME)):
+			boards.push_back(Board.new(path))
 
-		print("Found %s entries in profile '%s'" % [ note_paths.size(), save_path ])
+		print("Found %s entries in profile '%s'" % [ quarks.size(), save_dir ])
 
-		# for path in note_paths:
-		# 	var note := Note.new()
-		# 	entries.push_back(note)
 
 	_init_deferred.call_deferred()
 
@@ -54,17 +50,10 @@ func _init(__save_path__: String = generate_save_path()) -> void:
 func _init_deferred() -> void:
 	assert(Machine.inst != null)
 
-	if not Machine.inst.profiles.has(self):
-		Machine.inst.profiles.push_back(self)
+	if not Machine.profiles_locations.has(self):
+		Machine.profiles_locations[self] = save_path
 		Machine.inst.save()
 		Machine.inst.profile_added.emit(self)
-
-
-func json_import(json: Variant) -> void:
-	super.json_import(json)
-
-	if icon == null:
-		icon = ICONS[0]
 
 
 func make_active() -> void:
@@ -121,8 +110,8 @@ func reveal() -> void:
 
 
 func hide() -> void:
-	if Machine.inst.profiles.has(self):
-		Machine.inst.profiles.erase(self)
+	if Machine.profiles_locations.has(self):
+		Machine.profiles_locations.erase(self)
 		Machine.inst.save()
 		Machine.inst.profile_removed.emit(self)
 		Machine.active_profile = null

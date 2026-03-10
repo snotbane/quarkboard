@@ -26,14 +26,14 @@
 			"type": 4,
 			"value": ""
 		},
-		"save_path": {
-			"type": 4,
-			"value": "/Users/snotbane/Library/CloudStorage/ProtonDrive-liam.wofford@proton.me-folder/projects/godot/quarkboard/test 2.qrk/profile.json"
-		},
 		"script": {
 			"class": "GDScript",
 			"type": 24,
 			"value": "uid://bjj74lbhb06cd"
+		},
+		"tags": {
+			"type": 34,
+			"value": []
 		},
 		"time_created": {
 			"type": 2,
@@ -41,7 +41,7 @@
 		},
 		"time_modified": {
 			"type": 2,
-			"value": 1773048057
+			"value": 1773117591
 		}
 	}
 }

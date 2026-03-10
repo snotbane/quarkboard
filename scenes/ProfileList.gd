@@ -2,7 +2,7 @@
 extends SelectList
 
 func _ready() -> void:
-	for profile in Machine.profiles:
+	for profile in Machine.profiles_locations.keys():
 		if not profile: continue
 		_profile_added(profile, false)
 
