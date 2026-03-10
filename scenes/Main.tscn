@@ -2,9 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
 [ext_resource type="Texture2D" uid="uid://uh3pt61ejjbp" path="res://icons/circle_question.svg" id="2_vcsgt"]
+[ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/grid.svg" id="5_nxtc6"]
 [ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/plus.svg" id="6_nxtc6"]
+[ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/folder.svg" id="7_lhr70"]
 [ext_resource type="Script" uid="uid://d2tuw5ftakgg5" path="res://scenes/ViewsItemList.gd" id="7_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://dtga2xtjs61g8" path="res://scenes/ProfileManager.tscn" id="8_jlsqs"]
+[ext_resource type="Texture2D" uid="uid://bpteuqqsewggq" path="res://icons/dazzle/map.svg" id="8_wp0k4"]
+[ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/calendar.svg" id="9_bjd11"]
+[ext_resource type="Texture2D" uid="uid://cw8glbojunhfy" path="res://icons/notebook.svg" id="10_qmy6f"]
 
 [node name="canvas_layer" type="CanvasLayer" unique_id=1932569945]
 
@@ -70,3 +75,54 @@ tab_focus_mode = 0
 
 [node name="profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" unique_id=1920642639 instance=ExtResource("8_jlsqs")]
 layout_mode = 2
+
+[node name="create_views" type="Control" parent="safe_margin_container" unique_id=1552825026]
+layout_mode = 2
+
+[node name="panel_container" type="PanelContainer" parent="safe_margin_container/create_views" unique_id=639717787]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="grid_container" type="GridContainer" parent="safe_margin_container/create_views/panel_container" unique_id=1073017694]
+layout_mode = 2
+columns = 2
+
+[node name="collage" type="Button" parent="safe_margin_container/create_views/panel_container/grid_container" unique_id=754637792]
+layout_mode = 2
+tooltip_text = "Basic view that arranges Notes in a flow pattern so you can see several simultaneously."
+text = "Collage"
+icon = ExtResource("5_nxtc6")
+
+[node name="folder" type="Button" parent="safe_margin_container/create_views/panel_container/grid_container" unique_id=1366697291]
+layout_mode = 2
+tooltip_text = "Basic view that arranges Notes in a file-folder structure. Good for when Notes must be carefully organized."
+text = "Hierarchy"
+icon = ExtResource("7_lhr70")
+
+[node name="canvas" type="Button" parent="safe_margin_container/create_views/panel_container/grid_container" unique_id=1358331789]
+layout_mode = 2
+tooltip_text = "Advanced view that arranges Notes in a 2D space and allows you to position and connect them however you like."
+text = "Canvas"
+icon = ExtResource("8_wp0k4")
+
+[node name="calendar" type="Button" parent="safe_margin_container/create_views/panel_container/grid_container" unique_id=1965690541]
+layout_mode = 2
+tooltip_text = "Advanced view where Notes occupy a certain period of time. Good for events or reminders."
+text = "Calendar"
+icon = ExtResource("9_bjd11")
+
+[node name="journal" type="Button" parent="safe_margin_container/create_views/panel_container/grid_container" unique_id=2000734921]
+layout_mode = 2
+tooltip_text = "A special kind of Calendar which creates a new Note each day you write something down."
+text = "Journal"
+icon = ExtResource("10_qmy6f")

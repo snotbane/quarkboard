@@ -3,7 +3,6 @@ class_name Profile extends JsonResource
 
 const DIR_EXT := ".qrk"
 const PATH := "profile.json"
-const NOTES_SUBFOLDER_NAME := "notes"
 
 const ICONS : Array[Texture2D] = [
 	null
@@ -37,7 +36,7 @@ func _init(__save_path__: String = generate_save_path()) -> void:
 			self.save()
 
 		var note_paths := Myth.get_paths_in_folder(
-			save_dir.path_join(NOTES_SUBFOLDER_NAME),
+			save_dir.path_join(Quark.DIR_NAME),
 			RegEx.create_from_string("\\%s$" % note_ext)
 		)
 
@@ -95,7 +94,7 @@ func copy(to_dir: String) -> Profile:
 		return null
 
 	# if FileAccess.file_exists(result.save_dir.path_join(Note.NOTES_SUBFOLDER_NAME)):
-	var err := DirAccess.remove_absolute(result.save_dir.path_join(Note.NOTES_SUBFOLDER_NAME))
+	var err := DirAccess.remove_absolute(result.save_dir.path_join(Quark.DIR_NAME))
 	if err != OK:
 		printerr("Error code (%s) while removing notes folder from copied profile '%s'" % [ err, result.save_path ])
 
