@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b2dk7atb3rlnu"]
 
-[node name="qrk_file_dialog" type="FileDialog" unique_id=1611117896]
+[node name="qbdp_file_dialog" type="FileDialog" unique_id=1611117896]
 oversampling_override = 1.0
 initial_position = 1
 access = 2
-filters = PackedStringArray("*.qrk")
+filters = PackedStringArray("*.qbdp")
 use_native_dialog = true

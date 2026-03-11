@@ -12,6 +12,17 @@
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/calendar.svg" id="9_bjd11"]
 [ext_resource type="Texture2D" uid="uid://cw8glbojunhfy" path="res://icons/notebook.svg" id="10_qmy6f"]
 
+[sub_resource type="GDScript" id="GDScript_wp0k4"]
+script/source = "extends Button
+
+func _ready() -> void:
+	hide()
+	Machine.inst.active_profile_changed.connect(_active_profile_changed)
+	
+func _active_profile_changed() -> void:
+	visible = Machine.active_profile != null
+"
+
 [node name="canvas_layer" type="CanvasLayer" unique_id=1932569945]
 
 [node name="safe_margin_container" type="MarginContainer" parent="." unique_id=1507910763]
@@ -66,6 +77,7 @@ layout_mode = 2
 icon = ExtResource("6_nxtc6")
 flat = true
 icon_alignment = 1
+script = SubResource("GDScript_wp0k4")
 
 [node name="tab_container" type="TabContainer" parent="safe_margin_container/main/h_box_container" unique_id=38367856]
 layout_mode = 2

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dvah5oxfhs5bp" path="res://scenes/ProfileList.gd" id="1_4oep2"]
 [ext_resource type="PackedScene" uid="uid://gbmyoetclqr4" path="res://scenes/ProfileActionButton.tscn" id="1_l71mk"]
 [ext_resource type="PackedScene" uid="uid://bl4ti8lf6hvfo" path="res://scenes/SelectItemProfile.tscn" id="2_7tsq7"]
-[ext_resource type="PackedScene" uid="uid://b2dk7atb3rlnu" path="res://scenes/QrkFileDialog.tscn" id="2_dgt7i"]
+[ext_resource type="PackedScene" uid="uid://b2dk7atb3rlnu" path="res://scenes/ProfileFileDialog.tscn" id="2_dgt7i"]
 [ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/star_alt_2.svg" id="2_kb1f2"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/folder.svg" id="4_d8row"]
 [ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="5_noygu"]
