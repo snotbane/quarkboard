@@ -78,7 +78,7 @@ func _on_move_dialog_dir_selected(dir: String) -> void:
 
 
 func _on_copy_dialog_dir_selected(dir: String) -> void:
-	Machine.active_profile.copy(dir)
+	Machine.active_profile.copy(dir, false)
 
 
 func _on_hide_dialog_confirmed() -> void:
