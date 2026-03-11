@@ -2,7 +2,7 @@
 extends SelectList
 
 func _ready() -> void:
-	for profile in Machine.profiles_locations.keys():
+	for profile in Machine.profiles.keys():
 		if not profile: continue
 		_profile_added(profile, false)
 
@@ -40,13 +40,16 @@ func _on_create_dialog_file_selected(path: String) -> void:
 		printerr("Can't create new profile. A profile with the same file path already exists.")
 		return
 
-	var err := DirAccess.make_dir_recursive_absolute(path)
-	if err != OK:
-		printerr("Something went wrong: (code %s)" % err)
+	if Profile.find_parent_from_path(path):
+		printerr("Can't create a new profile inside of another profile directory.")
 		return
 
-	var profile_path := path.path_join(Profile.PATH)
-	var profile := Profile.new(profile_path)
+	# var err := DirAccess.make_dir_recursive_absolute(path)
+	# if err != OK:
+	# 	printerr("Something went wrong: (code %s)" % err)
+	# 	return
+
+	var profile := Profile.new(path)
 
 	profile.make_active()
 
@@ -56,11 +59,15 @@ func _on_import_dialog_file_selected(path: String) -> void:
 		printerr("Can't import profile. The path does not exist.")
 		return
 
+	if Machine.profiles.find_key(path) != null:
+		printerr("This profile is already imported.")
+		return
+
 	var profile_paths_found := Myth.get_paths_in_folder(path, Profile.REGEX_PATTERN_PROFILE_PATH)
 
 	var last_imported : Profile
 	for profile_path in profile_paths_found:
-		last_imported = Profile.new(profile_path.path_join(Profile.PATH))
+		last_imported = Profile.new(profile_path)
 
 	if profile_paths_found.size() == 1:
 		last_imported.make_active()

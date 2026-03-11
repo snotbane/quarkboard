@@ -25,6 +25,7 @@ var profile : Profile :
 
 func _get_selection_object() -> Variant:
 	return _profile
+
 func _set_selection_object(value: Variant) -> void:
 	_profile = value
 
@@ -32,19 +33,19 @@ func _set_selection_object(value: Variant) -> void:
 func refresh() -> void:
 	var is_valid := _profile.is_valid if _profile else false
 
-
 	button.disabled = not is_valid
 	icon_error.visible = not is_valid
 	icon.visible = is_valid
 	icon.texture = _profile.icon if _profile else null
 	label_name.text = _profile.name if _profile else String()
-	label_location.text = _profile.save_dir if _profile else String()
+	label_location.text = _profile.file_path_absolute if _profile else String()
 	label_location.tooltip_text = label_location.text
 	label_location.mouse_filter = Control.MOUSE_FILTER_IGNORE if is_valid else Control.MOUSE_FILTER_PASS
 
 
 func _on_selected() -> void:
 	profile.make_active()
+
 
 func _on_unselected() -> void:
 	pass

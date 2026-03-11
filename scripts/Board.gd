@@ -1,5 +1,5 @@
 ## Abstract class for a view in which to organize [Quark]s.
-class_name Board extends JsonResource
+class_name Board extends ProfileOwnedResource
 
 const DIR_NAME := "boards"
 const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
@@ -14,9 +14,10 @@ const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
 
 
 func _get_default_icon() -> Texture2D:
+	assert(false, "Expected override.")
 	return ICON_UNKNOWN
 
-func _init(__save_path__: String = generate_save_path(), __autoload__ : bool = true) -> void:
-	super._init(__save_path__, __autoload__)
 
-
+func _get_scene() -> PackedScene:
+	assert(false, "Expected override.")
+	return null

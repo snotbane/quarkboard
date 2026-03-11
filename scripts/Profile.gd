@@ -2,7 +2,6 @@
 class_name Profile extends JsonResource
 
 const DIR_EXT := ".qrk"
-const PATH := "__PROFILE__.json"
 
 static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DIR_EXT)
 
@@ -13,36 +12,24 @@ static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DI
 var quarks : Array
 var boards : Array
 
-var name_from_save_dir : String :
-	get:
-		var start := save_dir.rfind("/") + 1
-		var end := save_dir.rfind(Profile.DIR_EXT) - start
-		return save_dir.substr(start, end)
 
-var note_ext : String :
-	get: return ".json"
-
-
-func _init(__save_path__: String = generate_save_path()) -> void:
-	super._init(__save_path__)
+func _init(__file_path_absolute__: String = "") -> void:
+	super._init(__file_path_absolute__, true)
 
 	if is_valid:
-		self.load()
-
 		if name.is_empty():
-			name = name_from_save_dir
+			name = file_name
 			self.save()
 
 		quarks.clear()
-		for path in Myth.get_paths_in_folder(save_dir.path_join(Quark.DIR_NAME)):
+		for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
 			quarks.push_back(Quark.new(path))
 
 		boards.clear()
-		for path in Myth.get_paths_in_folder(save_dir.path_join(Board.DIR_NAME)):
+		for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
 			boards.push_back(Board.new(path))
 
-		print("Found %s entries in profile '%s'" % [ quarks.size(), save_dir ])
-
+		print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 
 	_init_deferred.call_deferred()
 
@@ -50,8 +37,8 @@ func _init(__save_path__: String = generate_save_path()) -> void:
 func _init_deferred() -> void:
 	assert(Machine.inst != null)
 
-	if not Machine.profiles_locations.has(self):
-		Machine.profiles_locations[self] = save_path
+	if not Machine.profiles.has(self):
+		Machine.profiles[self] = file_path_absolute
 		Machine.inst.save()
 		Machine.inst.profile_added.emit(self)
 
@@ -61,17 +48,18 @@ func make_active() -> void:
 
 
 func move(to_dir: String) -> void:
-	if save_path == to_dir: return
+	if file_dir == to_dir: return
+	file_dir = to_dir
 
-	print("Moving profile '%s' to '%s'" % [ save_path, to_dir ])
+	print("Moving profile '%s' to '%s'" % [ file_path, to_dir ])
 
-	var err := DirAccess.rename_absolute(save_dir_with_slash, to_dir)
-	if err != OK:
-		printerr("Error code (%s) while moving profile from '%s' to '%s'" % [ err, save_path, to_dir ])
-		return
+	# var err := DirAccess.rename_absolute(file_path_absolute.path_join(""), to_dir)
+	# if err != OK:
+	# 	printerr("Error code (%s) while moving profile from '%s' to '%s'" % [ err, file_path, to_dir ])
+	# 	return
 
-	save_path = to_dir.path_join(save_name)
-	save()
+	# _file_path = to_dir.path_join(file_name)
+	# save()
 	Machine.inst.save()
 
 
@@ -82,36 +70,36 @@ func copy(to_dir: String) -> Profile:
 	if result == null:
 		return null
 
-	# if FileAccess.file_exists(result.save_dir.path_join(Note.NOTES_SUBFOLDER_NAME)):
-	var err := DirAccess.remove_absolute(result.save_dir.path_join(Quark.DIR_NAME))
+	# if FileAccess.file_exists(result.file_dir.path_join(Note.NOTES_SUBFOLDER_NAME)):
+	var err := DirAccess.remove_absolute(result.file_dir.path_join(Quark.DIR_NAME))
 	if err != OK:
-		printerr("Error code (%s) while removing notes folder from copied profile '%s'" % [ err, result.save_path ])
+		printerr("Error code (%s) while removing notes folder from copied profile '%s'" % [ err, result.file_path ])
 
 	return result
 
 
 ## Copies settings and contents (notes).
 func copy_hard(to_dir: String) -> Profile:
-	if save_dir == to_dir:
+	if file_dir == to_dir:
 
 		printerr("Can't duplicate to the same path '%s'" % [ to_dir ])
 		return null
-	var err := DirAccess.copy_absolute(save_dir, to_dir)
+	var err := DirAccess.copy_absolute(file_dir, to_dir)
 	if err != OK:
-		printerr("Error code (%s) while copying profile from '%s' to '%s'" % [ err, save_dir, to_dir ])
+		printerr("Error code (%s) while copying profile from '%s' to '%s'" % [ err, file_dir, to_dir ])
 		return null
-	return Profile.new(to_dir.path_join(Profile.PATH))
+	return Profile.new(to_dir.path_join(JsonResource.DATA_PATH))
 
 
 func reveal() -> void:
-	var err := OS.shell_show_in_file_manager(save_dir)
+	var err := OS.shell_show_in_file_manager(file_dir)
 	if err != OK:
-		printerr("Error code (%s) while revealing profile '%s' in file manager." % [ err, save_path ])
+		printerr("Error code (%s) while revealing profile '%s' in file manager." % [ err, file_path ])
 
 
 func hide() -> void:
-	if Machine.profiles_locations.has(self):
-		Machine.profiles_locations.erase(self)
+	if Machine.profiles.has(self):
+		Machine.profiles.erase(self)
 		Machine.inst.save()
 		Machine.inst.profile_removed.emit(self)
 		Machine.active_profile = null
@@ -120,6 +108,6 @@ func hide() -> void:
 func delete() -> void:
 	hide()
 
-	var err := DirAccess.remove_absolute(save_dir)
+	var err := DirAccess.remove_absolute(file_dir)
 	if err != OK:
 		pass

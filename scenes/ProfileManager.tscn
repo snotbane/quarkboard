@@ -44,7 +44,7 @@ func _on_resource_socket_resource_value_changed(new_resource: Resource) -> void:
 	if new_resource is not Profile: return
 	profile = new_resource
 	
-	text = new_resource.save_path
+	text = profile.file_path_absolute
 	tooltip_text = text
 
 

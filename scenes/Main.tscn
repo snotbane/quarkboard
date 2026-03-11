@@ -95,38 +95,46 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="grid_container" type="GridContainer" parent="safe_margin_container/create_board/panel_container/panel_container" unique_id=1073017694]
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/create_board/panel_container/panel_container" unique_id=2078180798]
+layout_mode = 2
+
+[node name="label" type="Label" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container" unique_id=1791034087]
+layout_mode = 2
+text = "Create New View"
+horizontal_alignment = 1
+
+[node name="grid_container" type="GridContainer" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container" unique_id=1073017694]
 layout_mode = 2
 columns = 2
 
-[node name="collage" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/grid_container" unique_id=754637792]
+[node name="flat" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=754637792]
 layout_mode = 2
-tooltip_text = "Basic view that arranges Notes in a flow pattern so you can see several simultaneously."
-text = "Collage"
+tooltip_text = "Basic view that arranges Notes in a grid pattern so you can see several simultaneously."
+text = "Flat"
 icon = ExtResource("5_nxtc6")
 
-[node name="folder" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/grid_container" unique_id=1366697291]
+[node name="folder" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1366697291]
 layout_mode = 2
 tooltip_text = "Basic view that arranges Notes in a file-folder structure. Good for when Notes must be carefully organized."
 disabled = true
 text = "Folder"
 icon = ExtResource("7_lhr70")
 
-[node name="canvas" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/grid_container" unique_id=1358331789]
+[node name="canvas" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1358331789]
 layout_mode = 2
 tooltip_text = "Advanced view that arranges Notes in a 2D space and allows you to position and connect them however you like."
 disabled = true
 text = "Canvas"
 icon = ExtResource("8_wp0k4")
 
-[node name="calendar" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/grid_container" unique_id=1965690541]
+[node name="calendar" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1965690541]
 layout_mode = 2
 tooltip_text = "Advanced view where Notes occupy a certain period of time. Good for events or reminders."
 disabled = true
 text = "Calendar"
 icon = ExtResource("9_bjd11")
 
-[node name="journal" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/grid_container" unique_id=2000734921]
+[node name="journal" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=2000734921]
 layout_mode = 2
 tooltip_text = "A special kind of Calendar which creates a new Note each day you write something down."
 disabled = true
@@ -134,4 +142,4 @@ text = "Journal"
 icon = ExtResource("10_qmy6f")
 
 [connection signal="pressed" from="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container/add" to="safe_margin_container/create_board" method="show"]
-[connection signal="pressed" from="safe_margin_container/create_board/panel_container/panel_container/grid_container/collage" to="safe_margin_container/create_board" method="create_new_view" binds= [0]]
+[connection signal="pressed" from="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container/flat" to="safe_margin_container/create_board" method="create_new_view" binds= [&"FlatBoard"]]
