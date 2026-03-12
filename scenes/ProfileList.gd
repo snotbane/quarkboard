@@ -49,7 +49,8 @@ func _on_create_dialog_file_selected(path: String) -> void:
 	# 	printerr("Something went wrong: (code %s)" % err)
 	# 	return
 
-	var profile := Profile.new(path)
+	var profile := Profile.new()
+	profile.save(path)
 
 	profile.make_active()
 
@@ -67,7 +68,8 @@ func _on_import_dialog_file_selected(path: String) -> void:
 
 	var last_imported : Profile
 	for profile_path in profile_paths_found:
-		last_imported = Profile.new(profile_path)
+		last_imported = Profile.new()
+		last_imported.load(profile_path)
 
 	if profile_paths_found.size() == 1:
 		last_imported.make_active()

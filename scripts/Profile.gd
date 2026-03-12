@@ -18,27 +18,27 @@ signal board_added(board: Board, make_active: bool)
 var quarks : Array
 var boards : Array
 
+func _get_save_as_dir_default() -> bool: return true
 
-func _init(__file_path_absolute__: String = "") -> void:
-	super._init(__file_path_absolute__, true)
 
+func _touched() -> void:
 	if is_valid:
 		if name.is_empty():
 			name = file_name.capitalize()
 			self.save()
 
-		quarks.clear()
-		for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
-			if path.get_extension().is_empty(): continue
-			quarks.push_back(Quark.new(path))
+		# quarks.clear()
+		# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
+		# 	if path.get_extension().is_empty(): continue
+		# 	quarks.push_back(Quark.new(path))
 
-		boards.clear()
-		for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
-			if path.get_extension().is_empty(): continue
-			print("Importing board at path : %s" % [ path ])
-			boards.push_back(Board.new(path, false))
+		# boards.clear()
+		# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
+		# 	if path.get_extension().is_empty(): continue
+		# 	print("Importing board at path : %s" % [ path ])
+		# 	boards.push_back(Board.new(path, false))
 
-		print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
+		# print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 
 	_init_deferred.call_deferred()
 

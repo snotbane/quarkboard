@@ -17,8 +17,9 @@ func create_new_view(type: StringName) -> void:
 
 	match type:
 		&"FlatBoard":
-			board = FlatBoard.new(path)
+			board = FlatBoard.new()
 
 	assert(board != null, "No board was created.")
 
+	board.touch(path)
 	hide()

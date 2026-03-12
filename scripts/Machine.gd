@@ -33,11 +33,13 @@ signal active_profile_changed
 
 
 func _init() -> void:
-	super._init(Machine.PATH)
+	super._init()
+
+	touch(Machine.PATH)
 
 
-func json_export() -> Dictionary:
-	return {
+func _saving() -> void:
+	data = {
 		K_PROFILES: profiles.keys()
 			.filter( func(profile: Profile) -> bool:
 				return profile != null
@@ -51,12 +53,13 @@ func json_export() -> Dictionary:
 	}
 
 
-func json_import(json: Variant) -> void:
-	for path : String in json.get(K_PROFILES, []):
-		var profile := Profile.new(path)
+func _loaded() -> void:
+	for path : String in data.get(K_PROFILES, []):
+		var profile := Profile.new()
+		profile.touch(path)
 		profiles[profile] = path
 
-	var idx : int = json.get(K_PROFILE_ACTIVE, 0)
+	var idx : int = data.get(K_PROFILE_ACTIVE, 0)
 
 	if idx >= profiles.size(): return
 
