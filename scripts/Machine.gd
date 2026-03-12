@@ -40,20 +40,15 @@ func _init() -> void:
 
 func _saving() -> void:
 	data = {
-		K_PROFILES: profiles.keys()
-			.filter( func(profile: Profile) -> bool:
-				return profile != null
-				)
-			.map( func(profile: Profile) -> String:
-				return profile.file_path_absolute
-				)
-			,
+		K_PROFILES: Profile.REGISTRY.keys(),
 		K_PROFILE_ACTIVE: maxi(0, profiles.keys().find(active_profile)),
 		K_VIEW_ACTIVE: 0,
 	}
 
 
 func _loaded() -> void:
+	print(data)
+
 	for path : String in data.get(K_PROFILES, []):
 		var profile := Profile.new()
 		profile.touch(path)

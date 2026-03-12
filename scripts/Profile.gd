@@ -6,7 +6,7 @@ const ICON_DEFAULT = preload("uid://d1f31r2b2kbdd")
 const ICON_NULL := preload("uid://tn6tigaqju6d")
 
 static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DIR_EXT)
-
+static var REGISTRY : Dictionary
 
 signal board_added(board: Board, make_active: bool)
 
@@ -22,28 +22,39 @@ func _get_save_as_dir_default() -> bool: return true
 
 
 func _touched() -> void:
-	if is_valid:
-		if name.is_empty():
-			name = file_name.capitalize()
-			self.save()
+	if not is_valid: return
 
-		# quarks.clear()
-		# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
-		# 	if path.get_extension().is_empty(): continue
-		# 	quarks.push_back(Quark.new(path))
+	REGISTRY[file_path_absolute] = self
 
-		# boards.clear()
-		# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
-		# 	if path.get_extension().is_empty(): continue
-		# 	print("Importing board at path : %s" % [ path ])
-		# 	boards.push_back(Board.new(path, false))
+	if name.is_empty():
+		name = file_name.capitalize()
+		self.save()
 
-		# print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
+	_touched_deferred.call_deferred()
 
-	_init_deferred.call_deferred()
+func _loaded() -> void:
+	if not is_valid: return
+
+	# quarks.clear()
+	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
+	# 	if path.get_extension().is_empty(): continue
+	# 	quarks.push_back(Quark.new(path))
+
+	boards.clear()
+	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
+		if path.get_extension().is_empty(): continue
+		print("Importing board at path : %s" % [ path ])
+
+		var board := Board.new()
+		board.load(path)
+
+		boards.push_back(board)
+
+	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 
 
-func _init_deferred() -> void:
+
+func _touched_deferred() -> void:
 	assert(Machine.inst != null)
 
 	if not Machine.profiles.has(self):
