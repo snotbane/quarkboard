@@ -5,6 +5,11 @@ func _ready() -> void:
 	pass
 
 
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_released(&"loose_escape"):
+		hide()
+
+
 func create_new_view(type: StringName) -> void:
 	var board : Board
 
@@ -15,7 +20,5 @@ func create_new_view(type: StringName) -> void:
 			board = FlatBoard.new(path)
 
 	assert(board != null, "No board was created.")
-
-
 
 	hide()

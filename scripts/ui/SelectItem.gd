@@ -28,6 +28,7 @@ func _set_selection_object(value: Variant) -> void: pass
 
 
 func _ready() -> void:
+	button.button_group = parent_list.button_group
 	button.toggled.connect(_toggled)
 
 

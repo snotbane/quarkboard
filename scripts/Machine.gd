@@ -21,7 +21,6 @@ static var active_profile : Profile :
 
 		_active_profile = value
 		inst.active_profile_changed.emit()
-		print("Machine.active_profile : %s" % [ Machine.active_profile.name ])
 
 
 static func _static_init() -> void:
@@ -58,7 +57,6 @@ func json_import(json: Variant) -> void:
 		profiles[profile] = path
 
 	var idx : int = json.get(K_PROFILE_ACTIVE, 0)
-	print("idx : %s" % [ idx ])
 
 	if idx >= profiles.size(): return
 

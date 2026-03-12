@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://i8l2xr5uqdq6"]
+
+[ext_resource type="PackedScene" uid="uid://ce0lxeh6u1exy" path="res://scenes/SelectItem.tscn" id="1_7nd5y"]
+[ext_resource type="Script" uid="uid://cg8xme4rs5n8i" path="res://scenes/SelectItemBoardViewer.gd" id="2_a286o"]
+[ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/grid.svg" id="2_q6x11"]
+
+[node name="select_item_board_viewer" unique_id=610522657 instance=ExtResource("1_7nd5y")]
+anchors_preset = 0
+anchor_right = 0.0
+offset_right = 38.0
+offset_bottom = 38.0
+grow_horizontal = 1
+script = ExtResource("2_a286o")
+
+[node name="button" parent="." index="0" unique_id=1952971949]
+icon = ExtResource("2_q6x11")
+icon_alignment = 1
+
+[node name="margin_container" parent="." index="1" unique_id=2946062]
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3

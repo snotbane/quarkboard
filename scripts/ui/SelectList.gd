@@ -10,6 +10,8 @@ signal selection_changed
 @export var can_multi_select : bool = false
 @export var can_unselect : bool = false
 
+@export var button_group : ButtonGroup
+
 var _selected_children : Array[SelectItem]
 var any_selected : bool :
 	get: return not _selected_children.is_empty()

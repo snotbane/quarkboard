@@ -1,26 +1,31 @@
 [gd_scene format=3 uid="uid://dp76t3aegbnha"]
 
 [ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
-[ext_resource type="Texture2D" uid="uid://uh3pt61ejjbp" path="res://icons/circle_question.svg" id="2_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://i8l2xr5uqdq6" path="res://scenes/SelectItemBoardViewer.tscn" id="4_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/grid.svg" id="5_nxtc6"]
+[ext_resource type="Texture2D" uid="uid://tn6tigaqju6d" path="res://icons/user_question_alt_1.svg" id="5_qmy6f"]
 [ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/plus.svg" id="6_nxtc6"]
+[ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/gear.svg" id="6_qmy6f"]
 [ext_resource type="Script" uid="uid://qq6hnbhoqfq" path="res://scenes/boards/CreateBoard.gd" id="6_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/folder.svg" id="7_lhr70"]
-[ext_resource type="Script" uid="uid://d2tuw5ftakgg5" path="res://scenes/ViewsItemList.gd" id="7_q8u5g"]
+[ext_resource type="Script" uid="uid://d2tuw5ftakgg5" path="res://scenes/boards/BoardViewerList.gd" id="7_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://dtga2xtjs61g8" path="res://scenes/ProfileManager.tscn" id="8_jlsqs"]
 [ext_resource type="Texture2D" uid="uid://bpteuqqsewggq" path="res://icons/dazzle/map.svg" id="8_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/calendar.svg" id="9_bjd11"]
 [ext_resource type="Texture2D" uid="uid://cw8glbojunhfy" path="res://icons/notebook.svg" id="10_qmy6f"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_bjd11"]
+
 [sub_resource type="GDScript" id="GDScript_wp0k4"]
 script/source = "extends Button
 
 func _ready() -> void:
-	hide()
 	Machine.inst.active_profile_changed.connect(_active_profile_changed)
 	
 func _active_profile_changed() -> void:
-	visible = Machine.active_profile != null
+	disabled = Machine.active_profile == null
+	icon = Machine.active_profile.icon if Machine.active_profile else Profile.ICON_NULL
+	text = Machine.active_profile.name if Machine.active_profile else tr(\"Profile\")
 "
 
 [node name="canvas_layer" type="CanvasLayer" unique_id=1932569945]
@@ -31,11 +36,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 script = ExtResource("1_elqb8")
+add_margin_left = 4
+add_margin_top = 4
+add_margin_right = 4
+add_margin_bottom = 4
 metadata/_custom_type_script = "uid://cjwdhgbhm3d5y"
 
 [node name="main" type="Control" parent="safe_margin_container" unique_id=163587127]
@@ -49,44 +58,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="views_scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container" unique_id=1982896753]
+[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container" unique_id=2100736498]
 layout_mode = 2
-size_flags_horizontal = 0
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
+theme_override_constants/separation = 0
 
-[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/views_scroll_container" unique_id=1363743094]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="views_item_list" type="ItemList" parent="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container" unique_id=491724013]
-layout_mode = 2
-allow_search = false
-auto_width = true
-auto_height = true
-item_count = 1
-same_column_width = true
-icon_mode = 0
-icon_scale = 1.5
-item_0/icon = ExtResource("2_vcsgt")
-item_0/disabled = true
-script = ExtResource("7_q8u5g")
-
-[node name="add" type="Button" parent="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container" unique_id=1810103753]
+[node name="add_board" type="Button" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=1810103753]
 layout_mode = 2
 icon = ExtResource("6_nxtc6")
 flat = true
 icon_alignment = 1
+
+[node name="views_scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=1982896753]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="board_viewer_list" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/v_box_container/views_scroll_container" unique_id=1490767819]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("7_q8u5g")
+item_scene = ExtResource("4_bjd11")
+button_group = SubResource("ButtonGroup_bjd11")
+
+[node name="edit_profile" type="Button" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=2051282228]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+button_group = SubResource("ButtonGroup_bjd11")
+text = "Profile"
+icon = ExtResource("5_qmy6f")
+flat = true
 script = SubResource("GDScript_wp0k4")
 
-[node name="tab_container" type="TabContainer" parent="safe_margin_container/main/h_box_container" unique_id=38367856]
+[node name="edit_settings" type="Button" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=990539902]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+button_group = SubResource("ButtonGroup_bjd11")
+text = "Settings"
+icon = ExtResource("6_qmy6f")
+flat = true
+
+[node name="views" type="TabContainer" parent="safe_margin_container/main/h_box_container" unique_id=297222462]
 layout_mode = 2
 size_flags_horizontal = 3
 current_tab = 0
 tabs_visible = false
-tab_focus_mode = 0
 
-[node name="profile_manager" parent="safe_margin_container/main/h_box_container/tab_container" unique_id=1920642639 instance=ExtResource("8_jlsqs")]
+[node name="profile_manager" parent="safe_margin_container/main/h_box_container/views" unique_id=1920642639 instance=ExtResource("8_jlsqs")]
 layout_mode = 2
 
 [node name="create_board" type="Control" parent="safe_margin_container" unique_id=1552825026]
@@ -101,6 +123,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="panel_container" type="PanelContainer" parent="safe_margin_container/create_board/panel_container" unique_id=639717787]
 layout_mode = 2
@@ -153,5 +176,6 @@ disabled = true
 text = "Journal"
 icon = ExtResource("10_qmy6f")
 
-[connection signal="pressed" from="safe_margin_container/main/h_box_container/views_scroll_container/v_box_container/add" to="safe_margin_container/create_board" method="show"]
+[connection signal="pressed" from="safe_margin_container/main/h_box_container/v_box_container/add_board" to="safe_margin_container/create_board" method="show"]
+[connection signal="pressed" from="safe_margin_container/main/h_box_container/v_box_container/edit_profile" to="safe_margin_container/main/h_box_container/views" method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container/flat" to="safe_margin_container/create_board" method="create_new_view" binds= [&"FlatBoard"]]
