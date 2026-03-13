@@ -6,7 +6,6 @@ const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
 
 
 @export_storage var name : String
-@export_storage var icon : Texture2D
 
 ## A list of filters to include or exclude. For now, this will only filter for tags.
 ## E.g. [ "Ideas", "!Journal" ] will include all notes with the "Ideas" tag except ones with the "Journal" tag.
@@ -25,6 +24,8 @@ const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
 # func _init_deferred(make_active: bool) -> void:
 # 	parent.board_added.emit(self, make_active)
 
+var icon : Texture2D :
+	get: return _get_default_icon()
 
 func _get_default_icon() -> Texture2D:
 	assert(false, "Expected override.")

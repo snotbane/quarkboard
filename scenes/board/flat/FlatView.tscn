@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://i4omm3hsucbn"]
+
+[ext_resource type="Script" uid="uid://cs7r1ik3e8554" path="res://scenes/board/flat/FlatView.gd" id="1_43arh"]
+[ext_resource type="PackedScene" uid="uid://cy2frocf5nr13" path="res://scenes/TagEditor.tscn" id="2_7nobo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43arh"]
+
+[node name="collage_view" type="Control" unique_id=1424381750]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_43arh")
+
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=1600468522]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="quark_panel" type="PanelContainer" parent="h_box_container" unique_id=1040532669]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_43arh")
+
+[node name="scroll_container" type="ScrollContainer" parent="h_box_container/quark_panel" unique_id=209756389]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="margin_container" type="MarginContainer" parent="h_box_container/quark_panel/scroll_container" unique_id=183392736]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="grid_container" type="GridContainer" parent="h_box_container/quark_panel/scroll_container/margin_container" unique_id=1966027092]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 4
+
+[node name="tag_editor" parent="h_box_container" unique_id=825748298 instance=ExtResource("2_7nobo")]
+layout_mode = 2

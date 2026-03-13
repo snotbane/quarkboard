@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://dtga2xtjs61g8"]
 
-[ext_resource type="Script" uid="uid://dvah5oxfhs5bp" path="res://scenes/ProfileList.gd" id="1_4oep2"]
-[ext_resource type="PackedScene" uid="uid://gbmyoetclqr4" path="res://scenes/ProfileActionButton.tscn" id="1_l71mk"]
-[ext_resource type="PackedScene" uid="uid://bl4ti8lf6hvfo" path="res://scenes/SelectItemProfile.tscn" id="2_7tsq7"]
-[ext_resource type="PackedScene" uid="uid://b2dk7atb3rlnu" path="res://scenes/ProfileFileDialog.tscn" id="2_dgt7i"]
+[ext_resource type="Script" uid="uid://dvah5oxfhs5bp" path="res://scenes/profile/ProfileList.gd" id="1_4oep2"]
+[ext_resource type="PackedScene" uid="uid://gbmyoetclqr4" path="res://scenes/profile/ProfileActionButton.tscn" id="1_l71mk"]
+[ext_resource type="PackedScene" uid="uid://bl4ti8lf6hvfo" path="res://scenes/profile/SelectItemProfile.tscn" id="2_7tsq7"]
+[ext_resource type="PackedScene" uid="uid://b2dk7atb3rlnu" path="res://scenes/profile/ProfileFileDialog.tscn" id="2_dgt7i"]
 [ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/star_alt_2.svg" id="2_kb1f2"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/folder.svg" id="4_d8row"]
 [ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="5_noygu"]
 [ext_resource type="Script" uid="uid://45adv1w12mtd" path="res://addons/myth/modules/setting/SettingText.gd" id="5_ybb1a"]
 [ext_resource type="Script" uid="uid://cj3goivmfacwh" path="res://addons/myth/modules/setting/Setting_GroupLayout.gd" id="6_subl0"]
+[ext_resource type="Texture2D" uid="uid://dpe16tqie261o" path="res://icons/arrow_down_to_square.svg" id="7_j24vq"]
 [ext_resource type="Script" uid="uid://davnl5ty1puty" path="res://addons/myth/modules/setting/SettingImage.gd" id="7_q71o8"]
 [ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/profile_icons.tres" id="8_71axf"]
 [ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://icons/inbox_arrow_right.svg" id="8_fxjd5"]
@@ -55,6 +56,8 @@ func _pressed() -> void:
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oep2"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_ots10"]
+
 [node name="profile_manager" type="Control" unique_id=1920642639]
 layout_mode = 3
 anchors_preset = 15
@@ -92,7 +95,7 @@ item_scene = ExtResource("2_7tsq7")
 
 [node name="grid_container" type="GridContainer" parent="h_split_container/v_box_container" unique_id=836973193]
 layout_mode = 2
-columns = 2
+columns = 3
 
 [node name="create" parent="h_split_container/v_box_container/grid_container" unique_id=471194668 instance=ExtResource("1_l71mk")]
 layout_mode = 2
@@ -101,12 +104,21 @@ icon = ExtResource("2_kb1f2")
 
 [node name="create_dialog" parent="h_split_container/v_box_container/grid_container/create" unique_id=1611117896 instance=ExtResource("2_dgt7i")]
 
-[node name="import" parent="h_split_container/v_box_container/grid_container" unique_id=979856817 instance=ExtResource("1_l71mk")]
+[node name="open" parent="h_split_container/v_box_container/grid_container" unique_id=979856817 instance=ExtResource("1_l71mk")]
 layout_mode = 2
-text = "Import"
+text = "Open"
 icon = ExtResource("4_d8row")
 
-[node name="import_dialog" parent="h_split_container/v_box_container/grid_container/import" unique_id=1208019437 instance=ExtResource("2_dgt7i")]
+[node name="import_dialog" parent="h_split_container/v_box_container/grid_container/open" unique_id=1208019437 instance=ExtResource("2_dgt7i")]
+title = "Open a Directory"
+file_mode = 2
+
+[node name="import" parent="h_split_container/v_box_container/grid_container" unique_id=456718942 instance=ExtResource("1_l71mk")]
+layout_mode = 2
+text = "Import"
+icon = ExtResource("7_j24vq")
+
+[node name="import_dialog" parent="h_split_container/v_box_container/grid_container/import" unique_id=1726583266 instance=ExtResource("2_dgt7i")]
 title = "Open a Directory"
 file_mode = 2
 
@@ -210,9 +222,69 @@ dialog_text = "Hiding this profile will not delete notes from the system. It wil
 (To completely delete a profile and all of its contents, delete the .qrk folder in the file system.)"
 dialog_autowrap = true
 
+[node name="importer" type="Control" parent="." unique_id=1715073317]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="panel_container" type="PanelContainer" parent="importer" unique_id=1240517575]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.5
+anchor_right = 0.75
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="importer/panel_container" unique_id=736855572]
+layout_mode = 2
+
+[node name="grid_container" type="GridContainer" parent="importer/panel_container/v_box_container" unique_id=263520525]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="quarkboard" type="Button" parent="importer/panel_container/v_box_container/grid_container" unique_id=1735835045]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ots10")
+text = "Quarkboard"
+
+[node name="google_keep" type="Button" parent="importer/panel_container/v_box_container/grid_container" unique_id=1349038771]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ots10")
+text = "Google Keep"
+
+[node name="apple_notes" type="Button" parent="importer/panel_container/v_box_container/grid_container" unique_id=1160602931]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ots10")
+text = "Apple Notes"
+
+[node name="standard_notes" type="Button" parent="importer/panel_container/v_box_container/grid_container" unique_id=293067154]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ots10")
+text = "Standard Notes"
+
+[node name="rich_text_label" type="RichTextLabel" parent="importer/panel_container/v_box_container" unique_id=577921188]
+layout_mode = 2
+bbcode_enabled = true
+text = "Select an application to import notes from."
+fit_content = true
+
 [connection signal="object_selected" from="h_split_container/v_box_container/panel_container/scroll_container/select_list" to="h_split_container/panel_container/profile_editor/resource_socket" method="set_resource"]
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/create" to="h_split_container/v_box_container/grid_container/create/create_dialog" method="popup_file_dialog"]
 [connection signal="file_selected" from="h_split_container/v_box_container/grid_container/create/create_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_create_dialog_file_selected"]
+[connection signal="pressed" from="h_split_container/v_box_container/grid_container/open" to="h_split_container/v_box_container/grid_container/open/import_dialog" method="popup_file_dialog"]
+[connection signal="dir_selected" from="h_split_container/v_box_container/grid_container/open/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_import_dialog_file_selected"]
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/import" to="h_split_container/v_box_container/grid_container/import/import_dialog" method="popup_file_dialog"]
 [connection signal="dir_selected" from="h_split_container/v_box_container/grid_container/import/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_import_dialog_file_selected"]
 [connection signal="resource_value_changed" from="h_split_container/panel_container/profile_editor/resource_socket" to="h_split_container/panel_container/profile_editor/visibility_controller" method="_on_resource_socket_resource_value_changed"]

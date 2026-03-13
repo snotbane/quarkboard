@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bl4ti8lf6hvfo"]
 
 [ext_resource type="PackedScene" uid="uid://ce0lxeh6u1exy" path="res://scenes/SelectItem.tscn" id="1_vfhii"]
-[ext_resource type="Script" uid="uid://cwflfkufhyeew" path="res://scenes/SelectItemProfile.gd" id="2_l0kr3"]
+[ext_resource type="Script" uid="uid://cwflfkufhyeew" path="res://scenes/profile/SelectItemProfile.gd" id="2_l0kr3"]
 [ext_resource type="Texture2D" uid="uid://b0ov022ctxb3c" path="res://icons/triangle_exclamation.svg" id="3_8avbe"]
 [ext_resource type="Texture2D" uid="uid://bv2b3vanjk2wi" path="res://icons/dazzle/atom.svg" id="3_x5me3"]
 
