@@ -5,7 +5,15 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43arh"]
 
-[node name="collage_view" type="Control" unique_id=1424381750]
+[sub_resource type="InputEventKey" id="InputEventKey_48orc"]
+device = -1
+command_or_control_autoremap = true
+keycode = 78
+
+[sub_resource type="Shortcut" id="Shortcut_p58po"]
+events = [SubResource("InputEventKey_48orc")]
+
+[node name="flat_view" type="Control" unique_id=1424381750]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,11 +44,25 @@ vertical_scroll_mode = 3
 [node name="margin_container" type="MarginContainer" parent="h_box_container/quark_panel/scroll_container" unique_id=183392736]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="grid_container" type="GridContainer" parent="h_box_container/quark_panel/scroll_container/margin_container" unique_id=1966027092]
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/quark_panel/scroll_container/margin_container" unique_id=1070853866]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="grid_container" type="GridContainer" parent="h_box_container/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1966027092]
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 3
 columns = 4
+
+[node name="create_quark_button" type="Button" parent="h_box_container/quark_panel/scroll_container/margin_container/v_box_container" unique_id=2083484638]
+layout_mode = 2
+shortcut = SubResource("Shortcut_p58po")
+text = "Create New Note"
 
 [node name="tag_editor" parent="h_box_container" unique_id=825748298 instance=ExtResource("2_7nobo")]
 layout_mode = 2
+
+[connection signal="pressed" from="h_box_container/quark_panel/scroll_container/margin_container/v_box_container/create_quark_button" to="." method="create_new_quark"]

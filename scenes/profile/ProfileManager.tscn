@@ -95,7 +95,7 @@ item_scene = ExtResource("2_7tsq7")
 
 [node name="grid_container" type="GridContainer" parent="h_split_container/v_box_container" unique_id=836973193]
 layout_mode = 2
-columns = 3
+columns = 2
 
 [node name="create" parent="h_split_container/v_box_container/grid_container" unique_id=471194668 instance=ExtResource("1_l71mk")]
 layout_mode = 2
@@ -114,6 +114,7 @@ title = "Open a Directory"
 file_mode = 2
 
 [node name="import" parent="h_split_container/v_box_container/grid_container" unique_id=456718942 instance=ExtResource("1_l71mk")]
+visible = false
 layout_mode = 2
 text = "Import"
 icon = ExtResource("7_j24vq")
@@ -156,6 +157,7 @@ layout_mode = 2
 script = ExtResource("7_q71o8")
 collection = ExtResource("8_71axf")
 button_size_min = Vector2(48, 48)
+grid_rows = null
 label_text = "Icon"
 reset_button_enabled = false
 metadata/_custom_type_script = "uid://davnl5ty1puty"
