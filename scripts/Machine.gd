@@ -42,7 +42,7 @@ func _saving() -> void:
 	data = {
 		K_PROFILES: Profile.REGISTRY.keys(),
 		K_PROFILE_ACTIVE: maxi(0, profiles.keys().find(active_profile)),
-		K_VIEW_ACTIVE: 0,
+		K_VIEW_ACTIVE: ViewerContainer.inst.current_tab,
 	}
 
 
