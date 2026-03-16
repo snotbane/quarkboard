@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dxcxwvgaye5is"]
+
+[ext_resource type="Shader" uid="uid://dtxjyhqgmg0eq" path="res://materials/mat_mouse_hover.gdshader" id="1_axund"]
+
+[resource]
+shader = ExtResource("1_axund")
+shader_parameter/inner_radius = 25.0
+shader_parameter/outer_radius = 250.0

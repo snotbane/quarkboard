@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 myth_terminal_autoload="*uid://skiqkluncsub"
+MouseTracker="*uid://cr0syxt2gs1ys"
 
 [debug]
 
@@ -47,6 +48,7 @@ enabled=PackedStringArray("res://addons/myth/modules/base/plugin.cfg", "res://ad
 
 folder_colors={
 "res://addons/": "gray",
+"res://materials/": "yellow",
 "res://scenes/": "green",
 "res://scripts/": "blue"
 }
@@ -168,3 +170,10 @@ loose_escape={
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+mouse_position={
+"type": "vec2",
+"value": Vector2(-1, -1)
+}

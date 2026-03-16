@@ -4,18 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://gbmyoetclqr4" path="res://scenes/profile/ProfileActionButton.tscn" id="1_l71mk"]
 [ext_resource type="PackedScene" uid="uid://bl4ti8lf6hvfo" path="res://scenes/profile/SelectItemProfile.tscn" id="2_7tsq7"]
 [ext_resource type="PackedScene" uid="uid://b2dk7atb3rlnu" path="res://scenes/profile/ProfileFileDialog.tscn" id="2_dgt7i"]
-[ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/star_alt_2.svg" id="2_kb1f2"]
-[ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/folder.svg" id="4_d8row"]
+[ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/dazzle/star_alt_2.svg" id="2_kb1f2"]
+[ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/dazzle/folder.svg" id="4_d8row"]
 [ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="5_noygu"]
 [ext_resource type="Script" uid="uid://45adv1w12mtd" path="res://addons/myth/modules/setting/SettingText.gd" id="5_ybb1a"]
 [ext_resource type="Script" uid="uid://cj3goivmfacwh" path="res://addons/myth/modules/setting/Setting_GroupLayout.gd" id="6_subl0"]
-[ext_resource type="Texture2D" uid="uid://dpe16tqie261o" path="res://icons/arrow_down_to_square.svg" id="7_j24vq"]
+[ext_resource type="Texture2D" uid="uid://dpe16tqie261o" path="res://icons/dazzle/arrow_down_to_square.svg" id="7_j24vq"]
 [ext_resource type="Script" uid="uid://davnl5ty1puty" path="res://addons/myth/modules/setting/SettingImage.gd" id="7_q71o8"]
-[ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/profile_icons.tres" id="8_71axf"]
-[ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://icons/inbox_arrow_right.svg" id="8_fxjd5"]
-[ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/clone.svg" id="9_q71o8"]
-[ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/arrow_up_right_from_square.svg" id="10_71axf"]
-[ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/circle_dashed.svg" id="15_4oep2"]
+[ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/dazzle/profile_icons.tres" id="8_71axf"]
+[ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://icons/dazzle/inbox_arrow_right.svg" id="8_fxjd5"]
+[ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/dazzle/clone.svg" id="9_q71o8"]
+[ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_71axf"]
+[ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/dazzle/circle_dashed.svg" id="15_4oep2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
 
@@ -157,7 +157,6 @@ layout_mode = 2
 script = ExtResource("7_q71o8")
 collection = ExtResource("8_71axf")
 button_size_min = Vector2(48, 48)
-grid_rows = null
 label_text = "Icon"
 reset_button_enabled = false
 metadata/_custom_type_script = "uid://davnl5ty1puty"

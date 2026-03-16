@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gbmyoetclqr4"]
 
-[ext_resource type="Texture2D" uid="uid://uh3pt61ejjbp" path="res://icons/circle_question.svg" id="1_gwun8"]
+[ext_resource type="Texture2D" uid="uid://uh3pt61ejjbp" path="res://icons/dazzle/circle_question.svg" id="1_gwun8"]
 
 [node name="profile_action_button" type="Button" unique_id=471194668]
 anchors_preset = 10
