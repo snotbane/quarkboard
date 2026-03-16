@@ -17,5 +17,5 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 
-	current_tab = Machine.inst.data.get(Machine.K_VIEW_ACTIVE, PROFILE_TAB)
+	current_tab = mini(Machine.inst.data.get(Machine.K_VIEW_ACTIVE, PROFILE_TAB), get_tab_count() - 1)
 

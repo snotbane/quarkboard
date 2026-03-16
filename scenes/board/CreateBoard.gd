@@ -21,4 +21,6 @@ func create_new_view(type: StringName) -> void:
 	assert(board != null, "No board was created.")
 
 	board.touch(path)
+	print("board._is_ready : %s" % [ board._is_ready ])
+	print("board is FlatBoard : %s" % [ board is FlatBoard ])
 	hide()

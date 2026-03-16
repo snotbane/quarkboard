@@ -1,5 +1,5 @@
 ## Abstract class for a view in which to organize [Quark]s.
-class_name Board extends ProfileOwnedResource
+class_name Board extends JsonResource
 
 const DIR_NAME := "boards"
 const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
@@ -12,20 +12,24 @@ const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
 @export_storage var filters : PackedStringArray
 
 
-# func _init(__file_path_absolute__: String = "", make_active: bool = true) -> void:
-# 	super._init(__file_path_absolute__, false)
+func _init() -> void:
+	name = _get_default_name()
+	super._init()
 
-# 	print("__file_path_absolute__ : \"%s\"" % [ __file_path_absolute__ ])
-# 	print("file_path_absolute : \"%s\"" % [ file_path_absolute ])
-# 	print("parent : %s" % [ parent ])
-# 	# assert(parent is Profile)
-# 	_init_deferred.call_deferred(make_active)
 
-# func _init_deferred(make_active: bool) -> void:
-# 	parent.board_added.emit(self, make_active)
+func _ready() -> void:
+	print("ready : %s" % [ self ])
+	# if parent == Machine.active_profile:
+	parent.board_added.emit(self, false)
+
 
 var icon : Texture2D :
 	get: return _get_default_icon()
+
+
+func _get_default_name() -> String:
+	return ""
+
 
 func _get_default_icon() -> Texture2D:
 	assert(false, "Expected override.")

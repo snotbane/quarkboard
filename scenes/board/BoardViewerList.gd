@@ -19,9 +19,6 @@ func _active_profile_changed() -> void:
 
 	active_profile.board_added.connect(_board_added)
 
-	for board : Board in Machine.active_profile.boards:
-		_board_added(board, false)
-
 
 func _board_added(board: Board, make_active: bool = true) -> void:
 	var item : SelectItemBoardViewer = item_scene.instantiate()

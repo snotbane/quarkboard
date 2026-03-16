@@ -9,7 +9,7 @@ static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DI
 static var REGISTRY : Dictionary
 
 signal board_added(board: Board, make_active: bool)
-
+signal quark_added(quark: Quark)
 
 @export_storage var name : String
 @export_storage var icon : Texture2D = ICON_DEFAULT
@@ -31,29 +31,6 @@ func _touched() -> void:
 		self.save()
 
 	_touched_deferred.call_deferred()
-
-func _loaded() -> void:
-	if not is_valid: return
-
-	# quarks.clear()
-	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
-	# 	if path.get_extension().is_empty(): continue
-	# 	quarks.push_back(Quark.new(path))
-
-	boards.clear()
-	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
-		if path.get_extension().is_empty(): continue
-		print("Importing board at path : %s" % [ path ])
-
-		var board := Board.new()
-		board.load(path)
-
-		boards.push_back(board)
-
-	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
-
-
-
 func _touched_deferred() -> void:
 	assert(Machine.inst != null)
 
@@ -61,6 +38,30 @@ func _touched_deferred() -> void:
 		Machine.profiles[self] = file_path_absolute
 		Machine.inst.save()
 		Machine.inst.profile_added.emit(self)
+
+
+func _loaded() -> void:
+	if not is_valid: return
+
+	quarks.clear()
+	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
+		if path.get_extension().is_empty(): continue
+
+		var quark := Quark.new()
+		quark.load(path)
+
+		quarks.push_back(quark)
+
+	boards.clear()
+	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
+		if path.get_extension().is_empty(): continue
+
+		var board := Board.new()
+		board.load(path)
+
+		boards.push_back(board)
+
+	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 
 
 func make_active() -> void:

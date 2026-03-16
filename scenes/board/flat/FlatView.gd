@@ -1,5 +1,5 @@
 
-extends Control
+extends BoardView
 
 func create_new_quark() -> void:
 	var quark : Quark
