@@ -1,5 +1,5 @@
 
-@tool class_name FlatFlowContainer extends HBoxContainer
+@tool class_name KeepFlowContainer extends HBoxContainer
 
 
 var _reverse_fill : bool = false
@@ -34,21 +34,21 @@ var _reverse_fill : bool = false
 			inc += 1
 
 		_place_grandchildren()
-
+var columns_nodes : Array[VBoxContainer] :
+	get:
+		var result : Array[VBoxContainer]
+		for child in get_children():
+			if child is VBoxContainer:
+				result.push_back(child)
+		return result
 
 func _init() -> void:
-	_create_column()
-	vertical_alignment = VBoxContainer.ALIGNMENT_END
+	add_child(VBoxContainer.new())
+	get_child(0).alignment = VBoxContainer.ALIGNMENT_END
 
 
-func _ready() -> void:
-	child_entered_tree.connect(_child_entered_tree)
-
-
-func _child_entered_tree(node: Node) -> void:
-	if node is VBoxContainer: return
-
-	node.reparent(get_smallest_column())
+func add_grandchild(control: Control) -> void:
+	get_smallest_column().add_child(control)
 
 
 func _create_column() -> VBoxContainer:
@@ -68,8 +68,8 @@ func _hold_grandchildren() -> void:
 func _place_grandchildren() -> void:
 	grandchild_hold.sort_custom(_sort_grandchildren)
 
-	for i in get_child_count():
-		get_child(i).visible = i > grandchild_hold.size()
+	# for i in get_child_count():
+	# 	get_child(i).visible = i > grandchild_hold.size()
 
 	while not grandchild_hold.is_empty():
 		get_smallest_column().add_child(grandchild_hold.pop_back())
@@ -84,8 +84,8 @@ func _sort_grandchildren(a, b) -> bool:
 func get_smallest_column() -> VBoxContainer:
 	var result : VBoxContainer = get_child(-1 if reverse_fill else 0)
 	for i in get_child_count():
-		var child : VBoxContainer = get_child(-i-1 if reverse_fill else i)
-		if child.size.y >= result.size.y: continue
+		var child : Control = get_child(-i-1 if reverse_fill else i)
+		if child.get_combined_minimum_size().y >= result.get_combined_minimum_size().y: continue
 		result = child
 
 	return result

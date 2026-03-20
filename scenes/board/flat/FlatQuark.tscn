@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://xn3xfulhehj4" path="res://scenes/board/flat/FlatQuark.gd" id="1_rkbxp"]
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
 [ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="4_cxj08"]
-[ext_resource type="PackedScene" uid="uid://3cgv1vogw0y2" path="res://scenes/TagButton.tscn" id="4_rkbxp"]
 [ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="7_xn67a"]
 
@@ -34,14 +33,15 @@ layout_mode = 2
 
 [node name="label" type="RichTextLabel" parent="margin_container/v_box_container" unique_id=1013330258]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "The secret to doing anything is believing that you can do it. There are no mistakes, only happy accidents. You can do anything you want to do. This is your world. Ever make mistakes in life? Let's make them birds. Yeah, they're birds now..."
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 3
+justification_flags = 99
 
 [node name="actions" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=781562735]
 layout_mode = 2
@@ -75,15 +75,3 @@ flat = true
 
 [node name="tags" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1889680740]
 layout_mode = 2
-
-[node name="quick_tag_button" parent="margin_container/v_box_container/tags" unique_id=1019051424 instance=ExtResource("4_rkbxp")]
-layout_mode = 2
-text = "Project Ideas"
-
-[node name="quick_tag_button_2" parent="margin_container/v_box_container/tags" unique_id=1798267798 instance=ExtResource("4_rkbxp")]
-layout_mode = 2
-text = "Stiny"
-
-[node name="quick_tag_button_3" parent="margin_container/v_box_container/tags" unique_id=87856868 instance=ExtResource("4_rkbxp")]
-layout_mode = 2
-text = "Gift Ideas"

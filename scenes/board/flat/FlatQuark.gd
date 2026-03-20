@@ -1,8 +1,12 @@
 
-extends Control
+class_name FlatQuarkViewer extends Control
 
 @onready var label : RichTextLabel = %label
 @onready var socket : ResourceSocket = $resource_socket
+
+var quark : Quark :
+	get: return socket.resource
+	set(value): socket.resource = value
 
 var max_height : float = 500.0
 

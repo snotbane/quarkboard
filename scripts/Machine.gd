@@ -19,8 +19,19 @@ static var active_profile : Profile :
 			push_error("Cannot set active profile to an invalid profile.")
 			return
 
+		if _active_profile:
+			_active_profile.board_added.disconnect(inst.active_profile_board_added.emit)
+			_active_profile.quark_added.disconnect(inst.active_profile_quark_added.emit)
+
+
 		_active_profile = value
+
+		if _active_profile:
+			_active_profile.board_added.connect(inst.active_profile_board_added.emit)
+			_active_profile.quark_added.connect(inst.active_profile_quark_added.emit)
+
 		inst.active_profile_changed.emit()
+
 
 
 static func _static_init() -> void:
@@ -30,6 +41,8 @@ static func _static_init() -> void:
 signal profile_added(profile: Profile)
 signal profile_removed(profile: Profile)
 signal active_profile_changed
+signal active_profile_board_added(board: Board)
+signal active_profile_quark_added(quark: Quark)
 
 
 func _init() -> void:
