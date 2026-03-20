@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cs7r1ik3e8554" path="res://scenes/board/flat/FlatView.gd" id="1_43arh"]
 [ext_resource type="PackedScene" uid="uid://cy2frocf5nr13" path="res://scenes/TagEditor.tscn" id="2_7nobo"]
+[ext_resource type="Script" uid="uid://d0irniiek6mwo" path="res://scenes/board/flat/FlatFlowContainer.gd" id="2_p58po"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43arh"]
 
@@ -51,11 +52,11 @@ layout_mode = 2
 size_flags_vertical = 8
 alignment = 2
 
-[node name="grid_container" type="GridContainer" parent="h_box_container/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1966027092]
+[node name="keep_flow_container" type="HBoxContainer" parent="h_box_container/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1325644761]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-columns = 4
+size_flags_horizontal = 4
+alignment = 1
+script = ExtResource("2_p58po")
 
 [node name="create_quark_button" type="Button" parent="h_box_container/quark_panel/scroll_container/margin_container/v_box_container" unique_id=2083484638]
 layout_mode = 2

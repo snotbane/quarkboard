@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://ik6dmd4algrl"]
+
+[ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="1_7fsuq"]
+[ext_resource type="Script" uid="uid://xn3xfulhehj4" path="res://scenes/board/flat/FlatQuark.gd" id="1_rkbxp"]
+[ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
+[ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="4_cxj08"]
+[ext_resource type="PackedScene" uid="uid://3cgv1vogw0y2" path="res://scenes/TagButton.tscn" id="4_rkbxp"]
+[ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
+[ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="7_xn67a"]
+
+[node name="flat_quark" type="PanelContainer" unique_id=119261583]
+custom_minimum_size = Vector2(200, 10)
+offset_right = 200.0
+offset_bottom = 33.0
+script = ExtResource("1_rkbxp")
+
+[node name="resource_socket" type="Node" parent="." unique_id=1901970041]
+script = ExtResource("1_7fsuq")
+metadata/_custom_type_script = "uid://cg26odhngglnc"
+
+[node name="button" type="Button" parent="." unique_id=1742632581]
+layout_mode = 2
+flat = true
+
+[node name="margin_container" type="MarginContainer" parent="." unique_id=1305128167]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="v_box_container" type="VBoxContainer" parent="margin_container" unique_id=408325884]
+layout_mode = 2
+
+[node name="label" type="RichTextLabel" parent="margin_container/v_box_container" unique_id=1013330258]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "The secret to doing anything is believing that you can do it. There are no mistakes, only happy accidents. You can do anything you want to do. This is your world. Ever make mistakes in life? Let's make them birds. Yeah, they're birds now..."
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 3
+
+[node name="actions" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=781562735]
+layout_mode = 2
+
+[node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+icon = ExtResource("3_n5fev")
+flat = true
+
+[node name="tags" type="Button" parent="margin_container/v_box_container/actions" unique_id=203435716]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+tooltip_text = "Tag this item to group it with others."
+icon = ExtResource("4_cxj08")
+flat = true
+
+[node name="colors" type="Button" parent="margin_container/v_box_container/actions" unique_id=853608149]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+tooltip_text = "Color this item to change how it looks."
+icon = ExtResource("6_2h6w2")
+flat = true
+
+[node name="popout" type="Button" parent="margin_container/v_box_container/actions" unique_id=1914594585]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+tooltip_text = "Popout this Note into its own Window."
+icon = ExtResource("7_xn67a")
+flat = true
+
+[node name="tags" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1889680740]
+layout_mode = 2
+
+[node name="quick_tag_button" parent="margin_container/v_box_container/tags" unique_id=1019051424 instance=ExtResource("4_rkbxp")]
+layout_mode = 2
+text = "Project Ideas"
+
+[node name="quick_tag_button_2" parent="margin_container/v_box_container/tags" unique_id=1798267798 instance=ExtResource("4_rkbxp")]
+layout_mode = 2
+text = "Stiny"
+
+[node name="quick_tag_button_3" parent="margin_container/v_box_container/tags" unique_id=87856868 instance=ExtResource("4_rkbxp")]
+layout_mode = 2
+text = "Gift Ideas"

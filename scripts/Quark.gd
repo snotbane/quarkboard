@@ -2,3 +2,12 @@
 class_name Quark extends JsonResource
 
 const DIR_NAME := "quarks"
+
+@export var text : String
+
+func _ready() -> void:
+	parent.quark_added(self)
+
+
+func open_in_editor() -> void:
+	pass

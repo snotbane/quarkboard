@@ -20,7 +20,7 @@ func _active_profile_changed() -> void:
 	active_profile.board_added.connect(_board_added)
 
 
-func _board_added(board: Board, make_active: bool = true) -> void:
+func _board_added(board: Board) -> void:
 	var item : SelectItemBoardViewer = item_scene.instantiate()
 	item.board = board
 	add_child(item)

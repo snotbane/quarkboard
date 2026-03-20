@@ -8,7 +8,7 @@ const ICON_NULL := preload("uid://tn6tigaqju6d")
 static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DIR_EXT)
 static var REGISTRY : Dictionary
 
-signal board_added(board: Board, make_active: bool)
+signal board_added(board: Board)
 signal quark_added(quark: Quark)
 
 @export_storage var name : String

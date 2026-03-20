@@ -18,9 +18,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	print("ready : %s" % [ self ])
-	# if parent == Machine.active_profile:
-	parent.board_added.emit(self, false)
+	parent.board_added.emit(self)
 
 
 var icon : Texture2D :
