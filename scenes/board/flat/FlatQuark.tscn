@@ -19,10 +19,12 @@ metadata/_custom_type_script = "uid://cg26odhngglnc"
 
 [node name="button" type="Button" parent="." unique_id=1742632581]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="margin_container" type="MarginContainer" parent="." unique_id=1305128167]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -30,12 +32,14 @@ theme_override_constants/margin_bottom = 8
 
 [node name="v_box_container" type="VBoxContainer" parent="margin_container" unique_id=408325884]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="label" type="RichTextLabel" parent="margin_container/v_box_container" unique_id=1013330258]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
@@ -45,6 +49,8 @@ justification_flags = 99
 
 [node name="actions" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=781562735]
 layout_mode = 2
+mouse_filter = 2
+alignment = 1
 
 [node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068]
 self_modulate = Color(1, 1, 1, 0.5019608)
@@ -75,3 +81,6 @@ flat = true
 
 [node name="tags" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1889680740]
 layout_mode = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="button" to="." method="_on_pressed"]

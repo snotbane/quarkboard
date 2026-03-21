@@ -8,13 +8,13 @@ var profile : Profile :
 		if _profile == value: return
 
 		if _profile:
-			_profile.modified.disconnect(refresh)
+			_profile.changed.disconnect(refresh)
 
 		_profile = value
 		refresh.call_deferred()
 
 		if _profile:
-			_profile.modified.connect(refresh)
+			_profile.changed.connect(refresh)
 
 
 @onready var icon : TextureRect = $margin_container/h_box_container/icon

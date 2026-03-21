@@ -25,6 +25,8 @@ MouseTracker="*uid://cr0syxt2gs1ys"
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 gdscript/warnings/incompatible_ternary=0
+gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=0
 
 [display]
 

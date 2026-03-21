@@ -1,13 +1,7 @@
 
-extends Control
+extends Node
 
-func _ready() -> void:
-	pass
-
-
-func _gui_input(event: InputEvent) -> void:
-	if event.is_action_released(&"loose_escape"):
-		hide()
+@onready var parent : Control = get_parent()
 
 
 func create_new_view(type: StringName) -> void:
@@ -21,6 +15,4 @@ func create_new_view(type: StringName) -> void:
 	assert(board != null, "No board was created.")
 
 	board.touch(path)
-	print("board._is_ready : %s" % [ board._is_ready ])
-	print("board is FlatBoard : %s" % [ board is FlatBoard ])
-	hide()
+	parent.hide()

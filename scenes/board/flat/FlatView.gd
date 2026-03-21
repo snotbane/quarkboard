@@ -3,6 +3,12 @@ extends BoardView
 
 const FLAT_QUARK_SCENE = preload("uid://ik6dmd4algrl")
 
+static var REGEX_TITLE := RegEx.create_from_string(r"^\s*(\S.*?)\n")
+
+
+static func get_title_text(string: String) -> String:
+	return REGEX_TITLE.search(string).get_string(1)
+
 
 @onready var container : KeepFlowContainer = $h_box_container/quark_panel/scroll_container/margin_container/v_box_container/flat_flow_container
 

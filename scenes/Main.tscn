@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://dp76t3aegbnha"]
 
 [ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://bw4p4xivpjv0n" path="res://scripts/GlobalNode.gd" id="2_3p2gp"]
 [ext_resource type="PackedScene" uid="uid://i8l2xr5uqdq6" path="res://scenes/board/SelectItemBoardViewer.tscn" id="4_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/dazzle/grid.svg" id="5_nxtc6"]
 [ext_resource type="Texture2D" uid="uid://tn6tigaqju6d" path="res://icons/dazzle/user_question_alt_1.svg" id="5_qmy6f"]
 [ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/dazzle/plus.svg" id="6_nxtc6"]
 [ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/dazzle/gear.svg" id="6_qmy6f"]
-[ext_resource type="Script" uid="uid://qq6hnbhoqfq" path="res://scenes/board/CreateBoard.gd" id="6_wp0k4"]
+[ext_resource type="Script" uid="uid://qq6hnbhoqfq" path="res://scripts/ui/LooseEscape.gd" id="6_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/dazzle/folder.svg" id="7_lhr70"]
 [ext_resource type="Script" uid="uid://cgvkppohen5pe" path="res://scenes/ViewerContainer.gd" id="7_mwfav"]
 [ext_resource type="Script" uid="uid://d2tuw5ftakgg5" path="res://scenes/board/BoardViewerList.gd" id="7_q8u5g"]
@@ -14,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://bpteuqqsewggq" path="res://icons/dazzle/map.svg" id="8_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/dazzle/calendar.svg" id="9_bjd11"]
 [ext_resource type="Texture2D" uid="uid://cw8glbojunhfy" path="res://icons/dazzle/notebook.svg" id="10_qmy6f"]
+[ext_resource type="Script" uid="uid://dx24n4sp30s52" path="res://scenes/board/CreateBoardActions.gd" id="11_cvmbd"]
+[ext_resource type="Script" uid="uid://cdbhdjg02uuv8" path="res://scenes/QuarkEditorGlobal.gd" id="17_ft6cd"]
+[ext_resource type="Script" uid="uid://djmsefj2kiwae" path="res://scripts/ui/TabContainerPlusOne.gd" id="18_bb450"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_bjd11"]
 
@@ -31,7 +35,7 @@ func _active_profile_changed() -> void:
 
 [node name="canvas_layer" type="CanvasLayer" unique_id=1932569945]
 
-[node name="safe_margin_container" type="MarginContainer" parent="." unique_id=1507910763]
+[node name="main" type="MarginContainer" parent="." unique_id=1507910763]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,10 +52,13 @@ add_margin_right = 4
 add_margin_bottom = 4
 metadata/_custom_type_script = "uid://cjwdhgbhm3d5y"
 
-[node name="main" type="Control" parent="safe_margin_container" unique_id=163587127]
+[node name="global" type="Node" parent="main" unique_id=1583262262]
+script = ExtResource("2_3p2gp")
+
+[node name="base" type="Control" parent="main" unique_id=163587127]
 layout_mode = 2
 
-[node name="h_box_container" type="HBoxContainer" parent="safe_margin_container/main" unique_id=1115516237]
+[node name="h_box_container" type="HBoxContainer" parent="main/base" unique_id=1115516237]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,24 +66,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/main/h_box_container" unique_id=2100736498]
+[node name="v_box_container" type="VBoxContainer" parent="main/base/h_box_container" unique_id=2100736498]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="add_board" type="Button" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=1810103753]
+[node name="add_board" type="Button" parent="main/base/h_box_container/v_box_container" unique_id=1810103753]
 layout_mode = 2
 icon = ExtResource("6_nxtc6")
 flat = true
 icon_alignment = 1
 
-[node name="views_scroll_container" type="ScrollContainer" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=1982896753]
+[node name="views_scroll_container" type="ScrollContainer" parent="main/base/h_box_container/v_box_container" unique_id=1982896753]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="board_viewer_list" type="VBoxContainer" parent="safe_margin_container/main/h_box_container/v_box_container/views_scroll_container" unique_id=1490767819]
+[node name="board_viewer_list" type="VBoxContainer" parent="main/base/h_box_container/v_box_container/views_scroll_container" unique_id=1490767819]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -84,7 +91,7 @@ script = ExtResource("7_q8u5g")
 item_scene = ExtResource("4_bjd11")
 button_group = SubResource("ButtonGroup_bjd11")
 
-[node name="edit_profile" type="Button" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=2051282228]
+[node name="edit_profile" type="Button" parent="main/base/h_box_container/v_box_container" unique_id=2051282228]
 layout_mode = 2
 disabled = true
 toggle_mode = true
@@ -94,7 +101,7 @@ icon = ExtResource("5_qmy6f")
 flat = true
 script = SubResource("GDScript_wp0k4")
 
-[node name="edit_settings" type="Button" parent="safe_margin_container/main/h_box_container/v_box_container" unique_id=990539902]
+[node name="edit_settings" type="Button" parent="main/base/h_box_container/v_box_container" unique_id=990539902]
 layout_mode = 2
 disabled = true
 toggle_mode = true
@@ -103,22 +110,32 @@ text = "Settings"
 icon = ExtResource("6_qmy6f")
 flat = true
 
-[node name="viewer_tab_container" type="TabContainer" parent="safe_margin_container/main/h_box_container" unique_id=297222462]
+[node name="viewer_tab_container" type="TabContainer" parent="main/base/h_box_container" unique_id=297222462]
 layout_mode = 2
 size_flags_horizontal = 3
 current_tab = 0
 tabs_visible = false
 script = ExtResource("7_mwfav")
 
-[node name="profile_manager" parent="safe_margin_container/main/h_box_container/viewer_tab_container" unique_id=1920642639 instance=ExtResource("8_jlsqs")]
+[node name="profile_manager" parent="main/base/h_box_container/viewer_tab_container" unique_id=1920642639 instance=ExtResource("8_jlsqs")]
 layout_mode = 2
 
-[node name="create_board" type="Control" parent="safe_margin_container" unique_id=1552825026]
+[node name="create_board" type="Control" parent="main" unique_id=1552825026]
 visible = false
 layout_mode = 2
-script = ExtResource("6_wp0k4")
+mouse_filter = 2
 
-[node name="panel_container" type="PanelContainer" parent="safe_margin_container/create_board" unique_id=1710137238]
+[node name="create_board_actions" type="Node" parent="main/create_board" unique_id=537283053]
+script = ExtResource("11_cvmbd")
+
+[node name="loose_escape" type="Control" parent="main/create_board" unique_id=1406006373 node_paths=PackedStringArray("affected_control")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_wp0k4")
+affected_control = NodePath("..")
+
+[node name="panel_container" type="PanelContainer" parent="main/create_board" unique_id=1710137238]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,57 +144,125 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="panel_container" type="PanelContainer" parent="safe_margin_container/create_board/panel_container" unique_id=639717787]
+[node name="panel_container" type="PanelContainer" parent="main/create_board/panel_container" unique_id=639717787]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="v_box_container" type="VBoxContainer" parent="safe_margin_container/create_board/panel_container/panel_container" unique_id=2078180798]
+[node name="v_box_container" type="VBoxContainer" parent="main/create_board/panel_container/panel_container" unique_id=2078180798]
 layout_mode = 2
 
-[node name="label" type="Label" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container" unique_id=1791034087]
+[node name="label" type="Label" parent="main/create_board/panel_container/panel_container/v_box_container" unique_id=1791034087]
 layout_mode = 2
 text = "Create New View"
 horizontal_alignment = 1
 
-[node name="grid_container" type="GridContainer" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container" unique_id=1073017694]
+[node name="grid_container" type="GridContainer" parent="main/create_board/panel_container/panel_container/v_box_container" unique_id=1073017694]
 layout_mode = 2
 columns = 2
 
-[node name="flat" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=754637792]
+[node name="flat" type="Button" parent="main/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=754637792]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Basic view that arranges Notes in a grid pattern so you can see several simultaneously."
 text = "Flat"
 icon = ExtResource("5_nxtc6")
 
-[node name="folder" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1366697291]
+[node name="folder" type="Button" parent="main/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1366697291]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Basic view that arranges Notes in a file-folder structure. Good for when Notes must be carefully organized."
 disabled = true
 text = "Folder"
 icon = ExtResource("7_lhr70")
 
-[node name="canvas" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1358331789]
+[node name="canvas" type="Button" parent="main/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1358331789]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Advanced view that arranges Notes in a 2D space and allows you to position and connect them however you like."
 disabled = true
 text = "Canvas"
 icon = ExtResource("8_wp0k4")
 
-[node name="calendar" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1965690541]
+[node name="calendar" type="Button" parent="main/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=1965690541]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Advanced view where Notes occupy a certain period of time. Good for events or reminders."
 disabled = true
 text = "Calendar"
 icon = ExtResource("9_bjd11")
 
-[node name="journal" type="Button" parent="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=2000734921]
+[node name="journal" type="Button" parent="main/create_board/panel_container/panel_container/v_box_container/grid_container" unique_id=2000734921]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "A special kind of Calendar which creates a new Note each day you write something down."
 disabled = true
 text = "Journal"
 icon = ExtResource("10_qmy6f")
 
-[connection signal="pressed" from="safe_margin_container/main/h_box_container/v_box_container/add_board" to="safe_margin_container/create_board" method="show"]
-[connection signal="pressed" from="safe_margin_container/main/h_box_container/v_box_container/edit_profile" to="safe_margin_container/main/h_box_container/viewer_tab_container" method="set_current_tab" binds= [0]]
-[connection signal="pressed" from="safe_margin_container/create_board/panel_container/panel_container/v_box_container/grid_container/flat" to="safe_margin_container/create_board" method="create_new_view" binds= [&"FlatBoard"]]
+[node name="quark_editor_subwindow" type="Control" parent="main" unique_id=312921352]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("17_ft6cd")
+
+[node name="global_node" type="Node" parent="main/quark_editor_subwindow" unique_id=810487256]
+script = ExtResource("2_3p2gp")
+metadata/_custom_type_script = "uid://bw4p4xivpjv0n"
+
+[node name="loose_escape" type="Control" parent="main/quark_editor_subwindow" unique_id=569671135 node_paths=PackedStringArray("affected_control")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_wp0k4")
+affected_control = NodePath("..")
+
+[node name="panel_container" type="PanelContainer" parent="main/quark_editor_subwindow" unique_id=1833201170]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="control" type="Control" parent="main/quark_editor_subwindow/panel_container" unique_id=373596649]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="main/quark_editor_subwindow/panel_container/control" unique_id=589659526]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_right = 0.875
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="margin_container" type="MarginContainer" parent="main/quark_editor_subwindow/panel_container/control/scroll_container" unique_id=2042323002]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="quark_editor_container" type="TabContainer" parent="main/quark_editor_subwindow/panel_container/control/scroll_container/margin_container" unique_id=972917086]
+layout_mode = 2
+drag_to_rearrange_enabled = true
+use_hidden_tabs_for_min_size = true
+tab_focus_mode = 0
+script = ExtResource("18_bb450")
+
+[node name="global_node" type="Node" parent="main/quark_editor_subwindow/panel_container/control/scroll_container/margin_container/quark_editor_container" unique_id=17162251]
+script = ExtResource("2_3p2gp")
+metadata/_custom_type_script = "uid://bw4p4xivpjv0n"
+
+[connection signal="pressed" from="main/base/h_box_container/v_box_container/add_board" to="main/create_board" method="show"]
+[connection signal="pressed" from="main/base/h_box_container/v_box_container/edit_profile" to="main/base/h_box_container/viewer_tab_container" method="set_current_tab" binds= [0]]
