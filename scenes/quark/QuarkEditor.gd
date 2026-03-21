@@ -17,6 +17,7 @@ static var subwindow_container : Control :
 	get: return GlobalNode.get_global_node(&"quark_editor_container")
 
 @onready var text_edit : TextEdit = $safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/text
+@onready var popout_button : Button = $safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/switch_button/popout
 
 var window : Window
 
@@ -38,8 +39,8 @@ func popout() -> void:
 
 	window = WINDOW_SCENE.instantiate()
 	window.content_scale_factor = get_tree().root.content_scale_factor
+	window.position = get_screen_position()
 	window.size = size
-	window.position = position
 
 	get_tree().root.add_child(window)
 	window.show()
@@ -59,3 +60,11 @@ func popin() -> void:
 	subwindow.show()
 	reparent(subwindow_container)
 	window.queue_free()
+
+
+func popout_direct() -> void:
+	popout()
+	window.size = get_tree().root.size * 0.75
+	window.position = get_tree().root.position + (get_tree().root.size - Vector2i(size.floor())) / 2
+	show()
+	popout_button.hide()

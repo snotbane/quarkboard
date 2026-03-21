@@ -39,7 +39,11 @@ func open_in_editor(separate_window: bool = false) -> void:
 		await editor.get_tree().process_frame
 
 	editor.quark = self
-	GlobalNode.get_global_node(&"quark_editor_subwindow").show()
+
+	if separate_window:
+		editor.popout_direct()
+	else:
+		GlobalNode.get_global_node(&"quark_editor_subwindow").show()
 
 
 func close_in_editor() -> void:

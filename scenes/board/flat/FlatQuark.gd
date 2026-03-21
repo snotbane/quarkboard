@@ -29,3 +29,7 @@ func _on_resource_changed() -> void:
 
 func _on_pressed() -> void:
 	quark.open_in_editor()
+
+
+func _on_popout_pressed() -> void:
+	quark.open_in_editor(true)
