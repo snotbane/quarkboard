@@ -1,6 +1,7 @@
 
 @tool class_name KeepFlowContainer extends HBoxContainer
 
+@export var size_target : Control
 
 var _reverse_fill : bool = false
 @export var reverse_fill : bool = false :
@@ -9,15 +10,27 @@ var _reverse_fill : bool = false
 		if _reverse_fill == value: return
 		_reverse_fill = value
 
-
+var _vertical_alignment : VBoxContainer.AlignmentMode = VBoxContainer.ALIGNMENT_END
 @export var vertical_alignment : VBoxContainer.AlignmentMode = VBoxContainer.ALIGNMENT_END :
-	get: return get_child(0).alignment
+	get: return _vertical_alignment
 	set(value):
+		_vertical_alignment = value
 		for child in get_children():
 			child.alignment = value
 
 
-@export var columns : int = 1 :
+var _column_width : float = 200.0
+@export var column_width : float = 200.0 :
+	get: return _column_width
+	set(value):
+		value = maxf(value, 1.0)
+		_column_width = value
+		for child in get_children():
+			child.custom_minimum_size.x = value
+		_refresh_column_count()
+
+
+var columns : int = 1 :
 	get: return get_child_count()
 	set(value):
 		value = maxi(value, 1)
@@ -45,6 +58,22 @@ var columns_nodes : Array[VBoxContainer] :
 func _init() -> void:
 	add_child(VBoxContainer.new())
 	get_child(0).alignment = VBoxContainer.ALIGNMENT_END
+	get_child(0).custom_minimum_size.x = 200.0
+
+
+func _ready() -> void:
+	get_window().size_changed.connect(_refresh_column_count)
+
+	## Please don't ask.
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	_refresh_column_count.call_deferred()
+
+
+func _refresh_column_count() -> void:
+	print("size_target.size.x : %s" % [ size_target.size.x ])
+	columns = floori(size_target.size.x / column_width)
 
 
 func add_grandchild(control: Control) -> void:
@@ -56,6 +85,7 @@ func _create_column() -> VBoxContainer:
 	result.alignment = vertical_alignment
 	add_child(result)
 	return result
+
 
 var grandchild_hold : Array[Node]
 func _hold_grandchildren() -> void:
@@ -76,15 +106,15 @@ func _place_grandchildren() -> void:
 
 
 
-func _sort_grandchildren(a, b) -> bool:
-	## TODO: sort by last modified date
-	return false
+func _sort_grandchildren(a: FlatQuarkViewer, b: FlatQuarkViewer) -> bool:
+	return a.quark.time_modified > b.quark.time_modified
 
 
 func get_smallest_column() -> VBoxContainer:
 	var result : VBoxContainer = get_child(-1 if reverse_fill else 0)
 	for i in get_child_count():
 		var child : Control = get_child(-i-1 if reverse_fill else i)
+		if child.is_queued_for_deletion(): continue
 		if child.get_combined_minimum_size().y >= result.get_combined_minimum_size().y: continue
 		result = child
 

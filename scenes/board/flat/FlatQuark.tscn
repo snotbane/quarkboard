@@ -55,6 +55,8 @@ alignment = 1
 [node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
 icon = ExtResource("3_n5fev")
 flat = true
 
@@ -62,6 +64,7 @@ flat = true
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Tag this item to group it with others."
+mouse_default_cursor_shape = 2
 icon = ExtResource("4_cxj08")
 flat = true
 
@@ -69,6 +72,7 @@ flat = true
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Color this item to change how it looks."
+mouse_default_cursor_shape = 2
 icon = ExtResource("6_2h6w2")
 flat = true
 
@@ -76,6 +80,7 @@ flat = true
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Popout this Note into its own Window."
+mouse_default_cursor_shape = 2
 icon = ExtResource("7_xn67a")
 flat = true
 

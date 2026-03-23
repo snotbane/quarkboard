@@ -17,14 +17,14 @@ func _ready() -> void:
 
 
 func _on_resource_changed() -> void:
-	print("label.size before setting text : %s" % [ label.size ])
+	# print("label.size before setting text : %s" % [ label.size ])
 
 	label.text = socket.resource.text
 
 	if label.size.y > max_height:
 		label.text = label.text.substr(0, label.text.length() * float(max_height / label.size.y)) + "..."
 
-	print("label.size after  setting text : %s" % [ label.size ])
+	# print("label.size after  setting text : %s" % [ label.size ])
 
 
 func _on_pressed() -> void:

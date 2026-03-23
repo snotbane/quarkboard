@@ -17,9 +17,17 @@ static var subwindow_container : Control :
 	get: return GlobalNode.get_global_node(&"quark_editor_container")
 
 @onready var text_edit : TextEdit = $safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/text
-@onready var popout_button : Button = $safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/switch_button/popout
+@onready var popout_button : BaseButton = $safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/popout_popin
+@onready var pin_switch : BaseButton = $safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/pin_unpin
 
-var window : Window
+var _window : Window
+var window : Window :
+	get: return _window
+	set(value):
+		_window = value
+		pin_switch.visible = _window != null
+		pin_switch.button_pressed = _window.always_on_top if _window else false
+
 
 func _ready() -> void:
 	text_edit.text_changed.connect(_text_changed)
@@ -32,6 +40,13 @@ func _text_changed() -> void:
 	name = quark.name_text
 	if window:
 		window.refresh_title()
+
+
+func set_popout(value: bool) -> void:
+	if value:
+		popout()
+	else:
+		popin()
 
 
 func popout() -> void:
@@ -60,6 +75,7 @@ func popin() -> void:
 	subwindow.show()
 	reparent(subwindow_container)
 	window.queue_free()
+	window = null
 
 
 func popout_direct() -> void:
@@ -68,3 +84,13 @@ func popout_direct() -> void:
 	window.position = get_tree().root.position + (get_tree().root.size - Vector2i(size.floor())) / 2
 	show()
 	popout_button.hide()
+	popout_button.button_pressed = true
+
+
+var pinned : bool :
+	get: return window.always_on_top if window else false
+	set(value):
+		if not window: return
+		window.always_on_top = value
+func set_pinned(value: bool) -> void:
+	pinned = value
