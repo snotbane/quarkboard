@@ -18,9 +18,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_switch_toggle"):
+	if event.is_action_pressed(&"ui_shift"):
 		button_a.hide()
-	elif event.is_action_released(&"ui_switch_toggle"):
+	elif event.is_action_released(&"ui_shift"):
 		button_a.show()
 
 

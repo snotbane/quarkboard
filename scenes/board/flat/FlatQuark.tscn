@@ -44,7 +44,6 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
-horizontal_alignment = 3
 justification_flags = 99
 
 [node name="actions" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=781562735]

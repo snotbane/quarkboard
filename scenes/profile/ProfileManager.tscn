@@ -245,6 +245,12 @@ grow_vertical = 2
 [node name="v_box_container" type="VBoxContainer" parent="importer/panel_container" unique_id=736855572]
 layout_mode = 2
 
+[node name="rich_text_label" type="RichTextLabel" parent="importer/panel_container/v_box_container" unique_id=577921188]
+layout_mode = 2
+bbcode_enabled = true
+text = "Select an application to import notes from."
+fit_content = true
+
 [node name="grid_container" type="GridContainer" parent="importer/panel_container/v_box_container" unique_id=263520525]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -255,7 +261,13 @@ columns = 3
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ots10")
-text = "Quarkboard"
+text = "Quarkboard (.qbdp)"
+
+[node name="raw" type="Button" parent="importer/panel_container/v_box_container/grid_container" unique_id=146645765]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ots10")
+text = "Raw text files (.txt, .md)"
 
 [node name="google_keep" type="Button" parent="importer/panel_container/v_box_container/grid_container" unique_id=1349038771]
 layout_mode = 2
@@ -274,12 +286,6 @@ layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ots10")
 text = "Standard Notes"
-
-[node name="rich_text_label" type="RichTextLabel" parent="importer/panel_container/v_box_container" unique_id=577921188]
-layout_mode = 2
-bbcode_enabled = true
-text = "Select an application to import notes from."
-fit_content = true
 
 [connection signal="object_selected" from="h_split_container/v_box_container/panel_container/scroll_container/select_list" to="h_split_container/panel_container/profile_editor/resource_socket" method="set_resource"]
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/create" to="h_split_container/v_box_container/grid_container/create/create_dialog" method="popup_file_dialog"]
