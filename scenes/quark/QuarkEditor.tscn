@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://dvfrqx0c0lhbe" path="res://icons/dazzle/subscript.svg" id="16_ph5g5"]
 [ext_resource type="Texture2D" uid="uid://qvcdlihjf5e5" path="res://icons/dazzle/trash_xmark.svg" id="17_v1buq"]
 [ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="18_ee3ge"]
+[ext_resource type="Script" uid="uid://qq6hnbhoqfq" path="res://scripts/ui/LooseEscape.gd" id="21_n77bc"]
 [ext_resource type="Script" uid="uid://bxn2wydr6282n" path="res://scripts/ui/SwitchButton.gd" id="23_q8007"]
 [ext_resource type="Texture2D" uid="uid://v6er1fouf5d" path="res://icons/dazzle/unlock_alt.svg" id="23_syj40"]
 [ext_resource type="Texture2D" uid="uid://fwyr4rlu4is4" path="res://icons/dazzle/compress.svg" id="24_uy6il"]
@@ -338,17 +339,35 @@ layout_mode = 2
 icon = ExtResource("28_q6141")
 flat = true
 
-[node name="more" type="PopupPanel" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more" unique_id=992719031]
-oversampling_override = 1.0
-size = Vector2i(136, 180)
+[node name="more" type="MarginContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more" unique_id=1206592329]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -144.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="h_box_container" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" unique_id=1855338537]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 132.0
-offset_bottom = 176.0
+[node name="escape" type="Control" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" unique_id=753996586]
+layout_mode = 2
+script = ExtResource("21_n77bc")
+consume_input = false
+trigger = 1
 
-[node name="lock" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container" unique_id=1521522559]
+[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" unique_id=1119592001]
+layout_mode = 2
+
+[node name="h_box_container" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container" unique_id=1855338537]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="lock" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=1521522559]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -356,27 +375,27 @@ tooltip_text = "Archive this item. Archived items stay out of your way but are s
 text = "Lock"
 icon = ExtResource("23_syj40")
 
-[node name="archive" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container" unique_id=576572918]
+[node name="archive" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=576572918]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Archive this item. Archived items stay out of your way but are still fully searchable."
 text = "Archive"
 icon = ExtResource("18_ee3ge")
 
-[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container" unique_id=1871463745]
+[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=1871463745]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_syj40")
 script = ExtResource("23_q8007")
 switch_on_input = true
 
-[node name="trash" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container/panel_container" unique_id=2015282042]
+[node name="trash" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container" unique_id=2015282042]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Trash this item. It will be kept for a while and then permanently deleted."
 text = "Recycle"
 icon = ExtResource("5_g5is7")
 
-[node name="delete" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container/panel_container" unique_id=1675880623]
+[node name="delete" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container" unique_id=1675880623]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -384,13 +403,13 @@ tooltip_text = "Delete this item instantly, and permanently."
 text = "Delete"
 icon = ExtResource("17_v1buq")
 
-[node name="clone" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container" unique_id=477065808]
+[node name="clone" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=477065808]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("4_allrt")
 
-[node name="export" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/h_box_container" unique_id=903572339]
+[node name="export" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=903572339]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -437,6 +456,7 @@ size_flags_horizontal = 3
 alignment = 2
 
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/fields/show_format" to="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/format" method="set_visible"]
-[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" method="popup"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" method="show"]
+[connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" method="hide"]
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/pin_unpin" to="." method="set_pinned"]
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/popout_popin" to="." method="set_popout"]

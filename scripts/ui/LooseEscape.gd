@@ -1,33 +1,32 @@
-
+## Performs an action (e.g. hiding a node) when the user clicks outside this [Control].
 extends Control
 
+signal escaped
 
-@export var affected_control : Control
+## If enabled, this will prevent lower controls from consuming input.
+@export var consume_input : bool = true
 
-@export_enum("Hide", "Queue Free") var action : int = 0
-
-
-func _ready() -> void:
-	if affected_control == null:
-		affected_control = self
+@export_enum("On Press", "On Release") var trigger : int = 0
 
 
-func _gui_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree(): return
 
-	if event is InputEventMouseButton and event.is_released() and event.button_index == MOUSE_BUTTON_LEFT:
-		escape()
+	if is_event_escape(event):
+		escaped.emit()
+
+		if consume_input:
+			get_viewport().set_input_as_handled()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_visible_in_tree(): return
+func is_event_escape(event: InputEvent) -> bool:
+	return event.is_action_pressed(&"ui_cancel") or (
+		event is InputEventMouseButton and
+		(event.is_pressed() if trigger == 0 else event.is_released()) and
+		(
+			event.button_index == MOUSE_BUTTON_LEFT or
+			event.button_index == MOUSE_BUTTON_RIGHT
+		) and
+		not get_global_rect().has_point(event.global_position)
+	)
 
-	if event.is_action_released(&"loose_escape"):
-		escape()
-		get_viewport().set_input_as_handled()
-
-
-func escape() -> void:
-	match action:
-		0:	affected_control.hide()
-		1:	affected_control.queue_free()

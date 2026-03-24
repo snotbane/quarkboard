@@ -31,7 +31,7 @@ func _ready() -> void:
 func open_in_editor(separate_window: bool = false) -> void:
 	if editor:
 		if editor.window:
-			editor.window.move_to_foreground()
+			editor.window.grab_focus()
 			return
 	else:
 		editor = EDITOR_SCENE.instantiate()

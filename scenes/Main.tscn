@@ -128,13 +128,6 @@ mouse_filter = 2
 [node name="create_board_actions" type="Node" parent="main/create_board" unique_id=537283053]
 script = ExtResource("11_cvmbd")
 
-[node name="loose_escape" type="Control" parent="main/create_board" unique_id=1406006373 node_paths=PackedStringArray("affected_control")]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_wp0k4")
-affected_control = NodePath("..")
-
 [node name="panel_container" type="PanelContainer" parent="main/create_board" unique_id=1710137238]
 layout_mode = 1
 anchors_preset = 15
@@ -149,6 +142,10 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="loose_escape" type="Control" parent="main/create_board/panel_container/panel_container" unique_id=1406006373]
+layout_mode = 2
+script = ExtResource("6_wp0k4")
 
 [node name="v_box_container" type="VBoxContainer" parent="main/create_board/panel_container/panel_container" unique_id=2078180798]
 layout_mode = 2
@@ -211,16 +208,6 @@ script = ExtResource("17_ft6cd")
 script = ExtResource("2_3p2gp")
 metadata/_custom_type_script = "uid://bw4p4xivpjv0n"
 
-[node name="loose_escape" type="Control" parent="main/quark_editor_subwindow" unique_id=569671135 node_paths=PackedStringArray("affected_control")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_wp0k4")
-affected_control = NodePath("..")
-
 [node name="panel_container" type="PanelContainer" parent="main/quark_editor_subwindow" unique_id=1833201170]
 layout_mode = 1
 anchors_preset = 15
@@ -234,7 +221,7 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="main/quark_editor_subwindow/panel_container/control" unique_id=589659526 node_paths=PackedStringArray("affected_control")]
+[node name="scroll_container" type="ScrollContainer" parent="main/quark_editor_subwindow/panel_container/control" unique_id=589659526]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
@@ -245,8 +232,6 @@ grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
-script = ExtResource("6_wp0k4")
-affected_control = NodePath("../../..")
 
 [node name="margin_container" type="MarginContainer" parent="main/quark_editor_subwindow/panel_container/control/scroll_container" unique_id=2042323002]
 layout_mode = 2
@@ -255,8 +240,14 @@ size_flags_vertical = 3
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_bottom = 100
 
+[node name="loose_escape" type="Control" parent="main/quark_editor_subwindow/panel_container/control/scroll_container/margin_container" unique_id=569671135]
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("6_wp0k4")
+
 [node name="quark_editor_container" type="TabContainer" parent="main/quark_editor_subwindow/panel_container/control/scroll_container/margin_container" unique_id=972917086]
 layout_mode = 2
+tabs_visible = false
 drag_to_rearrange_enabled = true
 use_hidden_tabs_for_min_size = true
 tab_focus_mode = 0
@@ -268,3 +259,5 @@ metadata/_custom_type_script = "uid://bw4p4xivpjv0n"
 
 [connection signal="pressed" from="main/base/h_box_container/v_box_container/add_board" to="main/create_board" method="show"]
 [connection signal="pressed" from="main/base/h_box_container/v_box_container/edit_profile" to="main/base/h_box_container/viewer_tab_container" method="set_current_tab" binds= [0]]
+[connection signal="escaped" from="main/create_board/panel_container/panel_container/loose_escape" to="main/create_board" method="hide"]
+[connection signal="escaped" from="main/quark_editor_subwindow/panel_container/control/scroll_container/margin_container/loose_escape" to="main/quark_editor_subwindow" method="hide"]
