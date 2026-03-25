@@ -1,6 +1,8 @@
 
 @tool class_name KeepFlowContainer extends HBoxContainer
 
+signal items_changed
+
 @export var size_target : Control
 
 var _reverse_fill : bool = false
@@ -55,6 +57,7 @@ var columns_nodes : Array[VBoxContainer] :
 				result.push_back(child)
 		return result
 
+
 func _init() -> void:
 	add_child(VBoxContainer.new())
 	get_child(0).alignment = VBoxContainer.ALIGNMENT_END
@@ -72,12 +75,20 @@ func _ready() -> void:
 
 
 func _refresh_column_count() -> void:
-	print("size_target.size.x : %s" % [ size_target.size.x ])
 	columns = floori(size_target.size.x / column_width)
 
 
 func add_grandchild(control: Control) -> void:
 	get_smallest_column().add_child(control)
+
+
+func get_grandchild_count() -> int:
+	var result := 0
+	for child in get_children():
+		for grandchild in child.get_children():
+			result += 1
+	return result
+
 
 
 func _create_column() -> VBoxContainer:
@@ -103,6 +114,8 @@ func _place_grandchildren() -> void:
 
 	while not grandchild_hold.is_empty():
 		get_smallest_column().add_child(grandchild_hold.pop_back())
+
+	items_changed.emit()
 
 
 

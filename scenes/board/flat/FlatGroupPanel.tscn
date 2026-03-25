@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c5af1kmoyp7o7"]
+
+[ext_resource type="Script" uid="uid://c5gekvq1ljqu4" path="res://scenes/board/flat/FlatGroupPanel.gd" id="1_4oyfi"]
+[ext_resource type="Script" uid="uid://d0irniiek6mwo" path="res://scripts/ui/KeepFlowContainer.gd" id="1_dmino"]
+
+[node name="flat_group_panel" type="PanelContainer" unique_id=1846533377]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_4oyfi")
+
+[node name="v_box_container" type="VBoxContainer" parent="." unique_id=2145254793]
+layout_mode = 2
+
+[node name="label" type="Label" parent="v_box_container" unique_id=476479928]
+layout_mode = 2
+
+[node name="container" type="HBoxContainer" parent="v_box_container" unique_id=1365832695]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_dmino")
+vertical_alignment = 0

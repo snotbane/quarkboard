@@ -10,7 +10,7 @@ static func get_title_text(string: String) -> String:
 	return REGEX_TITLE.search(string).get_string(1)
 
 
-@onready var main : KeepFlowContainer = $h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container/main
+@onready var main : Control = $h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container/main
 
 
 func _ready() -> void:
