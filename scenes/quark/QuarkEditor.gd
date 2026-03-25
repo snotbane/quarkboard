@@ -42,6 +42,15 @@ func _text_changed() -> void:
 		window.refresh_title()
 
 
+func close() -> void:
+	queue_free()
+
+	if window:
+		window.queue_free()
+	else:
+		subwindow.hide()
+
+
 func set_popout(value: bool) -> void:
 	if value:
 		popout()
@@ -87,6 +96,8 @@ func popout_direct() -> void:
 	popout_button.button_pressed = true
 
 
+
+
 var pinned : bool :
 	get: return window.always_on_top if window else false
 	set(value):
@@ -94,3 +105,18 @@ var pinned : bool :
 		window.always_on_top = value
 func set_pinned(value: bool) -> void:
 	pinned = value
+
+
+func recycle() -> void:
+	pass # Replace with function body.
+	close()
+
+
+func delete() -> void:
+	quark.delete()
+	close()
+
+
+func copy() -> void:
+	quark.copy()
+	close()

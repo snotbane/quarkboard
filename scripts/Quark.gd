@@ -49,6 +49,15 @@ func open_in_editor(separate_window: bool = false) -> void:
 func close_in_editor() -> void:
 	if not editor: return
 
-	editor.queue_free()
+	editor.close()
 	editor = null
+
+
+func recycle() -> void:
+	pass
+
+
+# func delete() -> void:
+# 	super.delete()
+
 

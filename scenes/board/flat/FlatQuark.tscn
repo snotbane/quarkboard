@@ -5,10 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
 [ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="4_cxj08"]
 [ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
+[ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="6_n5fev"]
+[ext_resource type="Texture2D" uid="uid://cjkskb0nvfxdu" path="res://icons/dazzle/dots_vertical.svg" id="7_cxj08"]
 [ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="7_xn67a"]
 
 [node name="flat_quark" type="PanelContainer" unique_id=119261583]
-custom_minimum_size = Vector2(200, 10)
+custom_minimum_size = Vector2(240, 10)
 offset_right = 200.0
 offset_bottom = 33.0
 script = ExtResource("1_rkbxp")
@@ -46,17 +48,32 @@ scroll_active = false
 shortcut_keys_enabled = false
 justification_flags = 99
 
-[node name="actions" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=781562735]
+[node name="tags" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1889680740]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="actions" type="HBoxContainer" parent="margin_container/v_box_container" unique_id=119704278]
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_filter = 2
 alignment = 1
 
 [node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
+tooltip_text = "Flag this item."
 mouse_default_cursor_shape = 2
 toggle_mode = true
 icon = ExtResource("3_n5fev")
+flat = true
+
+[node name="archive" type="Button" parent="margin_container/v_box_container/actions" unique_id=2094248006]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+tooltip_text = "Archive this item."
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon = ExtResource("6_n5fev")
 flat = true
 
 [node name="tags" type="Button" parent="margin_container/v_box_container/actions" unique_id=203435716]
@@ -75,7 +92,17 @@ mouse_default_cursor_shape = 2
 icon = ExtResource("6_2h6w2")
 flat = true
 
+[node name="more" type="Button" parent="margin_container/v_box_container/actions" unique_id=205681586]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+tooltip_text = "Archive this item."
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon = ExtResource("7_cxj08")
+flat = true
+
 [node name="popout" type="Button" parent="margin_container/v_box_container/actions" unique_id=1914594585]
+visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Popout this Note into its own Window."
@@ -83,9 +110,18 @@ mouse_default_cursor_shape = 2
 icon = ExtResource("7_xn67a")
 flat = true
 
-[node name="tags" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1889680740]
+[node name="select_container" type="Control" parent="." unique_id=1475119411]
+visible = false
 layout_mode = 2
 mouse_filter = 2
+
+[node name="select" type="CheckBox" parent="select_container" unique_id=1281100732]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
 
 [connection signal="pressed" from="button" to="." method="_on_pressed"]
 [connection signal="pressed" from="margin_container/v_box_container/actions/popout" to="." method="_on_popout_pressed"]

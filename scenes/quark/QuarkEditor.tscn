@@ -388,7 +388,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_syj40")
 script = ExtResource("23_q8007")
 switch_on_input = true
 
-[node name="trash" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container" unique_id=2015282042]
+[node name="recycle" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container" unique_id=2015282042]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Trash this item. It will be kept for a while and then permanently deleted."
@@ -403,7 +403,15 @@ tooltip_text = "Delete this item instantly, and permanently."
 text = "Delete"
 icon = ExtResource("17_v1buq")
 
-[node name="clone" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=477065808]
+[node name="confirmation_dialog" type="ConfirmationDialog" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete" unique_id=1424817765]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(446, 100)
+ok_button_text = "Delete"
+dialog_text = "This will immediately and permanently delete this note!"
+dialog_autowrap = true
+
+[node name="copy" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=477065808]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 text = "Duplicate"
@@ -458,5 +466,9 @@ alignment = 2
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/fields/show_format" to="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/format" method="set_visible"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" method="show"]
 [connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more" method="hide"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/recycle" to="." method="recycle"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete/confirmation_dialog" method="popup_centered" binds= [0.5]]
+[connection signal="confirmed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete/confirmation_dialog" to="." method="delete"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/copy" to="." method="copy"]
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/pin_unpin" to="." method="set_pinned"]
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/popout_popin" to="." method="set_popout"]

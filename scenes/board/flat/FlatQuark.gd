@@ -8,12 +8,14 @@ var quark : Quark :
 	get: return socket.resource
 	set(value):
 		socket.resource = value
+
 		_on_resource_changed()
 
 var max_height : float = 350.0
 
 func _ready() -> void:
 	socket.resource_changed.connect(_on_resource_changed)
+	socket.resource_value_changed.connect(_on_resource_value_changed.unbind(1))
 
 
 func _on_resource_changed() -> void:
@@ -25,6 +27,11 @@ func _on_resource_changed() -> void:
 		label.text = label.text.substr(0, label.text.length() * float(max_height / label.size.y)) + "..."
 
 	# print("label.size after  setting text : %s" % [ label.size ])
+
+
+func _on_resource_value_changed() -> void:
+	if socket.resource:
+		socket.resource.deleted.connect(queue_free)
 
 
 func _on_pressed() -> void:
