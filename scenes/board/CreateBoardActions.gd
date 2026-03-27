@@ -9,7 +9,7 @@ func create_new_view(type: StringName) -> void:
 	var path := JsonResource.generate_save_path(Machine.active_profile.file_path_absolute.path_join(Board.DIR_NAME))
 
 	match type:
-		&"FlatBoard":
+		&"flat":
 			board = FlatBoard.new()
 
 	assert(board != null, "No board was created.")

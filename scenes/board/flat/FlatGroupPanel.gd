@@ -13,7 +13,9 @@ var container : KeepFlowContainer :
 
 @export var size_target : Control :
 	get: return container.size_target
-	set(value): container.size_target = value
+	set(value):
+		container.size_target = value
+		container._refresh_column_count()
 
 
 func _ready() -> void:

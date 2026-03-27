@@ -29,7 +29,7 @@ var _column_width : float = 200.0
 		_column_width = value
 		for child in get_children():
 			child.custom_minimum_size.x = value
-		_refresh_column_count()
+		_refresh_column_count.call_deferred()
 
 
 var columns : int = 1 :
@@ -67,11 +67,12 @@ func _init() -> void:
 func _ready() -> void:
 	get_window().size_changed.connect(_refresh_column_count)
 
-	## Please don't ask.
-	await get_tree().process_frame
-	await get_tree().process_frame
+	# ## Please don't ask.
+	# await get_tree().process_frame
+	# await get_tree().process_frame
+	# await get_tree().process_frame
 
-	_refresh_column_count.call_deferred()
+	# _refresh_column_count.call_deferred()
 
 
 func _refresh_column_count() -> void:

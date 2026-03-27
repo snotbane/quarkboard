@@ -6,7 +6,6 @@ const ICON_DEFAULT = preload("uid://d1f31r2b2kbdd")
 const ICON_NULL := preload("uid://tn6tigaqju6d")
 
 static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DIR_EXT)
-static var REGISTRY : Dictionary
 
 signal board_added(board: Board)
 signal quark_added(quark: Quark)
@@ -23,8 +22,6 @@ func _get_save_as_dir_default() -> bool: return true
 
 func _touched() -> void:
 	if not is_valid: return
-
-	REGISTRY[file_path_absolute] = self
 
 	if name.is_empty():
 		name = file_name.capitalize()
@@ -69,11 +66,11 @@ func make_active() -> void:
 
 
 func hide() -> void:
-	if Machine.profiles.has(self):
-		Machine.profiles.erase(self)
-		Machine.inst.save()
-		Machine.inst.profile_removed.emit(self)
-		Machine.active_profile = null
+# if Machine.profiles.has(self):
+	Machine.active_profile = null
+	Machine.profiles.erase(self)
+	Machine.inst.save()
+	Machine.inst.profile_removed.emit(self)
 
 
 func delete() -> void:

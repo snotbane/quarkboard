@@ -1,17 +1,22 @@
 
 class_name FlatQuarkViewer extends Control
 
-@onready var label : RichTextLabel = %label
-@onready var socket : ResourceSocket = $resource_socket
+static var REGEX_PATTERN_PREVIEW_STRIP_FRONT := RegEx.create_from_string(r"^\s*")
+static var REGEX_PATTERN_PREVIEW_STRIP_BACK := RegEx.create_from_string(r"\s*$")
+
+
 
 var quark : Quark :
 	get: return socket.resource
 	set(value):
 		socket.resource = value
 
-		_on_resource_changed()
+		# _on_resource_changed()
 
-var max_height : float = 350.0
+
+@onready var preview_label : PreviewLabel = %preview_label
+@onready var socket : ResourceSocket = $resource_socket
+
 
 func _ready() -> void:
 	socket.resource_changed.connect(_on_resource_changed)
@@ -19,14 +24,7 @@ func _ready() -> void:
 
 
 func _on_resource_changed() -> void:
-	# print("label.size before setting text : %s" % [ label.size ])
-
-	label.text = socket.resource.text
-
-	if label.size.y > max_height:
-		label.text = label.text.substr(0, label.text.length() * float(max_height / label.size.y)) + "..."
-
-	# print("label.size after  setting text : %s" % [ label.size ])
+	preview_label.set_content(REGEX_PATTERN_PREVIEW_STRIP_FRONT.sub(socket.resource.text, ""))
 
 
 func _on_resource_value_changed() -> void:

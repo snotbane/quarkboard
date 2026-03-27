@@ -218,9 +218,9 @@ oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(400, 262)
 ok_button_text = "Hide"
-dialog_text = "Hiding this profile will not delete notes from the system. It will only remove it from the local profile list. You can add an existing profile again at any time.
+dialog_text = "Hiding this profile will not delete any data from the system. It will only remove it from the app's profile list. You can add an existing profile again at any time.
 
-(To completely delete a profile and all of its contents, delete the .qrk folder in the file system.)"
+(To completely delete a profile and all of its contents, delete the .qbdp folder in the file system.)"
 dialog_autowrap = true
 
 [node name="importer" type="Control" parent="." unique_id=1715073317]

@@ -260,4 +260,5 @@ metadata/_custom_type_script = "uid://bw4p4xivpjv0n"
 [connection signal="pressed" from="main/base/h_box_container/v_box_container/add_board" to="main/create_board" method="show"]
 [connection signal="pressed" from="main/base/h_box_container/v_box_container/edit_profile" to="main/base/h_box_container/viewer_tab_container" method="set_current_tab" binds= [0]]
 [connection signal="escaped" from="main/create_board/panel_container/panel_container/loose_escape" to="main/create_board" method="hide"]
+[connection signal="pressed" from="main/create_board/panel_container/panel_container/v_box_container/grid_container/flat" to="main/create_board/create_board_actions" method="create_new_view" binds= [&"flat"]]
 [connection signal="escaped" from="main/quark_editor_subwindow/panel_container/control/scroll_container/margin_container/loose_escape" to="main/quark_editor_subwindow" method="hide"]
