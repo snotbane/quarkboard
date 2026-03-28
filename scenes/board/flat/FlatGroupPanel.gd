@@ -4,7 +4,7 @@
 var label : Label :
 	get: return $v_box_container/label
 
-var container : KeepFlowContainer :
+var container : MasonContainer :
 	get: return $v_box_container/container
 
 @export var label_text : String :
@@ -15,7 +15,7 @@ var container : KeepFlowContainer :
 	get: return container.size_target
 	set(value):
 		container.size_target = value
-		container._refresh_column_count()
+		container._refresh_beam_count()
 
 
 func _ready() -> void:
@@ -25,9 +25,9 @@ func _ready() -> void:
 
 
 func _container_items_changed() -> void:
-	visible = container.get_grandchild_count() > 0
+	visible = container.get_brick_count() > 0
 
 
 func add_grandchild(control: Control) -> void:
-	container.add_grandchild(control)
+	container.add_brick(control)
 
