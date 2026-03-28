@@ -1,5 +1,5 @@
 
-@tool class_name MasonContainer extends BoxContainer
+class_name MasonContainer extends BoxContainer
 
 signal items_changed
 

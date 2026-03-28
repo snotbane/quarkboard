@@ -21,5 +21,3 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 script = ExtResource("1_dmino")
-sub_alignment = null
-column_width = 240.0
