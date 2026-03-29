@@ -1,6 +1,13 @@
 ## A single file that contains user-created content.
 class_name Quark extends JsonResource
 
+enum Status {
+	NONE,
+	FLAG,
+	ARCHIVE,
+	RECYCLE,
+}
+
 const DIR_NAME := "quarks"
 const EDITOR_SCENE := preload("uid://cvqmvnonuqn32")
 const MAX_NAME_LENGTH := 50
@@ -10,6 +17,9 @@ static var REGEX_NAME_TEXT := RegEx.create_from_string(r"[\.:@/\"%]")
 
 
 @export var text : String
+@export var status : Status = Status.NONE
+
+# @export var tags : PackedStringArray
 
 
 var title_text : String :

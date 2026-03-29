@@ -1,5 +1,5 @@
 
-class_name MasonContainer extends BoxContainer
+@tool class_name MasonContainer extends BoxContainer
 
 signal items_changed
 
@@ -66,15 +66,14 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	get_parent().item_rect_changed.connect(_refresh_beam_count)
-	# get_window().size_changed.connect(_refresh_beam_count)
+	if Engine.is_editor_hint(): return
 
-	# ## Please don't ask.
-	# await get_tree().process_frame
-	# await get_tree().process_frame
-	# await get_tree().process_frame
+	get_window().size_changed.connect(_refresh_beam_count)
+	visibility_changed.connect(_visibility_changed)
 
-	# _refresh_beam_count.call_deferred()
+func _visibility_changed() -> void:
+	await get_tree().process_frame
+	_refresh_beam_count()
 
 
 func _refresh_beam_count() -> void:

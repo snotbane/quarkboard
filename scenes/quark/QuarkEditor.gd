@@ -8,7 +8,9 @@ var quark : Quark :
 	set(value):
 		$resource_socket.resource = value
 		text_edit.text = quark.text
-		name = quark.name_text
+
+		if quark.name_text:
+			name = quark.name_text
 
 
 static var subwindow : Control :
@@ -120,3 +122,7 @@ func delete() -> void:
 func copy() -> void:
 	quark.copy()
 	close()
+
+
+func reveal() -> void:
+	quark.reveal()

@@ -424,6 +424,12 @@ layout_mode = 2
 text = "Export"
 icon = ExtResource("14_6xg52")
 
+[node name="reveal" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container" unique_id=1021338981]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+text = "Reveal"
+icon = ExtResource("14_6xg52")
+
 [node name="search" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar" unique_id=684258046]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
@@ -470,5 +476,6 @@ alignment = 2
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete/confirmation_dialog" method="popup_centered" binds= [0.5]]
 [connection signal="confirmed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/panel_container/delete/confirmation_dialog" to="." method="delete"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/copy" to="." method="copy"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/show_more/more/panel_container/h_box_container/reveal" to="." method="reveal"]
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/pin_unpin" to="." method="set_pinned"]
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/popout_popin" to="." method="set_popout"]

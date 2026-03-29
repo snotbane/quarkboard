@@ -5,10 +5,15 @@
 [ext_resource type="Script" uid="uid://us0x7oqay2jh" path="res://scripts/ui/PreviewLabel.gd" id="3_cxj08"]
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
 [ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="4_cxj08"]
+[ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="5_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="6_n5fev"]
+[ext_resource type="Texture2D" uid="uid://b3s0nct0uqpae" path="res://icons/dazzle/flag_fill.svg" id="6_xn67a"]
 [ext_resource type="Texture2D" uid="uid://cjkskb0nvfxdu" path="res://icons/dazzle/dots_vertical.svg" id="7_cxj08"]
+[ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="7_iu4uw"]
 [ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="7_xn67a"]
+[ext_resource type="Texture2D" uid="uid://bbgafawka18rg" path="res://icons/dazzle/inbox_fill.svg" id="8_gmaco"]
+[ext_resource type="Texture2D" uid="uid://vtw5mxisiipx" path="res://icons/dazzle/trash_fill.svg" id="10_mas2m"]
 
 [node name="flat_quark" type="PanelContainer" unique_id=119261583]
 custom_minimum_size = Vector2(240, 10)
@@ -66,7 +71,7 @@ size_flags_horizontal = 4
 mouse_filter = 2
 alignment = 1
 
-[node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068]
+[node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068 node_paths=PackedStringArray("socket")]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Flag this item."
@@ -74,8 +79,12 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 icon = ExtResource("3_n5fev")
 flat = true
+script = ExtResource("5_2h6w2")
+socket = NodePath("../../../../resource_socket")
+status = 1
+icon_pressed = ExtResource("6_xn67a")
 
-[node name="archive" type="Button" parent="margin_container/v_box_container/actions" unique_id=2094248006]
+[node name="archive" type="Button" parent="margin_container/v_box_container/actions" unique_id=2094248006 node_paths=PackedStringArray("socket")]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Archive this item."
@@ -83,6 +92,24 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 icon = ExtResource("6_n5fev")
 flat = true
+script = ExtResource("5_2h6w2")
+socket = NodePath("../../../../resource_socket")
+status = 2
+icon_pressed = ExtResource("8_gmaco")
+
+[node name="recycle" type="Button" parent="margin_container/v_box_container/actions" unique_id=679725905 node_paths=PackedStringArray("socket")]
+visible = false
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+tooltip_text = "Archive this item."
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon = ExtResource("7_iu4uw")
+flat = true
+script = ExtResource("5_2h6w2")
+socket = NodePath("../../../../resource_socket")
+status = 3
+icon_pressed = ExtResource("10_mas2m")
 
 [node name="tags" type="Button" parent="margin_container/v_box_container/actions" unique_id=203435716]
 self_modulate = Color(1, 1, 1, 0.5019608)

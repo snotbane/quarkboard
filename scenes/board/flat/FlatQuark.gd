@@ -17,13 +17,14 @@ func _ready() -> void:
 
 
 func _on_resource_changed() -> void:
-	preview_label.set_content(socket.resource.text)
+	preview_label.set_content(socket.resource.text if socket.resource else "")
 
 
 func _on_resource_value_changed() -> void:
 	if socket.resource:
 		socket.resource.deleted.connect(queue_free)
-		_on_resource_changed()
+
+	_on_resource_changed()
 
 
 func _on_pressed() -> void:

@@ -74,16 +74,19 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_p58po")
 text = "Create New Note"
 
-[node name="flags" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1846533377 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
+[node name="flag" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1846533377 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
+unique_name_in_owner = true
 layout_mode = 2
-label_text = "Flags"
+label_text = "Flagged"
 size_target = NodePath("../../../../../size_target")
 
-[node name="main" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=384624617 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
+[node name="none" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=384624617 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
+unique_name_in_owner = true
 layout_mode = 2
 size_target = NodePath("../../../../../size_target")
 
 [node name="archive" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=715706812 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
+unique_name_in_owner = true
 layout_mode = 2
 label_text = "Archive"
 size_target = NodePath("../../../../../size_target")

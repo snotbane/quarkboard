@@ -10,7 +10,9 @@ static func get_title_text(string: String) -> String:
 	return REGEX_TITLE.search(string).get_string(1)
 
 
-@onready var main : Control = $h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container/main
+@onready var main_container : Control = %none
+@onready var flag_container : Control = %flag
+@onready var archive_container : Control = %archive
 
 
 func _ready() -> void:
@@ -21,8 +23,21 @@ func _ready() -> void:
 
 
 func _quark_added(quark: Quark) -> void:
+	var container : Control
+	match quark.status:
+		Quark.Status.NONE:
+			container = main_container
+		Quark.Status.FLAG:
+			container = flag_container
+		Quark.Status.ARCHIVE:
+			container = archive_container
+
+	if container == null:
+		return
+
 	var node : FlatQuarkViewer = FLAT_QUARK_SCENE.instantiate()
-	main.add_grandchild(node)
+
+	container.add_brick(node)
 
 	await get_tree().process_frame
 

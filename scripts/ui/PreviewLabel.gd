@@ -25,6 +25,8 @@ func _ready() -> void:
 	# _shadow_label.self_modulate = Color(1, 0, 0, 0.5)
 	add_child(_shadow_label)
 
+	visibility_changed.connect(refresh)
+
 
 func set_content(content: String) -> void:
 	_full_text = REGEX_PATTERN_PREVIEW_STRIP_FRONT.sub(content, "")
@@ -33,6 +35,9 @@ func set_content(content: String) -> void:
 	await get_tree().process_frame
 
 	_apply_constraints()
+
+func refresh() -> void:
+	set_content(_full_text)
 
 var _last_application : int
 
