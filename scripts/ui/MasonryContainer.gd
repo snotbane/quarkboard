@@ -1,11 +1,11 @@
 ## MasonryContainer.gd
 ## A custom Container that arranges children in a masonry ("Pinterest-style") layout.
 ##
-## In VERTICAL mode, children are sorted into [columns] columns. Each new child
+## In VERTICAL mode, children are sorted into columns. Each new child
 ## is placed at the bottom of the shortest column, so items pack tightly with
 ## no wasted vertical space regardless of varying child heights.
 ##
-## In HORIZONTAL mode, children are sorted into [rows] rows. Each new child is
+## In HORIZONTAL mode, children are sorted into rows. Each new child is
 ## placed at the right end of the shortest row, packing tightly regardless of
 ## varying child widths.
 ##
@@ -20,6 +20,17 @@
 ##   its parent and the column widths are computed correctly.
 
 @tool class_name MasonryContainer extends Container
+
+
+## Returns the index of the smallest value in a PackedFloat32Array.
+static func float32_array_find_min(arr: PackedFloat32Array) -> int:
+	var best_idx := 0
+	var best_val := arr[0]
+	for i in arr.size():
+		if arr[i] < best_val:
+			best_val = arr[i]
+			best_idx = i
+	return best_idx
 
 
 static func float32_array_max(array: PackedFloat32Array) -> float:
@@ -39,23 +50,25 @@ enum Orientation {
 }
 
 
-## Whether to lay children out in columns (VERTICAL) or rows (HORIZONTAL).
+## Whether to lay children out in columns or rows.
 @export var orientation: MasonryContainer.Orientation = MasonryContainer.Orientation.VERTICAL:
 	set(value):
 		orientation = value
 		queue_sort()
 
-## Number of columns used when orientation is VERTICAL.
-@export_range(1, 64) var columns: int = 3:
+## Number of rows or columns, depending on [member orientation].
+@export_range(0, 64) var lanes_max: int = 0:
 	set(value):
-		columns = maxi(1, value)
+		lanes_max = maxi(0, value)
 		queue_sort()
 
-## Number of rows used when orientation is HORIZONTAL.
-@export_range(1, 64) var rows: int = 3:
+
+@export var lane_size_min : float = 100.0 :
 	set(value):
-		rows = maxi(1, value)
+		lane_size_min = maxf(1.0, value)
 		queue_sort()
+
+var lanes : int = 1
 
 ## Horizontal gap between children (pixels).
 @export_range(0, 128) var h_separation: int = 4:
@@ -73,6 +86,10 @@ enum Orientation {
 # ---------------------------------------------------------------------------
 # Container overrides
 # ---------------------------------------------------------------------------
+
+func _ready() -> void:
+	get_window().size_changed.connect(queue_sort)
+
 
 func _notification(what: int) -> void:
 	match what:
@@ -115,12 +132,14 @@ func _perform_layout() -> void:
 	else:
 		_layout_horizontal(children)
 
+var target_size : Vector2 :
+	get: return size
 
-## Place children into [columns] columns, each child going to the shortest one.
 func _layout_vertical(children: Array[Control]) -> void:
-	var col_count  := columns
 	var avail_w    := size.x
+	var col_count  := _compute_lanes(target_size.x)
 	var col_w      := (avail_w - h_separation * (col_count - 1)) / float(col_count)
+	lanes = col_count
 
 	# Running Y offset (cursor) for each column.
 	var cursors := PackedFloat32Array()
@@ -129,7 +148,7 @@ func _layout_vertical(children: Array[Control]) -> void:
 
 	for child in children:
 		# Choose the column whose cursor is lowest (least filled).
-		var best_col  := _index_of_minimum(cursors)
+		var best_col  := float32_array_find_min(cursors)
 		var child_min := child.get_combined_minimum_size()
 
 		# X position: left edge of this column.
@@ -149,11 +168,11 @@ func _layout_vertical(children: Array[Control]) -> void:
 		custom_minimum_size.y = maxf(max_height, 0.0)
 
 
-## Place children into [rows] rows, each child going to the shortest one.
 func _layout_horizontal(children: Array[Control]) -> void:
-	var row_count := rows
 	var avail_h   := size.y
+	var row_count := _compute_lanes(target_size.y)
 	var row_h     := (avail_h - v_separation * (row_count - 1)) / float(row_count)
+	lanes = row_count
 
 	# Running X offset (cursor) for each row.
 	var cursors := PackedFloat32Array()
@@ -161,7 +180,7 @@ func _layout_horizontal(children: Array[Control]) -> void:
 	cursors.fill(0.0)
 
 	for child in children:
-		var best_row  := _index_of_minimum(cursors)
+		var best_row  := float32_array_find_min(cursors)
 		var child_min := child.get_combined_minimum_size()
 
 		var x := cursors[best_row]
@@ -182,25 +201,24 @@ func _layout_horizontal(children: Array[Control]) -> void:
 # Minimum size helpers
 # ---------------------------------------------------------------------------
 
-## Minimum size for a vertical (column-based) layout.
-## Width:  all columns at their narrowest child + separators.
-## Height: a rough simulation (assign children to shortest column greedily).
+
 func _minimum_size_vertical(children: Array[Control]) -> Vector2:
-	var col_count := columns
+	var min_w := lane_size_min
+	var col_count := _compute_lanes(target_size.x) if target_size.x > 0.0 else 1
 
 	# The minimum column width is the widest child's minimum width.
 	var max_child_w := 0.0
 	for child in children:
 		max_child_w = maxf(max_child_w, child.get_combined_minimum_size().x)
 
-	var min_w := max_child_w * col_count + h_separation * (col_count - 1)
+	# var min_w := max_child_w * col_count + h_separation * (col_count - 1)
 
 	# Simulate the greedy placement to get a realistic minimum height.
 	var cursors := PackedFloat32Array()
 	cursors.resize(col_count)
 	cursors.fill(0.0)
 	for child in children:
-		var best  := _index_of_minimum(cursors)
+		var best  := float32_array_find_min(cursors)
 		var child_h := child.get_combined_minimum_size().y
 		cursors[best] += child_h + v_separation
 	var min_h := float32_array_max(cursors) - v_separation
@@ -210,19 +228,20 @@ func _minimum_size_vertical(children: Array[Control]) -> Vector2:
 
 ## Minimum size for a horizontal (row-based) layout.
 func _minimum_size_horizontal(children: Array[Control]) -> Vector2:
-	var row_count := rows
+	var min_h := lane_size_min
+	var row_count := _compute_lanes(target_size.y) if target_size.y > 0.0 else 1
 
 	var max_child_h := 0.0
 	for child in children:
 		max_child_h = maxf(max_child_h, child.get_combined_minimum_size().y)
 
-	var min_h := max_child_h * row_count + v_separation * (row_count - 1)
+	# var min_h := max_child_h * row_count + v_separation * (row_count - 1)
 
 	var cursors := PackedFloat32Array()
 	cursors.resize(row_count)
 	cursors.fill(0.0)
 	for child in children:
-		var best  := _index_of_minimum(cursors)
+		var best  := float32_array_find_min(cursors)
 		var child_w := child.get_combined_minimum_size().x
 		cursors[best] += child_w + h_separation
 	var min_w := float32_array_max(cursors) - h_separation
@@ -234,6 +253,15 @@ func _minimum_size_horizontal(children: Array[Control]) -> Vector2:
 # Utilities
 # ---------------------------------------------------------------------------
 
+func _compute_lanes(avail_w: float) -> int:
+	var sep := h_separation if orientation == MasonryContainer.Orientation.HORIZONTAL else v_separation
+	var count := int((avail_w + sep) / (lane_size_min + sep))
+	count = maxi(1, count)
+	if lanes_max > 0:
+		count = mini(count, lanes_max)
+	print("count : %s" % [ count ])
+	return count
+
 ## Returns all direct Control children that are visible and not set to
 ## ignore layout (CanvasItem.visible == true, Control.top_level == false).
 func _get_visible_children() -> Array[Control]:
@@ -242,14 +270,3 @@ func _get_visible_children() -> Array[Control]:
 		if child is Control and child.visible and not child.top_level:
 			result.append(child as Control)
 	return result
-
-
-## Returns the index of the smallest value in a PackedFloat32Array.
-func _index_of_minimum(arr: PackedFloat32Array) -> int:
-	var best_idx := 0
-	var best_val := arr[0]
-	for i in range(1, arr.size()):
-		if arr[i] < best_val:
-			best_val = arr[i]
-			best_idx = i
-	return best_idx

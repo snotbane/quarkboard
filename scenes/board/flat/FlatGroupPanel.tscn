@@ -19,5 +19,5 @@ layout_mode = 2
 
 [node name="masonry" type="Container" parent="v_box_container" unique_id=457799815]
 layout_mode = 2
-size_flags_horizontal = 4
 script = ExtResource("2_4oyfi")
+lane_size_min = 240.0
