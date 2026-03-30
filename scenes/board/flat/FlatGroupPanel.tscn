@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c5af1kmoyp7o7"]
 
 [ext_resource type="Script" uid="uid://c5gekvq1ljqu4" path="res://scenes/board/flat/FlatGroupPanel.gd" id="1_4oyfi"]
-[ext_resource type="Script" uid="uid://d0irniiek6mwo" path="res://scripts/ui/MasonContainer.gd" id="1_dmino"]
+[ext_resource type="Script" uid="uid://ds28i15fl16c3" path="res://scenes/board/flat/QuarkMasonryContainer.gd" id="2_4oyfi"]
 
 [node name="flat_group_panel" type="PanelContainer" unique_id=1846533377]
 anchors_preset = 10
@@ -17,9 +17,7 @@ layout_mode = 2
 [node name="label" type="Label" parent="v_box_container" unique_id=476479928]
 layout_mode = 2
 
-[node name="container" type="HBoxContainer" parent="v_box_container" unique_id=1365832695]
-visible = false
+[node name="masonry" type="Container" parent="v_box_container" unique_id=457799815]
 layout_mode = 2
-alignment = 1
-script = ExtResource("1_dmino")
-beam_size_min = 240.0
+size_flags_horizontal = 4
+script = ExtResource("2_4oyfi")
