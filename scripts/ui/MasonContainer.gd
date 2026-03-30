@@ -81,7 +81,18 @@ func _refresh_beam_count() -> void:
 
 
 func add_brick(control: Control) -> void:
-	get_smallest_beam().add_child(control)
+	_hold_bricks()
+	brick_hold.push_front(control)
+	_place_bricks()
+
+
+func remove_brick(control: Control) -> void:
+	assert(control.get_parent() in self.get_children(), "MasonContainer: child Node does not belong to this container.")
+	_hold_bricks()
+	brick_hold.erase(control)
+	_place_bricks()
+	# control.get_parent().remove_child(control)
+	# _refresh_beam_count()
 
 
 func get_brick_count() -> int:
@@ -123,7 +134,9 @@ func _place_bricks() -> void:
 
 
 func _sort_bricks(a: FlatQuarkViewer, b: FlatQuarkViewer) -> bool:
-	return a.quark.time_modified > b.quark.time_modified
+	if a.quark == null or b.quark == null: return false
+
+	return a.quark.time_modified < b.quark.time_modified
 
 
 func get_smallest_beam() -> BoxContainer:

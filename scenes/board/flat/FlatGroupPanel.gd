@@ -1,5 +1,5 @@
 
-@tool extends PanelContainer
+@tool class_name FlatGroupPanel extends PanelContainer
 
 var label : Label :
 	get: return $v_box_container/label
@@ -10,6 +10,8 @@ var container : MasonContainer :
 @export var label_text : String :
 	get: return label.text
 	set(value): label.text = value
+
+@export var status : Quark.Status
 
 @export var size_target : Control :
 	get: return container.size_target

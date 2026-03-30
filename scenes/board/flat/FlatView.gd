@@ -1,5 +1,5 @@
 
-extends BoardView
+class_name FlatView extends BoardView
 
 const FLAT_QUARK_SCENE = preload("uid://ik6dmd4algrl")
 
@@ -22,18 +22,22 @@ func _ready() -> void:
 		_quark_added(quark)
 
 
-func _quark_added(quark: Quark) -> void:
-	var container : Control
+func get_container_for_quark(quark: Quark) -> Control:
+	var result : Control
 	match quark.status:
 		Quark.Status.NONE:
-			container = main_container
+			result = main_container
 		Quark.Status.FLAG:
-			container = flag_container
+			result = flag_container
 		Quark.Status.ARCHIVE:
-			container = archive_container
+			result = archive_container
 
-	if container == null:
-		return
+	return result
+
+
+func _quark_added(quark: Quark) -> void:
+	var container := get_container_for_quark(quark)
+	if container == null: return
 
 	var node : FlatQuarkViewer = FLAT_QUARK_SCENE.instantiate()
 

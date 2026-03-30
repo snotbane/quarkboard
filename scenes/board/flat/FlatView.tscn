@@ -78,17 +78,20 @@ text = "Create New Note"
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Flagged"
+status = 1
 size_target = NodePath("../../../../../size_target")
 
 [node name="none" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=384624617 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
 unique_name_in_owner = true
 layout_mode = 2
+status = 0
 size_target = NodePath("../../../../../size_target")
 
 [node name="archive" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=715706812 node_paths=PackedStringArray("size_target") instance=ExtResource("2_rfwpd")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Archive"
+status = 2
 size_target = NodePath("../../../../../size_target")
 
 [node name="tag_editor" parent="h_box_container" unique_id=825748298 instance=ExtResource("2_7nobo")]
