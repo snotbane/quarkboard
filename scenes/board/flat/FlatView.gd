@@ -10,11 +10,6 @@ static func get_title_text(string: String) -> String:
 	return REGEX_TITLE.search(string).get_string(1)
 
 
-@onready var main_container : FlatGroupPanel = %none
-@onready var flag_container : FlatGroupPanel = %flag
-@onready var archive_container : FlatGroupPanel = %archive
-
-
 func _ready() -> void:
 	Machine.inst.active_profile_quark_added.connect(_quark_added)
 
@@ -25,12 +20,14 @@ func _ready() -> void:
 func get_container_for_quark(quark: Quark) -> FlatGroupPanel:
 	var result : FlatGroupPanel
 	match quark.status:
-		Quark.Status.NONE:
-			result = main_container
 		Quark.Status.FLAG:
-			result = flag_container
+			result = %flag
 		Quark.Status.ARCHIVE:
-			result = archive_container
+			result = %archive
+		Quark.Status.RECYCLE:
+			result = %recycle
+		_:
+			result = %none
 
 	return result
 

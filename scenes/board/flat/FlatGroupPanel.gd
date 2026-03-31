@@ -17,6 +17,8 @@ var masonry : MasonryContainer :
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
+	label.visible = not label.text.is_empty()
+
 	visibility_changed.connect(_container_items_changed)
 	masonry.child_order_changed.connect(_container_items_changed)
 

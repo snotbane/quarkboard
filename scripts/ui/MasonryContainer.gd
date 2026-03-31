@@ -259,7 +259,6 @@ func _compute_lanes(avail_w: float) -> int:
 	count = maxi(1, count)
 	if lanes_max > 0:
 		count = mini(count, lanes_max)
-	print("count : %s" % [ count ])
 	return count
 
 ## Returns all direct Control children that are visible and not set to

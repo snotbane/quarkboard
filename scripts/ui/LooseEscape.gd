@@ -12,15 +12,18 @@ signal escaped
 func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree(): return
 
-	if is_event_escape(event):
+	if event.is_action_pressed(&"ui_cancel"):
 		escaped.emit()
+		get_viewport().set_input_as_handled()
 
+	elif is_event_escape(event):
+		escaped.emit()
 		if consume_input:
 			get_viewport().set_input_as_handled()
 
 
 func is_event_escape(event: InputEvent) -> bool:
-	return event.is_action_pressed(&"ui_cancel") or (
+	return (
 		event is InputEventMouseButton and
 		(event.is_pressed() if trigger == 0 else event.is_released()) and
 		(

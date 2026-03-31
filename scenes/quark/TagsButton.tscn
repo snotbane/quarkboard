@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bn7mhncfae5ej"]
+
+[ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="1_ykk67"]
+[ext_resource type="Script" uid="uid://go8l5lm0vwn4" path="res://scenes/quark/TagsButton.gd" id="2_76q5f"]
+[ext_resource type="Texture2D" uid="uid://j01hkqguphww" path="res://icons/dazzle/tags_fill.svg" id="3_ossd6"]
+[ext_resource type="Script" uid="uid://csb53qttoglw3" path="res://scripts/ui/ButtonPopupListener.gd" id="4_wviov"]
+[ext_resource type="Script" uid="uid://qq6hnbhoqfq" path="res://scripts/ui/LooseEscape.gd" id="5_3euma"]
+[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="6_fggdq"]
+[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/quark/TagList.gd" id="7_g80vm"]
+
+[node name="tags" type="Button" unique_id=1814274808]
+self_modulate = Color(1, 1, 1, 0.5019608)
+tooltip_text = "Tag this item to group it with others."
+toggle_mode = true
+icon = ExtResource("1_ykk67")
+flat = true
+script = ExtResource("2_76q5f")
+icon_pressed = ExtResource("3_ossd6")
+
+[node name="popup_listener" type="Node" parent="." unique_id=748982005 node_paths=PackedStringArray("watch_node")]
+script = ExtResource("4_wviov")
+watch_node = NodePath("../popup")
+
+[node name="popup" type="MarginContainer" parent="." unique_id=536915438]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="escape" type="Control" parent="popup" unique_id=2070724461]
+layout_mode = 2
+script = ExtResource("5_3euma")
+consume_input = false
+trigger = 1
+
+[node name="panel_container" type="PanelContainer" parent="popup" unique_id=1721871264]
+custom_minimum_size = Vector2(175, 175)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="popup/panel_container" unique_id=1276979273]
+layout_mode = 2
+
+[node name="line_edit" type="LineEdit" parent="popup/panel_container/v_box_container" unique_id=1702252511]
+layout_mode = 2
+placeholder_text = "Search..."
+clear_button_enabled = true
+select_all_on_focus = true
+caret_blink = true
+right_icon = ExtResource("6_fggdq")
+icon_expand_mode = 2
+right_icon_scale = 0.67
+
+[node name="h_separator" type="HSeparator" parent="popup/panel_container/v_box_container" unique_id=2109930797]
+layout_mode = 2
+
+[node name="list" type="HFlowContainer" parent="popup/panel_container/v_box_container" unique_id=1721749887]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("7_g80vm")
+
+[connection signal="escaped" from="popup/escape" to="popup" method="hide"]
+[connection signal="text_changed" from="popup/panel_container/v_box_container/line_edit" to="popup/panel_container/v_box_container/list" method="set_filter"]

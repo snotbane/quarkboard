@@ -18,8 +18,7 @@ static var REGEX_NAME_TEXT := RegEx.create_from_string(r"[\.:@/\"%]")
 
 @export var text : String
 @export var status : Status = Status.NONE
-
-# @export var tags : PackedStringArray
+@export var tags : PackedStringArray
 
 
 var title_text : String :

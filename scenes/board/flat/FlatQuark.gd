@@ -24,7 +24,8 @@ func _ready() -> void:
 func _on_resource_changed() -> void:
 	preview_label.set_content(socket.resource.text if socket.resource else "")
 
-	if Myth.find_ancestor_of_type(self, "FlatGroupPanel").status != quark.status:
+	var container : FlatGroupPanel = Myth.find_ancestor_of_type(self, "FlatGroupPanel")
+	if container.status != quark.status:
 		reparent(board.get_container_for_quark(quark).masonry)
 		# get_parent().get_parent().remove_brick(self)
 		# board.get_container_for_quark(quark).add_brick(self)

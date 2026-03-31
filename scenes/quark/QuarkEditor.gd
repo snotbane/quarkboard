@@ -126,3 +126,16 @@ func copy() -> void:
 
 func reveal() -> void:
 	quark.reveal()
+
+
+func _on_tag_selected(tag: String) -> void:
+	if quark.tags.has(tag):
+		quark.tags.erase(tag)
+	else:
+		quark.tags.push_back(tag)
+	quark.save()
+
+
+func _on_tags_removed(tag: String) -> void:
+	quark.tags.erase(tag)
+	quark.save()
