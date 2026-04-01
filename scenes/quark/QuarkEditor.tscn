@@ -268,25 +268,27 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_mid_grapheme = true
 
-[node name="meta_bar" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container" unique_id=436490536]
+[node name="meta_bar" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container" unique_id=1605266487]
 layout_mode = 2
 
-[node name="fields" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=442089693]
+[node name="tags" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=175244540 node_paths=PackedStringArray("socket")]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="tag_button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=1814274808 instance=ExtResource("12_b0le4")]
-layout_mode = 2
-
-[node name="tags" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=175244540 node_paths=PackedStringArray("socket")]
-layout_mode = 2
-size_flags_horizontal = 2
 size_flags_vertical = 4
 script = ExtResource("13_telsi")
-socket = NodePath("../../../../../../resource_socket")
+socket = NodePath("../../../../../resource_socket")
 read_only = false
 
-[node name="colors" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=1918610216]
+[node name="controls" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="tag_button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("12_b0le4")]
+layout_mode = 2
+socket = NodePath("../../../../../../resource_socket")
+
+[node name="colors" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1918610216]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -294,7 +296,7 @@ tooltip_text = "Color this item to change how it looks."
 icon = ExtResource("7_e6w8n")
 flat = true
 
-[node name="dates" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=544867958]
+[node name="dates" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=544867958]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -302,7 +304,7 @@ tooltip_text = "Add a date or time. Allows notifications."
 icon = ExtResource("12_6xg52")
 flat = true
 
-[node name="locations" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=1880107145]
+[node name="locations" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1880107145]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -310,7 +312,7 @@ tooltip_text = "Add a location. Allows notifications."
 icon = ExtResource("13_e4rji")
 flat = true
 
-[node name="attach" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=385672992]
+[node name="attach" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=385672992]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -318,7 +320,7 @@ tooltip_text = "Attach images or any other file."
 icon = ExtResource("11_urlr5")
 flat = true
 
-[node name="record" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=627253144]
+[node name="record" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=627253144]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -326,7 +328,7 @@ tooltip_text = "Record with a microphone input device."
 icon = ExtResource("10_80r0f")
 flat = true
 
-[node name="draw" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/fields" unique_id=208449904]
+[node name="draw" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=208449904]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -334,11 +336,11 @@ tooltip_text = "Draw something and Attach it as an image."
 icon = ExtResource("16_pay6x")
 flat = true
 
-[node name="title_bar" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]
+[node name="space" type="Control" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1327424570]
 layout_mode = 2
-alignment = 2
+size_flags_horizontal = 3
 
-[node name="more" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar" unique_id=1719507388]
+[node name="more" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1719507388]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 toggle_mode = true
@@ -347,11 +349,11 @@ flat = true
 script = ExtResource("13_6hsx6")
 icon_pressed = ExtResource("22_b0le4")
 
-[node name="popup_listener" type="Node" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more" unique_id=1579785587 node_paths=PackedStringArray("watch_node")]
+[node name="popup_listener" type="Node" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more" unique_id=1579785587 node_paths=PackedStringArray("watch_node")]
 script = ExtResource("23_telsi")
 watch_node = NodePath("../popup")
 
-[node name="popup" type="MarginContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more" unique_id=1206592329]
+[node name="popup" type="MarginContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more" unique_id=1206592329]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -366,26 +368,26 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="escape" type="Control" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup" unique_id=753996586]
+[node name="escape" type="Control" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup" unique_id=753996586]
 layout_mode = 2
 script = ExtResource("21_n77bc")
 consume_input = false
 trigger = 1
 
-[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup" unique_id=1119592001]
+[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup" unique_id=1119592001]
 layout_mode = 2
 
-[node name="h_box_container" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container" unique_id=1855338537]
+[node name="h_box_container" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container" unique_id=1855338537]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="reveal" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container" unique_id=1021338981]
+[node name="reveal" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container" unique_id=1021338981]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 text = "Reveal"
 icon = ExtResource("14_6xg52")
 
-[node name="lock" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container" unique_id=1521522559]
+[node name="lock" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container" unique_id=1521522559]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -393,23 +395,23 @@ tooltip_text = "Archive this item. Archived items stay out of your way but are s
 text = "Lock"
 icon = ExtResource("23_syj40")
 
-[node name="copy" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container" unique_id=477065808]
+[node name="copy" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container" unique_id=477065808]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("4_allrt")
 
-[node name="export" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container" unique_id=903572339]
+[node name="export" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container" unique_id=903572339]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 text = "Export"
 icon = ExtResource("14_6xg52")
 
-[node name="status" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container" unique_id=1692755635]
+[node name="status" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container" unique_id=1692755635]
 layout_mode = 2
 
-[node name="flag" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status" unique_id=1976902312 node_paths=PackedStringArray("socket")]
+[node name="flag" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status" unique_id=1976902312 node_paths=PackedStringArray("socket")]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Archive this item. Archived items stay out of your way but are still fully searchable."
@@ -420,7 +422,7 @@ socket = NodePath("../../../../../../../../../../../resource_socket")
 status = 1
 icon_pressed = ExtResource("14_kjyjw")
 
-[node name="archive" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status" unique_id=576572918 node_paths=PackedStringArray("socket")]
+[node name="archive" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status" unique_id=576572918 node_paths=PackedStringArray("socket")]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Archive this item. Archived items stay out of your way but are still fully searchable."
@@ -431,13 +433,13 @@ socket = NodePath("../../../../../../../../../../../resource_socket")
 status = 2
 icon_pressed = ExtResource("26_kjyjw")
 
-[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status" unique_id=1871463745]
+[node name="panel_container" type="PanelContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status" unique_id=1871463745]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_syj40")
 script = ExtResource("23_q8007")
 switch_on_input = true
 
-[node name="recycle" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container" unique_id=2015282042 node_paths=PackedStringArray("socket")]
+[node name="recycle" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container" unique_id=2015282042 node_paths=PackedStringArray("socket")]
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 tooltip_text = "Trash this item. It will be kept for a while and then permanently deleted."
@@ -448,7 +450,7 @@ socket = NodePath("../../../../../../../../../../../../resource_socket")
 status = 3
 icon_pressed = ExtResource("29_bspsr")
 
-[node name="delete" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container" unique_id=1675880623]
+[node name="delete" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container" unique_id=1675880623]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -456,7 +458,7 @@ tooltip_text = "Delete this item instantly, and permanently."
 icon = ExtResource("17_v1buq")
 flat = true
 
-[node name="confirmation_dialog" type="ConfirmationDialog" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container/delete" unique_id=1424817765]
+[node name="confirmation_dialog" type="ConfirmationDialog" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container/delete" unique_id=1424817765]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(446, 100)
@@ -464,7 +466,7 @@ ok_button_text = "Delete"
 dialog_text = "This will immediately and permanently delete this note!"
 dialog_autowrap = true
 
-[node name="search" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar" unique_id=684258046]
+[node name="search" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=684258046]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -472,7 +474,7 @@ tooltip_text = "Search and/or replace text within this Note."
 icon = ExtResource("3_yw8kp")
 flat = true
 
-[node name="history" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar" unique_id=416587360]
+[node name="history" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=416587360]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
@@ -480,7 +482,7 @@ tooltip_text = "Rewind to earlier versions."
 icon = ExtResource("4_qtber")
 flat = true
 
-[node name="pin_unpin" type="TextureButton" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar" unique_id=1932874269]
+[node name="pin_unpin" type="TextureButton" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1932874269]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
@@ -489,7 +491,7 @@ toggle_mode = true
 texture_normal = ExtResource("5_jn14r")
 texture_pressed = ExtResource("31_q6141")
 
-[node name="popout_popin" type="TextureButton" parent="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar" unique_id=343412764]
+[node name="popout_popin" type="TextureButton" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=343412764]
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Pop out to a new window or return to main window."
@@ -504,13 +506,13 @@ size_flags_horizontal = 3
 alignment = 2
 
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/text_panel/show_format" to="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/format" method="set_visible"]
-[connection signal="selected" from="safe_margin_container/panel_container/v_box_container/meta_bar/fields/tag_button" to="." method="_on_tag_selected"]
-[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/fields/tags" to="." method="_on_tags_removed"]
-[connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup" method="hide"]
-[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/reveal" to="." method="reveal"]
-[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/copy" to="." method="copy"]
-[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container/recycle" to="." method="recycle"]
-[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container/delete" to="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container/delete/confirmation_dialog" method="popup_centered" binds= [0.5]]
-[connection signal="confirmed" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/more/popup/panel_container/h_box_container/status/panel_container/delete/confirmation_dialog" to="." method="delete"]
-[connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/pin_unpin" to="." method="set_pinned"]
-[connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/popout_popin" to="." method="set_popout"]
+[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/tags" to="." method="_on_tags_removed"]
+[connection signal="selected" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/tag_button" to="." method="_on_tag_selected"]
+[connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup" method="hide"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/reveal" to="." method="reveal"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/copy" to="." method="copy"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container/recycle" to="." method="recycle"]
+[connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container/delete" to="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container/delete/confirmation_dialog" method="popup_centered" binds= [0.5]]
+[connection signal="confirmed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/status/panel_container/delete/confirmation_dialog" to="." method="delete"]
+[connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/pin_unpin" to="." method="set_pinned"]
+[connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/popout_popin" to="." method="set_popout"]

@@ -7,9 +7,23 @@ signal removed(tag: String)
 const TAG_READ_ONLY_SCENE := preload("uid://3cgv1vogw0y2")
 const TAG_REMOVABLE_SCENE := preload("uid://0y4t03xeidt5")
 
-@export var socket : ResourceSocket
+@export var socket : ResourceSocket :
+	set(value):
+		if socket == value: return
+
+		if socket:
+			socket.resource_changed.disconnect(refresh)
+
+		socket = value
+
+		if socket:
+			socket.resource_changed.connect(refresh)
+
+		refresh()
+
+
 @export var exclude_socket_tags : bool = false
-@export var read_only := true
+@export var removable := false
 
 var _filter_lower : String
 var filter : String :
@@ -25,21 +39,12 @@ func set_filter(value: String) -> void:
 	filter = value
 
 
-func _ready() -> void:
-	if socket == null:
+func refresh() -> void:
+	if socket == null or socket.resource == null:
 		for tag in Machine.active_profile.tags:
 			add_tag_control(tag)
 
-		resort_children()
-	else:
-		socket.resource_changed.connect(refresh)
-
-
-func refresh() -> void:
-	if socket.resource == null:
-		return
-
-	if socket.resource.get(&"tags") != null:
+	elif socket.resource.get(&"tags") != null:
 		for child in get_children():
 			child.queue_free()
 
@@ -55,17 +60,13 @@ func refresh() -> void:
 
 
 func add_tag_control(tag: String) -> Control:
-	var scene : PackedScene = TAG_READ_ONLY_SCENE if read_only else TAG_REMOVABLE_SCENE
+	var scene : PackedScene = TAG_REMOVABLE_SCENE
 	var result : Control = scene.instantiate()
 	result.text = tag
+	result.removable = removable
 
-	if result.has_signal(&"pressed"):
-		result.pressed.connect(selected.emit.bind(tag))
-
-	if result.has_signal(&"selected"):
-		result.selected.connect(selected.emit.bind(tag))
-	if result.has_signal(&"removed"):
-		result.removed.connect(removed.emit.bind(tag))
+	result.selected.connect(selected.emit.bind(tag))
+	result.removed.connect(removed.emit.bind(tag))
 
 	add_child(result)
 	return result
@@ -99,10 +100,6 @@ func _score_filter(tag: String) -> int:
 
 	if tag == _filter_lower: return tag.length() + 2
 	if tag.begins_with(_filter_lower): return tag.length() + 1
-
-	print("tag : %s" % [ tag ])
-	print("_filter_lower : %s" % [ _filter_lower ])
-	print("tag.find(_filter_lower) : %s" % [ tag.find(_filter_lower) ])
 
 	return tag.find(_filter_lower)
 

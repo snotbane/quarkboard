@@ -5,17 +5,51 @@
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="2_hajth"]
 [ext_resource type="Texture2D" uid="uid://xaogbwb4o3er" path="res://icons/dazzle/xmark.svg" id="3_4rens"]
 
-[node name="quick_tag_button" type="PanelContainer" unique_id=1019051424]
+[node name="tab_container" type="TabContainer" unique_id=940579227]
+offset_right = 57.0
+offset_bottom = 27.0
+theme_override_styles/panel = ExtResource("2_hajth")
+current_tab = 0
+tabs_visible = false
+tab_focus_mode = 0
+script = ExtResource("1_hajth")
+text = ""
+removable = true
+
+[node name="readonly" type="Button" parent="." unique_id=1104824031]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = ExtResource("1_4rens")
+metadata/_tab_index = 0
+
+[node name="select" type="Button" parent="readonly" unique_id=1210587471]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 53.0
+offset_bottom = 25.0
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_hajth")
+theme_override_styles/pressed = ExtResource("2_hajth")
+theme_override_styles/hover = ExtResource("2_hajth")
+text = "Tag"
+icon_alignment = 1
+expand_icon = true
+
+[node name="removable" type="PanelContainer" parent="." unique_id=1019051424]
+visible = false
+layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_4rens")
-script = ExtResource("1_hajth")
+metadata/_tab_index = 1
 
-[node name="buttons" type="HBoxContainer" parent="." unique_id=422496760]
+[node name="buttons" type="HBoxContainer" parent="removable" unique_id=422496760]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 3
 
-[node name="select" type="Button" parent="buttons" unique_id=277123761]
+[node name="select" type="Button" parent="removable/buttons" unique_id=277123761]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 mouse_filter = 1
@@ -26,7 +60,8 @@ text = "Tag"
 icon_alignment = 1
 expand_icon = true
 
-[node name="remove" type="Button" parent="buttons" unique_id=827284121]
+[node name="remove" type="Button" parent="removable/buttons" unique_id=827284121]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 mouse_filter = 1

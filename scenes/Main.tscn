@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dp76t3aegbnha"]
 
 [ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
+[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme.tres" id="1_nfivy"]
 [ext_resource type="Script" uid="uid://bw4p4xivpjv0n" path="res://scripts/GlobalNode.gd" id="2_3p2gp"]
 [ext_resource type="PackedScene" uid="uid://i8l2xr5uqdq6" path="res://scenes/board/SelectItemBoardViewer.tscn" id="4_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/dazzle/grid.svg" id="5_nxtc6"]
@@ -41,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_nfivy")
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
