@@ -4,8 +4,7 @@
 signal selected(tag: String)
 signal removed(tag: String)
 
-const TAG_READ_ONLY_SCENE := preload("uid://3cgv1vogw0y2")
-const TAG_REMOVABLE_SCENE := preload("uid://0y4t03xeidt5")
+const TAG_BUTTON_SCENE := preload("uid://0y4t03xeidt5")
 
 @export var socket : ResourceSocket :
 	set(value):
@@ -80,7 +79,7 @@ func refresh() -> void:
 
 
 func add_tag_control(tag: String, removable: bool) -> Control:
-	var scene : PackedScene = TAG_REMOVABLE_SCENE
+	var scene : PackedScene = TAG_BUTTON_SCENE
 	var result : Control = scene.instantiate()
 	result.text = tag
 	result.removable = removable

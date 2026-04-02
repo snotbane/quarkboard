@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bn7mhncfae5ej"]
 
 [ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="1_ykk67"]
-[ext_resource type="Script" uid="uid://go8l5lm0vwn4" path="res://scenes/quark/TagsButton.gd" id="2_76q5f"]
+[ext_resource type="Script" uid="uid://go8l5lm0vwn4" path="res://scenes/tag/TagsButton.gd" id="2_76q5f"]
 [ext_resource type="Texture2D" uid="uid://j01hkqguphww" path="res://icons/dazzle/tags_fill.svg" id="3_ossd6"]
 [ext_resource type="Script" uid="uid://bsmvxg0vw153g" path="res://scripts/ui/ControlPopup.gd" id="4_p8rdw"]
 [ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="6_fggdq"]
-[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/quark/TagList.gd" id="7_g80vm"]
+[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/tag/TagList.gd" id="7_g80vm"]
 
 [node name="tags" type="Button" unique_id=1814274808]
 self_modulate = Color(1, 1, 1, 0.5019608)
@@ -35,11 +35,11 @@ mouse_filter = 2
 transparent_bg = false
 handle_input_locally = false
 oversampling_override = 1.0
+position = Vector2i(-67, -179)
 size = Vector2i(175, 175)
 transient_to_focused = true
 transparent = false
 script = ExtResource("4_p8rdw")
-as_child = false
 button = NodePath("../..")
 
 [node name="v_box_container" type="VBoxContainer" parent="control/control_popup" unique_id=1276979273]
@@ -65,6 +65,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 2
 script = ExtResource("7_g80vm")
 options = 11
 

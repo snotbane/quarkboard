@@ -16,9 +16,17 @@ static var REGEX_TITLE_TEXT := RegEx.create_from_string(r"^\s*(\S.*?)(?:\n|$)")
 static var REGEX_NAME_TEXT := RegEx.create_from_string(r"[\.:@/\"%]")
 
 
-@export var text : String
+@export var text : String :
+	set(value):
+		if text == value: return
+		text = value
+
+		time_text_modified = NOW
+
 @export var status : Status = Status.NONE
 @export var tags : PackedStringArray
+
+@export_storage var time_text_modified : int
 
 
 var title_text : String :

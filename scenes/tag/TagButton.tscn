@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://0y4t03xeidt5"]
+
+[ext_resource type="StyleBox" uid="uid://dcaa7v1yusphs" path="res://ui/style_box_tag.tres" id="1_nvhbu"]
+[ext_resource type="Script" uid="uid://cjnyj4l5g2kmk" path="res://scenes/tag/TagButton.gd" id="2_nxv7f"]
+[ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="3_y8c3w"]
+[ext_resource type="Texture2D" uid="uid://xaogbwb4o3er" path="res://icons/dazzle/xmark.svg" id="4_lvqu0"]
+
+[node name="tag_button" type="PanelContainer" unique_id=795329266]
+offset_right = 56.0
+offset_bottom = 27.0
+size_flags_horizontal = 8
+theme_override_styles/panel = ExtResource("1_nvhbu")
+script = ExtResource("2_nxv7f")
+
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=422496760]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 3
+
+[node name="select" type="Button" parent="h_box_container" unique_id=1777035752]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("3_y8c3w")
+theme_override_styles/pressed = ExtResource("3_y8c3w")
+theme_override_styles/hover = ExtResource("3_y8c3w")
+text = "Tag"
+flat = true
+alignment = 0
+
+[node name="remove" type="Button" parent="h_box_container" unique_id=827284121]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("3_y8c3w")
+theme_override_styles/pressed = ExtResource("3_y8c3w")
+theme_override_styles/hover = ExtResource("3_y8c3w")
+icon = ExtResource("4_lvqu0")
+flat = true
+icon_alignment = 1
+expand_icon = true

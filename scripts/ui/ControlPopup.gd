@@ -21,8 +21,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not as_child: return
 
-	position = get_parent().global_position
-	size = get_parent().size
+	var rect : Rect2i = get_parent().get_global_rect()
+	position = rect.position
+	size = rect.size
 
 func _visibility_changed() -> void:
 	if visible:

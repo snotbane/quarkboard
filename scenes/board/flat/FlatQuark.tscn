@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://xn3xfulhehj4" path="res://scenes/board/flat/FlatQuark.gd" id="1_rkbxp"]
 [ext_resource type="Script" uid="uid://us0x7oqay2jh" path="res://scripts/ui/PreviewLabel.gd" id="3_cxj08"]
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
-[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/quark/TagList.gd" id="4_mas2m"]
+[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/tag/TagList.gd" id="4_mas2m"]
 [ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="5_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="6_n5fev"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="7_xn67a"]
 [ext_resource type="Texture2D" uid="uid://bbgafawka18rg" path="res://icons/dazzle/inbox_fill.svg" id="8_gmaco"]
 [ext_resource type="Texture2D" uid="uid://vtw5mxisiipx" path="res://icons/dazzle/trash_fill.svg" id="10_mas2m"]
-[ext_resource type="PackedScene" uid="uid://bn7mhncfae5ej" path="res://scenes/quark/TagsButton.tscn" id="11_gmaco"]
+[ext_resource type="PackedScene" uid="uid://bn7mhncfae5ej" path="res://scenes/tag/TagsButton.tscn" id="11_gmaco"]
 
 [node name="flat_quark" type="PanelContainer" unique_id=119261583]
 custom_minimum_size = Vector2(240, 10)
