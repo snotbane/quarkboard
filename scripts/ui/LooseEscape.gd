@@ -1,5 +1,12 @@
 ## Performs an action (e.g. hiding a node) when the user clicks outside this [Control].
-extends Control
+class_name LooseEscape extends Control
+
+static func add_to_control(parent: Control) -> LooseEscape:
+	var result := LooseEscape.new()
+	result.set_anchors_preset(PRESET_FULL_RECT)
+	parent.add_child(result, false, INTERNAL_MODE_FRONT)
+
+	return result
 
 signal escaped
 

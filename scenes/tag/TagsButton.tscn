@@ -31,22 +31,25 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="control_popup" type="PopupPanel" parent="control" unique_id=1831846818 node_paths=PackedStringArray("button")]
-transparent_bg = false
-handle_input_locally = false
-oversampling_override = 1.0
-position = Vector2i(-67, -179)
-size = Vector2i(175, 175)
-transient_to_focused = true
-transparent = false
+[node name="control_popup" type="PanelContainer" parent="control" unique_id=706898981 node_paths=PackedStringArray("button")]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.5
+offset_top = -175.0
+offset_right = 87.5
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("4_p8rdw")
 button = NodePath("../..")
 
 [node name="v_box_container" type="VBoxContainer" parent="control/control_popup" unique_id=1276979273]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 171.0
-offset_bottom = 171.0
+layout_mode = 2
 
 [node name="line_edit" type="LineEdit" parent="control/control_popup/v_box_container" unique_id=1702252511]
 layout_mode = 2

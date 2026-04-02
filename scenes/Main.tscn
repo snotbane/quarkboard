@@ -123,7 +123,6 @@ script = ExtResource("7_mwfav")
 layout_mode = 2
 
 [node name="create_board" type="Control" parent="main" unique_id=1552825026]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 

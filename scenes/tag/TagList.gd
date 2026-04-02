@@ -15,7 +15,7 @@ const TAG_BUTTON_SCENE := preload("uid://0y4t03xeidt5")
 
 		socket = value
 
-		if socket:
+		if socket and not Engine.is_editor_hint():
 			socket.resource_changed.connect(refresh)
 
 		refresh()
