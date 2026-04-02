@@ -18,9 +18,9 @@ static var subwindow : Control :
 static var subwindow_container : Control :
 	get: return GlobalNode.get_global_node(&"quark_editor_container")
 
-@onready var text_edit : TextEdit = $safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/text
-@onready var popout_button : BaseButton = $safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/popout_popin
-@onready var pin_switch : BaseButton = $safe_margin_container/panel_container/v_box_container/meta_bar/title_bar/pin_unpin
+@onready var text_edit : TextEdit = %text_edit
+@onready var popout_button : BaseButton = %popout_popin
+@onready var pin_switch : BaseButton = %pin_unpin
 
 var _window : Window
 var window : Window :
@@ -135,7 +135,8 @@ func _on_tag_selected(tag: String) -> void:
 		quark.tags.push_back(tag)
 	quark.save()
 
+func _on_tag_removed(tag: String) -> void:
+	if not quark.tags.has(tag): return
 
-func _on_tags_removed(tag: String) -> void:
 	quark.tags.erase(tag)
 	quark.save()

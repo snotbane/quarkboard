@@ -22,8 +22,7 @@ const TAG_REMOVABLE_SCENE := preload("uid://0y4t03xeidt5")
 		refresh()
 
 
-@export var exclude_socket_tags : bool = false
-@export var removable := false
+@export_flags("Include Profile Tags:1", "Include Socket Tags:2", "Removable Profile Tags:4", "Removable Socket Tags:8") var options : int = 3
 
 var _filter_lower : String
 var filter : String :
@@ -35,31 +34,52 @@ var filter : String :
 		resort_children()
 
 
+# func _ready() -> void:
+# 	Machine.inst.active_profile_changed.connect(refresh)
+
+
 func set_filter(value: String) -> void:
 	filter = value
 
 
+func add_tag_to_profile(tag: String, also_add_to_socket : bool = true) -> void:
+	Machine.active_profile.tags.push_back(tag)
+	Machine.active_profile.save()
+
+	if also_add_to_socket:
+		socket.resource.tags.push_back(tag)
+		socket.resource.save()	## save() automatically calls refresh() here.
+	else:
+		refresh()
+
+
+
 func refresh() -> void:
-	if socket == null or socket.resource == null:
+	# if not visible: return
+
+	for child in get_children():
+		child.queue_free()
+
+	var available_tags : Dictionary[String, bool]
+
+	if options & 1:
 		for tag in Machine.active_profile.tags:
-			add_tag_control(tag)
+			available_tags[tag] = options & 4
 
-	elif socket.resource.get(&"tags") != null:
-		for child in get_children():
-			child.queue_free()
+	if socket and socket.resource:
+		for tag : String in socket.resource.tags:
+			if not options & 2:
+				available_tags.erase(tag)
+			else:
+				available_tags[tag] = options & 8
 
-		if exclude_socket_tags:
-			for tag : String in Machine.active_profile.tags:
-				if socket.resource.tags.has(tag): continue
-				add_tag_control(tag)
-		else:
-			for tag : String in socket.resource.tags:
-				add_tag_control(tag)
+	for tag in available_tags.keys():
+		add_tag_control(tag, available_tags[tag])
 
 	resort_children()
 
 
-func add_tag_control(tag: String) -> Control:
+func add_tag_control(tag: String, removable: bool) -> Control:
 	var scene : PackedScene = TAG_REMOVABLE_SCENE
 	var result : Control = scene.instantiate()
 	result.text = tag

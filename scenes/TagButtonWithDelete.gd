@@ -1,24 +1,34 @@
 
 @tool extends Control
 
+const READ_ONLY_STYLE := preload("uid://dcaa7v1yusphs")
+const REMOVABLE_STYLE := preload("uid://be8tud0vjigvc")
+
 signal selected
 signal removed
 
 @export var text : String = "Tag" :
-	get: return $readonly.text
-	set(value):	$readonly.text = value
+	get: return %select.text
+	set(value): %select.text = value
+
 
 @export var removable : bool = false :
-	get: return $readonly.visible
-	set(value): $readonly.visible = value
+	get: return %remove.visible
+	set(value):
+		%remove.visible = value
+		add_theme_stylebox_override(&"panel", REMOVABLE_STYLE if value else READ_ONLY_STYLE)
+
+
+var hovered : bool = false :
+	set(value):
+		hovered = value
+		%remove.self_modulate = Color.WHITE if value else Color.TRANSPARENT
 
 
 func _ready() -> void:
-	# $buttons.modulate = Color.TRANSPARENT
 
-	$readonly.pressed.connect(selected.emit)
-	$removable/buttons/select.pressed.connect(selected.emit)
-	$removable/buttons/remove.pressed.connect(removed.emit)
+	%select.pressed.connect(selected.emit)
+	%remove.pressed.connect(removed.emit)
 
 	mouse_entered.connect(_mouse_entered)
 	mouse_exited.connect(_mouse_exited)
@@ -27,12 +37,8 @@ func _ready() -> void:
 
 
 func _mouse_entered() -> void:
-	# $label.modulate = Color.TRANSPARENT
-	# $buttons.modulate = Color.WHITE
-	$removable/buttons/remove.modulate = Color.WHITE
+	hovered = true
 
 
 func _mouse_exited() -> void:
-	# $label.modulate = Color.WHITE
-	# $buttons.modulate = Color.TRANSPARENT
-	$removable/buttons/remove.modulate = Color.TRANSPARENT
+	hovered = false

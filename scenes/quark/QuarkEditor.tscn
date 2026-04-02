@@ -254,7 +254,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_kjyjw")
 toggle_mode = true
 icon = ExtResource("16_ph5g5")
 
-[node name="text" type="TextEdit" parent="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container" unique_id=1446985480]
+[node name="text_edit" type="TextEdit" parent="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container" unique_id=1446985480]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -277,14 +278,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 script = ExtResource("13_telsi")
 socket = NodePath("../../../../../resource_socket")
-read_only = false
+options = 10
 
 [node name="controls" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="tag_button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("12_b0le4")]
+[node name="tag_popup" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("12_b0le4")]
 layout_mode = 2
 socket = NodePath("../../../../../../resource_socket")
 
@@ -483,6 +484,7 @@ icon = ExtResource("4_qtber")
 flat = true
 
 [node name="pin_unpin" type="TextureButton" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1932874269]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
@@ -492,6 +494,7 @@ texture_normal = ExtResource("5_jn14r")
 texture_pressed = ExtResource("31_q6141")
 
 [node name="popout_popin" type="TextureButton" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=343412764]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Pop out to a new window or return to main window."
@@ -506,8 +509,9 @@ size_flags_horizontal = 3
 alignment = 2
 
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/text_panel/show_format" to="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/format" method="set_visible"]
-[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/tags" to="." method="_on_tags_removed"]
-[connection signal="selected" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/tag_button" to="." method="_on_tag_selected"]
+[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/tags" to="." method="_on_tag_removed"]
+[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/tag_popup" to="." method="_on_tag_removed"]
+[connection signal="selected" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/tag_popup" to="." method="_on_tag_selected"]
 [connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup" method="hide"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/reveal" to="." method="reveal"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/copy" to="." method="copy"]
