@@ -66,7 +66,8 @@ script = ExtResource("3_cxj08")
 layout_mode = 2
 script = ExtResource("4_mas2m")
 socket = NodePath("../../../resource_socket")
-options = 2
+options = 10
+select_toggle = false
 
 [node name="actions" type="HBoxContainer" parent="margin_container/v_box_container" unique_id=119704278]
 layout_mode = 2
@@ -114,7 +115,7 @@ socket = NodePath("../../../../resource_socket")
 status = 3
 icon_pressed = ExtResource("10_mas2m")
 
-[node name="tags" parent="margin_container/v_box_container/actions" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("11_gmaco")]
+[node name="tag_popup" parent="margin_container/v_box_container/actions" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("11_gmaco")]
 layout_mode = 2
 socket = NodePath("../../../../resource_socket")
 
@@ -158,6 +159,4 @@ offset_right = 12.0
 offset_bottom = 12.0
 
 [connection signal="pressed" from="button" to="." method="_on_pressed"]
-[connection signal="removed" from="margin_container/v_box_container/actions/tags" to="." method="_on_tag_removed"]
-[connection signal="selected" from="margin_container/v_box_container/actions/tags" to="." method="_on_tag_selected"]
 [connection signal="pressed" from="margin_container/v_box_container/actions/popout" to="." method="_on_popout_pressed"]

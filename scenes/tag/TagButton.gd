@@ -1,22 +1,23 @@
 
 @tool extends Control
 
-const READ_ONLY_STYLE := preload("uid://dcaa7v1yusphs")
-const REMOVABLE_STYLE := preload("uid://be8tud0vjigvc")
+const MARGIN_READ_ONLY := 8
+const MARGIN_REMOVABLE := 4
 
 signal selected
 signal removed
 
 @export var text : String = "Tag" :
-	get: return %select.text
-	set(value): %select.text = value
+	get: return %label.text
+	set(value): %label.text = value
 
 
 @export var removable : bool = false :
 	get: return %remove.visible
 	set(value):
 		%remove.visible = value
-		add_theme_stylebox_override(&"panel", REMOVABLE_STYLE if value else READ_ONLY_STYLE)
+		$margin_container.add_theme_constant_override(&"margin_right", MARGIN_REMOVABLE if value else MARGIN_READ_ONLY)
+		# add_theme_stylebox_override(&"panel", REMOVABLE_STYLE if value else READ_ONLY_STYLE)
 
 
 var hovered : bool = false :
@@ -26,7 +27,6 @@ var hovered : bool = false :
 
 
 func _ready() -> void:
-
 	%select.pressed.connect(selected.emit)
 	%remove.pressed.connect(removed.emit)
 

@@ -40,20 +40,23 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -87.5
-offset_top = -175.0
-offset_right = 87.5
+offset_left = -707.5
+offset_top = -899.0
+offset_right = -532.5
+offset_bottom = -724.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("4_p8rdw")
+as_child = false
 button = NodePath("../..")
 
 [node name="v_box_container" type="VBoxContainer" parent="control/control_popup" unique_id=1276979273]
 layout_mode = 2
 
-[node name="line_edit" type="LineEdit" parent="control/control_popup/v_box_container" unique_id=1702252511]
+[node name="tag_search" type="LineEdit" parent="control/control_popup/v_box_container" unique_id=1702252511]
 layout_mode = 2
 placeholder_text = "Search..."
+keep_editing_on_text_submit = true
 clear_button_enabled = true
 select_all_on_focus = true
 caret_blink = true
@@ -72,6 +75,6 @@ alignment = 2
 script = ExtResource("7_g80vm")
 options = 11
 
-[connection signal="toggled" from="." to="control/control_popup" method="set_visible"]
-[connection signal="text_changed" from="control/control_popup/v_box_container/line_edit" to="control/control_popup/v_box_container/list" method="set_filter"]
-[connection signal="text_submitted" from="control/control_popup/v_box_container/line_edit" to="control/control_popup/v_box_container/list" method="add_tag_to_profile"]
+[connection signal="text_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="set_filter"]
+[connection signal="text_submitted" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="text_submitted"]
+[connection signal="visibility_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/tag_search" method="clear"]

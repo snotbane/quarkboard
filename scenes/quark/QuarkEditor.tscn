@@ -279,6 +279,7 @@ size_flags_vertical = 4
 script = ExtResource("13_telsi")
 socket = NodePath("../../../../../resource_socket")
 options = 10
+select_toggle = false
 
 [node name="controls" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]
 layout_mode = 2
@@ -510,8 +511,6 @@ alignment = 2
 
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/text_panel/show_format" to="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/format" method="set_visible"]
 [connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/tags" to="." method="_on_tag_removed"]
-[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/tag_popup" to="." method="_on_tag_removed"]
-[connection signal="selected" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/tag_popup" to="." method="_on_tag_selected"]
 [connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup" method="hide"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/reveal" to="." method="reveal"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/copy" to="." method="copy"]

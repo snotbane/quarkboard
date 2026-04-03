@@ -23,6 +23,8 @@ const TAG_BUTTON_SCENE := preload("uid://0y4t03xeidt5")
 
 @export_flags("Include Profile Tags:1", "Include Socket Tags:2", "Removable Profile Tags:4", "Removable Socket Tags:8") var options : int = 3
 
+@export var select_toggle : bool = true
+
 var _filter_lower : String
 var filter : String :
 	set(value):
@@ -32,6 +34,8 @@ var filter : String :
 
 		resort_children()
 
+var socket_tags_valid : bool :
+	get: return socket and socket.resource and socket.resource.get(&"tags") != null
 
 # func _ready() -> void:
 # 	Machine.inst.active_profile_changed.connect(refresh)
@@ -41,22 +45,40 @@ func set_filter(value: String) -> void:
 	filter = value
 
 
-func add_tag_to_profile(tag: String, also_add_to_socket : bool = true) -> void:
-	Machine.active_profile.tags.push_back(tag)
-	Machine.active_profile.save()
+func text_submitted(text: String) -> void:
+	var do_refresh := false
+	var create_new := true
 
-	if also_add_to_socket:
-		socket.resource.tags.push_back(tag)
-		socket.resource.save()	## save() automatically calls refresh() here.
-	else:
+	var text_lower := text.to_lower()
+	for tag in Machine.active_profile.tags:
+		if text_lower == tag.to_lower():
+			create_new = false
+			text = tag
+			break
+
+	if create_new:
+		if not await confirm_create_new_tag(text):
+			return
+
+		Machine.active_profile.tags.push_back(text)
+		Machine.active_profile.save()
+		do_refresh = true
+
+	if socket and socket.resource and not socket.resource.tags.has(text):
+		socket.resource.tags.push_back(text)
+		socket.resource.save()
+		do_refresh = false
+
+	if do_refresh:
 		refresh()
-
 
 
 func refresh() -> void:
 	# if not visible: return
 
 	for child in get_children():
+		if child is not Control: continue
+
 		child.queue_free()
 
 	var available_tags : Dictionary[String, bool]
@@ -84,8 +106,8 @@ func add_tag_control(tag: String, removable: bool) -> Control:
 	result.text = tag
 	result.removable = removable
 
-	result.selected.connect(selected.emit.bind(tag))
-	result.removed.connect(removed.emit.bind(tag))
+	result.selected.connect(_selected.bind(tag))
+	result.removed.connect(_removed.bind(tag))
 
 	add_child(result)
 	return result
@@ -94,6 +116,8 @@ func add_tag_control(tag: String, removable: bool) -> Control:
 func resort_children() -> void:
 	var children : Array[Control]
 	for child in get_children():
+		if child is not Control: continue
+
 		children.push_back(child)
 		remove_child(child)
 
@@ -125,3 +149,37 @@ func _score_filter(tag: String) -> int:
 
 func _filter_tag(tag: String) -> bool:
 	return filter.is_empty() or tag.to_lower().contains(_filter_lower)
+
+
+func confirm_create_new_tag(tag: String) :
+	var dialog := ConfirmationDialog.new()
+	dialog.dialog_text = "You are creating a new tag \"%s\"." % [ tag ]
+	dialog.ok_button_text = "Create"
+	add_child(dialog)
+	dialog.popup_centered()
+
+	return await Async.any_indexed([ dialog.canceled, dialog.confirmed ]) == 1
+
+
+func _selected(tag: String) -> void:
+	selected.emit(tag)
+	if not socket_tags_valid: return
+
+	if socket.resource.tags.has(tag):
+		if select_toggle:
+			socket.resource.tags.erase(tag)
+			socket.resource.save()
+	else:
+		socket.resource.tags.push_back(tag)
+		socket.resource.save()
+
+
+
+
+func _removed(tag: String) -> void:
+	removed.emit(tag)
+	if not socket_tags_valid: return
+
+	if socket.resource.tags.has(tag):
+		socket.resource.tags.erase(tag)
+		socket.resource.save()

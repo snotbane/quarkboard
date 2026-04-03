@@ -44,17 +44,3 @@ func _on_pressed() -> void:
 
 func _on_popout_pressed() -> void:
 	quark.open_in_editor(true)
-
-
-func _on_tag_selected(tag: String) -> void:
-	if quark.tags.has(tag): return
-
-	quark.tags.push_back(tag)
-	quark.save()
-
-
-func _on_tag_removed(tag: String) -> void:
-	if not quark.tags.has(tag): return
-
-	quark.tags.erase(tag)
-	quark.save()
