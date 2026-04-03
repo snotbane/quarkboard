@@ -1,5 +1,5 @@
 
-@tool extends Container
+extends Container
 
 signal selected(tag: String)
 signal removed(tag: String)
@@ -74,6 +74,7 @@ func text_submitted(text: String) -> void:
 
 
 func refresh() -> void:
+	if Engine.is_editor_hint(): return
 	# if not visible: return
 
 	for child in get_children():

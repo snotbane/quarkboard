@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://d7a3fo3dglu8"]
+
+[ext_resource type="Script" uid="uid://cdarq8jmrxa8r" path="res://scenes/board/BoardSettingsPanel.gd" id="1_c5oqb"]
+[ext_resource type="Script" uid="uid://eufi46qvlf6t" path="res://addons/myth/modules/misc/QuickTabContainer.gd" id="2_e40cw"]
+[ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/dazzle/gear.svg" id="3_w31kk"]
+[ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="4_ndfu1"]
+[ext_resource type="Texture2D" uid="uid://bmyh3jw4pdq3o" path="res://icons/dazzle/gear_fill.svg" id="5_42yhp"]
+[ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="6_j03tw"]
+[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/tag/TagList.gd" id="7_ul8k1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1o47n"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wkm6"]
+
+[node name="board_settings" type="PanelContainer" unique_id=807210196]
+custom_minimum_size = Vector2(250, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 128.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1o47n")
+script = ExtResource("1_c5oqb")
+
+[node name="v_box_container" type="VBoxContainer" parent="." unique_id=136850090]
+layout_mode = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container" unique_id=823716683]
+layout_mode = 2
+
+[node name="title" type="PanelContainer" parent="v_box_container/h_box_container" unique_id=1868330753]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3wkm6")
+script = ExtResource("2_e40cw")
+metadata/_custom_type_script = "uid://eufi46qvlf6t"
+
+[node name="title_label" type="Label" parent="v_box_container/h_box_container/title" unique_id=713665961]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Title"
+horizontal_alignment = 1
+
+[node name="title_edit" type="LineEdit" parent="v_box_container/h_box_container/title" unique_id=1643630048]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Title"
+alignment = 1
+keep_editing_on_text_submit = true
+
+[node name="icon_toggle_button" type="Button" parent="v_box_container/h_box_container" unique_id=1379387281]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+toggle_mode = true
+icon = ExtResource("3_w31kk")
+flat = true
+script = ExtResource("4_ndfu1")
+icon_pressed = ExtResource("5_42yhp")
+metadata/_custom_type_script = "uid://coko05d00knrj"
+
+[node name="tabs" type="PanelContainer" parent="v_box_container" unique_id=1517856498]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_j03tw")
+script = ExtResource("2_e40cw")
+metadata/_custom_type_script = "uid://eufi46qvlf6t"
+
+[node name="board" type="VBoxContainer" parent="v_box_container/tabs" unique_id=1616760788]
+layout_mode = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="v_box_container/tabs/board" unique_id=615160317]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="board_tag_list" type="VBoxContainer" parent="v_box_container/tabs/board/scroll_container" unique_id=1103553523]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_ul8k1")
+options = 2
+select_toggle = false
+
+[node name="profile" type="VBoxContainer" parent="v_box_container/tabs" unique_id=726674212]
+visible = false
+layout_mode = 2
+
+[node name="label" type="Label" parent="v_box_container/tabs/profile" unique_id=955023355]
+layout_mode = 2
+text = "Select Filters"
+horizontal_alignment = 1
+
+[node name="scroll_container" type="ScrollContainer" parent="v_box_container/tabs/profile" unique_id=47484594]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="profile_tag_list" type="VBoxContainer" parent="v_box_container/tabs/profile/scroll_container" unique_id=1748833319]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_ul8k1")
+options = 11
+
+[connection signal="toggled" from="v_box_container/h_box_container/icon_toggle_button" to="v_box_container/h_box_container/title/title_edit" method="set_visible"]
+[connection signal="toggled" from="v_box_container/h_box_container/icon_toggle_button" to="v_box_container/tabs/profile" method="set_visible"]

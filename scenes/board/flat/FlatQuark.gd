@@ -27,8 +27,6 @@ func _on_resource_changed() -> void:
 	var container : FlatGroupPanel = Myth.find_ancestor_of_type(self, "FlatGroupPanel")
 	if container.status != quark.status:
 		reparent(board.get_container_for_quark(quark).masonry)
-		# get_parent().get_parent().remove_brick(self)
-		# board.get_container_for_quark(quark).add_brick(self)
 
 
 func _on_resource_value_changed() -> void:

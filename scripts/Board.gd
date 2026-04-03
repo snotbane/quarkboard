@@ -9,7 +9,7 @@ const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
 
 ## A list of filters to include or exclude. For now, this will only filter for tags.
 ## E.g. [ "Ideas", "!Journal" ] will include all notes with the "Ideas" tag except ones with the "Journal" tag.
-@export_storage var filters : PackedStringArray
+@export_storage var tags : PackedStringArray
 
 
 func _init() -> void:

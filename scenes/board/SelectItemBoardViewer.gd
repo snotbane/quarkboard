@@ -11,7 +11,7 @@ var board : Board :
 		refresh.call_deferred()
 
 
-var viewer : Node
+var viewer : BoardView
 
 
 func refresh() -> void:
@@ -24,6 +24,7 @@ func refresh() -> void:
 		viewer.queue_free()
 
 	viewer = _board._get_viewer_scene().instantiate()
+	viewer.board = board
 	ViewerContainer.inst.add_child(viewer)
 
 	button.pressed.connect(viewer.show)
