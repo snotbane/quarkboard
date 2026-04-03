@@ -1,9 +1,10 @@
 
-@tool extends Control
+class_name TagButton extends Control
 
 const MARGIN_READ_ONLY := 8
 const MARGIN_REMOVABLE := 4
 
+signal toggled(toggled_on: bool)
 signal selected
 signal removed
 
@@ -12,12 +13,38 @@ signal removed
 	set(value): %label.text = value
 
 
-@export var removable : bool = false :
+## If enabled, the main button will be togglable
+@export var toggle_mode : bool = true :
+	set(value):
+		toggle_mode = value
+		if not is_node_ready(): return
+
+		%select.toggle_mode = value
+		_update_removable()
+
+
+var _button_pressed : bool
+@export var button_pressed : bool = false :
+	get: return %select.button_pressed
+	set(value):
+		_button_pressed = value
+		if not is_node_ready(): return
+
+		%select.button_pressed = value
+
+
+var removable : bool :
+	get: return (toggle_mode and button_pressed) or use_remove_action
+func _update_removable() -> void:
+	%remove.visible = removable
+	$margin_container.add_theme_constant_override(&"margin_right", MARGIN_REMOVABLE if removable else MARGIN_READ_ONLY)
+
+## If enabled, the remove sub-button will be usable.
+@export var use_remove_action : bool = false :
 	get: return %remove.visible
 	set(value):
 		%remove.visible = value
-		$margin_container.add_theme_constant_override(&"margin_right", MARGIN_REMOVABLE if value else MARGIN_READ_ONLY)
-		# add_theme_stylebox_override(&"panel", REMOVABLE_STYLE if value else READ_ONLY_STYLE)
+		_update_removable()
 
 
 var hovered : bool = false :
@@ -27,6 +54,11 @@ var hovered : bool = false :
 
 
 func _ready() -> void:
+	%select.toggle_mode = toggle_mode
+	%select.button_pressed = _button_pressed
+
+	%select.toggled.connect(toggled.emit)
+	%select.toggled.connect(_update_removable.unbind(1))
 	%select.pressed.connect(selected.emit)
 	%remove.pressed.connect(removed.emit)
 

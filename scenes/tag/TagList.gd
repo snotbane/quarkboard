@@ -1,6 +1,7 @@
 
-extends Container
+class_name TagList extends Container
 
+signal toggled(tag: String, toggled_on: bool)
 signal selected(tag: String)
 signal removed(tag: String)
 
@@ -15,15 +16,24 @@ const TAG_BUTTON_SCENE := preload("uid://0y4t03xeidt5")
 
 		socket = value
 
-		if socket and not Engine.is_editor_hint():
-			socket.resource_changed.connect(refresh)
+		# if socket and not Engine.is_editor_hint():
+		# 	socket.resource_changed.connect(refresh)
 
 		refresh()
 
 
 @export_flags("Include Profile Tags:1", "Include Socket Tags:2", "Removable Profile Tags:4", "Removable Socket Tags:8") var options : int = 3
 
-@export var select_toggle : bool = true
+## Single Select: Only one tag can be selected.
+## Multi Meta: Multiple tags can be selected, but must be done while holding Shift or Ctrl.
+## Multi Select: Multiple tags are selected using only the primary button; meta keys do nothing.
+@export_enum("Single Select", "Multi Meta", "Multi Select") var multi_select : int = 0
+
+@export var toggle_mode : bool = true
+
+## If enabled, the socket resource's tags will be updated to match the state of each button.
+@export var affect_socket : bool = true
+
 
 var _filter_lower : String
 var filter : String :
@@ -79,7 +89,6 @@ func refresh() -> void:
 
 	for child in get_children():
 		if child is not Control: continue
-
 		child.queue_free()
 
 	var available_tags : Dictionary[String, bool]
@@ -103,12 +112,14 @@ func refresh() -> void:
 
 func add_tag_control(tag: String, removable: bool) -> Control:
 	var scene : PackedScene = TAG_BUTTON_SCENE
-	var result : Control = scene.instantiate()
+	var result : TagButton = scene.instantiate()
 	result.text = tag
-	result.removable = removable
+	result.toggle_mode = toggle_mode
+	result.button_pressed = removable
 
-	result.selected.connect(_selected.bind(tag))
-	result.removed.connect(_removed.bind(tag))
+	result.toggled.connect(_toggled.bind(tag))
+	result.selected.connect(_toggled.bind(true, tag))
+	result.removed.connect(_toggled.bind(false, tag))
 
 	add_child(result)
 	return result
@@ -162,25 +173,17 @@ func confirm_create_new_tag(tag: String) :
 	return await Async.any_indexed([ dialog.canceled, dialog.confirmed ]) == 1
 
 
-func _selected(tag: String) -> void:
-	selected.emit(tag)
-	if not socket_tags_valid: return
+func _toggled(toggled_on: bool, tag: String) -> void:
+	toggled.emit(tag, toggled_on)
+	if not (affect_socket and socket_tags_valid): return
 
-	if socket.resource.tags.has(tag):
-		if select_toggle:
-			socket.resource.tags.erase(tag)
-			socket.resource.save()
-	else:
+	if toggled_on:
+		if socket.resource.tags.has(tag): return
+		print("added : %s" % [ tag ])
 		socket.resource.tags.push_back(tag)
 		socket.resource.save()
-
-
-
-
-func _removed(tag: String) -> void:
-	removed.emit(tag)
-	if not socket_tags_valid: return
-
-	if socket.resource.tags.has(tag):
+	else:
+		if not socket.resource.tags.has(tag): return
+		print("removed : %s" % [ tag ])
 		socket.resource.tags.erase(tag)
 		socket.resource.save()

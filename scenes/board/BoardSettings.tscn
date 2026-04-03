@@ -93,6 +93,25 @@ script = ExtResource("7_ul8k1")
 options = 2
 select_toggle = false
 
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container/tabs/board" unique_id=326832442]
+layout_mode = 2
+
+[node name="label" type="Label" parent="v_box_container/tabs/board/h_box_container" unique_id=523371709]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Filter Notes with"
+
+[node name="multi_option" type="OptionButton" parent="v_box_container/tabs/board/h_box_container" unique_id=1347754849]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "any tags"
+popup/item_0/id = 1
+popup/item_1/text = "all tags"
+popup/item_1/id = 0
+popup/item_2/text = "no tags"
+popup/item_2/id = 2
+
 [node name="profile" type="VBoxContainer" parent="v_box_container/tabs" unique_id=726674212]
 visible = false
 layout_mode = 2

@@ -74,6 +74,7 @@ size_flags_vertical = 3
 alignment = 2
 script = ExtResource("7_g80vm")
 options = 11
+multi_select = 2
 
 [connection signal="text_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="set_filter"]
 [connection signal="text_submitted" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="text_submitted"]
