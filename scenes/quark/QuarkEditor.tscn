@@ -18,13 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://cxwdjyt7j824s" path="res://icons/dazzle/underline.svg" id="11_haobq"]
 [ext_resource type="Texture2D" uid="uid://dfmnpflefot5f" path="res://icons/dazzle/paperclip.svg" id="11_urlr5"]
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/dazzle/calendar.svg" id="12_6xg52"]
-[ext_resource type="PackedScene" uid="uid://bn7mhncfae5ej" path="res://scenes/tag/TagsButton.tscn" id="12_b0le4"]
+[ext_resource type="PackedScene" uid="uid://d1kd3voivjxqa" path="res://scenes/tag/TagsPopupButton.tscn" id="12_b0le4"]
 [ext_resource type="Texture2D" uid="uid://b1six852y05dc" path="res://icons/dazzle/strikethrough.svg" id="12_q6141"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="13_6hsx6"]
 [ext_resource type="Texture2D" uid="uid://dfjrd0xjuqx0v" path="res://icons/dazzle/location_pin.svg" id="13_e4rji"]
 [ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="13_eoq34"]
 [ext_resource type="Texture2D" uid="uid://dhjueb438g0ts" path="res://icons/dazzle/text.svg" id="13_syj40"]
-[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/tag/TagList.gd" id="13_telsi"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="14_6xg52"]
 [ext_resource type="Texture2D" uid="uid://b3s0nct0uqpae" path="res://icons/dazzle/flag_fill.svg" id="14_kjyjw"]
 [ext_resource type="Texture2D" uid="uid://difsxbkvq1nua" path="res://icons/dazzle/superscript.svg" id="15_n77bc"]
@@ -272,23 +271,18 @@ caret_mid_grapheme = true
 [node name="meta_bar" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container" unique_id=1605266487]
 layout_mode = 2
 
-[node name="tags" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=175244540 node_paths=PackedStringArray("socket")]
+[node name="tags" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=175244540]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-script = ExtResource("13_telsi")
-socket = NodePath("../../../../../resource_socket")
-options = 10
-select_toggle = false
 
 [node name="controls" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="tag_popup" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("12_b0le4")]
+[node name="tags_popup_button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 instance=ExtResource("12_b0le4")]
 layout_mode = 2
-socket = NodePath("../../../../../../resource_socket")
 
 [node name="colors" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1918610216]
 visible = false
@@ -510,7 +504,6 @@ size_flags_horizontal = 3
 alignment = 2
 
 [connection signal="toggled" from="safe_margin_container/panel_container/v_box_container/text_panel/show_format" to="safe_margin_container/panel_container/v_box_container/text_panel/v_box_container/format" method="set_visible"]
-[connection signal="removed" from="safe_margin_container/panel_container/v_box_container/meta_bar/tags" to="." method="_on_tag_removed"]
 [connection signal="escaped" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/escape" to="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup" method="hide"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/reveal" to="." method="reveal"]
 [connection signal="pressed" from="safe_margin_container/panel_container/v_box_container/meta_bar/controls/more/popup/panel_container/h_box_container/copy" to="." method="copy"]

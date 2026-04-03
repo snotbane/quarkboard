@@ -1,21 +1,16 @@
-[gd_scene format=3 uid="uid://bn7mhncfae5ej"]
+[gd_scene format=3 uid="uid://d1kd3voivjxqa"]
 
-[ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="1_ykk67"]
-[ext_resource type="Script" uid="uid://go8l5lm0vwn4" path="res://scenes/tag/TagsButton.gd" id="2_76q5f"]
-[ext_resource type="Texture2D" uid="uid://j01hkqguphww" path="res://icons/dazzle/tags_fill.svg" id="3_ossd6"]
-[ext_resource type="Script" uid="uid://bsmvxg0vw153g" path="res://scripts/ui/ControlPopup.gd" id="4_p8rdw"]
-[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="6_fggdq"]
-[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/tag/TagList.gd" id="7_g80vm"]
+[ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="1_f8qf8"]
+[ext_resource type="Script" uid="uid://bsmvxg0vw153g" path="res://scripts/ui/ControlPopup.gd" id="2_tb6ha"]
+[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="3_qs3va"]
 
-[node name="tags" type="Button" unique_id=1814274808]
+[node name="tags_popup_button" type="Button" unique_id=1814274808]
 self_modulate = Color(1, 1, 1, 0.5019608)
 tooltip_text = "Tag this item to group it with others."
 mouse_default_cursor_shape = 2
 toggle_mode = true
-icon = ExtResource("1_ykk67")
+icon = ExtResource("1_f8qf8")
 flat = true
-script = ExtResource("2_76q5f")
-icon_pressed = ExtResource("3_ossd6")
 
 [node name="control" type="Control" parent="." unique_id=1388484917]
 custom_minimum_size = Vector2(175, 175)
@@ -46,7 +41,7 @@ offset_right = -532.5
 offset_bottom = -724.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("4_p8rdw")
+script = ExtResource("2_tb6ha")
 as_child = false
 button = NodePath("../..")
 
@@ -60,7 +55,7 @@ keep_editing_on_text_submit = true
 clear_button_enabled = true
 select_all_on_focus = true
 caret_blink = true
-right_icon = ExtResource("6_fggdq")
+right_icon = ExtResource("3_qs3va")
 icon_expand_mode = 2
 right_icon_scale = 0.67
 
@@ -72,9 +67,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
-script = ExtResource("7_g80vm")
-options = 11
-multi_select = 2
 
 [connection signal="text_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="set_filter"]
 [connection signal="text_submitted" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="text_submitted"]

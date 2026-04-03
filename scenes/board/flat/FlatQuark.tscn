@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://xn3xfulhehj4" path="res://scenes/board/flat/FlatQuark.gd" id="1_rkbxp"]
 [ext_resource type="Script" uid="uid://us0x7oqay2jh" path="res://scripts/ui/PreviewLabel.gd" id="3_cxj08"]
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
-[ext_resource type="Script" uid="uid://biq3hx3ajvsyv" path="res://scenes/tag/TagList.gd" id="4_mas2m"]
 [ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="5_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="6_n5fev"]
@@ -14,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="7_xn67a"]
 [ext_resource type="Texture2D" uid="uid://bbgafawka18rg" path="res://icons/dazzle/inbox_fill.svg" id="8_gmaco"]
 [ext_resource type="Texture2D" uid="uid://vtw5mxisiipx" path="res://icons/dazzle/trash_fill.svg" id="10_mas2m"]
-[ext_resource type="PackedScene" uid="uid://bn7mhncfae5ej" path="res://scenes/tag/TagsButton.tscn" id="11_gmaco"]
+[ext_resource type="PackedScene" uid="uid://d1kd3voivjxqa" path="res://scenes/tag/TagsPopupButton.tscn" id="11_gmaco"]
 
 [node name="flat_quark" type="PanelContainer" unique_id=119261583]
 custom_minimum_size = Vector2(240, 10)
@@ -62,12 +61,8 @@ shortcut_keys_enabled = false
 justification_flags = 99
 script = ExtResource("3_cxj08")
 
-[node name="tag_list" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1340809867 node_paths=PackedStringArray("socket")]
+[node name="tag_list" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1340809867]
 layout_mode = 2
-script = ExtResource("4_mas2m")
-socket = NodePath("../../../resource_socket")
-options = 10
-select_toggle = false
 
 [node name="actions" type="HBoxContainer" parent="margin_container/v_box_container" unique_id=119704278]
 layout_mode = 2
@@ -115,9 +110,8 @@ socket = NodePath("../../../../resource_socket")
 status = 3
 icon_pressed = ExtResource("10_mas2m")
 
-[node name="tag_popup" parent="margin_container/v_box_container/actions" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("11_gmaco")]
+[node name="tags_popup_button" parent="margin_container/v_box_container/actions" unique_id=1814274808 instance=ExtResource("11_gmaco")]
 layout_mode = 2
-socket = NodePath("../../../../resource_socket")
 
 [node name="colors" type="Button" parent="margin_container/v_box_container/actions" unique_id=853608149]
 self_modulate = Color(1, 1, 1, 0.5019608)

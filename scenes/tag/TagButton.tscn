@@ -1,7 +1,6 @@
-[gd_scene format=3 uid="uid://0y4t03xeidt5"]
+[gd_scene format=3 uid="uid://dviqhihgm6ltf"]
 
 [ext_resource type="StyleBox" uid="uid://dcaa7v1yusphs" path="res://ui/style_box_tag.tres" id="1_nvhbu"]
-[ext_resource type="Script" uid="uid://cjnyj4l5g2kmk" path="res://scenes/tag/TagButton.gd" id="2_nxv7f"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="3_y8c3w"]
 [ext_resource type="StyleBox" uid="uid://bwkuis1gc7m2h" path="res://ui/style_box_tag_press.tres" id="4_1u00r"]
 [ext_resource type="Texture2D" uid="uid://xaogbwb4o3er" path="res://icons/dazzle/xmark.svg" id="4_lvqu0"]
@@ -11,7 +10,6 @@
 offset_right = 28.0
 offset_bottom = 23.0
 theme_override_styles/panel = ExtResource("3_y8c3w")
-script = ExtResource("2_nxv7f")
 
 [node name="select" type="Button" parent="." unique_id=19860335]
 unique_name_in_owner = true
