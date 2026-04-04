@@ -16,6 +16,9 @@ static var REGEX_TITLE_TEXT := RegEx.create_from_string(r"^\s*(\S.*?)(?:\n|$)")
 static var REGEX_NAME_TEXT := RegEx.create_from_string(r"[\.:@/\"%]")
 
 
+signal tags_changed
+
+
 @export var text : String :
 	set(value):
 		if text == value: return

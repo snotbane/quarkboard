@@ -43,6 +43,7 @@ signal profile_removed(profile: Profile)
 signal active_profile_changed
 signal active_profile_board_added(board: Board)
 signal active_profile_quark_added(quark: Quark)
+signal active_profile_tags_changed
 
 
 func _init() -> void:

@@ -5,6 +5,9 @@ const DIR_NAME := "boards"
 const ICON_UNKNOWN := preload("uid://uh3pt61ejjbp")
 
 
+signal tags_changed
+
+
 @export_storage var name : String
 
 ## A list of filters to include or exclude. For now, this will only filter for tags.

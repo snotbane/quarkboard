@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://d1kd3voivjxqa"]
 
 [ext_resource type="Texture2D" uid="uid://25pa7fdbg5rs" path="res://icons/dazzle/tags.svg" id="1_f8qf8"]
+[ext_resource type="Script" uid="uid://bixgveqqrmptx" path="res://scenes/tag/TagsPopupButton.gd" id="2_qs3va"]
 [ext_resource type="Script" uid="uid://bsmvxg0vw153g" path="res://scripts/ui/ControlPopup.gd" id="2_tb6ha"]
 [ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="3_qs3va"]
+[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="4_tb6ha"]
 
 [node name="tags_popup_button" type="Button" unique_id=1814274808]
 self_modulate = Color(1, 1, 1, 0.5019608)
@@ -11,6 +13,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 icon = ExtResource("1_f8qf8")
 flat = true
+script = ExtResource("2_qs3va")
 
 [node name="control" type="Control" parent="." unique_id=1388484917]
 custom_minimum_size = Vector2(175, 175)
@@ -67,6 +70,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
+script = ExtResource("4_tb6ha")
+socket_mode = 1
+toggle_mode = 3
 
 [connection signal="text_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="set_filter"]
 [connection signal="text_submitted" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="text_submitted"]

@@ -41,7 +41,6 @@ func _quark_added(quark: Quark) -> void:
 	container.masonry.add_child(node)
 
 	await get_tree().process_frame
-
 	node.quark = quark
 
 
