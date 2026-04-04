@@ -3,6 +3,7 @@ class_name TagButton extends PanelContainer
 
 signal toggled(toggled_on: bool)
 signal pressed
+signal removed
 
 var _text : String
 @export var text : String :
@@ -34,10 +35,24 @@ var _button_pressed : bool
 		%main.button_pressed = value
 
 
+var _feature_remove : bool
+@export var feature_remove : bool :
+	get: return %remove.visible
+	set(value):
+		_feature_remove = value
+		if not is_node_ready(): return
+
+		%remove.visible = value
+
+
+
 func _ready() -> void:
 	%label.text = _text
+
 	%main.toggle_mode = _toggle_mode
 	%main.button_pressed = _button_pressed
-
 	%main.toggled.connect(toggled.emit)
 	%main.pressed.connect(pressed.emit)
+
+	%remove.visible = _feature_remove
+	%remove.pressed.connect(removed.emit)

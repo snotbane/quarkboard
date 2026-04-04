@@ -62,10 +62,15 @@ shortcut_keys_enabled = false
 justification_flags = 99
 script = ExtResource("3_cxj08")
 
+[node name="space" type="Control" parent="margin_container/v_box_container" unique_id=1571187126]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="tag_list" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1340809867 node_paths=PackedStringArray("socket")]
 layout_mode = 2
 script = ExtResource("4_mas2m")
 socket = NodePath("../../../resource_socket")
+feature_remove = true
 
 [node name="actions" type="HBoxContainer" parent="margin_container/v_box_container" unique_id=119704278]
 layout_mode = 2

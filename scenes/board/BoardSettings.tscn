@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="4_ndfu1"]
 [ext_resource type="Texture2D" uid="uid://bmyh3jw4pdq3o" path="res://icons/dazzle/gear_fill.svg" id="5_42yhp"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="6_j03tw"]
+[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="7_c5oqb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1o47n"]
 content_margin_left = 8.0
@@ -88,6 +89,8 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("7_c5oqb")
+toggle_mode = 2
 
 [node name="multi" type="HBoxContainer" parent="v_box_container/tabs/board" unique_id=326832442]
 visible = false
@@ -121,6 +124,9 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("7_c5oqb")
+socket_mode = 1
+toggle_mode = 3
 
 [node name="label" type="Label" parent="v_box_container/tabs/profile" unique_id=955023355]
 layout_mode = 2

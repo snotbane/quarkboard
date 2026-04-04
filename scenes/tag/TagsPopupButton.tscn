@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bixgveqqrmptx" path="res://scenes/tag/TagsPopupButton.gd" id="2_qs3va"]
 [ext_resource type="Script" uid="uid://bsmvxg0vw153g" path="res://scripts/ui/ControlPopup.gd" id="2_tb6ha"]
 [ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="3_qs3va"]
+[ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="4_l13bg"]
 [ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="4_tb6ha"]
 
 [node name="tags_popup_button" type="Button" unique_id=1814274808]
@@ -51,11 +52,14 @@ button = NodePath("../..")
 [node name="v_box_container" type="VBoxContainer" parent="control/control_popup" unique_id=1276979273]
 layout_mode = 2
 
-[node name="tag_search" type="LineEdit" parent="control/control_popup/v_box_container" unique_id=1702252511]
+[node name="search" type="LineEdit" parent="control/control_popup/v_box_container" unique_id=1702252511]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/focus = ExtResource("4_l13bg")
 placeholder_text = "Search..."
 keep_editing_on_text_submit = true
 clear_button_enabled = true
+flat = true
 select_all_on_focus = true
 caret_blink = true
 right_icon = ExtResource("3_qs3va")
@@ -74,6 +78,7 @@ script = ExtResource("4_tb6ha")
 socket_mode = 1
 toggle_mode = 3
 
-[connection signal="text_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="set_filter"]
-[connection signal="text_submitted" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/list" method="text_submitted"]
-[connection signal="visibility_changed" from="control/control_popup/v_box_container/tag_search" to="control/control_popup/v_box_container/tag_search" method="clear"]
+[connection signal="text_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/list" method="set_filter"]
+[connection signal="text_submitted" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/list" method="touch_tag"]
+[connection signal="visibility_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/search" method="grab_focus"]
+[connection signal="visibility_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/search" method="clear"]

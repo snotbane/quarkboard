@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/dazzle/calendar.svg" id="12_6xg52"]
 [ext_resource type="PackedScene" uid="uid://d1kd3voivjxqa" path="res://scenes/tag/TagsPopupButton.tscn" id="12_b0le4"]
 [ext_resource type="Texture2D" uid="uid://b1six852y05dc" path="res://icons/dazzle/strikethrough.svg" id="12_q6141"]
+[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="12_telsi"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="13_6hsx6"]
 [ext_resource type="Texture2D" uid="uid://dfjrd0xjuqx0v" path="res://icons/dazzle/location_pin.svg" id="13_e4rji"]
 [ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="13_eoq34"]
@@ -271,18 +272,22 @@ caret_mid_grapheme = true
 [node name="meta_bar" type="VBoxContainer" parent="safe_margin_container/panel_container/v_box_container" unique_id=1605266487]
 layout_mode = 2
 
-[node name="tags" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=175244540]
+[node name="tag_list" type="HFlowContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=175244540 node_paths=PackedStringArray("socket")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+script = ExtResource("12_telsi")
+socket = NodePath("../../../../../resource_socket")
+feature_remove = true
 
 [node name="controls" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="tags_popup_button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 instance=ExtResource("12_b0le4")]
+[node name="tags_popup_button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("12_b0le4")]
 layout_mode = 2
+socket = NodePath("../../../../../../resource_socket")
 
 [node name="colors" type="Button" parent="safe_margin_container/panel_container/v_box_container/meta_bar/controls" unique_id=1918610216]
 visible = false

@@ -9,6 +9,7 @@ static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DI
 
 signal board_added(board: Board)
 signal quark_added(quark: Quark)
+signal tags_changed
 
 @export_storage var name : String
 @export_storage var icon : Texture2D = ICON_DEFAULT

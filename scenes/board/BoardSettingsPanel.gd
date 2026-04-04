@@ -1,13 +1,11 @@
 
 extends Control
 
-
-
 @export var socket : ResourceSocket :
 	set(value):
 		socket = value
-		# %board_tag_list.socket = value
-		# %profile_tag_list.socket = value
+		%board_tag_list.socket = value
+		%profile_tag_list.socket = value
 
 		socket.resource_changed.connect(_resource_changed)
 		socket.resource_value_changed.connect(_resource_value_changed.unbind(1))
