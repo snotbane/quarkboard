@@ -167,8 +167,7 @@ func confirm_create_new_tag(tag: String) :
 	add_child(dialog)
 	dialog.popup_centered()
 
-	return await Async.any_indexed([ dialog.canceled, dialog.confirmed ]) == 1
-
+	return await Async.which([ dialog.canceled, dialog.confirmed ]) == 1
 
 
 func _tag_toggled(toggled_on: bool, tag: String) -> void:

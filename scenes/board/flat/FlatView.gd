@@ -11,7 +11,7 @@ static func get_title_text(string: String) -> String:
 
 
 func _ready() -> void:
-	Machine.inst.active_profile_quark_added.connect(_quark_added)
+	Machine.active_profile.quark_added.connect(_quark_added)
 
 	for quark in Machine.active_profile.quarks:
 		_quark_added(quark)

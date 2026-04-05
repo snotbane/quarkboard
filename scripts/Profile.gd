@@ -7,8 +7,8 @@ const ICON_NULL := preload("uid://tn6tigaqju6d")
 
 static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DIR_EXT)
 
-signal board_added(board: Board)
 signal quark_added(quark: Quark)
+signal boards_changed
 signal tags_changed
 
 @export_storage var name : String
@@ -56,8 +56,6 @@ func _loaded() -> void:
 
 		var board := Board.new()
 		board.load(path)
-
-		boards.push_back(board)
 
 	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 

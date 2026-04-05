@@ -21,7 +21,10 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	parent.board_added.emit(self)
+	if parent.boards.has(self): return
+
+	parent.boards.push_back(self)
+	parent.boards_changed.emit()
 
 
 var icon : Texture2D :
