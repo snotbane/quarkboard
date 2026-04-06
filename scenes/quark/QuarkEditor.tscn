@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/dazzle/calendar.svg" id="12_6xg52"]
 [ext_resource type="PackedScene" uid="uid://d1kd3voivjxqa" path="res://scenes/tag/TagsPopupButton.tscn" id="12_b0le4"]
 [ext_resource type="Texture2D" uid="uid://b1six852y05dc" path="res://icons/dazzle/strikethrough.svg" id="12_q6141"]
-[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="12_telsi"]
+[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/tag/TagList.gd" id="12_telsi"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="13_6hsx6"]
 [ext_resource type="Texture2D" uid="uid://dfjrd0xjuqx0v" path="res://icons/dazzle/location_pin.svg" id="13_e4rji"]
 [ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="13_eoq34"]

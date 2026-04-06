@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/dazzle/clone.svg" id="9_q71o8"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_71axf"]
 [ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/dazzle/circle_dashed.svg" id="15_4oep2"]
-[ext_resource type="Script" uid="uid://qpph4wfv8acy" path="res://scenes/profile/ProfileTagList.gd" id="17_qto30"]
+[ext_resource type="Script" uid="uid://qpph4wfv8acy" path="res://scenes/tag/ProfileTagList.gd" id="17_qto30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
 

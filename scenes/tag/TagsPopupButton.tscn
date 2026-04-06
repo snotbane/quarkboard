@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bsmvxg0vw153g" path="res://scripts/ui/ControlPopup.gd" id="2_tb6ha"]
 [ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="3_qs3va"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="4_l13bg"]
-[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="4_tb6ha"]
+[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/tag/TagList.gd" id="4_tb6ha"]
 
 [node name="tags_popup_button" type="Button" unique_id=1814274808]
 self_modulate = Color(1, 1, 1, 0.5019608)

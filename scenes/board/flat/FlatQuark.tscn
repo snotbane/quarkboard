@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://xn3xfulhehj4" path="res://scenes/board/flat/FlatQuark.gd" id="1_rkbxp"]
 [ext_resource type="Script" uid="uid://us0x7oqay2jh" path="res://scripts/ui/PreviewLabel.gd" id="3_cxj08"]
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
-[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/board/flat/TagList.gd" id="4_mas2m"]
+[ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/tag/TagList.gd" id="4_mas2m"]
 [ext_resource type="Script" uid="uid://diw4o36q5fmvb" path="res://scenes/quark/QuarkStatusButton.gd" id="5_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://b25kjh2s24s5s" path="res://icons/profile_icons/swatchbook.svg" id="6_2h6w2"]
 [ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="6_n5fev"]
