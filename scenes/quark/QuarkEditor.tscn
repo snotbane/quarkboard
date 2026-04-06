@@ -278,6 +278,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 script = ExtResource("12_telsi")
 socket = NodePath("../../../../../resource_socket")
+toggle_mode = 1
 feature_remove = true
 
 [node name="controls" type="HBoxContainer" parent="safe_margin_container/panel_container/v_box_container/meta_bar" unique_id=640411552]

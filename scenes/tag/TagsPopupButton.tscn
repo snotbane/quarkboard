@@ -76,7 +76,7 @@ size_flags_vertical = 3
 alignment = 2
 script = ExtResource("4_tb6ha")
 socket_mode = 1
-toggle_mode = 3
+toggle_mode = 4
 
 [connection signal="text_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/list" method="set_filter"]
 [connection signal="text_submitted" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/list" method="touch_tag"]

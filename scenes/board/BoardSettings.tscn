@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d7a3fo3dglu8"]
 
 [ext_resource type="Script" uid="uid://cdarq8jmrxa8r" path="res://scenes/board/BoardSettingsPanel.gd" id="1_c5oqb"]
-[ext_resource type="Script" uid="uid://eufi46qvlf6t" path="res://addons/myth/modules/misc/QuickTabContainer.gd" id="2_e40cw"]
+[ext_resource type="Script" uid="uid://eufi46qvlf6t" path="res://addons/myth/modules/misc/SoloContainer.gd" id="2_e40cw"]
 [ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/dazzle/gear.svg" id="3_w31kk"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="4_ndfu1"]
 [ext_resource type="Texture2D" uid="uid://bmyh3jw4pdq3o" path="res://icons/dazzle/gear_fill.svg" id="5_42yhp"]
@@ -90,7 +90,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("7_c5oqb")
-toggle_mode = 2
+toggle_mode = 3
 
 [node name="multi" type="HBoxContainer" parent="v_box_container/tabs/board" unique_id=326832442]
 visible = false
@@ -126,7 +126,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("7_c5oqb")
 socket_mode = 1
-toggle_mode = 3
+toggle_mode = 4
 
 [node name="label" type="Label" parent="v_box_container/tabs/profile" unique_id=955023355]
 layout_mode = 2

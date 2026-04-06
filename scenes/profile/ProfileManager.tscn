@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/dazzle/clone.svg" id="9_q71o8"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_71axf"]
 [ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/dazzle/circle_dashed.svg" id="15_4oep2"]
+[ext_resource type="Script" uid="uid://qpph4wfv8acy" path="res://scenes/profile/ProfileTagList.gd" id="17_qto30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
 
@@ -130,7 +131,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_71axf")
 [node name="profile_editor" type="PanelContainer" parent="h_split_container/panel_container" unique_id=1570939945]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="visibility_controller" type="Node" parent="h_split_container/panel_container/profile_editor" unique_id=1751573922]
 script = SubResource("GDScript_4oep2")
@@ -222,6 +222,20 @@ dialog_text = "Hiding this profile will not delete any data from the system. It 
 
 (To completely delete a profile and all of its contents, delete the .qbdp folder in the file system.)"
 dialog_autowrap = true
+
+[node name="scroll_container" type="ScrollContainer" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=1583960620]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container" unique_id=1290697419 node_paths=PackedStringArray("socket")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("17_qto30")
+socket = NodePath("../../../resource_socket")
+feature_rename = true
+feature_remove = true
+confirm_remove = true
 
 [node name="importer" type="Control" parent="." unique_id=1715073317]
 visible = false

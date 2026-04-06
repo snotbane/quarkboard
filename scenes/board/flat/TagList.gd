@@ -12,8 +12,10 @@ signal tag_pressed(tag: String)
 		socket.resource_value_changed.connect(_resource_value_changed.unbind(1))
 
 @export_enum("Socket Tags Only", "Profile + Toggle Socket Tags") var socket_mode : int = 0
-@export_enum("Press Only", "Single Select", "Multi Select with meta", "Multi Select") var toggle_mode : int = 0
+@export_enum("Disabled", "Press Only", "Single Select", "Multi Select with meta", "Multi Select") var toggle_mode : int = 0
+@export var feature_rename : bool = false
 @export var feature_remove : bool = false
+@export var confirm_remove : bool = false
 
 var _filter_lower : String
 var filter : String :
@@ -36,14 +38,27 @@ func find_tag_button(tag: String) -> TagButton:
 		return child
 	return null
 
+var active_profile : Profile
 
 func _ready() -> void:
 	visibility_changed.connect(_visibility_changed)
-	Machine.active_profile.tags_changed.connect(recreate_buttons)
+	Machine.inst.active_profile_changed.connect(_active_profile_changed)
+	_active_profile_changed()
+
+
+func _active_profile_changed() -> void:
+	if active_profile:
+		active_profile.tags_changed.disconnect(recreate_buttons)
+
+	active_profile = Machine.active_profile
+
+	if active_profile:
+		active_profile.tags_changed.connect(recreate_buttons)
+
 
 
 func _resource_value_changed() -> void:
-	if socket.resource:
+	if socket.resource and socket.resource != Machine.active_profile:
 		socket.resource.tags_changed.connect(reorder_buttons if socket_mode == 1 else recreate_buttons)
 
 	recreate_buttons()
@@ -88,9 +103,12 @@ func recreate_buttons() -> void:
 func create_button(tag: String) -> TagButton:
 	var result : TagButton = TAG_BUTTON_SCENE.instantiate()
 	result.text = tag
-	result.toggle_mode = toggle_mode > 0
+	result.disabled = toggle_mode == 0
+	result.toggle_mode = toggle_mode > 1
 	result.button_pressed = result.toggle_mode and socket_mode != 0 and socket and socket.resource.tags.has(tag)
+	result.feature_rename = feature_rename
 	result.feature_remove = feature_remove
+	result.confirm_remove = confirm_remove
 
 	result.toggled.connect(_tag_toggled.bind(tag))
 	result.pressed.connect(_tag_pressed.bind(tag))
@@ -116,7 +134,7 @@ func reorder_buttons() -> void:
 	for child in children:
 		child.visible = filter.is_empty() or child.text.to_lower().contains(_filter_lower)
 		match socket_mode:
-			1 when socket and toggle_mode > 0:
+			1 when socket and toggle_mode > 1:
 				child.button_pressed = child.text in socket.resource.tags
 		add_child(child)
 
@@ -141,6 +159,8 @@ func _get_tag_filter_score(tag: String) -> int:
 
 
 func touch_tag(text: String) -> void:
+	if text.is_empty(): return
+
 	var create_new := true
 
 	var text_lower := text.to_lower()

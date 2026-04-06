@@ -77,3 +77,53 @@ func delete() -> void:
 
 	super.delete()
 
+
+func can_add_tag(tag: String) -> bool:
+	return not (tags.is_empty() or tags.has(tag))
+
+
+func rename_tag_globally(tag: String, new_tag: String) -> void:
+	assert(tags.has(tag))
+	if not can_add_tag(new_tag): return
+
+	for quark in quarks:
+		if not quark.tags.has(tag): continue
+
+		quark.tags.erase(tag)
+		quark.tags.push_back(new_tag)
+		quark.save()
+
+	for board in boards:
+		if not board.tags.has(tag): continue
+
+		board.tags.erase(tag)
+		board.tags.push_back(new_tag)
+		board.save()
+
+	tags.erase(tag)
+	tags.push_back(new_tag)
+	save()
+	tags_changed.emit()
+
+	pass
+
+
+func remove_tag_globally(tag: String) -> void:
+	assert(tags.has(tag))
+
+	for quark in quarks:
+		if not quark.tags.has(tag): continue
+
+		quark.tags.erase(tag)
+		quark.save()
+
+	for board in boards:
+		if not board.tags.has(tag): continue
+
+		board.tags.erase(tag)
+		board.save()
+
+	tags.erase(tag)
+	save()
+	tags_changed.emit()
+
