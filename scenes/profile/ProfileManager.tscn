@@ -228,11 +228,19 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container" unique_id=1290697419 node_paths=PackedStringArray("socket")]
+[node name="margin_container" type="MarginContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container" unique_id=1188955642]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container/margin_container" unique_id=1290697419 node_paths=PackedStringArray("socket")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("17_qto30")
-socket = NodePath("../../../resource_socket")
+socket = NodePath("../../../../resource_socket")
 feature_rename = true
 feature_remove = true
 confirm_remove = true

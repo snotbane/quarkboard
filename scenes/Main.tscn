@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dp76t3aegbnha"]
 
 [ext_resource type="Script" uid="uid://cjwdhgbhm3d5y" path="res://scripts/ui/SafeMarginContainer.gd" id="1_elqb8"]
-[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme.tres" id="1_nfivy"]
+[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme_dark.tres" id="1_nfivy"]
 [ext_resource type="Script" uid="uid://bw4p4xivpjv0n" path="res://scripts/GlobalNode.gd" id="2_3p2gp"]
 [ext_resource type="PackedScene" uid="uid://i8l2xr5uqdq6" path="res://scenes/board/SelectItemBoardViewer.tscn" id="4_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/dazzle/grid.svg" id="5_nxtc6"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://gs7gjxvxk85h" path="res://icons/dazzle/calendar.svg" id="9_bjd11"]
 [ext_resource type="Texture2D" uid="uid://cw8glbojunhfy" path="res://icons/dazzle/notebook.svg" id="10_qmy6f"]
 [ext_resource type="Script" uid="uid://dx24n4sp30s52" path="res://scenes/board/CreateBoardActions.gd" id="11_cvmbd"]
+[ext_resource type="Texture2D" uid="uid://bcmkea36pxfno" path="res://icons/dazzle/dot.svg" id="12_1nqs0"]
 [ext_resource type="Script" uid="uid://cdbhdjg02uuv8" path="res://scenes/QuarkEditorGlobal.gd" id="17_ft6cd"]
 [ext_resource type="Script" uid="uid://djmsefj2kiwae" path="res://scripts/ui/TabContainerPlusOne.gd" id="18_bb450"]
 
@@ -34,7 +35,21 @@ func _active_profile_changed() -> void:
 	text = Machine.active_profile.name if Machine.active_profile else tr(\"Profile\")
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1iba3"]
+bg_color = Color(0.07058824, 0.07450981, 0.078431375, 1)
+shadow_color = Color(0, 0, 0, 0.2509804)
+shadow_size = 8
+shadow_offset = Vector2(2, 4)
+
 [node name="canvas_layer" type="CanvasLayer" unique_id=1932569945]
+
+[node name="color_rect" type="ColorRect" parent="." unique_id=256114629]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.07450981, 0.078431375, 1)
 
 [node name="main" type="MarginContainer" parent="." unique_id=1507910763]
 anchors_preset = 15
@@ -131,6 +146,7 @@ mouse_filter = 2
 script = ExtResource("11_cvmbd")
 
 [node name="panel_container" type="PanelContainer" parent="main/create_board" unique_id=1710137238]
+self_modulate = Color(1, 1, 1, 0.7058824)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,6 +154,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1iba3")
+
+[node name="texture_rect" type="TextureRect" parent="main/create_board/panel_container" unique_id=1237549748]
+self_modulate = Color(0.15294118, 0.16078432, 0.16862746, 1)
+layout_mode = 2
+texture = ExtResource("12_1nqs0")
+stretch_mode = 1
 
 [node name="panel_container" type="PanelContainer" parent="main/create_board/panel_container" unique_id=639717787]
 custom_minimum_size = Vector2(300, 0)

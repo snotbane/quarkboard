@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ik6dmd4algrl"]
 
 [ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="1_7fsuq"]
+[ext_resource type="Theme" uid="uid://df5ddjiht55nr" path="res://ui/quark_dark.tres" id="1_ksw3f"]
 [ext_resource type="Script" uid="uid://xn3xfulhehj4" path="res://scenes/board/flat/FlatQuark.gd" id="1_rkbxp"]
 [ext_resource type="Script" uid="uid://us0x7oqay2jh" path="res://scripts/ui/PreviewLabel.gd" id="3_cxj08"]
 [ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="3_n5fev"]
@@ -17,19 +18,15 @@
 [ext_resource type="PackedScene" uid="uid://d1kd3voivjxqa" path="res://scenes/tag/TagsPopupButton.tscn" id="11_gmaco"]
 
 [node name="flat_quark" type="PanelContainer" unique_id=119261583]
-custom_minimum_size = Vector2(240, 10)
-offset_right = 200.0
-offset_bottom = 33.0
+custom_minimum_size = Vector2(0, 10)
+offset_right = 280.0
+offset_bottom = 142.0
+theme = ExtResource("1_ksw3f")
 script = ExtResource("1_rkbxp")
 
 [node name="resource_socket" type="Node" parent="." unique_id=1901970041]
 script = ExtResource("1_7fsuq")
 metadata/_custom_type_script = "uid://cg26odhngglnc"
-
-[node name="button" type="Button" parent="." unique_id=1742632581]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-flat = true
 
 [node name="margin_container" type="MarginContainer" parent="." unique_id=1305128167]
 layout_mode = 2
@@ -52,7 +49,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
-focus_mode = 0
 focus_behavior_recursive = 1
 mouse_filter = 2
 bbcode_enabled = true
@@ -65,17 +61,20 @@ script = ExtResource("3_cxj08")
 [node name="space" type="Control" parent="margin_container/v_box_container" unique_id=1571187126]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="tag_list" type="HFlowContainer" parent="margin_container/v_box_container" unique_id=1340809867 node_paths=PackedStringArray("socket")]
 layout_mode = 2
 script = ExtResource("4_mas2m")
 socket = NodePath("../../../resource_socket")
-feature_remove = true
+toggle_mode = 1
 
 [node name="actions" type="HBoxContainer" parent="margin_container/v_box_container" unique_id=119704278]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="flag" type="Button" parent="margin_container/v_box_container/actions" unique_id=1887408068 node_paths=PackedStringArray("socket")]
@@ -161,5 +160,4 @@ offset_top = -12.0
 offset_right = 12.0
 offset_bottom = 12.0
 
-[connection signal="pressed" from="button" to="." method="_on_pressed"]
 [connection signal="pressed" from="margin_container/v_box_container/actions/popout" to="." method="_on_popout_pressed"]

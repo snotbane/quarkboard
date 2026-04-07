@@ -5,6 +5,7 @@ const TAG_BUTTON_SCENE := preload("uid://dviqhihgm6ltf")
 
 signal tag_toggled(toggled_on: bool, tag: String)
 signal tag_pressed(tag: String)
+signal filter_changed(new_filter: String)
 
 @export var socket : ResourceSocket :
 	set(value):
@@ -16,6 +17,7 @@ signal tag_pressed(tag: String)
 @export var feature_rename : bool = false
 @export var feature_remove : bool = false
 @export var confirm_remove : bool = false
+@export var feature_display : bool = false
 
 var _filter_lower : String
 var filter : String :
@@ -25,6 +27,7 @@ var filter : String :
 		if _filter_lower == value.to_lower(): return
 		_filter_lower = value.to_lower()
 
+		filter_changed.emit(filter)
 		reorder_buttons()
 func set_filter(value: String) -> void:
 	filter = value
@@ -104,11 +107,12 @@ func create_button(tag: String) -> TagButton:
 	var result : TagButton = TAG_BUTTON_SCENE.instantiate()
 	result.text = tag
 	result.disabled = toggle_mode == 0
-	result.toggle_mode = toggle_mode > 1
-	result.button_pressed = result.toggle_mode and socket_mode != 0 and socket and socket.resource.tags.has(tag)
+	result.toggle_mode = toggle_mode >= 2
+	result.button_pressed = result.toggle_mode and socket_mode == 1 and socket and socket.resource.tags.has(tag)
 	result.feature_rename = feature_rename
 	result.feature_remove = feature_remove
 	result.confirm_remove = confirm_remove
+	result.feature_display = feature_display
 
 	result.toggled.connect(_tag_toggled.bind(tag))
 	result.pressed.connect(_tag_pressed.bind(tag))
@@ -134,7 +138,7 @@ func reorder_buttons() -> void:
 	for child in children:
 		child.visible = filter.is_empty() or child.text.to_lower().contains(_filter_lower)
 		match socket_mode:
-			1 when socket and toggle_mode > 1:
+			1 when socket and child.toggle_mode:
 				child.button_pressed = child.text in socket.resource.tags
 		add_child(child)
 
@@ -158,41 +162,33 @@ func _get_tag_filter_score(tag: String) -> int:
 	return tag.find(_filter_lower)
 
 
-func touch_tag(text: String) -> void:
-	if text.is_empty(): return
+func add_existing_from_filter() -> void:
+	if filter.is_empty(): return
 
-	var create_new := true
-
-	var text_lower := text.to_lower()
 	for tag in Machine.active_profile.tags:
-		if text_lower == tag.to_lower():
-			create_new = false
-			text = tag
-			break
+		if _filter_lower != tag.to_lower(): continue
 
-	if create_new:
-		if not await confirm_create_new_tag(text): return
+		var button := find_tag_button(filter)
+		button.button_pressed = not button._button_pressed
+		filter = ""
 
-		Machine.active_profile.tags.push_back(text)
-		Machine.active_profile.save()
-		Machine.active_profile.tags_changed.emit()
+		break
 
-	var button := find_tag_button(text)
+
+func create_from_filter() -> void:
+	Machine.active_profile.tags.push_back(filter)
+	Machine.active_profile.save()
+	Machine.active_profile.tags_changed.emit()
+
+	var button := find_tag_button(filter)
 	button.button_pressed = not button._button_pressed
-
-func confirm_create_new_tag(tag: String) :
-	var dialog := ConfirmationDialog.new()
-	dialog.dialog_text = "You are creating a new tag \"%s\"." % [ tag ]
-	dialog.ok_button_text = "Create"
-	add_child(dialog)
-	dialog.popup_centered()
-
-	return await Async.which([ dialog.canceled, dialog.confirmed ]) == 1
+	filter = ""
 
 
 func _tag_toggled(toggled_on: bool, tag: String) -> void:
 	match socket_mode:
 		1 when socket:
+			if toggled_on == socket.resource.tags.has(tag): return
 			if toggled_on:
 				socket.resource.tags.push_back(tag)
 			else:
@@ -211,3 +207,4 @@ func _tag_removed(tag: String) -> void:
 	socket.resource.tags.erase(tag)
 	socket.resource.save()
 	socket.resource.tags_changed.emit()
+

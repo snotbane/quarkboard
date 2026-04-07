@@ -6,9 +6,32 @@
 [ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="3_qs3va"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="4_l13bg"]
 [ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/tag/TagList.gd" id="4_tb6ha"]
+[ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/dazzle/plus.svg" id="7_lcr0b"]
+
+[sub_resource type="GDScript" id="GDScript_bosub"]
+script/source = "
+extends Button
+
+@export var message : String = \"%s\"
+
+func _on_list_filter_changed(new_filter: String) -> void:
+	var exists := false
+	var _filter_lower := new_filter.to_lower()
+	for tag in Machine.active_profile.tags:
+		if _filter_lower != tag.to_lower(): continue
+		
+		exists = true
+		
+		break
+	
+	visible = not (new_filter.is_empty() or exists)
+	text = message % new_filter
+"
 
 [node name="tags_popup_button" type="Button" unique_id=1814274808]
 self_modulate = Color(1, 1, 1, 0.5019608)
+offset_right = 40.0
+offset_bottom = 40.0
 tooltip_text = "Tag this item to group it with others."
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -39,9 +62,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -707.5
+offset_left = -703.5
 offset_top = -899.0
-offset_right = -532.5
+offset_right = -528.5
 offset_bottom = -724.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -49,16 +72,18 @@ script = ExtResource("2_tb6ha")
 as_child = false
 button = NodePath("../..")
 
-[node name="v_box_container" type="VBoxContainer" parent="control/control_popup" unique_id=1276979273]
+[node name="margin_container" type="MarginContainer" parent="control/control_popup" unique_id=593669311]
 layout_mode = 2
 
-[node name="search" type="LineEdit" parent="control/control_popup/v_box_container" unique_id=1702252511]
+[node name="v_box_container" type="VBoxContainer" parent="control/control_popup/margin_container" unique_id=1276979273]
+layout_mode = 2
+
+[node name="search" type="LineEdit" parent="control/control_popup/margin_container/v_box_container" unique_id=1702252511]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/focus = ExtResource("4_l13bg")
 placeholder_text = "Search..."
 keep_editing_on_text_submit = true
-clear_button_enabled = true
 flat = true
 select_all_on_focus = true
 caret_blink = true
@@ -66,10 +91,10 @@ right_icon = ExtResource("3_qs3va")
 icon_expand_mode = 2
 right_icon_scale = 0.67
 
-[node name="h_separator" type="HSeparator" parent="control/control_popup/v_box_container" unique_id=2109930797]
+[node name="h_separator" type="HSeparator" parent="control/control_popup/margin_container/v_box_container" unique_id=2109930797]
 layout_mode = 2
 
-[node name="list" type="HFlowContainer" parent="control/control_popup/v_box_container" unique_id=1721749887]
+[node name="list" type="HFlowContainer" parent="control/control_popup/margin_container/v_box_container" unique_id=1721749887]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -77,8 +102,23 @@ alignment = 2
 script = ExtResource("4_tb6ha")
 socket_mode = 1
 toggle_mode = 4
+feature_display = true
 
-[connection signal="text_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/list" method="set_filter"]
-[connection signal="text_submitted" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/list" method="touch_tag"]
-[connection signal="visibility_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/search" method="grab_focus"]
-[connection signal="visibility_changed" from="control/control_popup/v_box_container/search" to="control/control_popup/v_box_container/search" method="clear"]
+[node name="create" type="Button" parent="control/control_popup/margin_container/v_box_container" unique_id=934862035]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+icon = ExtResource("7_lcr0b")
+alignment = 0
+autowrap_mode = 3
+script = SubResource("GDScript_bosub")
+message = "Create \"%s\""
+
+[connection signal="text_changed" from="control/control_popup/margin_container/v_box_container/search" to="control/control_popup/margin_container/v_box_container/list" method="set_filter"]
+[connection signal="text_submitted" from="control/control_popup/margin_container/v_box_container/search" to="control/control_popup/margin_container/v_box_container/list" method="add_existing_from_filter" unbinds=1]
+[connection signal="visibility_changed" from="control/control_popup/margin_container/v_box_container/search" to="control/control_popup/margin_container/v_box_container/search" method="grab_focus"]
+[connection signal="visibility_changed" from="control/control_popup/margin_container/v_box_container/search" to="control/control_popup/margin_container/v_box_container/search" method="clear"]
+[connection signal="filter_changed" from="control/control_popup/margin_container/v_box_container/list" to="control/control_popup/margin_container/v_box_container/create" method="_on_list_filter_changed"]
+[connection signal="pressed" from="control/control_popup/margin_container/v_box_container/create" to="control/control_popup/margin_container/v_box_container/list" method="create_from_filter"]

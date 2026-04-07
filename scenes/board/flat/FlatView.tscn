@@ -1,19 +1,16 @@
 [gd_scene format=3 uid="uid://i4omm3hsucbn"]
 
+[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme_dark.tres" id="1_1o47n"]
 [ext_resource type="Script" uid="uid://cs7r1ik3e8554" path="res://scenes/board/flat/FlatView.gd" id="1_43arh"]
 [ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="2_3c1lg"]
 [ext_resource type="PackedScene" uid="uid://c5af1kmoyp7o7" path="res://scenes/board/flat/FlatGroupPanel.tscn" id="2_rfwpd"]
+[ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="4_dk8r6"]
 [ext_resource type="PackedScene" uid="uid://d7a3fo3dglu8" path="res://scenes/board/BoardSettings.tscn" id="4_rfwpd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43arh"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_48orc"]
-device = -1
-command_or_control_autoremap = true
-keycode = 78
-
-[sub_resource type="Shortcut" id="Shortcut_p58po"]
-events = [SubResource("InputEventKey_48orc")]
+[ext_resource type="Texture2D" uid="uid://cntrsxw7i0q1" path="res://icons/dazzle/camera.svg" id="5_7rkya"]
+[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="5_mpw8x"]
+[ext_resource type="Texture2D" uid="uid://nh14mgmh8cob" path="res://icons/dazzle/microphone_alt_1.svg" id="6_3wkm6"]
+[ext_resource type="Texture2D" uid="uid://dy5g2gwti0k3v" path="res://icons/dazzle/scribble.svg" id="7_mpw8x"]
+[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="9_mpw8x"]
 
 [node name="flat_view" type="Control" unique_id=1424381750]
 layout_mode = 3
@@ -22,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_1o47n")
 script = ExtResource("1_43arh")
 
 [node name="resource_socket" type="Node" parent="." unique_id=1086232912]
@@ -36,65 +34,94 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="control" type="Control" parent="h_box_container" unique_id=1093754764]
+[node name="container" type="PanelContainer" parent="h_box_container" unique_id=1741792255]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("4_dk8r6")
 
-[node name="quark_panel" type="PanelContainer" parent="h_box_container/control" unique_id=1040532669]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_43arh")
-
-[node name="scroll_container" type="ScrollContainer" parent="h_box_container/control/quark_panel" unique_id=209756389]
+[node name="scroll_container" type="ScrollContainer" parent="h_box_container/container" unique_id=209756389]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="margin_container" type="MarginContainer" parent="h_box_container/control/quark_panel/scroll_container" unique_id=183392736]
+[node name="margin_container" type="MarginContainer" parent="h_box_container/container/scroll_container" unique_id=183392736]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_top = 88
 
-[node name="v_box_container" type="VBoxContainer" parent="h_box_container/control/quark_panel/scroll_container/margin_container" unique_id=1070853866]
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/container/scroll_container/margin_container" unique_id=1070853866]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/separation = 10
+alignment = 2
 
-[node name="create_quark_button" type="Button" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=2083484638]
-layout_mode = 2
-shortcut = SubResource("Shortcut_p58po")
-text = "Create New Note"
-
-[node name="flag" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1846533377 instance=ExtResource("2_rfwpd")]
+[node name="flag" parent="h_box_container/container/scroll_container/margin_container/v_box_container" unique_id=1846533377 instance=ExtResource("2_rfwpd")]
 unique_name_in_owner = true
 layout_mode = 2
-label_text = "Flagged"
+label_text = "[img]uid://ovp3pmy0nm00[/img] Flagged"
 status = 1
 
-[node name="none" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=384624617 instance=ExtResource("2_rfwpd")]
+[node name="none" parent="h_box_container/container/scroll_container/margin_container/v_box_container" unique_id=384624617 instance=ExtResource("2_rfwpd")]
 unique_name_in_owner = true
 layout_mode = 2
+label_text = "[img]uid://ckl3sfmnlmgdi[/img] Noted"
 
-[node name="archive" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=715706812 instance=ExtResource("2_rfwpd")]
+[node name="archive" parent="h_box_container/container/scroll_container/margin_container/v_box_container" unique_id=715706812 instance=ExtResource("2_rfwpd")]
 unique_name_in_owner = true
 layout_mode = 2
-label_text = "Archived"
+label_text = "[img]uid://d1b7g70es04xe[/img] Archived"
 status = 2
 
-[node name="recycle" parent="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container" unique_id=1869487386 instance=ExtResource("2_rfwpd")]
+[node name="recycle" parent="h_box_container/container/scroll_container/margin_container/v_box_container" unique_id=1869487386 instance=ExtResource("2_rfwpd")]
 unique_name_in_owner = true
 layout_mode = 2
-label_text = "Recycled"
+label_text = "[img]uid://cgmyjasbsxhe3[/img] Recycled"
 status = 3
+
+[node name="margin_container" type="MarginContainer" parent="h_box_container/container" unique_id=1967301259]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="panel_container" type="PanelContainer" parent="h_box_container/container/margin_container" unique_id=146529059]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="h_box_container" type="HBoxContainer" parent="h_box_container/container/margin_container/panel_container" unique_id=369113554]
+layout_mode = 2
+alignment = 1
+
+[node name="search" type="LineEdit" parent="h_box_container/container/margin_container/panel_container/h_box_container" unique_id=264165918]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Search..."
+expand_to_text_length = true
+right_icon = ExtResource("5_mpw8x")
+icon_expand_mode = 1
+right_icon_scale = 0.5
+
+[node name="capture" type="Button" parent="h_box_container/container/margin_container/panel_container/h_box_container" unique_id=719515046]
+layout_mode = 2
+icon = ExtResource("5_7rkya")
+
+[node name="record" type="Button" parent="h_box_container/container/margin_container/panel_container/h_box_container" unique_id=384722038]
+layout_mode = 2
+icon = ExtResource("6_3wkm6")
+
+[node name="draw" type="Button" parent="h_box_container/container/margin_container/panel_container/h_box_container" unique_id=1313567460]
+layout_mode = 2
+icon = ExtResource("7_mpw8x")
+
+[node name="write" type="Button" parent="h_box_container/container/margin_container/panel_container/h_box_container" unique_id=940172587]
+layout_mode = 2
+icon = ExtResource("9_mpw8x")
 
 [node name="board_settings" parent="h_box_container" unique_id=807210196 node_paths=PackedStringArray("socket") instance=ExtResource("4_rfwpd")]
 layout_mode = 2
 socket = NodePath("../../resource_socket")
 
-[connection signal="pressed" from="h_box_container/control/quark_panel/scroll_container/margin_container/v_box_container/create_quark_button" to="." method="create_new_quark"]
+[connection signal="pressed" from="h_box_container/container/margin_container/panel_container/h_box_container/write" to="." method="create_new_quark"]

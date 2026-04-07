@@ -1,6 +1,0 @@
-[gd_resource type="Theme" format=3 uid="uid://bxb0g3nks2nwl"]
-
-[ext_resource type="FontFile" uid="uid://cp4fdqh3uucwl" path="res://ui/fonts/IBMPlexSans-VariableFont_wdth,wght.ttf" id="1_g1fjd"]
-
-[resource]
-default_font = ExtResource("1_g1fjd")

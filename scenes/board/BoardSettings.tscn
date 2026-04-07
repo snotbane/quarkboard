@@ -8,27 +8,14 @@
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="6_j03tw"]
 [ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/tag/TagList.gd" id="7_c5oqb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1o47n"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wkm6"]
 
-[node name="board_settings" type="PanelContainer" unique_id=807210196]
+[node name="board_settings" type="MarginContainer" unique_id=1672710317]
 custom_minimum_size = Vector2(250, 0)
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 128.0
+offset_right = 250.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1o47n")
 script = ExtResource("1_c5oqb")
 
 [node name="v_box_container" type="VBoxContainer" parent="." unique_id=136850090]
@@ -71,12 +58,11 @@ script = ExtResource("4_ndfu1")
 icon_pressed = ExtResource("5_42yhp")
 metadata/_custom_type_script = "uid://coko05d00knrj"
 
-[node name="tabs" type="PanelContainer" parent="v_box_container" unique_id=1517856498]
+[node name="tabs" type="PanelContainer" parent="v_box_container" unique_id=60001355]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_j03tw")
 script = ExtResource("2_e40cw")
-metadata/_custom_type_script = "uid://eufi46qvlf6t"
 
 [node name="board" type="VBoxContainer" parent="v_box_container/tabs" unique_id=1616760788]
 layout_mode = 2
@@ -85,7 +71,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="board_tag_list" type="VBoxContainer" parent="v_box_container/tabs/board/scroll_container" unique_id=1103553523]
+[node name="margin_container" type="MarginContainer" parent="v_box_container/tabs/board/scroll_container" unique_id=1526250276]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="board_tag_list" type="VBoxContainer" parent="v_box_container/tabs/board/scroll_container/margin_container" unique_id=1103553523]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -127,6 +117,8 @@ size_flags_horizontal = 3
 script = ExtResource("7_c5oqb")
 socket_mode = 1
 toggle_mode = 4
+feature_rename = true
+confirm_remove = true
 
 [node name="label" type="Label" parent="v_box_container/tabs/profile" unique_id=955023355]
 layout_mode = 2
