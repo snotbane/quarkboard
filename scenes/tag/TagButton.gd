@@ -6,6 +6,23 @@ signal pressed
 signal tag_renamed(new_name: String)
 signal removed
 
+var tag : Tag :
+	set(value):
+		if tag == value: return
+
+		if tag:
+			tag.changed.disconnect(_on_tag_changed)
+
+		tag = value
+
+		if tag:
+			tag.changed.connect(_on_tag_changed)
+func _on_tag_changed() -> void:
+	if not is_node_ready(): return
+
+	%label.text = tag.to_string()
+
+
 var _text : String
 @export var text : String :
 	get: return %label.text
@@ -14,7 +31,6 @@ var _text : String
 		if not is_node_ready(): return
 
 		%label.text = value
-		# %rename_edit.text = value
 
 
 var _disabled : bool
@@ -80,7 +96,9 @@ var _feature_display : bool
 
 
 func _ready() -> void:
-	text = _text
+	if tag:
+		_on_tag_changed()
+	# text = _text
 
 	%label.focus_exited.connect(_on_rename_reverted)
 

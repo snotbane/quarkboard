@@ -1,14 +1,28 @@
 [gd_scene format=3 uid="uid://d7a3fo3dglu8"]
 
 [ext_resource type="Script" uid="uid://cdarq8jmrxa8r" path="res://scenes/board/BoardSettingsPanel.gd" id="1_c5oqb"]
+[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme_dark.tres" id="1_e40cw"]
 [ext_resource type="Script" uid="uid://eufi46qvlf6t" path="res://addons/myth/modules/misc/SoloContainer.gd" id="2_e40cw"]
 [ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/dazzle/gear.svg" id="3_w31kk"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="4_ndfu1"]
 [ext_resource type="Texture2D" uid="uid://bmyh3jw4pdq3o" path="res://icons/dazzle/gear_fill.svg" id="5_42yhp"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="6_j03tw"]
 [ext_resource type="Script" uid="uid://c6hr8fdbv4h3p" path="res://scenes/tag/TagList.gd" id="7_c5oqb"]
+[ext_resource type="PackedScene" uid="uid://dviqhihgm6ltf" path="res://scenes/tag/TagButton.tscn" id="9_w31kk"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wkm6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e40cw"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.1882353, 0.2, 0.21176471, 0.3764706)
+draw_center = false
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.2509804)
+shadow_offset = Vector2(2, 4)
 
 [node name="board_settings" type="MarginContainer" unique_id=1672710317]
 custom_minimum_size = Vector2(250, 0)
@@ -16,6 +30,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 250.0
 grow_vertical = 2
+theme = ExtResource("1_e40cw")
 script = ExtResource("1_c5oqb")
 
 [node name="v_box_container" type="VBoxContainer" parent="." unique_id=136850090]
@@ -24,33 +39,22 @@ layout_mode = 2
 [node name="h_box_container" type="HBoxContainer" parent="v_box_container" unique_id=823716683]
 layout_mode = 2
 
-[node name="title" type="PanelContainer" parent="v_box_container/h_box_container" unique_id=1868330753]
+[node name="title" type="LineEdit" parent="v_box_container/h_box_container" unique_id=1643630048]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_3wkm6")
-script = ExtResource("2_e40cw")
-metadata/_custom_type_script = "uid://eufi46qvlf6t"
-
-[node name="title_label" type="Label" parent="v_box_container/h_box_container/title" unique_id=713665961]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Title"
-horizontal_alignment = 1
-
-[node name="title_edit" type="LineEdit" parent="v_box_container/h_box_container/title" unique_id=1643630048]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
 size_flags_vertical = 4
-placeholder_text = "Title"
+theme_override_colors/font_uneditable_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_styles/read_only = SubResource("StyleBoxFlat_e40cw")
+placeholder_text = "Board name..."
 alignment = 1
+editable = false
 keep_editing_on_text_submit = true
 
-[node name="icon_toggle_button" type="Button" parent="v_box_container/h_box_container" unique_id=1379387281]
+[node name="settings_toggle" type="Button" parent="v_box_container/h_box_container" unique_id=1379387281]
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 0
+size_flags_vertical = 4
 toggle_mode = true
 icon = ExtResource("3_w31kk")
 flat = true
@@ -58,40 +62,50 @@ script = ExtResource("4_ndfu1")
 icon_pressed = ExtResource("5_42yhp")
 metadata/_custom_type_script = "uid://coko05d00knrj"
 
-[node name="tabs" type="PanelContainer" parent="v_box_container" unique_id=60001355]
+[node name="solo" type="PanelContainer" parent="v_box_container" unique_id=60001355]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_j03tw")
 script = ExtResource("2_e40cw")
 
-[node name="board" type="VBoxContainer" parent="v_box_container/tabs" unique_id=1616760788]
+[node name="board" type="VBoxContainer" parent="v_box_container/solo" unique_id=1616760788]
 layout_mode = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="v_box_container/tabs/board" unique_id=615160317]
+[node name="scroll_container" type="ScrollContainer" parent="v_box_container/solo/board" unique_id=615160317]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="margin_container" type="MarginContainer" parent="v_box_container/tabs/board/scroll_container" unique_id=1526250276]
+[node name="margin_container" type="MarginContainer" parent="v_box_container/solo/board/scroll_container" unique_id=1526250276]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="board_tag_list" type="VBoxContainer" parent="v_box_container/tabs/board/scroll_container/margin_container" unique_id=1103553523]
+[node name="board_tag_list" type="VBoxContainer" parent="v_box_container/solo/board/scroll_container/margin_container" unique_id=1103553523]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("7_c5oqb")
 toggle_mode = 3
 
-[node name="multi" type="HBoxContainer" parent="v_box_container/tabs/board" unique_id=326832442]
+[node name="archive_tag" parent="v_box_container/solo/board" unique_id=277815674 instance=ExtResource("9_w31kk")]
+layout_mode = 2
+text = "Archived"
+toggle_mode = true
+
+[node name="recycle_tag" parent="v_box_container/solo/board" unique_id=1230367377 instance=ExtResource("9_w31kk")]
+layout_mode = 2
+text = "Recycled"
+toggle_mode = true
+
+[node name="multi" type="HBoxContainer" parent="v_box_container/solo/board" unique_id=326832442]
 visible = false
 layout_mode = 2
 
-[node name="label" type="Label" parent="v_box_container/tabs/board/multi" unique_id=523371709]
+[node name="label" type="Label" parent="v_box_container/solo/board/multi" unique_id=523371709]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Filter Notes with"
 
-[node name="multi_option" type="OptionButton" parent="v_box_container/tabs/board/multi" unique_id=1347754849]
+[node name="multi_option" type="OptionButton" parent="v_box_container/solo/board/multi" unique_id=1347754849]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -102,15 +116,16 @@ popup/item_1/id = 0
 popup/item_2/text = "no tags"
 popup/item_2/id = 2
 
-[node name="profile" type="VBoxContainer" parent="v_box_container/tabs" unique_id=726674212]
+[node name="settings" type="VBoxContainer" parent="v_box_container/solo" unique_id=726674212]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="v_box_container/tabs/profile" unique_id=47484594]
+[node name="scroll_container" type="ScrollContainer" parent="v_box_container/solo/settings" unique_id=47484594]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="profile_tag_list" type="VBoxContainer" parent="v_box_container/tabs/profile/scroll_container" unique_id=1748833319]
+[node name="profile_tag_list" type="VBoxContainer" parent="v_box_container/solo/settings/scroll_container" unique_id=1748833319]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -120,10 +135,9 @@ toggle_mode = 4
 feature_rename = true
 confirm_remove = true
 
-[node name="label" type="Label" parent="v_box_container/tabs/profile" unique_id=955023355]
+[node name="label" type="Label" parent="v_box_container/solo/settings" unique_id=955023355]
 layout_mode = 2
 text = "Selecting visible tags"
 horizontal_alignment = 1
 
-[connection signal="toggled" from="v_box_container/h_box_container/icon_toggle_button" to="v_box_container/h_box_container/title/title_edit" method="set_visible"]
-[connection signal="toggled" from="v_box_container/h_box_container/icon_toggle_button" to="v_box_container/tabs/profile" method="set_visible"]
+[connection signal="toggled" from="v_box_container/h_box_container/settings_toggle" to="." method="_on_settings_toggled"]

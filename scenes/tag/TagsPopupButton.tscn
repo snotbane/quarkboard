@@ -17,8 +17,8 @@ extends Button
 func _on_list_filter_changed(new_filter: String) -> void:
 	var exists := false
 	var _filter_lower := new_filter.to_lower()
-	for tag in Machine.active_profile.tags:
-		if _filter_lower != tag.to_lower(): continue
+	for tag in Machine.active_profile.tags.list:
+		if _filter_lower != tag.name.to_lower(): continue
 		
 		exists = true
 		

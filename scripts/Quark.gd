@@ -1,5 +1,5 @@
 ## A single file that contains user-created content.
-class_name Quark extends JsonResource
+class_name Quark extends TaggedJsonResource
 
 enum Status {
 	NONE,
@@ -16,8 +16,6 @@ static var REGEX_TITLE_TEXT := RegEx.create_from_string(r"^\s*(\S.*?)(?:\n|$)")
 static var REGEX_NAME_TEXT := RegEx.create_from_string(r"[\.:@/\"%]")
 
 
-signal tags_changed
-
 
 @export var text : String :
 	set(value):
@@ -27,7 +25,6 @@ signal tags_changed
 		time_text_modified = NOW
 
 @export var status : Status = Status.NONE
-@export var tags : PackedStringArray
 
 @export_storage var time_text_modified : int
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ce0lxeh6u1exy" path="res://scenes/SelectItem.tscn" id="1_7nd5y"]
 [ext_resource type="Script" uid="uid://cg8xme4rs5n8i" path="res://scenes/board/SelectItemBoardViewer.gd" id="2_a286o"]
-[ext_resource type="Texture2D" uid="uid://dn4aoui1gwbld" path="res://icons/dazzle/grid.svg" id="2_q6x11"]
+[ext_resource type="Texture2D" uid="uid://lhx4bj3qqvba" path="res://icons/dazzle/masonry.svg" id="3_oxy7m"]
 
 [node name="select_item_board_viewer" unique_id=610522657 instance=ExtResource("1_7nd5y")]
 anchors_preset = 0
@@ -13,7 +13,7 @@ grow_horizontal = 1
 script = ExtResource("2_a286o")
 
 [node name="button" parent="." index="0" unique_id=1952971949]
-icon = ExtResource("2_q6x11")
+icon = ExtResource("3_oxy7m")
 icon_alignment = 1
 
 [node name="margin_container" parent="." index="1" unique_id=2946062]

@@ -7,6 +7,8 @@ signal tag_toggled(toggled_on: bool, tag: String)
 signal tag_pressed(tag: String)
 signal filter_changed(new_filter: String)
 
+@export var source_socket : ResourceSocket
+
 @export var socket : ResourceSocket :
 	set(value):
 		socket = value
@@ -36,7 +38,7 @@ func set_filter(value: String) -> void:
 func find_tag_button(tag: String) -> TagButton:
 	for child in get_children():
 		if child is not TagButton: continue
-		if child.text != tag: continue
+		if child.tag.name != tag: continue
 
 		return child
 	return null
@@ -51,18 +53,18 @@ func _ready() -> void:
 
 func _active_profile_changed() -> void:
 	if active_profile:
-		active_profile.tags_changed.disconnect(recreate_buttons)
+		active_profile.tags.changed.disconnect(recreate_buttons)
 
 	active_profile = Machine.active_profile
 
 	if active_profile:
-		active_profile.tags_changed.connect(recreate_buttons)
+		active_profile.tags.changed.connect(recreate_buttons)
 
 
 
 func _resource_value_changed() -> void:
 	if socket.resource and socket.resource != Machine.active_profile:
-		socket.resource.tags_changed.connect(reorder_buttons if socket_mode == 1 else recreate_buttons)
+		socket.resource.tags.changed.connect(reorder_buttons if socket_mode == 1 else recreate_buttons)
 
 	recreate_buttons()
 
@@ -83,29 +85,25 @@ func recreate_buttons() -> void:
 		if child is not Control: continue
 		child.queue_free()
 
-	var available_tags : PackedStringArray
+	var available_tags : TagSet
 	match socket_mode:
 		0 when socket.resource == null: return
+		0: available_tags = socket.resource.tags if socket.resource.tags else null
+		1: available_tags = Machine.active_profile.tags
 
-		0:
-			available_tags = socket.resource.tags.duplicate()
-			for tag in socket.resource.tags:
-				if Machine.active_profile.tags.has(tag): continue
-				available_tags.erase(tag)
+	if available_tags == null: return
 
-		1: available_tags = Machine.active_profile.tags.duplicate()
-
-	for tag in available_tags:
-		if tag not in Machine.active_profile.tags: continue
+	for tag in available_tags.list:
+		if socket_mode == 0 and Machine.active_profile.tags.has(tag): continue
 
 		create_button(tag)
 
 	reorder_buttons()
 
 
-func create_button(tag: String) -> TagButton:
+func create_button(tag: Tag) -> TagButton:
 	var result : TagButton = TAG_BUTTON_SCENE.instantiate()
-	result.text = tag
+	result.tag = tag
 	result.disabled = toggle_mode == 0
 	result.toggle_mode = toggle_mode >= 2
 	result.button_pressed = result.toggle_mode and socket_mode == 1 and socket and socket.resource.tags.has(tag)
@@ -176,35 +174,36 @@ func add_existing_from_filter() -> void:
 
 
 func create_from_filter() -> void:
-	Machine.active_profile.tags.push_back(filter)
-	Machine.active_profile.save()
-	Machine.active_profile.tags_changed.emit()
+	var err := Machine.active_profile.tags.append_by_name(filter)
+	if err != OK:
+		printerr(TagSet.error_string(err))
+
+	if socket.resource:
+		socket.resource.tags.append_by_name(filter)
 
 	var button := find_tag_button(filter)
+	assert(button != null, "TagButton should be created for \"%s\"." % filter)
+
 	button.button_pressed = not button._button_pressed
 	filter = ""
 
 
-func _tag_toggled(toggled_on: bool, tag: String) -> void:
+func _tag_toggled(toggled_on: bool, tag: Tag) -> void:
 	match socket_mode:
 		1 when socket:
 			if toggled_on == socket.resource.tags.has(tag): return
 			if toggled_on:
-				socket.resource.tags.push_back(tag)
+				socket.resource.tags.append(tag)
 			else:
 				socket.resource.tags.erase(tag)
-			socket.resource.save()
-			socket.resource.tags_changed.emit()
 
 	tag_toggled.emit(toggled_on, tag)
 
 
-func _tag_pressed(tag: String) -> void:
+func _tag_pressed(tag: Tag) -> void:
 	tag_pressed.emit(tag)
 
 
-func _tag_removed(tag: String) -> void:
+func _tag_removed(tag: Tag) -> void:
 	socket.resource.tags.erase(tag)
-	socket.resource.save()
-	socket.resource.tags_changed.emit()
 
