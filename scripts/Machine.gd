@@ -49,8 +49,6 @@ func _saving() -> void:
 
 
 func _loaded() -> void:
-	print("Machine data : %s" % [ data ])
-
 	for path : String in data.get(K_PROFILES, []):
 		var profile := Profile.new()
 		print("profile.tags : %s" % [ profile.tags ])

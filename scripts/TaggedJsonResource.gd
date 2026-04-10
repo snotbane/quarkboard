@@ -1,12 +1,13 @@
 
 class_name TaggedJsonResource extends JsonResource
 
-var other : Resource
+signal tags_changed
 
 
 func _init_tags() -> void:
 	tags = TagSet.new()
 	tags.changed.connect(save)
+	tags.changed.connect(tags_changed.emit)
 
 
 func _tag_matches_text(tag: Tag, text: String) -> bool:

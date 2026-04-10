@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dviqhihgm6ltf"]
 
 [ext_resource type="Theme" uid="uid://ddxk66xpl3aku" path="res://ui/theme_tag_dark.tres" id="1_jt8ft"]
+[ext_resource type="Script" uid="uid://dn4cq8fx6vj1i" path="res://scenes/tag/TagButton.gd" id="2_nxv7f"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="3_y8c3w"]
+[ext_resource type="Script" uid="uid://bjycpuilfxvvb" path="res://scripts/ui/ReleaseFocusOnCancel.gd" id="4_jt8ft"]
 [ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="6_vckjx"]
 [ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="7_vckjx"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="8_2jd2p"]
@@ -12,6 +14,8 @@ offset_right = 50.0
 offset_bottom = 28.0
 theme = ExtResource("1_jt8ft")
 theme_override_styles/panel = ExtResource("3_y8c3w")
+script = ExtResource("2_nxv7f")
+text = "Tag"
 
 [node name="main" type="Button" parent="." unique_id=19860335]
 unique_name_in_owner = true
@@ -41,10 +45,14 @@ theme_override_constants/minimum_character_width = 0
 text = "Tag"
 placeholder_text = "Tag"
 editable = false
+keep_editing_on_text_submit = true
 expand_to_text_length = true
 backspace_deletes_composite_character_enabled = true
 select_all_on_focus = true
 caret_blink = true
+
+[node name="release_focus_on_cancel" type="Node" parent="margin_container/h_box_container/label" unique_id=1023933629]
+script = ExtResource("4_jt8ft")
 
 [node name="rename" type="Button" parent="margin_container/h_box_container" unique_id=1126896377]
 unique_name_in_owner = true
@@ -106,6 +114,3 @@ flat = true
 expand_icon = true
 script = ExtResource("8_2jd2p")
 icon_pressed = ExtResource("7_vckjx")
-
-[connection signal="text_submitted" from="margin_container/h_box_container/label" to="." method="_on_tag_renamed"]
-[connection signal="toggled" from="margin_container/h_box_container/rename" to="." method="_on_rename_toggled"]

@@ -25,24 +25,48 @@ func _serialize() -> Variant:
 			result.push_back(tag.name)
 		return result
 	else:
-		return list
+		return JsonResource.serialize(list)
 
 
 func _deserialize(json) -> bool:
 	if store_as_refs:
 		list.clear()
-		for e in json:
-			list.push_back(Tag.new(e))
+		assert(false, "Needs implementation.")
+		# for e in json:
+		# 	push_back(null)
 	else:
-		list = json
+		var values = JsonResource.deserialize(json)
+		for tag in values:
+			push_back(tag)
 
 	return true
 
 
+func has(query) -> bool:
+	assert(query is String or query is Tag, "TagSet.has() must query either a String or a Tag.")
+
+	if query is Tag:
+		for tag in list: if query.name	== tag.name: return true
+	else:
+		for tag in list: if query		== tag.name: return true
+
+	return false
+
+
 func push_back(tag: Tag) -> void:
+	if has(tag): return
+
 	list.push_back(tag)
+	tag.changed.connect(emit_changed)
 	emit_changed()
 
+
+func erase(tag: Tag) -> void:
+	if not has(tag): return
+
+	list.erase(tag)
+	tag.changed.disconnect(emit_changed)
+	emit_changed()
 
 # var _tags_lower_clean : bool = false
 # var _tags_lower : PackedStringArray

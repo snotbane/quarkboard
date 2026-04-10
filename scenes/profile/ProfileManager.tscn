@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/dazzle/clone.svg" id="9_q71o8"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_71axf"]
 [ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/dazzle/circle_dashed.svg" id="15_4oep2"]
+[ext_resource type="Script" uid="uid://npwu7e5hl4ea" path="res://scenes/tag/TagButtonContainer.gd" id="17_qto30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
 
@@ -119,6 +120,9 @@ columns = 2
 layout_mode = 2
 text = "Create"
 icon = ExtResource("2_kb1f2")
+icon_alignment = 0
+vertical_icon_alignment = 1
+expand_icon = false
 
 [node name="create_dialog" parent="h_split_container/v_box_container/grid_container/create" unique_id=1611117896 instance=ExtResource("2_dgt7i")]
 
@@ -126,6 +130,9 @@ icon = ExtResource("2_kb1f2")
 layout_mode = 2
 text = "Open"
 icon = ExtResource("4_d8row")
+icon_alignment = 0
+vertical_icon_alignment = 1
+expand_icon = false
 
 [node name="import_dialog" parent="h_split_container/v_box_container/grid_container/open" unique_id=1208019437 instance=ExtResource("2_dgt7i")]
 title = "Open a Directory"
@@ -202,6 +209,9 @@ layout_mode = 2
 tooltip_text = "Moves the profile and all its notes to a new location on this machine."
 text = "Move"
 icon = ExtResource("8_fxjd5")
+icon_alignment = 0
+vertical_icon_alignment = 1
+expand_icon = false
 
 [node name="move_dialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move" unique_id=1021428856 instance=ExtResource("2_dgt7i")]
 title = "Open a Directory"
@@ -229,6 +239,9 @@ layout_mode = 2
 tooltip_text = "Removes the profile from the application without deleting anything."
 text = "Hide"
 icon = ExtResource("15_4oep2")
+icon_alignment = 0
+vertical_icon_alignment = 1
+expand_icon = false
 
 [node name="hide_dialog" type="ConfirmationDialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide" unique_id=724943703]
 oversampling_override = 1.0
@@ -258,9 +271,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container/margin_container" unique_id=1290697419]
+[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container/margin_container" unique_id=1290697419 node_paths=PackedStringArray("read_socket")]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("17_qto30")
+read_socket = NodePath("../../../../resource_socket")
+button_feature_rename = true
+button_feature_remove = true
 
 [node name="importer" type="Control" parent="." unique_id=1715073317]
 visible = false

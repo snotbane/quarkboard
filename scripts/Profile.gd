@@ -19,10 +19,9 @@ var boards : Array
 func _get_save_as_dir_default() -> bool: return true
 
 
-# func _init() -> void:
-# 	super._init()
-
-# 	tags.use_references = false
+func _init_tags() -> void:
+	super._init_tags()
+	tags.store_as_refs = false
 
 
 func _touched() -> void:
