@@ -7,7 +7,6 @@ var other : Resource
 func _init_tags() -> void:
 	tags = TagSet.new()
 	tags.changed.connect(save)
-	print("is_connected: ", tags.changed.is_connected(save))
 
 
 func _tag_matches_text(tag: Tag, text: String) -> bool:
@@ -15,5 +14,4 @@ func _tag_matches_text(tag: Tag, text: String) -> bool:
 
 
 func _create_tag_by_name(text: String) -> void:
-	print("is_connected: ", tags.changed.is_connected(save))
 	tags.push_back(Tag.new(text))

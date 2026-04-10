@@ -70,8 +70,7 @@ func _loaded() -> void:
 	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
 		if path.get_extension().is_empty(): continue
 
-		var board := Board.new()
-		board.load(path)
+		Board.new().load(path)
 
 	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 
