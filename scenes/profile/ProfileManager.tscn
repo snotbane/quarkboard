@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/dazzle/clone.svg" id="9_q71o8"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_71axf"]
 [ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/dazzle/circle_dashed.svg" id="15_4oep2"]
-[ext_resource type="Script" uid="uid://qpph4wfv8acy" path="res://scenes/tag/ProfileTagList.gd" id="17_qto30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
 
@@ -56,6 +55,24 @@ func _pressed() -> void:
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oep2"]
+
+[sub_resource type="GDScript" id="GDScript_j24vq"]
+script/source = "
+extends LineEdit
+
+@onready var socket := ResourceSocket.find_ancestor(self)
+
+func _ready() -> void:
+	text_submitted.connect(_text_submitted)
+
+func _text_submitted(new_text: String) -> void:
+	assert(socket.resource is JsonResource)
+	
+	socket.resource.create_tag_by_name(new_text)
+	print(socket.resource.tags.list)
+	
+	clear()
+"
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_ots10"]
 
@@ -223,6 +240,11 @@ dialog_text = "Hiding this profile will not delete any data from the system. It 
 (To completely delete a profile and all of its contents, delete the .qbdp folder in the file system.)"
 dialog_autowrap = true
 
+[node name="line_edit" type="LineEdit" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=986575776]
+layout_mode = 2
+placeholder_text = "Add new tag..."
+script = SubResource("GDScript_j24vq")
+
 [node name="scroll_container" type="ScrollContainer" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=1583960620]
 layout_mode = 2
 size_flags_vertical = 3
@@ -236,14 +258,9 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container/margin_container" unique_id=1290697419 node_paths=PackedStringArray("socket")]
+[node name="tag_list" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/v_box_container/scroll_container/margin_container" unique_id=1290697419]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("17_qto30")
-socket = NodePath("../../../../resource_socket")
-feature_rename = true
-feature_remove = true
-confirm_remove = true
 
 [node name="importer" type="Control" parent="." unique_id=1715073317]
 visible = false

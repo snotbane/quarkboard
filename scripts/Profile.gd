@@ -19,10 +19,10 @@ var boards : Array
 func _get_save_as_dir_default() -> bool: return true
 
 
-func _init() -> void:
-	super._init()
+# func _init() -> void:
+# 	super._init()
 
-	tags.use_references = false
+# 	tags.use_references = false
 
 
 func _touched() -> void:
@@ -44,6 +44,9 @@ func _touched_deferred() -> void:
 
 func _loaded() -> void:
 	if not is_valid: return
+
+	super._loaded()
+	print("tags.list : %s" % [ tags.list ])
 
 	# tags.clear()
 	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Tag.DIR_NAME)):
@@ -89,59 +92,3 @@ func delete() -> void:
 	hide()
 
 	super.delete()
-
-
-func can_add_tag(tag: String) -> bool:
-	return not (tags.is_empty() or tags.has_by_name(tag))
-
-
-func rename_tag_globally(tag_name: String, new_tag: String) -> void:
-	new_tag = Tag.format_string_for_tag(new_tag)
-
-	assert(tags.has_by_name(tag_name))
-	if not can_add_tag(new_tag): return
-
-	var tag := tags.find_by_name(tag_name)
-	tag.name = new_tag
-
-	# for quark in quarks:
-	# 	if not quark.tags.has(tag): continue
-
-	# 	quark.tags.erase(tag)
-	# 	quark.tags.push_back(new_tag)
-	# 	quark.save()
-
-	# for board in boards:
-	# 	if not board.tags.has(tag): continue
-
-	# 	board.tags.erase(tag)
-	# 	board.tags.push_back(new_tag)
-	# 	board.save()
-
-	# tags.erase(tag)
-	# tags.push_back(new_tag)
-	# save()
-	# tags_changed.emit()
-
-
-func remove_tag_globally(tag: Tag) -> void:
-	assert(tags.has(tag))
-
-	tags.erase(tag)
-
-	# for quark in quarks:
-	# 	if not quark.tags.has(tag): continue
-
-	# 	quark.tags.erase(tag)
-	# 	quark.save()
-
-	# for board in boards:
-	# 	if not board.tags.has(tag): continue
-
-	# 	board.tags.erase(tag)
-	# 	board.save()
-
-	# tags.erase(tag)
-	# save()
-	# tags_changed.emit()
-

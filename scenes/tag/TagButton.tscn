@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://dviqhihgm6ltf"]
 
 [ext_resource type="Theme" uid="uid://ddxk66xpl3aku" path="res://ui/theme_tag_dark.tres" id="1_jt8ft"]
-[ext_resource type="Script" uid="uid://bk481c0updjy8" path="res://scenes/tag/TagButton.gd" id="2_nxv7f"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="3_y8c3w"]
 [ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="6_vckjx"]
-[ext_resource type="Script" uid="uid://wdduxb6g5pjh" path="res://scenes/tag/TagRenameLineEdit.gd" id="7_2jd2p"]
 [ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="7_vckjx"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="8_2jd2p"]
 [ext_resource type="Texture2D" uid="uid://dy45nl86aoy6u" path="res://icons/dazzle/dot_alt.svg" id="9_ffjli"]
@@ -14,7 +12,6 @@ offset_right = 50.0
 offset_bottom = 28.0
 theme = ExtResource("1_jt8ft")
 theme_override_styles/panel = ExtResource("3_y8c3w")
-script = ExtResource("2_nxv7f")
 
 [node name="main" type="Button" parent="." unique_id=19860335]
 unique_name_in_owner = true
@@ -48,7 +45,6 @@ expand_to_text_length = true
 backspace_deletes_composite_character_enabled = true
 select_all_on_focus = true
 caret_blink = true
-script = ExtResource("7_2jd2p")
 
 [node name="rename" type="Button" parent="margin_container/h_box_container" unique_id=1126896377]
 unique_name_in_owner = true

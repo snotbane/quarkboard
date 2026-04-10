@@ -14,7 +14,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	if parent.boards.has(self): return
+	if parent == null or parent.boards.has(self): return
 
 	parent.boards.push_back(self)
 	parent.boards_changed.emit()

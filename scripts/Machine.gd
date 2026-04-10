@@ -44,15 +44,16 @@ func _saving() -> void:
 	data = {
 		K_PROFILES: profiles.values(),
 		K_PROFILE_ACTIVE: maxi(0, profiles.keys().find(active_profile)),
-		K_VIEW_ACTIVE: ViewerContainer.inst.current_tab,
+		K_VIEW_ACTIVE: ViewerContainer.inst.current_tab if ViewerContainer.inst else 0,
 	}
 
 
 func _loaded() -> void:
-	print(data)
+	print("Machine data : %s" % [ data ])
 
 	for path : String in data.get(K_PROFILES, []):
 		var profile := Profile.new()
+		print("profile.tags : %s" % [ profile.tags ])
 		profile.touch(path)
 		profiles[profile] = path
 
