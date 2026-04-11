@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/dazzle/gear.svg" id="3_w31kk"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="4_ndfu1"]
 [ext_resource type="Texture2D" uid="uid://bmyh3jw4pdq3o" path="res://icons/dazzle/gear_fill.svg" id="5_42yhp"]
-[ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="6_j03tw"]
 [ext_resource type="PackedScene" uid="uid://dviqhihgm6ltf" path="res://scenes/tag/TagButton.tscn" id="9_w31kk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e40cw"]
@@ -61,14 +60,17 @@ script = ExtResource("4_ndfu1")
 icon_pressed = ExtResource("5_42yhp")
 metadata/_custom_type_script = "uid://coko05d00knrj"
 
-[node name="solo" type="PanelContainer" parent="v_box_container" unique_id=60001355]
+[node name="solo" type="TabContainer" parent="v_box_container" unique_id=2059307992]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("6_j03tw")
+current_tab = 0
+tabs_visible = false
 script = ExtResource("2_e40cw")
+metadata/_custom_type_script = "uid://eufi46qvlf6t"
 
 [node name="board" type="VBoxContainer" parent="v_box_container/solo" unique_id=1616760788]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="scroll_container" type="ScrollContainer" parent="v_box_container/solo/board" unique_id=615160317]
 layout_mode = 2
@@ -117,6 +119,7 @@ popup/item_2/id = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="scroll_container" type="ScrollContainer" parent="v_box_container/solo/settings" unique_id=47484594]
 layout_mode = 2

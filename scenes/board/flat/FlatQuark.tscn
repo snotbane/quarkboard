@@ -113,8 +113,9 @@ socket = NodePath("../../../../resource_socket")
 status = 3
 icon_pressed = ExtResource("10_mas2m")
 
-[node name="tags_popup_button" parent="margin_container/v_box_container/actions" unique_id=1814274808 instance=ExtResource("11_gmaco")]
+[node name="tags_popup_button" parent="margin_container/v_box_container/actions" unique_id=1814274808 node_paths=PackedStringArray("socket") instance=ExtResource("11_gmaco")]
 layout_mode = 2
+socket = NodePath("../../../../resource_socket")
 
 [node name="colors" type="Button" parent="margin_container/v_box_container/actions" unique_id=853608149]
 self_modulate = Color(1, 1, 1, 0.5019608)

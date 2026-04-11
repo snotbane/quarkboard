@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dxeo2bqwesui"]
+
+[ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="1_6ps6w"]
+[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="2_df6hw"]
+[ext_resource type="Script" uid="uid://dxrurua4aog32" path="res://scenes/tag/TagSearch.gd" id="3_40nwj"]
+[ext_resource type="Script" uid="uid://npwu7e5hl4ea" path="res://scenes/tag/TagButtonContainer.gd" id="4_qf1r8"]
+[ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/dazzle/plus.svg" id="5_j88uw"]
+
+[sub_resource type="GDScript" id="GDScript_bosub"]
+script/source = "
+extends Button
+
+@export var message : String = \"%s\"
+
+func _on_list_filter_changed(new_filter: String) -> void:
+	var exists := false
+	var _filter_lower := new_filter.to_lower()
+	for tag in Machine.active_profile.tags.list:
+		if _filter_lower != tag.name.to_lower(): continue
+		
+		exists = true
+		
+		break
+	
+	visible = not (new_filter.is_empty() or exists)
+	text = message % new_filter
+"
+
+[node name="tag_searchable_list" type="VBoxContainer" unique_id=2126046195]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 88.0
+grow_vertical = 2
+
+[node name="search" type="LineEdit" parent="." unique_id=1329567042 node_paths=PackedStringArray("tag_button_container")]
+layout_mode = 2
+theme_override_styles/focus = ExtResource("1_6ps6w")
+placeholder_text = "Search..."
+keep_editing_on_text_submit = true
+select_all_on_focus = true
+caret_blink = true
+right_icon = ExtResource("2_df6hw")
+icon_expand_mode = 2
+right_icon_scale = 0.67
+script = ExtResource("3_40nwj")
+tag_button_container = NodePath("../scroll_container/list")
+submit_self_action = 2
+
+[node name="create" type="Button" parent="." unique_id=1080588121]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+icon = ExtResource("5_j88uw")
+alignment = 0
+autowrap_mode = 3
+script = SubResource("GDScript_bosub")
+message = "Create \"%s\""
+
+[node name="h_separator" type="HSeparator" parent="." unique_id=1975730697]
+visible = false
+layout_mode = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="." unique_id=489159455]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="list" type="HFlowContainer" parent="scroll_container" unique_id=299947845]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+script = ExtResource("4_qf1r8")
+button_toggle_mode = 4
+button_feature_display = true
+
+[connection signal="visibility_changed" from="search" to="search" method="clear"]
+[connection signal="visibility_changed" from="search" to="search" method="grab_focus"]
+[connection signal="pressed" from="create" to="scroll_container/list" method="create_from_filter"]
