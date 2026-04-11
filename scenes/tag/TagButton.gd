@@ -21,6 +21,7 @@ func _on_tag_changed() -> void:
 	if not is_node_ready(): return
 
 	text = tag.to_string() if tag else ""
+	palette = tag.palette
 
 
 var _text : String
@@ -31,6 +32,16 @@ var _text : String
 		if not is_node_ready(): return
 
 		%label.text = value
+
+var _palette : int
+@export var palette : int :
+	get: return _palette
+	set(value):
+		_palette = value
+		if not tag: return
+
+		%main.self_modulate = UserPalette.get_palette(value).normal_color
+		tag.palette = value
 
 
 var _disabled : bool
@@ -73,6 +84,15 @@ var _feature_rename : bool
 		if not is_node_ready(): return
 
 		%rename.visible = value
+
+var _feature_palette : bool
+@export var feature_palette : bool :
+	get: return %palette.visible
+	set(value):
+		_feature_palette = value
+		if not is_node_ready(): return
+
+		%palette.visible = value
 
 
 var _feature_remove : bool
@@ -130,12 +150,27 @@ func _ready() -> void:
 	%label.text_submitted.connect(_on_rename_submitted)
 	editable = false
 
-	feature_rename = _feature_rename
-	%rename.toggled.connect(_on_rename_toggled)
+	if _feature_rename:
+		feature_rename = true
+		%rename.pressed.connect(_on_rename_pressed)
+	else:
+		%rename.queue_free()
 
-	feature_remove = _feature_remove
-	%remove.pressed.connect(%remove_confirm.popup if confirm_remove else removed.emit)
-	%remove_confirm.confirmed.connect(removed.emit)
+	if _feature_palette:
+		feature_palette = true
+		%palette.pressed.connect(_on_palette_pressed)
+		%palette_selector.option_hovered.connect(_on_palette_hovered)
+		%palette_selector.option_selected.connect(_on_palette_selected)
+	else:
+		%palette.queue_free()
+		%palette_margin_container.queue_free()
+
+	if _feature_remove:
+		feature_remove = true
+		%remove.pressed.connect(%remove_confirm.popup if confirm_remove else removed.emit)
+		%remove_confirm.confirmed.connect(removed.emit)
+	else:
+		%remove.queue_free()
 
 	feature_display = _feature_display
 
@@ -145,8 +180,8 @@ func _on_main_toggled(toggled_on: bool) -> void:
 	toggled.emit(toggled_on)
 
 
-func _on_rename_toggled(toggled_on: bool) -> void:
-	editable = toggled_on
+func _on_rename_pressed() -> void:
+	editable = true
 
 
 func _on_rename_reverted() -> void:
@@ -169,3 +204,22 @@ func _on_rename_submitted(new_name: String) -> void:
 
 	tag.name = new_name
 	tag_renamed.emit(new_name)
+
+
+func _on_palette_pressed() -> void:
+	%palette_margin_container.show()
+	%palette_selector.show_with_palette(tag.palette)
+
+
+func _on_palette_hovered(idx: int) -> void:
+	create_tween().tween_property(%main, "self_modulate", UserPalette.get_palette(idx if idx >= 0 else tag.palette).normal_color, 0.125)
+
+
+func _on_palette_selected(idx: int) -> void:
+	_on_palette_hovered(idx)
+	%palette_margin_container.hide()
+
+	if idx == -1: return
+
+	tag.palette = idx
+

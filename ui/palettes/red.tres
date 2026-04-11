@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="UserPalette" format=3 uid="uid://c1ymxhiogju0j"]
+
+[ext_resource type="Script" uid="uid://p58njvvw1ai2" path="res://scripts/UserPalette.gd" id="1_hdfsl"]
+
+[resource]
+script = ExtResource("1_hdfsl")
+normal_color = Color(0.9098039, 0.47843137, 0.5529412, 1)
+metadata/_custom_type_script = "uid://p58njvvw1ai2"

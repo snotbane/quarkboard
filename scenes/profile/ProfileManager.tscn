@@ -277,6 +277,7 @@ size_flags_horizontal = 3
 script = ExtResource("17_qto30")
 read_socket = NodePath("../../../../resource_socket")
 button_feature_rename = true
+button_feature_palette = true
 button_feature_remove = true
 
 [node name="importer" type="Control" parent="." unique_id=1715073317]

@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://dviqhihgm6ltf"]
 
-[ext_resource type="Theme" uid="uid://ddxk66xpl3aku" path="res://ui/theme_tag_dark.tres" id="1_jt8ft"]
+[ext_resource type="Theme" uid="uid://cji8obf5a27j" path="res://ui/theme_tag_light.tres" id="1_po0b4"]
 [ext_resource type="Script" uid="uid://dn4cq8fx6vj1i" path="res://scenes/tag/TagButton.gd" id="2_nxv7f"]
 [ext_resource type="StyleBox" uid="uid://c48x16s4haw1b" path="res://ui/style_box_empty.tres" id="3_y8c3w"]
+[ext_resource type="Script" uid="uid://eufi46qvlf6t" path="res://addons/myth/modules/misc/SoloContainer.gd" id="4_a2bdk"]
 [ext_resource type="Script" uid="uid://bjycpuilfxvvb" path="res://scripts/ui/ReleaseFocusOnCancel.gd" id="4_jt8ft"]
+[ext_resource type="Texture2D" uid="uid://cvw053jyk0fn6" path="res://icons/dazzle/palette.svg" id="6_2jd2p"]
 [ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="6_vckjx"]
 [ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="7_vckjx"]
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="8_2jd2p"]
 [ext_resource type="Texture2D" uid="uid://dy45nl86aoy6u" path="res://icons/dazzle/dot_alt.svg" id="9_ffjli"]
+[ext_resource type="Script" uid="uid://bxhcr7l2ixmrf" path="res://scenes/palette/PaletteSelector.gd" id="11_lahnn"]
+[ext_resource type="StyleBox" uid="uid://5uwyi4lx8o40" path="res://ui/palette_selector_button_normal.tres" id="12_po0b4"]
 
 [node name="tag_button" type="PanelContainer" unique_id=277815674]
 offset_right = 50.0
 offset_bottom = 28.0
-theme = ExtResource("1_jt8ft")
+theme = ExtResource("1_po0b4")
 theme_override_styles/panel = ExtResource("3_y8c3w")
 script = ExtResource("2_nxv7f")
 text = "Tag"
@@ -22,23 +26,31 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="margin_container" type="MarginContainer" parent="." unique_id=443126619]
+[node name="solo_container" type="Container" parent="." unique_id=119650650]
 layout_mode = 2
+script = ExtResource("4_a2bdk")
+fit_largest = false
+metadata/_custom_type_script = "uid://eufi46qvlf6t"
+
+[node name="margin_container" type="MarginContainer" parent="solo_container" unique_id=443126619]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="h_box_container" type="HBoxContainer" parent="margin_container" unique_id=422496760]
+[node name="h_box_container" type="HBoxContainer" parent="solo_container/margin_container" unique_id=422496760]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="LineEdit" parent="margin_container/h_box_container" unique_id=2088553779]
+[node name="label" type="LineEdit" parent="solo_container/margin_container/h_box_container" unique_id=2088553779]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 mouse_filter = 2
 theme_override_constants/caret_width = 2
 theme_override_constants/minimum_character_width = 0
@@ -51,10 +63,10 @@ backspace_deletes_composite_character_enabled = true
 select_all_on_focus = true
 caret_blink = true
 
-[node name="release_focus_on_cancel" type="Node" parent="margin_container/h_box_container/label" unique_id=1023933629]
+[node name="release_focus_on_cancel" type="Node" parent="solo_container/margin_container/h_box_container/label" unique_id=1023933629]
 script = ExtResource("4_jt8ft")
 
-[node name="rename" type="Button" parent="margin_container/h_box_container" unique_id=1126896377]
+[node name="rename" type="Button" parent="solo_container/margin_container/h_box_container" unique_id=1126896377]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(1, 1, 1, 0.39215687)
@@ -66,13 +78,29 @@ mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("3_y8c3w")
 theme_override_styles/pressed = ExtResource("3_y8c3w")
 theme_override_styles/hover = ExtResource("3_y8c3w")
-toggle_mode = true
 icon = ExtResource("6_vckjx")
 flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="remove" type="Button" parent="margin_container/h_box_container" unique_id=827284121]
+[node name="palette" type="Button" parent="solo_container/margin_container/h_box_container" unique_id=515467965]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0.39215687)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("3_y8c3w")
+theme_override_styles/pressed = ExtResource("3_y8c3w")
+theme_override_styles/hover = ExtResource("3_y8c3w")
+icon = ExtResource("6_2jd2p")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="remove" type="Button" parent="solo_container/margin_container/h_box_container" unique_id=827284121]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(1, 1, 1, 0.39215687)
@@ -88,7 +116,7 @@ icon = ExtResource("7_vckjx")
 flat = true
 expand_icon = true
 
-[node name="remove_confirm" type="ConfirmationDialog" parent="margin_container/h_box_container/remove" unique_id=563273708]
+[node name="remove_confirm" type="ConfirmationDialog" parent="solo_container/margin_container/h_box_container/remove" unique_id=563273708]
 unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 5
@@ -97,7 +125,7 @@ ok_button_text = "Delete"
 dialog_text = "This will delete all tags from all Notes and cannot be undone! Are you sure?"
 dialog_autowrap = true
 
-[node name="display" type="Button" parent="margin_container/h_box_container" unique_id=1968043716]
+[node name="display" type="Button" parent="solo_container/margin_container/h_box_container" unique_id=1968043716]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(1, 1, 1, 0.39215687)
@@ -114,3 +142,111 @@ flat = true
 expand_icon = true
 script = ExtResource("8_2jd2p")
 icon_pressed = ExtResource("7_vckjx")
+
+[node name="palette_margin_container" type="MarginContainer" parent="solo_container" unique_id=1050428402]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 2
+
+[node name="palette_selector" type="HBoxContainer" parent="solo_container/palette_margin_container" unique_id=1185555858]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+script = ExtResource("11_lahnn")
+
+[node name="color_00" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=1126648748]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_01" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=438019667]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_02" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=595560693]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_03" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=752962636]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_04" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=1932071832]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_05" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=1686349334]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_06" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=1866705546]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_07" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=274122180]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1
+
+[node name="color_08" type="Button" parent="solo_container/palette_margin_container/palette_selector" unique_id=2031801672]
+custom_minimum_size = Vector2(12, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("12_po0b4")
+theme_override_styles/pressed = ExtResource("12_po0b4")
+theme_override_styles/hover = ExtResource("12_po0b4")
+theme_override_styles/hover_pressed = ExtResource("12_po0b4")
+icon_alignment = 1

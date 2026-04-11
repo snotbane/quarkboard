@@ -28,11 +28,14 @@ signal filter_changed(new_filter: String)
 
 @export var button_feature_rename : bool = false
 
+@export var button_feature_palette : bool = false
+
 @export var button_feature_remove : bool = false
 
 @export var button_confirm_remove : bool = false
 
 @export var button_feature_display : bool = false
+
 
 
 var _filter_lower : String
@@ -102,6 +105,7 @@ func create_button(tag: Tag) -> TagButton:
 	result.toggle_mode = button_toggle_mode >= 2
 	result.button_pressed = result.toggle_mode and read_write_sockets_are_different and write_socket.resource.tags.has(tag)
 	result.feature_rename = button_feature_rename
+	result.feature_palette = button_feature_palette
 	result.feature_remove = button_feature_remove
 	result.confirm_remove = button_confirm_remove
 	result.feature_display = button_feature_display
