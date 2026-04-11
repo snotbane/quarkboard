@@ -1,5 +1,5 @@
 
-@tool class_name TagButton extends Control
+class_name TagButton extends Control
 
 signal toggled(toggled_on: bool)
 signal pressed
@@ -134,7 +134,8 @@ var editable : bool :
 			%label.focus_mode = FOCUS_NONE
 
 
-@onready var container : Container = get_parent()
+var container : Container :
+	get: return get_parent()
 
 
 func _ready() -> void:
@@ -153,7 +154,7 @@ func _ready() -> void:
 	if _feature_rename:
 		feature_rename = true
 		%rename.pressed.connect(_on_rename_pressed)
-	else:
+	elif not Engine.is_editor_hint():
 		%rename.queue_free()
 
 	if _feature_palette:
@@ -161,18 +162,21 @@ func _ready() -> void:
 		%palette.pressed.connect(_on_palette_pressed)
 		%palette_selector.option_hovered.connect(_on_palette_hovered)
 		%palette_selector.option_selected.connect(_on_palette_selected)
-	else:
+	elif not Engine.is_editor_hint():
 		%palette.queue_free()
-		%palette_margin_container.queue_free()
+		%palette_container.queue_free()
 
 	if _feature_remove:
 		feature_remove = true
 		%remove.pressed.connect(%remove_confirm.popup if confirm_remove else removed.emit)
 		%remove_confirm.confirmed.connect(removed.emit)
-	else:
+	elif not Engine.is_editor_hint():
 		%remove.queue_free()
 
-	feature_display = _feature_display
+	if _feature_display:
+		feature_display = true
+	elif not Engine.is_editor_hint():
+		%display.queue_free()
 
 
 func _on_main_toggled(toggled_on: bool) -> void:
@@ -185,7 +189,6 @@ func _on_rename_pressed() -> void:
 
 
 func _on_rename_reverted() -> void:
-	print("Reverted")
 	editable = false
 	text = _text
 
@@ -207,7 +210,7 @@ func _on_rename_submitted(new_name: String) -> void:
 
 
 func _on_palette_pressed() -> void:
-	%palette_margin_container.show()
+	%palette_container.show()
 	%palette_selector.show_with_palette(tag.palette)
 
 
@@ -217,7 +220,7 @@ func _on_palette_hovered(idx: int) -> void:
 
 func _on_palette_selected(idx: int) -> void:
 	_on_palette_hovered(idx)
-	%palette_margin_container.hide()
+	%palette_container.hide()
 
 	if idx == -1: return
 

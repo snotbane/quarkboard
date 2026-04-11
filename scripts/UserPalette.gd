@@ -1,5 +1,5 @@
 
-class_name UserPalette extends Resource
+@tool class_name UserPalette extends Resource
 
 enum {
 	SYSTEM,
@@ -11,6 +11,7 @@ enum {
 	BLUE,
 	PURPLE,
 	GRAY,
+	MAX,
 }
 
 static var GLOBAL_RESOURCES : Dictionary[int, UserPalette] = {
@@ -23,6 +24,7 @@ static var GLOBAL_RESOURCES : Dictionary[int, UserPalette] = {
 	BLUE:		load("uid://b3mhvg0qb4k8u"),
 	PURPLE:		load("uid://bfkfjmd7rupn2"),
 	GRAY:		load("uid://dsm6wfiw5s3mf"),
+	MAX:		null,
 }
 
 static func get_palette(palette: int) -> UserPalette:
