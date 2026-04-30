@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Quarkboard"
-run/main_scene="uid://dp76t3aegbnha"
+run/main_scene="uid://kg1yilff358s"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/low_processor_mode=true

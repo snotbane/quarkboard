@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://kg1yilff358s"]
+
+[ext_resource type="Script" uid="uid://coksmubhy87xv" path="res://addons/myth/modules/json/JsonResourceNode.gd" id="1_x272f"]
+[ext_resource type="Script" uid="uid://cntvxlma270f8" path="res://addons/myth/modules/json/ResourceDebugInfo.gd" id="2_4sg6b"]
+
+[node name="main" type="Control" unique_id=141438203]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="color_rect" type="ColorRect" parent="." unique_id=413463394]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+
+[node name="h_split_container" type="HSplitContainer" parent="." unique_id=1511670850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="h_split_container" unique_id=2071922440]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="margin_container" type="MarginContainer" parent="h_split_container/scroll_container" unique_id=1892850374]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="machine" type="VBoxContainer" parent="h_split_container/scroll_container/margin_container" unique_id=760648179]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="json_resource_node" type="Node" parent="h_split_container/scroll_container/margin_container/machine" unique_id=1901621402]
+script = ExtResource("1_x272f")
+resource_initial_path = "user://machine.json"
+metadata/_custom_type_script = "uid://coksmubhy87xv"
+
+[node name="margin_container" type="MarginContainer" parent="h_split_container/scroll_container/margin_container/machine" unique_id=188888303]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="json_resource_debug_label" type="PanelContainer" parent="h_split_container/scroll_container/margin_container/machine/margin_container" unique_id=989565646]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+script = ExtResource("2_4sg6b")
+metadata/_custom_type_script = "uid://cntvxlma270f8"
+
+[node name="button" type="Button" parent="h_split_container/scroll_container/margin_container/machine" unique_id=574950111]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save Resource"
+
+[connection signal="pressed" from="h_split_container/scroll_container/margin_container/machine/button" to="h_split_container/scroll_container/margin_container/machine/json_resource_node" method="save"]
