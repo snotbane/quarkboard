@@ -13,7 +13,7 @@ signal filter_changed(new_filter: String)
 ## Tags in this resource will be available. If this resource's tags change, the list will be recreated.
 @export var read_socket : ResourceSocket
 
-@export_enum("None", "Active Profile") var read_fallback : int = 1
+@export_enum("None", "Active Profile", "Ancestor") var read_fallback : int = 1
 
 ## Tags in this resource will be available and toggled. If this resource's tags change, the toggle state of children will be updated to reflect.
 @export var write_socket : ResourceSocket
@@ -63,14 +63,17 @@ func _ready() -> void:
 				read_socket.resource = Machine.active_profile
 				add_child(read_socket)
 
-	read_socket.connect_resource_signal(&"tags_changed", recreate_buttons)
+			2:	read_socket = ResourceSocket.find_ancestor(self)
+
+	if read_socket:
+		read_socket.connect_resource_signal(&"tags_changed", recreate_buttons)
 
 	if write_socket == null:
 		match write_fallback:
 			1: write_socket = read_socket
 			2: write_socket = ResourceSocket.find_ancestor(self)
 
-	if write_socket != read_socket:
+	if write_socket != read_socket and write_socket:
 		write_socket.connect_resource_signal(&"tags_changed", refresh_buttons)
 
 	recreate_buttons()
@@ -131,7 +134,7 @@ func refresh_buttons() -> void:
 
 	for button: TagButton in cache:
 		button.visible = filter.is_empty() or button.text.to_lower().contains(_filter_lower)
-		button.button_pressed = write_socket.resource.tags.has_tag_by_name(button.text) if button.toggle_mode and write_socket else false
+		button.button_pressed = write_socket.resource.tags.has(button.text) if button.toggle_mode and write_socket else false
 		add_child(button)
 
 

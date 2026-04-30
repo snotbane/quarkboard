@@ -28,12 +28,18 @@ func _serialize() -> Variant:
 		return JsonResource.serialize(list)
 
 
-func _deserialize(json) -> bool:
+func _deserialize(json, context : Object = null) -> bool:
 	if store_as_refs:
+		assert(context is JsonResource, "Context must be a JsonResource.")
+		assert(context.parent != null, "Context must have a parent.")
+
 		list.clear()
-		assert(false, "Needs implementation.")
-		# for e in json:
-		# 	push_back(null)
+		var profile : Profile = context.parent
+		for tag_name in json:
+			var tag : Tag = profile.tags.find(tag_name)
+			if tag == null: continue
+			push_back(tag)
+
 	else:
 		var values = JsonResource.deserialize(json)
 		for tag in values:
@@ -51,6 +57,11 @@ func has(query) -> bool:
 		for tag in list: if query		== tag.name: return true
 
 	return false
+
+
+func find(query: StringName) -> Tag:
+	for tag in list: if query == tag.name: return tag
+	return null
 
 
 func push_back(tag: Tag) -> void:

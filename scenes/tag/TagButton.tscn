@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://coko05d00knrj" path="res://scripts/ui/IconToggleButton.gd" id="8_2jd2p"]
 [ext_resource type="Texture2D" uid="uid://dy45nl86aoy6u" path="res://icons/dazzle/dot_alt.svg" id="9_ffjli"]
 [ext_resource type="Script" uid="uid://bxhcr7l2ixmrf" path="res://scenes/palette/PaletteSelector.gd" id="11_lahnn"]
+[ext_resource type="Texture2D" uid="uid://xaogbwb4o3er" path="res://icons/dazzle/xmark.svg" id="11_po0b4"]
 
 [node name="tag_button" type="PanelContainer" unique_id=277815674]
 offset_right = 50.0
@@ -139,7 +140,7 @@ icon = ExtResource("9_ffjli")
 flat = true
 expand_icon = true
 script = ExtResource("8_2jd2p")
-icon_pressed = ExtResource("7_vckjx")
+icon_pressed = ExtResource("11_po0b4")
 
 [node name="palette_container" type="MarginContainer" parent="solo_container" unique_id=1351518054]
 unique_name_in_owner = true

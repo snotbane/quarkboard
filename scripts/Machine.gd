@@ -51,7 +51,6 @@ func _saving() -> void:
 func _loaded() -> void:
 	for path : String in data.get(K_PROFILES, []):
 		var profile := Profile.new()
-		print("profile.tags : %s" % [ profile.tags ])
 		profile.touch(path)
 		profiles[profile] = path
 

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c5af1kmoyp7o7"]
 
 [ext_resource type="Script" uid="uid://c5gekvq1ljqu4" path="res://scenes/board/flat/FlatGroupPanel.gd" id="1_4oyfi"]
-[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme_dark.tres" id="1_e6q6l"]
 [ext_resource type="Script" uid="uid://ds28i15fl16c3" path="res://scenes/board/flat/QuarkMasonryContainer.gd" id="2_4oyfi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akae1"]
@@ -29,7 +28,6 @@ anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_e6q6l")
 theme_override_styles/panel = SubResource("StyleBoxFlat_akae1")
 script = ExtResource("1_4oyfi")
 
@@ -39,6 +37,7 @@ theme_override_constants/separation = 10
 
 [node name="label" type="RichTextLabel" parent="v_box_container" unique_id=1662450545]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24

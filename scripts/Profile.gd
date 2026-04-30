@@ -56,20 +56,20 @@ func _loaded() -> void:
 
 	# 	tags.append(tag)
 
-	quarks.clear()
-	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
-		if path.get_extension().is_empty(): continue
+	# quarks.clear()
+	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
+	# 	if path.get_extension().is_empty(): continue
 
-		var quark := Quark.new()
-		quark.load(path)
+	# 	var quark := Quark.new()
+	# 	quark.load(path)
 
-		quarks.push_back(quark)
+	# 	quarks.push_back(quark)
 
-	boards.clear()
-	for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
-		if path.get_extension().is_empty(): continue
+	# boards.clear()
+	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
+	# 	if path.get_extension().is_empty(): continue
 
-		Board.new().load(path)
+	# 	Board.new().load(path)
 
 	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
 

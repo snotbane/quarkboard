@@ -73,6 +73,7 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
 script = ExtResource("4_qf1r8")
+write_fallback = 2
 button_toggle_mode = 4
 button_feature_display = true
 

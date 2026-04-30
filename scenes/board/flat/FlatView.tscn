@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://i4omm3hsucbn"]
 
-[ext_resource type="Theme" uid="uid://bxb0g3nks2nwl" path="res://ui/main_theme_dark.tres" id="1_1o47n"]
 [ext_resource type="Script" uid="uid://cs7r1ik3e8554" path="res://scenes/board/flat/FlatView.gd" id="1_43arh"]
 [ext_resource type="Script" uid="uid://cg26odhngglnc" path="res://addons/myth/modules/setting/ResourceSocket.gd" id="2_3c1lg"]
 [ext_resource type="PackedScene" uid="uid://c5af1kmoyp7o7" path="res://scenes/board/flat/FlatGroupPanel.tscn" id="2_rfwpd"]
@@ -19,7 +18,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_1o47n")
 script = ExtResource("1_43arh")
 
 [node name="resource_socket" type="Node" parent="." unique_id=1086232912]
