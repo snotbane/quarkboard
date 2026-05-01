@@ -24,8 +24,8 @@ static var active_profile: Profile:
 		inst.active_profile_changed.emit()
 
 
-static func _static_init() -> void:
-	inst = Machine.new()
+func _init() -> void:
+	inst = self
 
 
 signal profile_added(profile: Profile)
@@ -38,7 +38,7 @@ signal active_profile_changed
 	set(value):
 		for path in value:
 			var profile := Profile.new()
-			profile.touch(path)
+			profile.load(path)
 			profiles[profile] = path
 
 

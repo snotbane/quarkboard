@@ -10,11 +10,11 @@ static var REGEX_PATTERN_PROFILE_PATH := RegEx.create_from_string(".*\\%s$" % DI
 signal quark_added(quark: Quark)
 signal boards_changed
 
-@export_storage var name : String
-@export_storage var icon : Texture2D = ICON_DEFAULT
+@export_storage var name: String
+@export_storage var icon: Texture2D = ICON_DEFAULT
 
-var quarks : Array
-var boards : Array
+var quarks: Array
+var boards: Array
 
 func _get_save_as_dir_default() -> bool: return true
 
@@ -27,25 +27,19 @@ func _init_tags() -> void:
 func _touched() -> void:
 	if not is_valid: return
 
-	if name.is_empty():
-		name = file_name.capitalize()
-		self.save()
-
-	_touched_deferred.call_deferred()
-func _touched_deferred() -> void:
-	assert(Machine.inst != null)
-
-	if not Machine.profiles.has(self):
-		Machine.profiles[self] = file_path_absolute
+	if not Machine.profiles.has(self ):
+		Machine.profiles[ self ] = file_path_absolute
 		Machine.inst.save()
-		Machine.inst.profile_added.emit(self)
+		Machine.inst.profile_added.emit(self )
+
+	print("Machine.profiles : %s" % [Machine.profiles])
 
 
 func _loaded() -> void:
 	if not is_valid: return
 
 	super._loaded()
-	print("tags.list : %s" % [ tags.list ])
+	print("tags.list : %s" % [tags.list])
 
 	# tags.clear()
 	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Tag.DIR_NAME)):
@@ -71,7 +65,7 @@ func _loaded() -> void:
 
 	# 	Board.new().load(path)
 
-	print("Found %s Quarks and %s Boards in profile '%s'" % [ quarks.size(), boards.size(), file_path_absolute ])
+	print("Found %s Quarks and %s Boards in profile '%s'" % [quarks.size(), boards.size(), file_path_absolute])
 
 
 func make_active() -> void:
@@ -81,9 +75,9 @@ func make_active() -> void:
 func hide() -> void:
 # if Machine.profiles.has(self):
 	Machine.active_profile = null
-	Machine.profiles.erase(self)
+	Machine.profiles.erase(self )
 	Machine.inst.save()
-	Machine.inst.profile_removed.emit(self)
+	Machine.inst.profile_removed.emit(self )
 
 
 func delete() -> void:

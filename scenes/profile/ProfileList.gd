@@ -1,4 +1,3 @@
-
 extends SelectList
 
 func _ready() -> void:
@@ -66,7 +65,7 @@ func _on_import_dialog_file_selected(path: String) -> void:
 
 	var profile_paths_found := Myth.get_paths_in_folder(path, Profile.REGEX_PATTERN_PROFILE_PATH)
 
-	var last_imported : Profile
+	var last_imported: Profile
 	for profile_path in profile_paths_found:
 		last_imported = Profile.new()
 		last_imported.load(profile_path)
@@ -85,5 +84,3 @@ func _on_copy_dialog_dir_selected(dir: String) -> void:
 
 func _on_hide_dialog_confirmed() -> void:
 	Machine.active_profile.hide()
-
-
