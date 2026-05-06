@@ -28,8 +28,6 @@ func _init() -> void:
 	inst = self
 
 
-signal profile_added(profile: Profile)
-signal profile_removed(profile: Profile)
 signal active_profile_changed
 
 
@@ -40,6 +38,7 @@ signal active_profile_changed
 			var profile := Profile.new()
 			profile.load(path)
 			profiles[profile] = path
+		emit_changed()
 
 
 @export_storage var active_profile_idx: int:

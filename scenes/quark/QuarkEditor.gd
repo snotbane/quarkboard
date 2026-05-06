@@ -1,9 +1,8 @@
-
 class_name QuarkEditor extends Control
 
 const WINDOW_SCENE := preload("uid://dhqywdywggsx5")
 
-var quark : Quark :
+var quark: Quark:
 	get: return $resource_socket.resource
 	set(value):
 		$resource_socket.resource = value
@@ -13,17 +12,17 @@ var quark : Quark :
 			name = quark.name_text
 
 
-static var subwindow : Control :
+static var subwindow: Control:
 	get: return GlobalNode.get_global_node(&"quark_editor_subwindow")
-static var subwindow_container : Control :
+static var subwindow_container: Control:
 	get: return GlobalNode.get_global_node(&"quark_editor_container")
 
-@onready var text_edit : TextEdit = %text_edit
-@onready var popout_button : BaseButton = %popout_popin
-@onready var pin_switch : BaseButton = %pin_unpin
+@onready var text_edit: TextEdit = %text_edit
+@onready var popout_button: BaseButton = %popout_popin
+@onready var pin_switch: BaseButton = %pin_unpin
 
-var _window : Window
-var window : Window :
+var _window: Window
+var window: Window:
 	get: return _window
 	set(value):
 		_window = value
@@ -98,9 +97,7 @@ func popout_direct() -> void:
 	popout_button.button_pressed = true
 
 
-
-
-var pinned : bool :
+var pinned: bool:
 	get: return window.always_on_top if window else false
 	set(value):
 		if not window: return
@@ -125,4 +122,4 @@ func copy() -> void:
 
 
 func reveal() -> void:
-	quark.reveal()
+	quark.shell_reveal()

@@ -1,4 +1,3 @@
-
 class_name FlatView extends BoardView
 
 const FLAT_QUARK_SCENE = preload("uid://ik6dmd4algrl")
@@ -18,7 +17,7 @@ func _ready() -> void:
 
 
 func get_container_for_quark(quark: Quark) -> FlatGroupPanel:
-	var result : FlatGroupPanel
+	var result: FlatGroupPanel
 	match quark.status:
 		Quark.Status.FLAG:
 			result = %flag
@@ -36,7 +35,7 @@ func _quark_added(quark: Quark) -> void:
 	var container := get_container_for_quark(quark)
 	if container == null: return
 
-	var node : FlatQuarkViewer = FLAT_QUARK_SCENE.instantiate()
+	var node: FlatQuarkViewer = FLAT_QUARK_SCENE.instantiate()
 
 	container.masonry.add_child(node)
 
@@ -45,8 +44,8 @@ func _quark_added(quark: Quark) -> void:
 
 
 func create_new_quark() -> void:
-	var quark : Quark
-	var path := JsonResource.generate_save_path(Machine.active_profile.file_path_absolute.path_join(Quark.DIR_NAME))
+	var quark: Quark
+	var path := JsonResource.generate_save_path(Machine.active_profile.file_path.path_join(Quark.DIR_NAME))
 
 	quark = Quark.new()
 	quark.touch(path)

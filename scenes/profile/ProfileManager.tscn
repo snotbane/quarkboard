@@ -7,35 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/dazzle/star_alt_2.svg" id="2_kb1f2"]
 [ext_resource type="Script" uid="uid://bnel1lru80tj3" path="res://scenes/profile/ProfileItemList.gd" id="3_a1fiq"]
 [ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/dazzle/folder.svg" id="4_d8row"]
-[ext_resource type="Script" uid="uid://45adv1w12mtd" path="res://addons/myth/modules/setting/SettingText.gd" id="5_ybb1a"]
-[ext_resource type="Script" uid="uid://cj3goivmfacwh" path="res://addons/myth/modules/setting/Setting_GroupLayout.gd" id="6_subl0"]
 [ext_resource type="Script" uid="uid://davnl5ty1puty" path="res://addons/myth/modules/setting/SettingImage.gd" id="7_q71o8"]
 [ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/dazzle/profile_icons.tres" id="8_71axf"]
 [ext_resource type="Texture2D" uid="uid://deo70xkotesnd" path="res://icons/dazzle/inbox_arrow_right.svg" id="8_fxjd5"]
-[ext_resource type="Script" uid="uid://coksmubhy87xv" path="res://addons/myth/modules/json/JsonResourceNode.gd" id="8_qto30"]
+[ext_resource type="Script" uid="uid://c162kxoyulapy" path="res://scenes/profile/ActiveProfileResourceNode.gd" id="8_qto30"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/modules/json/ResourcePropertyNode.gd" id="9_j24vq"]
 [ext_resource type="Texture2D" uid="uid://bqkh7xo63rwhs" path="res://icons/dazzle/clone.svg" id="9_q71o8"]
+[ext_resource type="Script" uid="uid://dx15qneb2k2vb" path="res://addons/myth/modules/setting/IconSelector.gd" id="9_qto30"]
 [ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_71axf"]
 [ext_resource type="Texture2D" uid="uid://bwdbmlfkpx40b" path="res://icons/dazzle/circle_dashed.svg" id="15_4oep2"]
 [ext_resource type="PackedScene" uid="uid://dxeo2bqwesui" path="res://scenes/tag/TagSearchableList.tscn" id="17_qto30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71axf"]
-
-[sub_resource type="GDScript" id="GDScript_4oep2"]
-script/source = "extends Node
-
-
-func _ready() -> void:
-	get_parent().visible = false
-
-
-func _on_resource_socket_resource_value_changed(new_resource: Resource) -> void:
-	get_parent().visible = new_resource != null
-"
-
-[sub_resource type="Resource" id="Resource_dp6ht"]
-resource_local_to_scene = true
-script = ExtResource("6_subl0")
-metadata/_custom_type_script = "uid://cj3goivmfacwh"
 
 [sub_resource type="GDScript" id="GDScript_7tsq7"]
 script/source = "extends Button
@@ -98,7 +81,6 @@ item_scene = ExtResource("2_7tsq7")
 [node name="profile_list" type="ItemList" parent="h_split_container/v_box_container/panel_container/scroll_container" unique_id=224433428]
 layout_mode = 2
 size_flags_horizontal = 3
-select_mode = 1
 auto_width = true
 auto_height = true
 wraparound_items = false
@@ -136,30 +118,56 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_71axf")
 
 [node name="profile_editor" type="PanelContainer" parent="h_split_container/panel_container" unique_id=1570939945]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="visibility_controller" type="Node" parent="h_split_container/panel_container/profile_editor" unique_id=1751573922]
-script = SubResource("GDScript_4oep2")
-
-[node name="json_resource_node" type="Node" parent="h_split_container/panel_container/profile_editor" unique_id=590727591]
+[node name="active_profile_socket" type="Node" parent="h_split_container/panel_container/profile_editor" unique_id=1550202479]
 script = ExtResource("8_qto30")
-metadata/_custom_type_script = "uid://coksmubhy87xv"
+when_resource_is_null = 1
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
 
-[node name="v_box_container" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor" unique_id=1287438185]
+[node name="margin_container" type="MarginContainer" parent="h_split_container/panel_container/profile_editor" unique_id=1216640439]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="v_box_container" type="VBoxContainer" parent="h_split_container/panel_container/profile_editor/margin_container" unique_id=1287438185]
 layout_mode = 2
 
-[node name="name" type="Control" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=396330585]
+[node name="h_box_container" type="HBoxContainer" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=1959270317]
+layout_mode = 2
+
+[node name="icon" type="Button" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/h_box_container" unique_id=257829262]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+toggle_mode = true
+icon_alignment = 3
+vertical_icon_alignment = 3
+expand_icon = true
+script = ExtResource("9_qto30")
+collection = ExtResource("8_71axf")
+button_size_min = Vector2(64, 64)
+
+[node name="resource_property_node" type="Node" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/h_box_container/icon" unique_id=12612332]
+script = ExtResource("9_j24vq")
+fallback_type = 2
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="name" type="LineEdit" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/h_box_container" unique_id=113448888]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("5_ybb1a")
-handle_minimum_width = 200.0
-label_text = "Name"
-reset_button_enabled = false
-layout_group = SubResource("Resource_dp6ht")
-metadata/_custom_type_script = "uid://45adv1w12mtd"
+size_flags_vertical = 4
+alignment = 1
 
-[node name="icon" type="Control" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=677000883]
+[node name="resource_property_node" type="Node" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/h_box_container/name" unique_id=341654523]
+script = ExtResource("9_j24vq")
+fallback_type = 2
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="icon" type="Control" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=677000883]
 layout_mode = 2
 script = ExtResource("7_q71o8")
 collection = ExtResource("8_71axf")
@@ -168,7 +176,7 @@ label_text = "Icon"
 reset_button_enabled = false
 metadata/_custom_type_script = "uid://davnl5ty1puty"
 
-[node name="location" type="Button" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=841485372]
+[node name="location" type="Button" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=841485372]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "user://default.qrk"
@@ -179,15 +187,15 @@ icon_alignment = 2
 expand_icon = true
 script = SubResource("GDScript_7tsq7")
 
-[node name="h_separator" type="HSeparator" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=426392910]
+[node name="h_separator" type="HSeparator" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=426392910]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_4oep2")
 
-[node name="grid_container" type="GridContainer" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=826179487]
+[node name="grid_container" type="GridContainer" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=826179487]
 layout_mode = 2
 columns = 2
 
-[node name="move" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1193590418 instance=ExtResource("1_l71mk")]
+[node name="move" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container" unique_id=1193590418 instance=ExtResource("1_l71mk")]
 layout_mode = 2
 tooltip_text = "Moves the profile and all its notes to a new location on this machine."
 text = "Move"
@@ -196,28 +204,28 @@ icon_alignment = 0
 vertical_icon_alignment = 1
 expand_icon = false
 
-[node name="move_dialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move" unique_id=1021428856 instance=ExtResource("2_dgt7i")]
+[node name="move_dialog" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/move" unique_id=1021428856 instance=ExtResource("2_dgt7i")]
 title = "Open a Directory"
 file_mode = 2
 
-[node name="copy" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=210246179 instance=ExtResource("1_l71mk")]
+[node name="copy" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container" unique_id=210246179 instance=ExtResource("1_l71mk")]
 visible = false
 layout_mode = 2
 tooltip_text = "Copies the profile and its settings without copying any of its contents."
 text = "Copy"
 icon = ExtResource("9_q71o8")
 
-[node name="copy_dialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy" unique_id=1105291956 instance=ExtResource("2_dgt7i")]
+[node name="copy_dialog" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/copy" unique_id=1105291956 instance=ExtResource("2_dgt7i")]
 title = "Open a Directory"
 file_mode = 2
 
-[node name="reveal" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1727461590 instance=ExtResource("1_l71mk")]
+[node name="reveal" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container" unique_id=1727461590 instance=ExtResource("1_l71mk")]
 visible = false
 layout_mode = 2
 text = "Reveal"
 icon = ExtResource("10_71axf")
 
-[node name="hide" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container" unique_id=1151163680 instance=ExtResource("1_l71mk")]
+[node name="hide" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container" unique_id=1151163680 instance=ExtResource("1_l71mk")]
 layout_mode = 2
 tooltip_text = "Removes the profile from the application without deleting anything."
 text = "Hide"
@@ -226,7 +234,7 @@ icon_alignment = 0
 vertical_icon_alignment = 1
 expand_icon = false
 
-[node name="hide_dialog" type="ConfirmationDialog" parent="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide" unique_id=724943703]
+[node name="hide_dialog" type="ConfirmationDialog" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/hide" unique_id=724943703]
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(400, 262)
@@ -236,9 +244,11 @@ dialog_text = "Hiding this profile will not delete any data from the system. It 
 (To completely delete a profile and all of its contents, delete the .qbdp folder in the file system.)"
 dialog_autowrap = true
 
-[node name="tag_searchable_list" parent="h_split_container/panel_container/profile_editor/v_box_container" unique_id=2126046195 instance=ExtResource("17_qto30")]
+[node name="tag_searchable_list" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=2126046195 instance=ExtResource("17_qto30")]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="popup_panel" type="PopupPanel" parent="h_split_container/panel_container/profile_editor/margin_container/v_box_container" unique_id=2132220897]
 
 [node name="importer" type="Control" parent="." unique_id=1715073317]
 visible = false
@@ -308,9 +318,9 @@ text = "Standard Notes"
 [connection signal="file_selected" from="h_split_container/v_box_container/grid_container/create/create_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/profile_list" method="_on_create_dialog_file_selected"]
 [connection signal="pressed" from="h_split_container/v_box_container/grid_container/import" to="h_split_container/v_box_container/grid_container/import/import_dialog" method="popup_file_dialog"]
 [connection signal="dir_selected" from="h_split_container/v_box_container/grid_container/import/import_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/profile_list" method="_on_import_dialog_dir_selected"]
-[connection signal="pressed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move" to="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move/move_dialog" method="show"]
-[connection signal="dir_selected" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/move/move_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_move_dialog_dir_selected"]
-[connection signal="pressed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy" to="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy/copy_dialog" method="show"]
-[connection signal="dir_selected" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/copy/copy_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_copy_dialog_dir_selected"]
-[connection signal="pressed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide" to="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide/hide_dialog" method="show"]
-[connection signal="confirmed" from="h_split_container/panel_container/profile_editor/v_box_container/grid_container/hide/hide_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_hide_dialog_confirmed"]
+[connection signal="pressed" from="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/move" to="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/move/move_dialog" method="show"]
+[connection signal="dir_selected" from="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/move/move_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_move_dialog_dir_selected"]
+[connection signal="pressed" from="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/copy" to="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/copy/copy_dialog" method="show"]
+[connection signal="dir_selected" from="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/copy/copy_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_copy_dialog_dir_selected"]
+[connection signal="pressed" from="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/hide" to="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/hide/hide_dialog" method="show"]
+[connection signal="confirmed" from="h_split_container/panel_container/profile_editor/margin_container/v_box_container/grid_container/hide/hide_dialog" to="h_split_container/v_box_container/panel_container/scroll_container/select_list" method="_on_hide_dialog_confirmed"]

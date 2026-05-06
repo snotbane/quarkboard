@@ -49,7 +49,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="json_resource_node" type="Node" parent="safe_margin_container/margin_container/machine" unique_id=62696781]
+[node name="machine_socket" type="Node" parent="safe_margin_container/margin_container/machine" unique_id=62696781]
 script = ExtResource("1_x272f")
 resource_initial_path = "user://machine.json"
 metadata/_custom_type_script = "uid://coksmubhy87xv"

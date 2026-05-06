@@ -5,10 +5,6 @@ func _ready() -> void:
 		if not profile: continue
 		_profile_added(profile, false)
 
-	Machine.inst.profile_added.connect(_profile_added)
-	Machine.inst.profile_removed.connect(_profile_removed)
-	Machine.inst.active_profile_changed.connect(_active_profile_changed, ConnectFlags.CONNECT_DEFERRED)
-
 
 func _notification(what: int) -> void:
 	match what:

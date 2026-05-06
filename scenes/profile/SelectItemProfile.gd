@@ -1,8 +1,7 @@
-
 extends SelectItem
 
-var _profile : Profile
-var profile : Profile :
+var _profile: Profile
+var profile: Profile:
 	get: return _profile
 	set(value):
 		if _profile == value: return
@@ -17,10 +16,10 @@ var profile : Profile :
 			_profile.changed.connect(refresh)
 
 
-@onready var icon : TextureRect = $margin_container/h_box_container/icon
-@onready var icon_error : TextureRect = $margin_container/h_box_container/error
-@onready var label_name : Label = $margin_container/h_box_container/v_box_container/name
-@onready var label_location : Label = $margin_container/h_box_container/v_box_container/location
+@onready var icon: TextureRect = $margin_container/h_box_container/icon
+@onready var icon_error: TextureRect = $margin_container/h_box_container/error
+@onready var label_name: Label = $margin_container/h_box_container/v_box_container/name
+@onready var label_location: Label = $margin_container/h_box_container/v_box_container/location
 
 
 func _get_selection_object() -> Variant:
@@ -38,7 +37,7 @@ func refresh() -> void:
 	icon.visible = is_valid
 	icon.texture = _profile.icon if _profile else null
 	label_name.text = _profile.name if _profile else String()
-	label_location.text = _profile.file_path_absolute if _profile else String()
+	label_location.text = _profile.file_path if _profile else String()
 	label_location.tooltip_text = label_location.text
 	label_location.mouse_filter = Control.MOUSE_FILTER_IGNORE if is_valid else Control.MOUSE_FILTER_PASS
 

@@ -13,6 +13,9 @@ signal boards_changed
 @export_storage var name: String
 @export_storage var icon: Texture2D = ICON_DEFAULT
 
+var display_name: String:
+	get: return name if name else file_name_and_ext
+
 var quarks: Array
 var boards: Array
 
@@ -28,11 +31,8 @@ func _touched() -> void:
 	if not is_valid: return
 
 	if not Machine.profiles.has(self ):
-		Machine.profiles[ self ] = file_path_absolute
+		Machine.profiles[ self ] = file_path
 		Machine.inst.save()
-		Machine.inst.profile_added.emit(self )
-
-	print("Machine.profiles : %s" % [Machine.profiles])
 
 
 func _loaded() -> void:
@@ -42,7 +42,7 @@ func _loaded() -> void:
 	print("tags.list : %s" % [tags.list])
 
 	# tags.clear()
-	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Tag.DIR_NAME)):
+	# for path in Myth.get_paths_in_folder(file_path.path_join(Tag.DIR_NAME)):
 	# 	if path.get_extension().is_empty(): continue
 
 	# 	var tag := Tag.new()
@@ -51,7 +51,7 @@ func _loaded() -> void:
 	# 	tags.append(tag)
 
 	# quarks.clear()
-	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Quark.DIR_NAME)):
+	# for path in Myth.get_paths_in_folder(file_path.path_join(Quark.DIR_NAME)):
 	# 	if path.get_extension().is_empty(): continue
 
 	# 	var quark := Quark.new()
@@ -60,12 +60,12 @@ func _loaded() -> void:
 	# 	quarks.push_back(quark)
 
 	# boards.clear()
-	# for path in Myth.get_paths_in_folder(file_path_absolute.path_join(Board.DIR_NAME)):
+	# for path in Myth.get_paths_in_folder(file_path.path_join(Board.DIR_NAME)):
 	# 	if path.get_extension().is_empty(): continue
 
 	# 	Board.new().load(path)
 
-	print("Found %s Quarks and %s Boards in profile '%s'" % [quarks.size(), boards.size(), file_path_absolute])
+	print("Found %s Quarks and %s Boards in profile '%s'" % [quarks.size(), boards.size(), file_path])
 
 
 func make_active() -> void:
