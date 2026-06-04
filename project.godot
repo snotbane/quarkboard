@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="Quarkboard"
-run/main_scene="uid://kg1yilff358s"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/low_processor_mode=true
@@ -49,15 +48,12 @@ naming/script_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/myth/modules/base/plugin.cfg", "res://addons/myth/modules/setting/plugin.cfg", "res://addons/myth/modules/terminal/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
 folder_colors={
-"res://addons/": "gray",
-"res://materials/": "yellow",
-"res://scenes/": "green",
-"res://scripts/": "blue"
+"res://addons/": "gray"
 }
 
 [filesystem]
