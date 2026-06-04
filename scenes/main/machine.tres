@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Machine" format=3 uid="uid://c85g2l76u2ac7"]
+
+[ext_resource type="Script" uid="uid://d1lrbgrx677sq" path="res://scripts/data/Machine.gd" id="1_i7781"]
+
+[resource]
+script = ExtResource("1_i7781")
+_file_path_relative = "user://local.json"
+tags = null
+metadata/_custom_type_script = "uid://d1lrbgrx677sq"
