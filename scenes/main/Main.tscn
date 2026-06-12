@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://d3rc3q016pc5w"]
 
-[ext_resource type="Script" uid="uid://coksmubhy87xv" path="res://addons/myth/scripts/json/JsonResourceNode.gd" id="1_nha0i"]
+[ext_resource type="Script" uid="uid://o6gdeyy3se7b" path="res://scenes/main/MachineController.gd" id="1_1rhdn"]
 [ext_resource type="Script" uid="uid://d1lrbgrx677sq" path="res://scripts/data/Machine.gd" id="2_gyg6b"]
 [ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/dazzle/star_alt_2.svg" id="2_q24mn"]
+[ext_resource type="Script" uid="uid://duup5ow7c5ui" path="res://addons/myth/scripts/component/ArrayComponent.gd" id="3_1rhdn"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="3_dc040"]
+[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="4_gyg6b"]
+[ext_resource type="PackedScene" uid="uid://f2rwvd4qkr6h" path="res://scenes/main/ProfileButton.tscn" id="4_sjxhf"]
 
-[sub_resource type="Resource" id="Resource_q24mn"]
+[sub_resource type="Resource" id="Resource_gyg6b"]
 script = ExtResource("2_gyg6b")
 _file_path_relative = "user://local.json"
 tags = null
@@ -33,18 +37,54 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="json_resource_node" type="Node" parent="margin_container/panel_container/profiles" unique_id=121805770]
-script = ExtResource("1_nha0i")
-resource_initial_path = "user://local.json"
-touch_script = ExtResource("2_gyg6b")
-resource = SubResource("Resource_q24mn")
-metadata/_custom_type_script = "uid://coksmubhy87xv"
+[node name="resource_node" type="Node" parent="margin_container/panel_container/profiles" unique_id=2074962396]
+script = ExtResource("1_1rhdn")
+resource = SubResource("Resource_gyg6b")
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
 
-[node name="existing" type="VBoxContainer" parent="margin_container/panel_container/profiles" unique_id=1349610007]
+[node name="existing" type="VBoxContainer" parent="margin_container/panel_container/profiles" unique_id=2126638732]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="add" type="Button" parent="margin_container/panel_container/profiles" unique_id=441235350]
+[node name="array_component" type="Node" parent="margin_container/panel_container/profiles/existing" unique_id=2066317245]
+script = ExtResource("3_1rhdn")
+elements_scene = ExtResource("4_sjxhf")
+elements = [null]
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="profiles" type="Node" parent="margin_container/panel_container/profiles/existing/array_component" unique_id=757410970]
+script = ExtResource("3_dc040")
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="h_box_container" type="HBoxContainer" parent="margin_container/panel_container/profiles" unique_id=986598214]
 layout_mode = 2
+
+[node name="add" type="Button" parent="margin_container/panel_container/profiles/h_box_container" unique_id=441235350]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Create New"
 icon = ExtResource("2_q24mn")
+
+[node name="file_dialog" type="FileDialog" parent="margin_container/panel_container/profiles/h_box_container/add" unique_id=1226252610]
+oversampling_override = 1.0
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.qbdp")
+use_native_dialog = true
+
+[node name="scan" type="Button" parent="margin_container/panel_container/profiles/h_box_container" unique_id=74420957]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Import"
+icon = ExtResource("4_gyg6b")
+
+[node name="file_dialog" type="FileDialog" parent="margin_container/panel_container/profiles/h_box_container/scan" unique_id=1293814000]
+oversampling_override = 1.0
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.qbdp")
+use_native_dialog = true
+
+[connection signal="pressed" from="margin_container/panel_container/profiles/h_box_container/add" to="margin_container/panel_container/profiles/h_box_container/add/file_dialog" method="popup_file_dialog"]
+[connection signal="file_selected" from="margin_container/panel_container/profiles/h_box_container/add/file_dialog" to="margin_container/panel_container/profiles/resource_node" method="add_profile_at_path"]
+[connection signal="pressed" from="margin_container/panel_container/profiles/h_box_container/scan" to="margin_container/panel_container/profiles/h_box_container/scan/file_dialog" method="popup_file_dialog"]

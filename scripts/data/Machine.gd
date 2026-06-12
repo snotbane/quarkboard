@@ -6,7 +6,7 @@ static var inst: Machine
 
 
 var profiles: Array[Profile]
-var active_profile: Profile
+var profile_idx: Profile
 
 
 func _init() -> void:
@@ -15,23 +15,33 @@ func _init() -> void:
 	super._init()
 
 
-func _touched() -> void:
-	print("active_profile : %s" % [active_profile])
-
-
 func _serialize() -> Dictionary:
 	var result := {}
 	result.profiles = profiles.map(func(profile: Profile) -> String:
 		return profile.file_path_absolute
 	)
-	result.active_profile = profiles.find(active_profile)
+	result.profile_idx = profiles.find(profile_idx)
 	return result
 
-# func _deserialize(json: Variant, context: Object) -> Machine:
-# 	profiles = json.get(&"profiles", []).map(func(path: String) -> Profile:
-# 		return Profile.new_from_path(path)
-# 	)
-# 	if profiles.is_empty(): return
-# 	active_profile = profiles[json.get(&"active_profile", 0)]
-# 	print("profiles : %s" % [profiles])
-# return self
+
+func _deserialize(json: Dictionary) -> void:
+	profiles.resize(json.profiles.size())
+	for i in profiles.size():
+		profiles[i] = Profile.new()
+		profiles[i].load(json.profiles[i])
+
+	if profiles.is_empty(): return
+	profile_idx = profiles[json.get(&"profile_idx", 0)]
+
+
+func add_profile_at_path(path: String) -> Profile:
+	for existing in profiles:
+		if existing.file_path_absolute == path: return existing
+
+	var result := Profile.new()
+	result.touch(path)
+	profiles.push_back(result)
+	emit_changed()
+
+
+	return result

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://f2rwvd4qkr6h"]
+
+[ext_resource type="Script" uid="uid://dcy6spglnwkmm" path="res://scenes/main/ProfileButton.gd" id="1_opd8o"]
+
+[node name="profile_button" type="PanelContainer" unique_id=833429166]
+script = ExtResource("1_opd8o")
+
+[node name="label" type="Label" parent="." unique_id=1775839692]
+layout_mode = 2
+text = "Something"
