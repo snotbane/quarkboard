@@ -18,3 +18,12 @@ func populate(element: Profile):
 
 func move_to_folder(path: String) -> void:
 	profile.move(path)
+
+
+func _ready() -> void:
+	Machine.inst.changed.connect(make_visible_if_active)
+
+
+func make_visible_if_active() -> void:
+	if Machine.inst.profile_active == profile:
+		show()

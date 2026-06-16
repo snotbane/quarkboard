@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://i4bt8ktob7rq"]
+
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_qe56w"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="2_456kf"]
+[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="3_e6241"]
+[ext_resource type="Texture2D" uid="uid://cvw053jyk0fn6" path="res://icons/dazzle/palette.svg" id="4_3a8xt"]
+[ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="5_nijja"]
+
+[node name="tag_editor" type="PanelContainer" unique_id=597368390]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="tag" type="Node" parent="." unique_id=1746045873]
+script = ExtResource("1_qe56w")
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=1070426355]
+layout_mode = 2
+
+[node name="name" type="LineEdit" parent="h_box_container" unique_id=1620894130]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "(Unnamed Tag)"
+max_length = 256
+editable = false
+flat = true
+
+[node name="text" type="Node" parent="h_box_container/name" unique_id=1584434822]
+script = ExtResource("2_456kf")
+resource_emit_changed = false
+node_property_signal = &"text_changed"
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="merge_confirmation_dialog" type="ConfirmationDialog" parent="h_box_container/name" unique_id=1317175380]
+oversampling_override = 1.0
+size = Vector2i(952, 100)
+ok_button_text = "Merge"
+dialog_text = "This tag shares a name with another existing Tag. This will merge the two tags into one. Are you sure you want to do this?"
+
+[node name="rename" type="Button" parent="h_box_container" unique_id=1936753783]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_e6241")
+flat = true
+
+[node name="palette" type="Button" parent="h_box_container" unique_id=782125343]
+layout_mode = 2
+icon = ExtResource("4_3a8xt")
+flat = true
+
+[node name="remove" type="Button" parent="h_box_container" unique_id=1058074265]
+layout_mode = 2
+icon = ExtResource("5_nijja")
+flat = true
+
+[node name="confirmation_dialog" type="ConfirmationDialog" parent="h_box_container/remove" unique_id=1928896064]
+ok_button_text = "Delete Tag"
+dialog_text = "Are you sure you want to delete this Tag? This action will remove it from all Notes as well."
+
+[connection signal="pressed" from="h_box_container/rename" to="h_box_container/name/text" method="emit_resource_changed"]
+[connection signal="toggled" from="h_box_container/rename" to="h_box_container/name" method="set_editable"]
+[connection signal="pressed" from="h_box_container/remove" to="h_box_container/name/merge_confirmation_dialog" method="popup_centered"]

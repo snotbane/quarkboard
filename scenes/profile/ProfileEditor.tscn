@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://bsjpfkki7d2jw"]
 
-[ext_resource type="Script" uid="uid://cmcxtsakxxy55" path="res://scenes/main/ProfileEditor.gd" id="1_ejyg5"]
+[ext_resource type="Script" uid="uid://cmcxtsakxxy55" path="res://scenes/profile/ProfileEditor.gd" id="1_ejyg5"]
 [ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="1_qh773"]
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="2_4ulw4"]
 [ext_resource type="Texture2D" uid="uid://d1f31r2b2kbdd" path="res://icons/profile_icons/00_user_alt_1.svg" id="3_0500h"]
 [ext_resource type="Script" uid="uid://dx15qneb2k2vb" path="res://addons/myth/scripts/json/IconSelector.gd" id="4_cnal7"]
 [ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/dazzle/profile_icons.tres" id="5_a57bd"]
 [ext_resource type="Texture2D" uid="uid://cf17ltfca1dxg" path="res://icons/dazzle/file_arrow_right.svg" id="6_cnal7"]
 [ext_resource type="Script" uid="uid://colsjxiky4rbu" path="res://addons/myth/scripts/component/FeatureComponent.gd" id="7_a57bd"]
+[ext_resource type="PackedScene" uid="uid://c7kwhj1a2hfvx" path="res://scenes/tags/TagSuiteEditor.tscn" id="9_k3fsw"]
 
 [node name="profile" type="PanelContainer" unique_id=305481421]
 anchors_preset = 15
@@ -17,10 +19,9 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_ejyg5")
 
-[node name="resource_component" type="Node" parent="." unique_id=952754254]
-script = ExtResource("1_qh773")
-fallback_type = 0
-metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+[node name="profile" type="Node" parent="." unique_id=332269867]
+script = ExtResource("2_4ulw4")
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
 
 [node name="scroll_container" type="ScrollContainer" parent="." unique_id=1130659197]
 layout_mode = 2
@@ -39,6 +40,8 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("3_0500h")
+icon_alignment = 3
+vertical_icon_alignment = 3
 expand_icon = true
 script = ExtResource("4_cnal7")
 collection = ExtResource("5_a57bd")
@@ -48,6 +51,7 @@ metadata/_custom_type_script = "uid://dx15qneb2k2vb"
 [node name="icon" type="Node" parent="scroll_container/v_box_container/h_box_container/icon" unique_id=1214109926]
 script = ExtResource("1_qh773")
 node_property_signal = &"icon_changed"
+fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
 [node name="v_box_container" type="VBoxContainer" parent="scroll_container/v_box_container/h_box_container" unique_id=1379924614]
@@ -65,11 +69,12 @@ placeholder_text = "(Unnamed Profile)"
 [node name="text" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/name" unique_id=1617732030]
 script = ExtResource("1_qh773")
 node_property_signal = &"text_changed"
+fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
 [node name="move" type="Button" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container" unique_id=1361451620]
 layout_mode = 2
-tooltip_text = "Move this Profile to a new location on this machine."
+tooltip_text = "Move and/or Rename this Profile's folder to a new location on this machine."
 icon = ExtResource("6_cnal7")
 
 [node name="feature_component" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move" unique_id=2041220828]
@@ -103,11 +108,16 @@ metadata/_custom_type_script = "uid://colsjxiky4rbu"
 
 [node name="text" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/file_path_absolute" unique_id=136670837]
 script = ExtResource("1_qh773")
+fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
 [node name="tooltip_text" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/file_path_absolute" unique_id=1035412426]
 script = ExtResource("1_qh773")
+fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="tag_suite_editor" parent="scroll_container/v_box_container" unique_id=768514276 instance=ExtResource("9_k3fsw")]
+layout_mode = 2
 
 [connection signal="pressed" from="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move" to="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move/file_dialog" method="popup_file_dialog"]
 [connection signal="dir_selected" from="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move/file_dialog" to="." method="move_to_folder"]

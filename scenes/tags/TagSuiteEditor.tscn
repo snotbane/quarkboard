@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c7kwhj1a2hfvx"]
+
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_c5nnm"]
+[ext_resource type="Texture2D" uid="uid://dqwbq62esncsk" path="res://icons/dazzle/search.svg" id="2_wnl72"]
+[ext_resource type="Script" uid="uid://duup5ow7c5ui" path="res://addons/myth/scripts/component/ArrayComponent.gd" id="3_5cp3d"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="4_wf3q6"]
+[ext_resource type="PackedScene" uid="uid://i4bt8ktob7rq" path="res://scenes/tags/TagEditor.tscn" id="5_t8ac7"]
+
+[node name="tag_suite_editor" type="PanelContainer" unique_id=768514276]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 200.0
+grow_vertical = 2
+
+[node name="profile" type="Node" parent="." unique_id=836369172]
+script = ExtResource("1_c5nnm")
+fallback_type = 1
+json_enabled = false
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="v_box_container" type="VBoxContainer" parent="." unique_id=1814754458]
+layout_mode = 2
+
+[node name="search" type="LineEdit" parent="v_box_container" unique_id=797385714]
+layout_mode = 2
+placeholder_text = "Search tags..."
+right_icon = ExtResource("2_wnl72")
+
+[node name="tag_editors" type="VBoxContainer" parent="v_box_container" unique_id=321789462]
+layout_mode = 2
+
+[node name="tag_suite" type="Node" parent="v_box_container/tag_editors" unique_id=1128771606]
+script = ExtResource("3_5cp3d")
+elements_scene = ExtResource("5_t8ac7")
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="v_box_container/tag_editors/tag_suite" unique_id=307940956]
+script = ExtResource("4_wf3q6")
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"

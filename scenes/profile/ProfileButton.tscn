@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://f2rwvd4qkr6h"]
 
-[ext_resource type="Script" uid="uid://dcy6spglnwkmm" path="res://scenes/main/ProfileButton.gd" id="1_opd8o"]
+[ext_resource type="Script" uid="uid://dcy6spglnwkmm" path="res://scenes/profile/ProfileButton.gd" id="1_opd8o"]
 [ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="2_0pf7v"]
 [ext_resource type="Texture2D" uid="uid://d1f31r2b2kbdd" path="res://icons/profile_icons/00_user_alt_1.svg" id="3_6c37k"]
 [ext_resource type="Texture2D" uid="uid://cbww56fe5rff0" path="res://icons/dazzle/grip_dots_vertical_clipped.svg" id="3_fax83"]
@@ -24,7 +24,6 @@ script = ExtResource("1_opd8o")
 
 [node name="resource_component" type="Node" parent="." unique_id=1376285850]
 script = ExtResource("2_0pf7v")
-fallback_type = 0
 json_auto_touch = 0
 metadata/_custom_type_script = "uid://b7s3a8dglp08t"
 
@@ -69,6 +68,7 @@ expand_mode = 2
 
 [node name="texture" type="Node" parent="h_box_container/margin_container/h_box_container/icon_safe" unique_id=638251816]
 script = ExtResource("3_xm1k1")
+fallback_type = 1
 json_enabled = false
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
@@ -77,14 +77,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="file_name" type="Label" parent="h_box_container/margin_container/h_box_container/v_box_container" unique_id=468158214]
+[node name="name_safe" type="Label" parent="h_box_container/margin_container/h_box_container/v_box_container" unique_id=468158214]
 layout_mode = 2
 text = "Profile"
 label_settings = SubResource("LabelSettings_fax83")
 text_overrun_behavior = 3
 
-[node name="text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/file_name" unique_id=1891039848]
+[node name="text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/name_safe" unique_id=1891039848]
 script = ExtResource("3_xm1k1")
+fallback_type = 1
 json_enabled = false
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
@@ -99,11 +100,13 @@ structured_text_bidi_override = 2
 
 [node name="text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/file_path_absolute" unique_id=870613695]
 script = ExtResource("3_xm1k1")
+fallback_type = 1
 json_enabled = false
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
 [node name="tooltip_text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/file_path_absolute" unique_id=376405651]
 script = ExtResource("3_xm1k1")
+fallback_type = 1
 json_enabled = false
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 

@@ -7,6 +7,8 @@ static var inst: Machine
 
 var profile_active: Profile:
 	set(value):
+		if profile_active == value: return
+
 		profile_active = value
 		emit_changed()
 
