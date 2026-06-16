@@ -1,10 +1,110 @@
 [gd_scene format=3 uid="uid://f2rwvd4qkr6h"]
 
 [ext_resource type="Script" uid="uid://dcy6spglnwkmm" path="res://scenes/main/ProfileButton.gd" id="1_opd8o"]
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="2_0pf7v"]
+[ext_resource type="Texture2D" uid="uid://d1f31r2b2kbdd" path="res://icons/profile_icons/00_user_alt_1.svg" id="3_6c37k"]
+[ext_resource type="Texture2D" uid="uid://cbww56fe5rff0" path="res://icons/dazzle/grip_dots_vertical_clipped.svg" id="3_fax83"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="3_xm1k1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opd8o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fax83"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_yikg7"]
+font_size = 12
+font_color = Color(1, 1, 1, 0.6901961)
 
 [node name="profile_button" type="PanelContainer" unique_id=833429166]
+custom_minimum_size = Vector2(200, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_opd8o")
 script = ExtResource("1_opd8o")
 
-[node name="label" type="Label" parent="." unique_id=1775839692]
+[node name="resource_component" type="Node" parent="." unique_id=1376285850]
+script = ExtResource("2_0pf7v")
+fallback_type = 0
+json_auto_touch = 0
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="main_button" type="Button" parent="." unique_id=559800456]
 layout_mode = 2
-text = "Something"
+mouse_filter = 1
+toggle_mode = true
+action_mode = 0
+
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=459200682]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="grip" type="Button" parent="h_box_container" unique_id=899722712]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 7
+keep_pressed_outside = true
+icon = ExtResource("3_fax83")
+flat = true
+icon_alignment = 1
+
+[node name="margin_container" type="MarginContainer" parent="h_box_container" unique_id=1765965349]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 4
+
+[node name="h_box_container" type="HBoxContainer" parent="h_box_container/margin_container" unique_id=1314162013]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="icon_safe" type="TextureRect" parent="h_box_container/margin_container/h_box_container" unique_id=2034261100]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_6c37k")
+expand_mode = 2
+
+[node name="texture" type="Node" parent="h_box_container/margin_container/h_box_container/icon_safe" unique_id=638251816]
+script = ExtResource("3_xm1k1")
+json_enabled = false
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/margin_container/h_box_container" unique_id=1338849159]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="file_name" type="Label" parent="h_box_container/margin_container/h_box_container/v_box_container" unique_id=468158214]
+layout_mode = 2
+text = "Profile"
+label_settings = SubResource("LabelSettings_fax83")
+text_overrun_behavior = 3
+
+[node name="text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/file_name" unique_id=1891039848]
+script = ExtResource("3_xm1k1")
+json_enabled = false
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="file_path_absolute" type="Label" parent="h_box_container/margin_container/h_box_container/v_box_container" unique_id=1865520553]
+layout_mode = 2
+text = "/user/path/to/profile.qbdp"
+label_settings = SubResource("LabelSettings_yikg7")
+horizontal_alignment = 2
+text_overrun_behavior = 5
+text_direction = 2
+structured_text_bidi_override = 2
+
+[node name="text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/file_path_absolute" unique_id=870613695]
+script = ExtResource("3_xm1k1")
+json_enabled = false
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="tooltip_text" type="Node" parent="h_box_container/margin_container/h_box_container/v_box_container/file_path_absolute" unique_id=376405651]
+script = ExtResource("3_xm1k1")
+json_enabled = false
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[connection signal="pressed" from="main_button" to="resource_component" method="call_resource_method" binds= [&"make_active"]]

@@ -5,8 +5,12 @@ class_name Machine extends JsonResource
 static var inst: Machine
 
 
+var profile_active: Profile:
+	set(value):
+		profile_active = value
+		emit_changed()
+
 var profiles: Array[Profile]
-var profile_idx: Profile
 
 
 func _init() -> void:
@@ -17,10 +21,10 @@ func _init() -> void:
 
 func _serialize() -> Dictionary:
 	var result := {}
+	result.profile_active = profile_active.file_path_absolute if profile_active else ""
 	result.profiles = profiles.map(func(profile: Profile) -> String:
 		return profile.file_path_absolute
 	)
-	result.profile_idx = profiles.find(profile_idx)
 	return result
 
 
@@ -30,8 +34,14 @@ func _deserialize(json: Dictionary) -> void:
 		profiles[i] = Profile.new()
 		profiles[i].load(json.profiles[i])
 
-	if profiles.is_empty(): return
-	profile_idx = profiles[json.get(&"profile_idx", 0)]
+	var profile_active_path: String = json.get(&"profile_active", "")
+
+	profile_active = null
+
+	for profile in profiles:
+		if profile.file_path_absolute == profile_active_path:
+			profile_active = profile
+			break
 
 
 func add_profile_at_path(path: String) -> Profile:
@@ -42,6 +52,5 @@ func add_profile_at_path(path: String) -> Profile:
 	result.touch(path)
 	profiles.push_back(result)
 	emit_changed()
-
 
 	return result
