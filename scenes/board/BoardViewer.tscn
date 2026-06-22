@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cxre308immwrh"]
+
+[ext_resource type="Script" uid="uid://boqwibj8bahf7" path="res://scenes/board/BoardViewer.gd" id="1_kdf3v"]
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_x6x7a"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="2_arblp"]
+[ext_resource type="PackedScene" uid="uid://n643y8eusisk" path="res://scenes/tags/TagSuiteSelector.tscn" id="4_tfois"]
+
+[node name="board_viewer" type="Control" unique_id=1346588600]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kdf3v")
+
+[node name="board" type="Node" parent="." unique_id=904656242]
+script = ExtResource("1_x6x7a")
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="visible" type="Node" parent="." unique_id=870306898]
+script = ExtResource("2_arblp")
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="h_split_container" type="HSplitContainer" parent="." unique_id=59882587]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(-300)
+split_offset = -300
+
+[node name="main" type="Control" parent="h_split_container" unique_id=2035690732]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="tag_suite_selector" parent="h_split_container" unique_id=768514276 instance=ExtResource("4_tfois")]
+layout_mode = 2

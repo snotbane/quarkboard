@@ -1,4 +1,5 @@
-class_name Profile extends JsonResource
+class_name Profile
+extends JsonResourceQB
 
 const FILE_EXTENSION := "qbdp"
 
@@ -16,14 +17,14 @@ var icon_safe: Texture2D:
 	get: return icon if icon else ICON_DEFAULT
 
 
-@export_storage var quarks: Array
+var boards: Array[Board]
+var quarks: Array[Quark]
 
 
 ## Returns true if this profile is the currently active one, according to [Machine].
 var is_active: bool:
 	get: return Machine.inst.profile_active == self
 	set(value):
-		print("value : %s" % [value])
 		if value:
 			Machine.inst.profile_active = self
 			emit_changed()
@@ -36,6 +37,35 @@ func _get_save_as_dir_default() -> bool:
 	return true
 
 
+func _loaded() -> void:
+	Myth.transfer_array(boards, load_children(Board.DIR))
+	# Myth.transfer_array(quarks, load_children(Quark.DIR))
+
+
+# func _ready() -> void:
+	# create_welcome_boards()
+
+
+func create_welcome_boards() -> void:
+	var welcome_board_everything := MasonryBoard.new(self)
+	welcome_board_everything.name = "Everything"
+	welcome_board_everything.icon = preload("res://icons/dazzle/cube_alt_1.svg")
+	welcome_board_everything.internal_mode = Node.INTERNAL_MODE_FRONT
+	boards.push_back(welcome_board_everything)
+
+	var welcome_board_archive := MasonryBoard.new(self)
+	welcome_board_archive.name = "Archive"
+	welcome_board_archive.icon = preload("res://icons/dazzle/floppy_disk_alt.svg")
+	welcome_board_archive.internal_mode = Node.INTERNAL_MODE_BACK
+	boards.push_back(welcome_board_archive)
+
+	var welcome_board_recycle := MasonryBoard.new(self)
+	welcome_board_recycle.name = "Recycle"
+	welcome_board_recycle.icon = preload("res://icons/dazzle/trash_clock.svg")
+	welcome_board_recycle.internal_mode = Node.INTERNAL_MODE_BACK
+	boards.push_back(welcome_board_recycle)
+
+
 func _tags_init() -> Variant:
 	return TagSuite.new(false)
 
@@ -46,3 +76,17 @@ func make_active() -> void:
 
 func unlink() -> void:
 	Machine.inst.remove_profile(self)
+
+
+func create_new_board(selector_idx: int) -> Board:
+	var result: Board
+	match selector_idx:
+		0: result = MasonryBoard.new(self)
+		# 1: result = TreeBoard.new(self)
+		# 2: ...etc...
+	assert(result != null, "Unimplemented board index.")
+
+	boards.push_back(result)
+	emit_changed()
+
+	return result

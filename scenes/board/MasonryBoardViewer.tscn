@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c55pt1352pp2d"]
+
+[ext_resource type="PackedScene" uid="uid://cxre308immwrh" path="res://scenes/board/BoardViewer.tscn" id="1_4re2d"]
+
+[node name="board_viewer" unique_id=1346588600 instance=ExtResource("1_4re2d")]
+
+[node name="center_container" type="CenterContainer" parent="h_split_container/main" parent_id_path=PackedInt32Array(2035690732) index="0" unique_id=814847126]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="h_split_container/main/center_container" index="0" unique_id=1353192274]
+layout_mode = 2
+text = "Hello this is a masonry board"

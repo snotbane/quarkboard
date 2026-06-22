@@ -56,7 +56,7 @@ size_flags_vertical = 0
 
 [node name="profiles" type="Node" parent="margin_container/h_box_container/left_sidebar/profile_buttons/list" unique_id=2066317245]
 script = ExtResource("3_p0h58")
-elements_scene = ExtResource("4_4km2u")
+elements_fallback_scene = ExtResource("4_4km2u")
 metadata/_custom_type_script = "uid://duup5ow7c5ui"
 
 [node name="elements" type="Node" parent="margin_container/h_box_container/left_sidebar/profile_buttons/list/profiles" unique_id=757410970]
@@ -82,7 +82,7 @@ tabs_visible = false
 
 [node name="profiles" type="Node" parent="margin_container/h_box_container/main/v_box_container/profile_editors" unique_id=794709263]
 script = ExtResource("3_p0h58")
-elements_scene = ExtResource("8_de17w")
+elements_fallback_scene = ExtResource("8_de17w")
 metadata/_custom_type_script = "uid://duup5ow7c5ui"
 
 [node name="elements" type="Node" parent="margin_container/h_box_container/main/v_box_container/profile_editors/profiles" unique_id=1260686275]

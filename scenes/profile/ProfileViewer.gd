@@ -20,3 +20,7 @@ func populate(element: Profile) -> void:
 # 	visibility_changed.connect(func() -> void:
 # 		visibility_changed_with_value.emit(visible)
 # 	)
+
+
+func _on_selector_id_pressed(id: int) -> void:
+	profile.create_new_board(id)

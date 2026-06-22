@@ -53,31 +53,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
 tabs_visible = false
+deselect_enabled = true
 
 [node name="profiles" type="Node" parent="profile_viewers" unique_id=1377876282]
 script = ExtResource("5_w1e63")
-elements_scene = ExtResource("6_s5jrt")
+elements_fallback_scene = ExtResource("6_s5jrt")
 metadata/_custom_type_script = "uid://duup5ow7c5ui"
 
 [node name="elements" type="Node" parent="profile_viewers/profiles" unique_id=472021957]
 script = ExtResource("7_1caxe")
 fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
-
-[node name="fallback" type="Control" parent="profile_viewers" unique_id=1865323436]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="center_container" type="CenterContainer" parent="profile_viewers/fallback" unique_id=1509536693]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="label" type="Label" parent="profile_viewers/fallback/center_container" unique_id=976188926]
-layout_mode = 2
-text = "No profiles are selected."
