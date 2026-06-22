@@ -3,17 +3,23 @@
 [ext_resource type="Script" uid="uid://cmcxtsakxxy55" path="res://scenes/profile/ProfileEditor.gd" id="1_ejyg5"]
 [ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="1_qh773"]
 [ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="2_4ulw4"]
+[ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="3_35aki"]
 [ext_resource type="Texture2D" uid="uid://d1f31r2b2kbdd" path="res://icons/profile_icons/00_user_alt_1.svg" id="3_0500h"]
 [ext_resource type="Script" uid="uid://dx15qneb2k2vb" path="res://addons/myth/scripts/json/IconSelector.gd" id="4_cnal7"]
 [ext_resource type="Resource" uid="uid://bm0lj0e3t6h35" path="res://icons/dazzle/profile_icons.tres" id="5_a57bd"]
 [ext_resource type="Texture2D" uid="uid://cf17ltfca1dxg" path="res://icons/dazzle/file_arrow_right.svg" id="6_cnal7"]
-[ext_resource type="Script" uid="uid://colsjxiky4rbu" path="res://addons/myth/scripts/component/FeatureComponent.gd" id="7_a57bd"]
+[ext_resource type="Script" uid="uid://colsjxiky4rbu" path="res://addons/myth/scripts/component/FeatureDependency.gd" id="7_a57bd"]
 [ext_resource type="PackedScene" uid="uid://c7kwhj1a2hfvx" path="res://scenes/tags/TagSuiteEditor.tscn" id="9_k3fsw"]
+[ext_resource type="Texture2D" uid="uid://bib6bptj5q4me" path="res://icons/dazzle/arrow_up_right_from_square.svg" id="10_5xqux"]
+[ext_resource type="Texture2D" uid="uid://c6ssfm5nmrhl3" path="res://icons/dazzle/eye_slash.svg" id="10_vhs2s"]
 
 [node name="profile" type="PanelContainer" unique_id=305481421]
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -154.0
+offset_right = 154.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -23,19 +29,13 @@ script = ExtResource("1_ejyg5")
 script = ExtResource("2_4ulw4")
 metadata/_custom_type_script = "uid://b7s3a8dglp08t"
 
-[node name="scroll_container" type="ScrollContainer" parent="." unique_id=1130659197]
+[node name="v_box_container" type="VBoxContainer" parent="." unique_id=1670537362]
 layout_mode = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="scroll_container" unique_id=319090841]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="h_box_container" type="HBoxContainer" parent="scroll_container/v_box_container" unique_id=601904237]
+[node name="info" type="HBoxContainer" parent="v_box_container" unique_id=601904237]
 layout_mode = 2
 
-[node name="icon" type="Button" parent="scroll_container/v_box_container/h_box_container" unique_id=1633359009]
+[node name="icon" type="Button" parent="v_box_container/info" unique_id=1633359009]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 toggle_mode = true
@@ -48,42 +48,72 @@ collection = ExtResource("5_a57bd")
 button_size_min = Vector2(64, 64)
 metadata/_custom_type_script = "uid://dx15qneb2k2vb"
 
-[node name="icon" type="Node" parent="scroll_container/v_box_container/h_box_container/icon" unique_id=1214109926]
+[node name="icon" type="Node" parent="v_box_container/info/icon" unique_id=1214109926]
 script = ExtResource("1_qh773")
 node_property_signal = &"icon_changed"
 fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
-[node name="v_box_container" type="VBoxContainer" parent="scroll_container/v_box_container/h_box_container" unique_id=1379924614]
+[node name="v_box_container" type="VBoxContainer" parent="v_box_container/info" unique_id=1379924614]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="h_box_container" type="HBoxContainer" parent="scroll_container/v_box_container/h_box_container/v_box_container" unique_id=1017560375]
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container/info/v_box_container" unique_id=1017560375]
 layout_mode = 2
 
-[node name="name" type="LineEdit" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container" unique_id=872869427]
+[node name="name" type="LineEdit" parent="v_box_container/info/v_box_container/h_box_container" unique_id=872869427]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "(Unnamed Profile)"
+placeholder_text = "New Profile"
 
-[node name="text" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/name" unique_id=1617732030]
+[node name="text" type="Node" parent="v_box_container/info/v_box_container/h_box_container/name" unique_id=1617732030]
 script = ExtResource("1_qh773")
 node_property_signal = &"text_changed"
 fallback_type = 1
 metadata/_custom_type_script = "uid://d3f8jstcrmiht"
 
-[node name="move" type="Button" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container" unique_id=1361451620]
+[node name="file_path_absolute" type="Label" parent="v_box_container/info/v_box_container" unique_id=426434959]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "path/to/file.qbdp"
+text_overrun_behavior = 5
+text_direction = 2
+structured_text_bidi_override = 2
+
+[node name="feature_component" type="Node" parent="v_box_container/info/v_box_container/file_path_absolute" unique_id=551367820]
+script = ExtResource("7_a57bd")
+metadata/_custom_type_script = "uid://colsjxiky4rbu"
+
+[node name="text" type="Node" parent="v_box_container/info/v_box_container/file_path_absolute" unique_id=136670837]
+script = ExtResource("1_qh773")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="tooltip_text" type="Node" parent="v_box_container/info/v_box_container/file_path_absolute" unique_id=1035412426]
+script = ExtResource("1_qh773")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="actions" type="HFlowContainer" parent="v_box_container" unique_id=359491329]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="move" type="Button" parent="v_box_container/actions" unique_id=1361451620]
 layout_mode = 2
 tooltip_text = "Move and/or Rename this Profile's folder to a new location on this machine."
+text = "Move/Rename"
 icon = ExtResource("6_cnal7")
 
-[node name="feature_component" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move" unique_id=2041220828]
+[node name="feature_component" type="Node" parent="v_box_container/actions/move" unique_id=2041220828]
 script = ExtResource("7_a57bd")
 retain_when = 2
 features = PackedStringArray("mobile")
 metadata/_custom_type_script = "uid://colsjxiky4rbu"
 
-[node name="file_dialog" type="FileDialog" parent="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move" unique_id=249687157]
+[node name="file_dialog" type="FileDialog" parent="v_box_container/actions/move" unique_id=249687157]
 oversampling_override = 1.0
 title = "Open a Directory"
 position = Vector2i(0, 36)
@@ -93,31 +123,39 @@ display_mode = 1
 access = 2
 use_native_dialog = true
 
-[node name="file_path_absolute" type="Label" parent="scroll_container/v_box_container/h_box_container/v_box_container" unique_id=426434959]
+[node name="reveal" type="Button" parent="v_box_container/actions" unique_id=69307294]
+layout_mode = 2
+text = "Reveal"
+icon = ExtResource("10_5xqux")
+
+[node name="unlink" type="Button" parent="v_box_container/actions" unique_id=2132628065]
+layout_mode = 2
+tooltip_text = "Non-destructively remove this Profile from Quarkboard on this machine."
+text = "Hide"
+icon = ExtResource("10_vhs2s")
+
+[node name="confirmation_dialog" type="ConfirmationDialog" parent="v_box_container/actions/unlink" unique_id=2107991585]
+ok_button_text = "Unlink"
+dialog_text = "Unlinking a Profile will preserv all its data in its original location, but will no longer be visible in Quarkboard (until it is added again). Are you sure"
+dialog_autowrap = true
+
+[node name="popout" type="Button" parent="v_box_container/actions" unique_id=377401]
+layout_mode = 2
+text = "Popout"
+icon = ExtResource("3_35aki")
+
+[node name="tags" type="ScrollContainer" parent="v_box_container" unique_id=1130659197]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="tag_suite_editor" parent="v_box_container/tags" unique_id=768514276 instance=ExtResource("9_k3fsw")]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
-text = "path/to/file.qbdp"
-text_overrun_behavior = 5
-text_direction = 2
-structured_text_bidi_override = 2
 
-[node name="feature_component" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/file_path_absolute" unique_id=551367820]
-script = ExtResource("7_a57bd")
-metadata/_custom_type_script = "uid://colsjxiky4rbu"
-
-[node name="text" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/file_path_absolute" unique_id=136670837]
-script = ExtResource("1_qh773")
-fallback_type = 1
-metadata/_custom_type_script = "uid://d3f8jstcrmiht"
-
-[node name="tooltip_text" type="Node" parent="scroll_container/v_box_container/h_box_container/v_box_container/file_path_absolute" unique_id=1035412426]
-script = ExtResource("1_qh773")
-fallback_type = 1
-metadata/_custom_type_script = "uid://d3f8jstcrmiht"
-
-[node name="tag_suite_editor" parent="scroll_container/v_box_container" unique_id=768514276 instance=ExtResource("9_k3fsw")]
-layout_mode = 2
-
-[connection signal="pressed" from="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move" to="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move/file_dialog" method="popup_file_dialog"]
-[connection signal="dir_selected" from="scroll_container/v_box_container/h_box_container/v_box_container/h_box_container/move/file_dialog" to="." method="move_to_folder"]
+[connection signal="pressed" from="v_box_container/actions/move" to="v_box_container/actions/move/file_dialog" method="popup_file_dialog"]
+[connection signal="dir_selected" from="v_box_container/actions/move/file_dialog" to="." method="move_to_folder"]
+[connection signal="pressed" from="v_box_container/actions/unlink" to="v_box_container/actions/unlink/confirmation_dialog" method="popup_centered"]
+[connection signal="confirmed" from="v_box_container/actions/unlink/confirmation_dialog" to="profile" method="call_resource_method" binds= [&"unlink"]]

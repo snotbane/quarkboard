@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://dwnxxtx8lf75e"]
+
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_1urk0"]
+[ext_resource type="Script" uid="uid://dpqn63cjbro11" path="res://scenes/profile/ProfileViewer.gd" id="1_upvl5"]
+[ext_resource type="Script" uid="uid://duup5ow7c5ui" path="res://addons/myth/scripts/component/ArrayComponent.gd" id="2_0yww2"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="3_2mp87"]
+[ext_resource type="Texture2D" uid="uid://jg8wus7h1s6n" path="res://icons/dazzle/gear.svg" id="4_weni2"]
+[ext_resource type="Texture2D" uid="uid://dmbqougg605ri" path="res://icons/dazzle/user_alt_1.svg" id="5_upvl5"]
+[ext_resource type="Script" uid="uid://colsjxiky4rbu" path="res://addons/myth/scripts/component/FeatureDependency.gd" id="6_3q6h3"]
+[ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="6_78g8q"]
+
+[node name="profile_viewer" type="Control" unique_id=1600914059]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_upvl5")
+
+[node name="profile" type="Node" parent="." unique_id=1815629860]
+script = ExtResource("1_1urk0")
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="visible" type="Node" parent="." unique_id=498738714 node_paths=PackedStringArray("fallback_component")]
+script = ExtResource("3_2mp87")
+resource_property_name = &"is_active"
+node_property_signal = &"visibility_changed_with_value"
+fallback_component = NodePath("../profile")
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=573026839]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="board_selector" type="PanelContainer" parent="h_box_container" unique_id=822733541]
+layout_mode = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/board_selector" unique_id=251355207]
+layout_mode = 2
+
+[node name="scroll_container" type="ScrollContainer" parent="h_box_container/board_selector/v_box_container" unique_id=775231235]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="h_box_container/board_selector/v_box_container/scroll_container" unique_id=1802406451]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="boards" type="Node" parent="h_box_container/board_selector/v_box_container/scroll_container/v_box_container" unique_id=669086756]
+script = ExtResource("2_0yww2")
+enabled = false
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="h_box_container/board_selector/v_box_container/scroll_container/v_box_container/boards" unique_id=1646052019]
+script = ExtResource("3_2mp87")
+fallback_type = 1
+enabled = false
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="icon_safe" type="Button" parent="h_box_container/board_selector/v_box_container" unique_id=1484853773]
+layout_mode = 2
+size_flags_horizontal = 6
+icon = ExtResource("5_upvl5")
+flat = true
+
+[node name="icon" type="Node" parent="h_box_container/board_selector/v_box_container/icon_safe" unique_id=1903420188]
+script = ExtResource("3_2mp87")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="text" type="Node" parent="h_box_container/board_selector/v_box_container/icon_safe" unique_id=1954690479]
+script = ExtResource("3_2mp87")
+resource_property_name = &"name_safe"
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="actions" type="HBoxContainer" parent="h_box_container/board_selector/v_box_container" unique_id=1120686141]
+layout_mode = 2
+
+[node name="settings" type="Button" parent="h_box_container/board_selector/v_box_container/actions" unique_id=443519156]
+layout_mode = 2
+size_flags_horizontal = 6
+icon = ExtResource("4_weni2")
+flat = true
+
+[node name="popout" type="Button" parent="h_box_container/board_selector/v_box_container/actions" unique_id=1479415013]
+layout_mode = 2
+size_flags_horizontal = 6
+icon = ExtResource("6_78g8q")
+flat = true
+
+[node name="feature_dependency" type="Node" parent="h_box_container/board_selector/v_box_container/actions" unique_id=1192275290]
+script = ExtResource("6_3q6h3")
+features = PackedStringArray("web", "mobile")
+metadata/_custom_type_script = "uid://colsjxiky4rbu"
+
+[node name="boards" type="TabContainer" parent="h_box_container" unique_id=969197645]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="boards" type="Node" parent="h_box_container/boards" unique_id=1527178562]
+script = ExtResource("2_0yww2")
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="h_box_container/boards/boards" unique_id=79655303]
+script = ExtResource("3_2mp87")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"

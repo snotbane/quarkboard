@@ -9,7 +9,8 @@ var profile: Profile:
 		if not is_node_ready():
 			await ready
 
-		$resource_component.resource = _profile
+		$profile.resource = _profile
+		make_visible_if_active.call_deferred()
 
 
 func populate(element: Profile):

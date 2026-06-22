@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://ca74bf1gi38vl"]
+
+[ext_resource type="Script" uid="uid://b1qkde50uc7c1" path="res://scenes/main/Bootstrap.gd" id="1_efn5k"]
+[ext_resource type="Script" uid="uid://o6gdeyy3se7b" path="res://scenes/main/MachineController.gd" id="2_ew5fm"]
+[ext_resource type="Script" uid="uid://cuhrxat84dmss" path="res://scenes/main/GameMenuBar.gd" id="3_dtuhu"]
+[ext_resource type="Script" uid="uid://colsjxiky4rbu" path="res://addons/myth/scripts/component/FeatureDependency.gd" id="4_ew5fm"]
+[ext_resource type="Script" uid="uid://duup5ow7c5ui" path="res://addons/myth/scripts/component/ArrayComponent.gd" id="5_w1e63"]
+[ext_resource type="Script" uid="uid://bahoflah65bwr" path="res://addons/myth/scripts/ui/AuxiliaryWindow.gd" id="5_xeweq"]
+[ext_resource type="PackedScene" uid="uid://d3rc3q016pc5w" path="res://scenes/profile/ProfilesManager.tscn" id="6_arsyl"]
+[ext_resource type="PackedScene" uid="uid://dwnxxtx8lf75e" path="res://scenes/profile/ProfileViewer.tscn" id="6_s5jrt"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="7_1caxe"]
+
+[node name="bootstrap" type="Control" unique_id=2078513126]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_efn5k")
+
+[node name="machine" type="Node" parent="." unique_id=1449163178]
+script = ExtResource("2_ew5fm")
+json_auto_save = 1
+json_auto_touch = 0
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="menu_bar" type="MenuBar" parent="." unique_id=1564511841]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_dtuhu")
+
+[node name="feature_dependency" type="Node" parent="menu_bar" unique_id=1059697194]
+script = ExtResource("4_ew5fm")
+features = PackedStringArray("pc")
+metadata/_custom_type_script = "uid://colsjxiky4rbu"
+
+[node name="profiles_manager_window" type="Window" parent="." unique_id=1057882538]
+oversampling_override = 1.0
+title = "Profiles"
+size = Vector2i(800, 1000)
+visible = false
+script = ExtResource("5_xeweq")
+metadata/_custom_type_script = "uid://bahoflah65bwr"
+
+[node name="profiles_manager" parent="profiles_manager_window" unique_id=1232826719 instance=ExtResource("6_arsyl")]
+
+[node name="profile_viewers" type="TabContainer" parent="." unique_id=1629371606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="profiles" type="Node" parent="profile_viewers" unique_id=1377876282]
+script = ExtResource("5_w1e63")
+elements_scene = ExtResource("6_s5jrt")
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="profile_viewers/profiles" unique_id=472021957]
+script = ExtResource("7_1caxe")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="fallback" type="Control" parent="profile_viewers" unique_id=1865323436]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="center_container" type="CenterContainer" parent="profile_viewers/fallback" unique_id=1509536693]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="profile_viewers/fallback/center_container" unique_id=976188926]
+layout_mode = 2
+text = "No profiles are selected."

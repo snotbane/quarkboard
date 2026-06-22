@@ -4,13 +4,6 @@ var machine: Machine:
 	get: return resource
 
 
-func _resource_changed() -> void:
-	if not is_node_ready():
-		await ready
-
-	$profile_active.resource = machine.profile_active
-
-
 ## Creates a new profile in the user data folder.
 func create_new_profile() -> Profile:
 	var result: Profile = null

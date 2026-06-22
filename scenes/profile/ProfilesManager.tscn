@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://d3rc3q016pc5w"]
+
+[ext_resource type="Script" uid="uid://cfmopv1372cx1" path="res://scenes/profile/ProfilesManager.gd" id="1_2whib"]
+[ext_resource type="Script" uid="uid://o6gdeyy3se7b" path="res://scenes/main/MachineController.gd" id="1_dpmks"]
+[ext_resource type="Script" uid="uid://duup5ow7c5ui" path="res://addons/myth/scripts/component/ArrayComponent.gd" id="3_p0h58"]
+[ext_resource type="PackedScene" uid="uid://f2rwvd4qkr6h" path="res://scenes/profile/ProfileButton.tscn" id="4_4km2u"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="5_efrsm"]
+[ext_resource type="PackedScene" uid="uid://bsjpfkki7d2jw" path="res://scenes/profile/ProfileEditor.tscn" id="8_de17w"]
+[ext_resource type="Shortcut" uid="uid://dxn1dx8nto6ye" path="res://data/shortcuts/shortcut_new.tres" id="9_hi3ue"]
+[ext_resource type="Texture2D" uid="uid://dkjixq3rpl4rv" path="res://icons/dazzle/star_alt_2.svg" id="10_65sv6"]
+[ext_resource type="Shortcut" uid="uid://blal0glchmkse" path="res://data/shortcuts/shortcut_open.tres" id="11_lntda"]
+[ext_resource type="Texture2D" uid="uid://dgpp20x5ejeje" path="res://icons/dazzle/folder.svg" id="12_v0lcl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_anm5x"]
+
+[node name="profiles_manager" type="Control" unique_id=1232826719]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2whib")
+
+[node name="machine" type="Node" parent="." unique_id=2074962396]
+script = ExtResource("1_dpmks")
+fallback_type = 1
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="margin_container" type="MarginContainer" parent="." unique_id=649882644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="margin_container" unique_id=101193604]
+layout_mode = 2
+
+[node name="left_sidebar" type="VBoxContainer" parent="margin_container/h_box_container" unique_id=234500319]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="profile_buttons" type="ScrollContainer" parent="margin_container/h_box_container/left_sidebar" unique_id=1327808003]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="list" type="VBoxContainer" parent="margin_container/h_box_container/left_sidebar/profile_buttons" unique_id=2126638732]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="profiles" type="Node" parent="margin_container/h_box_container/left_sidebar/profile_buttons/list" unique_id=2066317245]
+script = ExtResource("3_p0h58")
+elements_scene = ExtResource("4_4km2u")
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="margin_container/h_box_container/left_sidebar/profile_buttons/list/profiles" unique_id=757410970]
+script = ExtResource("5_efrsm")
+fallback_type = 1
+json_enabled = false
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="main" type="PanelContainer" parent="margin_container/h_box_container" unique_id=229878480]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="margin_container/h_box_container/main" unique_id=428416341]
+layout_mode = 2
+alignment = 1
+
+[node name="profile_editors" type="TabContainer" parent="margin_container/h_box_container/main/v_box_container" unique_id=321109436]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_anm5x")
+tabs_visible = false
+
+[node name="profiles" type="Node" parent="margin_container/h_box_container/main/v_box_container/profile_editors" unique_id=794709263]
+script = ExtResource("3_p0h58")
+elements_scene = ExtResource("8_de17w")
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="margin_container/h_box_container/main/v_box_container/profile_editors/profiles" unique_id=1260686275]
+script = ExtResource("5_efrsm")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="visible" type="Node" parent="margin_container/h_box_container/main/v_box_container/profile_editors" unique_id=60041699]
+script = ExtResource("5_efrsm")
+resource_property_name = &"profile_active_exists"
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="actions" type="HBoxContainer" parent="margin_container/h_box_container/main/v_box_container" unique_id=986598214]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="create_new" type="Button" parent="margin_container/h_box_container/main/v_box_container/actions" unique_id=441235350]
+layout_mode = 2
+size_flags_horizontal = 3
+shortcut = ExtResource("9_hi3ue")
+text = "Create New Profile"
+icon = ExtResource("10_65sv6")
+
+[node name="scan" type="Button" parent="margin_container/h_box_container/main/v_box_container/actions" unique_id=74420957]
+layout_mode = 2
+size_flags_horizontal = 3
+shortcut = ExtResource("11_lntda")
+text = "Import Existing Profile"
+icon = ExtResource("12_v0lcl")
+
+[node name="file_dialog" type="FileDialog" parent="margin_container/h_box_container/main/v_box_container/actions/scan" unique_id=1293814000]
+oversampling_override = 1.0
+title = "Open a Directory"
+file_mode = 2
+display_mode = 1
+access = 1
+filters = PackedStringArray("*.qbdp")
+use_native_dialog = true
+
+[connection signal="pressed" from="margin_container/h_box_container/main/v_box_container/actions/create_new" to="machine" method="create_new_profile"]
+[connection signal="pressed" from="margin_container/h_box_container/main/v_box_container/actions/scan" to="margin_container/h_box_container/main/v_box_container/actions/scan/file_dialog" method="popup_file_dialog"]
+[connection signal="dir_selected" from="margin_container/h_box_container/main/v_box_container/actions/scan/file_dialog" to="machine" method="add_profile_at_path"]

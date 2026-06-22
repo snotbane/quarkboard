@@ -9,8 +9,7 @@ var profile: Profile:
 		if not is_node_ready():
 			await ready
 
-		$resource_component.resource = _profile
-		$main_button.button_pressed = _profile.is_active
+		$profile.resource = _profile
 
 
 func populate(element: Profile):

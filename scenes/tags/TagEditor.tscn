@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://i4bt8ktob7rq"]
 
-[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_qe56w"]
-[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="2_456kf"]
-[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="3_e6241"]
-[ext_resource type="Texture2D" uid="uid://cvw053jyk0fn6" path="res://icons/dazzle/palette.svg" id="4_3a8xt"]
-[ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="5_nijja"]
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_sw0v8"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="2_tv3b4"]
+[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="3_fivhr"]
+[ext_resource type="Texture2D" uid="uid://cvw053jyk0fn6" path="res://icons/dazzle/palette.svg" id="4_p0y05"]
+[ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="5_jrt81"]
 
 [node name="tag_editor" type="PanelContainer" unique_id=597368390]
 anchors_preset = 10
@@ -13,7 +13,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="tag" type="Node" parent="." unique_id=1746045873]
-script = ExtResource("1_qe56w")
+script = ExtResource("1_sw0v8")
 metadata/_custom_type_script = "uid://b7s3a8dglp08t"
 
 [node name="h_box_container" type="HBoxContainer" parent="." unique_id=1070426355]
@@ -28,7 +28,7 @@ editable = false
 flat = true
 
 [node name="text" type="Node" parent="h_box_container/name" unique_id=1584434822]
-script = ExtResource("2_456kf")
+script = ExtResource("2_tv3b4")
 resource_emit_changed = false
 node_property_signal = &"text_changed"
 fallback_type = 1
@@ -43,17 +43,17 @@ dialog_text = "This tag shares a name with another existing Tag. This will merge
 [node name="rename" type="Button" parent="h_box_container" unique_id=1936753783]
 layout_mode = 2
 toggle_mode = true
-icon = ExtResource("3_e6241")
+icon = ExtResource("3_fivhr")
 flat = true
 
 [node name="palette" type="Button" parent="h_box_container" unique_id=782125343]
 layout_mode = 2
-icon = ExtResource("4_3a8xt")
+icon = ExtResource("4_p0y05")
 flat = true
 
 [node name="remove" type="Button" parent="h_box_container" unique_id=1058074265]
 layout_mode = 2
-icon = ExtResource("5_nijja")
+icon = ExtResource("5_jrt81")
 flat = true
 
 [node name="confirmation_dialog" type="ConfirmationDialog" parent="h_box_container/remove" unique_id=1928896064]
