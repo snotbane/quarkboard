@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/clipboard.svg-24412f5da77e026dff5d39c399c2b27
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

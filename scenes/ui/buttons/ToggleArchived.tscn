@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://co4hswv71wjji"]
+
+[ext_resource type="PackedScene" uid="uid://deun681dbi430" path="res://scenes/ui/buttons/_ToggleBase.tscn" id="1_mvxgx"]
+[ext_resource type="Texture2D" uid="uid://bbgafawka18rg" path="res://icons/dazzle/inbox_fill.svg" id="1_pdopv"]
+[ext_resource type="Texture2D" uid="uid://d1b7g70es04xe" path="res://icons/dazzle/inbox.svg" id="2_70fvs"]
+
+[node name="archived" unique_id=1631341252 instance=ExtResource("1_mvxgx")]
+theme_override_icons/checked = ExtResource("1_pdopv")
+theme_override_icons/unchecked = ExtResource("2_70fvs")

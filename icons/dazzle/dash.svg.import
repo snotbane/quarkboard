@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/dash.svg-99a9878b8f9c7302200e29dd6b8bedaf.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

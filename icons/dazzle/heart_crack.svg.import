@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/heart_crack.svg-231d0260d628a807fbc44737374b9
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

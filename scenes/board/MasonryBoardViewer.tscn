@@ -1,17 +1,55 @@
 [gd_scene format=3 uid="uid://c55pt1352pp2d"]
 
 [ext_resource type="PackedScene" uid="uid://cxre308immwrh" path="res://scenes/board/BoardViewer.tscn" id="1_4re2d"]
+[ext_resource type="Script" uid="uid://ct8677tf8tygd" path="res://scenes/misc/MasonryContainer.gd" id="2_i4vsw"]
+[ext_resource type="Script" uid="uid://duup5ow7c5ui" path="res://addons/myth/scripts/component/ArrayComponent.gd" id="3_ulp7j"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="4_emmjh"]
+[ext_resource type="PackedScene" uid="uid://kw6et5i3nmbm" path="res://scenes/quark/MasonryQuarkViewer.tscn" id="4_tsd4t"]
+[ext_resource type="Texture2D" uid="uid://inmpqm3e5tym" path="res://icons/dazzle/plus.svg" id="5_emmjh"]
 
 [node name="board_viewer" unique_id=1346588600 instance=ExtResource("1_4re2d")]
 
-[node name="center_container" type="CenterContainer" parent="h_split_container/main" parent_id_path=PackedInt32Array(2035690732) index="0" unique_id=814847126]
+[node name="container" type="Container" parent="h_split_container/main" parent_id_path=PackedInt32Array(2035690732) index="0" unique_id=1315195869]
+custom_minimum_size = Vector2(0, 67)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+script = ExtResource("2_i4vsw")
+lanes_max = 5
+metadata/_custom_type_script = "uid://ct8677tf8tygd"
 
-[node name="label" type="Label" parent="h_split_container/main/center_container" index="0" unique_id=1353192274]
+[node name="quarks" type="Node" parent="h_split_container/main/container" index="0" unique_id=291667553]
+script = ExtResource("3_ulp7j")
+elements_fallback_scene = ExtResource("4_tsd4t")
+metadata/_custom_type_script = "uid://duup5ow7c5ui"
+
+[node name="elements" type="Node" parent="h_split_container/main/container/quarks" index="0" unique_id=1265337649]
+script = ExtResource("4_emmjh")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="quark_viewer_toolbar" type="HBoxContainer" parent="h_split_container/main" parent_id_path=PackedInt32Array(2035690732) index="1" unique_id=584663427]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -222.0
+offset_top = 40.0
+offset_right = 222.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="search" type="LineEdit" parent="h_split_container/main/quark_viewer_toolbar" index="0" unique_id=546958741]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "Hello this is a masonry board"
+size_flags_horizontal = 3
+
+[node name="create" type="Button" parent="h_split_container/main/quark_viewer_toolbar" index="1" unique_id=187813014]
+layout_mode = 2
+icon = ExtResource("5_emmjh")
+
+[connection signal="pressed" from="h_split_container/main/quark_viewer_toolbar/create" to="." method="create_new_quark"]

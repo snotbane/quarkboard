@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/gear_fill.svg-f27496be82ec4dc96a9b6706523708b
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

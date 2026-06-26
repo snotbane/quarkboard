@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/life_ring.svg-1c666104a567e0a6d99d717918b08dd
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

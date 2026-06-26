@@ -15,7 +15,7 @@ func _serialize_custom() -> Variant:
 		return result
 
 	else:
-		return JsonResource.serialize(list)
+		return Serialization.serialize(list)
 
 func _deserialize_custom(json: Array) -> void:
 	list.resize(json.size())
@@ -26,4 +26,4 @@ func _deserialize_custom(json: Array) -> void:
 
 	else:
 		for i in json.size():
-			list[i] = JsonResource.deserialize(json[i])
+			list[i] = Serialization.deserialize(json[i])

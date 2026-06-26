@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/phone.svg-7b90c80367d038f4cc18c0350af4a419.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

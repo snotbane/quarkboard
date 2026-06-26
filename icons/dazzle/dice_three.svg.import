@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/dice_three.svg-10c0d7306502fc41aae42a1f9e85bf
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

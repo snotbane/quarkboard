@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/letter_chinese_a.svg-778bd51635e825d4e6780560
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

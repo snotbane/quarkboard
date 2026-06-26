@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/compass.svg-ed39ded7f9ba4162e1ff806891175425.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/droplets.svg-c7478d292949c56caf1db4f1d5a0bc06
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/calendar_alt.svg-2f959673d079e97a31991ce1e64e
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/filter_xmark.svg-8d4e3aa3cc3bfb806c3d91d2a74f
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

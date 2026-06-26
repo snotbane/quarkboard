@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/octagon_exclamation.svg-7abeb41d56de1ebf26c98
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

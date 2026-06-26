@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cassette_tape.svg-ab090286b7bff3ffe6d176b71eb
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

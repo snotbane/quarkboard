@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/badge.svg-8261df6a3c0a08f2f6cbcbe1d5691bf4.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

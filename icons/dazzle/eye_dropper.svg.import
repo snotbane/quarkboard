@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/eye_dropper.svg-bf67f997da2a46fa71e703ea2766f
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

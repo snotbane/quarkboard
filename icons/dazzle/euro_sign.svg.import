@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/euro_sign.svg-86ad37d2facf598b038ddbc26cfced5
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

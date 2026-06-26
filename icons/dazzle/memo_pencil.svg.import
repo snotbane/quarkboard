@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/memo_pencil.svg-81e0af467cc632cfbab3ab46dbe9d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

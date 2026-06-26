@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b7gi0ywdubcyx"]
+
+[ext_resource type="PackedScene" uid="uid://deun681dbi430" path="res://scenes/ui/buttons/_ToggleBase.tscn" id="1_siap1"]
+[ext_resource type="Texture2D" uid="uid://b3s0nct0uqpae" path="res://icons/dazzle/flag_fill.svg" id="1_uqiec"]
+[ext_resource type="Texture2D" uid="uid://ovp3pmy0nm00" path="res://icons/dazzle/flag.svg" id="2_siap1"]
+
+[node name="flagged" unique_id=1631341252 instance=ExtResource("1_siap1")]
+theme_override_icons/checked = ExtResource("1_uqiec")
+theme_override_icons/unchecked = ExtResource("2_siap1")

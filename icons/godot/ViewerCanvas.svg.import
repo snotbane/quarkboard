@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/ViewerCanvas.svg-0d80dba1c6e710a0d3588f53db72
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

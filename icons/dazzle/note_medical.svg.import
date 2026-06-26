@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/note_medical.svg-5dbe14cfd68db5b15e0ad5ec5dbc
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/water.svg-a68ffda9c38604f434f84af47bd9dc13.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

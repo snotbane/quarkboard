@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/lock_hashtag.svg-e7b2d6293db7af5fd5981a218e9a
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -1,4 +1,3 @@
-@abstract
 class_name Board
 extends JsonResourceQB
 
@@ -16,13 +15,16 @@ var main_scene: PackedScene:
 
 @export_storage var internal_mode := Node.INTERNAL_MODE_DISABLED
 
-@abstract
-func _get_main_scene() -> PackedScene
+var quarks: Array[Quark]:
+	get: return parent.quarks
 
-func _init(profile: Profile = null) -> void:
-	super._init(profile, DIR.path_join(generate_save_name() + ".json"))
+func _get_main_scene() -> PackedScene: return null
 
 
 ## Creates a new [Quark], applying filters such that it is ensured to appear inside of this [Board].
-func create_new_quark() -> void:
-	pass
+func create_new_quark() -> Quark:
+	var result: Quark = parent.create_new_quark()
+
+	# result.tags = tags.duplicate()
+	emit_changed()
+	return result

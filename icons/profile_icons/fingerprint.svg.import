@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/fingerprint.svg-8735191b16a7c338f64d0e1995e63
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

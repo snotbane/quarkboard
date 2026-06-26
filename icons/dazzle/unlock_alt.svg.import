@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/unlock_alt.svg-802433dfad8703c8f2bce8970ed379
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

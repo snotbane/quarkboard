@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/rainbow.svg-2b2b1fa3d8f383ae446f48a5050a5528.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

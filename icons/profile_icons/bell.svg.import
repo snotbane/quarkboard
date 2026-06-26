@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/bell.svg-7e7a5639ebb40272007c851d4686e8a1.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

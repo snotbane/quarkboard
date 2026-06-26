@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/code_fork.svg-144ed8161c0dd0adccf309cd7f003cb
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

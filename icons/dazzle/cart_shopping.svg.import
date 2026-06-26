@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cart_shopping.svg-c05c5a289f1ed35c4cb584c5c87
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

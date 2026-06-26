@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/trophy.svg-a3245fd694fb8516e3c8aea877426ccb.d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

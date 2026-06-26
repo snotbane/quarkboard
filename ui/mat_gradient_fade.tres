@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://nnjl2pvl4iao"]
+
+[sub_resource type="Shader" id="Shader_o1h5r"]
+code = "shader_type canvas_item;
+
+uniform sampler2D grad;
+
+void fragment() {
+	COLOR *= texture(grad, UV);
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_ellwm"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ellwm"]
+gradient = SubResource("Gradient_ellwm")
+width = 1
+height = 256
+fill_from = Vector2(1, 1)
+
+[resource]
+shader = SubResource("Shader_o1h5r")
+shader_parameter/grad = SubResource("GradientTexture2D_ellwm")

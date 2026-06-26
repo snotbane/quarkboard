@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/mail.svg-67999cfff6b3bc2850e874ab2bad0e72.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

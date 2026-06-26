@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/capsule.svg-b6e8692176eae0cfe91430c1f1825b88.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

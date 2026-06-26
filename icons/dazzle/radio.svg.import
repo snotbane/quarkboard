@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/radio.svg-586556f7af50efeef57aeb5c94ae3893.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

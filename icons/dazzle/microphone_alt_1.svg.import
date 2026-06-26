@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/microphone_alt_1.svg-22adbd568cd6859310f17924
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

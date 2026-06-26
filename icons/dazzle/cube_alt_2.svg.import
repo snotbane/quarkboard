@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cube_alt_2.svg-53d002b82e603c5731a4c76ebf9063
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

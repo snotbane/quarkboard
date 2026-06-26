@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/inbox_arrow_right.svg-1b471aa3fb897c9dd498eff
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/car.svg-1e4df8462e6b7674e299267c6229a063.dpit
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/file_exclamation_alt_1.svg-0be44fc8db140e5f4e
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

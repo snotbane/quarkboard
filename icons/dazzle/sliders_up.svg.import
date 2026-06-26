@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/sliders_up.svg-190138b998225f83c27bbe037a92dd
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

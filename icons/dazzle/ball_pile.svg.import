@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/ball_pile.svg-036ee030b405c3ea0efbce4227a28ba
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

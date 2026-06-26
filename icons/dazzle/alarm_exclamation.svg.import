@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/alarm_exclamation.svg-f63da78055e0f6e6db427e3
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

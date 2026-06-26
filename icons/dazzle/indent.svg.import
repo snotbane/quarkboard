@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/indent.svg-aec29c826dc1b36e76bad1e986f73a79.d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

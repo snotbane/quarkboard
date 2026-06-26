@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/umbrella.svg-c018ab9c0224480bd96243d7d8a405d8
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

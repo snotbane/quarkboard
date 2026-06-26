@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/fork_knife.svg-3b2a954874408126c7c636a1bd4909
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

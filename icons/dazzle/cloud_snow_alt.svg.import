@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cloud_snow_alt.svg-821188aa513ba1162385d338cf
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/play_pause.svg-e7ff0c40bc2704bba295b12d8a218c
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

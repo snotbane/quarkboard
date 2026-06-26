@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://kw6et5i3nmbm"]
+
+[ext_resource type="Script" uid="uid://b7s3a8dglp08t" path="res://addons/myth/scripts/component/ResourceComponent.gd" id="1_acr03"]
+[ext_resource type="PackedScene" uid="uid://xt40dt45tltm" path="res://scenes/ui/buttons/ToggleOccupied.tscn" id="2_epwfa"]
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="2_vnjkr"]
+[ext_resource type="PackedScene" uid="uid://c330eapythg32" path="res://scenes/quark/QuarkActions.tscn" id="3_ellwm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epwfa"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="masonry_quark_viewer" type="PanelContainer" unique_id=1116538452]
+offset_right = 128.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_epwfa")
+
+[node name="quark" type="Node" parent="." unique_id=1394025474]
+script = ExtResource("1_acr03")
+metadata/_custom_type_script = "uid://b7s3a8dglp08t"
+
+[node name="occupied" parent="." unique_id=1631341252 instance=ExtResource("2_epwfa")]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="." unique_id=275975639]
+layout_mode = 2
+
+[node name="text" type="RichTextLabel" parent="v_box_container" unique_id=1016728607]
+custom_minimum_size = Vector2(200, 20)
+custom_maximum_size = Vector2(-1, 350)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Each highlight must have it's own private shadow. When you do it your way you can go anywhere you choose. You have freedom here. The only guide is your heart. Sometimes you learn more from mistakes than from success. Let's have a happy little tree in here.
+
+We'll do another happy little painting. Let's do that again. I think there's an artist hidden in the bottom of every single one of us. We tell people sometimes: we're like drug dealers, come into town and get everybody absolutely addicted to painting. It doesn't take much to get you addicted. If you didn't have baby clouds, you wouldn't have big clouds. Leave some dark so your light will show. Fluff that up.
+
+Let's do it again then, what the heck. Just beat the devil out of it. So often we avoid running water, and running water is a lot of fun. That's what makes life fun. That you can make these decisions. That you can create the world that you want. Ever make mistakes in life? Let's make them birds."
+fit_content = true
+scroll_active = false
+justification_flags = 35
+
+[node name="text" type="Node" parent="v_box_container/text" unique_id=1710490091]
+script = ExtResource("2_vnjkr")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"
+
+[node name="quark_actions" parent="v_box_container" unique_id=339875958 instance=ExtResource("3_ellwm")]
+layout_mode = 2
+size_flags_vertical = 10

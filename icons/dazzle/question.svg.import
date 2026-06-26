@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/question.svg-3a1422733628a24723c340b0e3c49ecd
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/power_off.svg-391fe163213121f8d59afdf1cf3e8cd
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

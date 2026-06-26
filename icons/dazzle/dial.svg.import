@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/dial.svg-30e2b6e12bef2ee9d21161f0a7c2eaaa.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

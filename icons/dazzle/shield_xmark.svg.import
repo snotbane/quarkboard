@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/shield_xmark.svg-f1ece8b2d353b7abf5e3899a3e5d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/columns_3.svg-deed33d8b450eafc93521d2a60d0fda
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

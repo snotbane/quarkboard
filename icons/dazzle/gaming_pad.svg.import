@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/gaming_pad.svg-976ce12371fc2d671aa701c739e5f8
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

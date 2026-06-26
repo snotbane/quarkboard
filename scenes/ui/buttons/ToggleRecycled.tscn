@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c4sfqfw7o4udl"]
+
+[ext_resource type="PackedScene" uid="uid://deun681dbi430" path="res://scenes/ui/buttons/_ToggleBase.tscn" id="1_3d5jm"]
+[ext_resource type="Texture2D" uid="uid://vtw5mxisiipx" path="res://icons/dazzle/trash_fill.svg" id="1_qeq5r"]
+[ext_resource type="Texture2D" uid="uid://b2ok138l42c3p" path="res://icons/dazzle/trash.svg" id="2_63n6g"]
+
+[node name="recycled" unique_id=1631341252 instance=ExtResource("1_3d5jm")]
+theme_override_icons/checked = ExtResource("1_qeq5r")
+theme_override_icons/unchecked = ExtResource("2_63n6g")

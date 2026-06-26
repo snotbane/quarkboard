@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/trash_clock.svg-5f85a98aa1cff623baea4d5481d9a
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

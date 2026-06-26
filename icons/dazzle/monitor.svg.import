@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/monitor.svg-901969759db806b143c230a2b2025cea.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

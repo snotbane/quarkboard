@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/brush.svg-a37c52d9de2be7790c34708d72f6f124.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/arrow_down_big_small.svg-e01fe6dd220b180d8228
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

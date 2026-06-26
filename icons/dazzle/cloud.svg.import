@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cloud.svg-1dd054a79ab0d728458ab71c5fd0e3dd.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

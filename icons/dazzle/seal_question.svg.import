@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/seal_question.svg-5754d8cbbe59ed1da3081f9c234
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

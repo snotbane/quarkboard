@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/trash_xmark.svg-65651126ae65d29834ee9e2b5337f
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

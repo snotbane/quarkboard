@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/moon_stars.svg-890ac9b93fd6f916457945011683db
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/ClassList.svg-9a6ad46a82b3e33156d0a0ece7e7bc6
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/watch_alt_1.svg-0b31d534cf489dddff2931b108350
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

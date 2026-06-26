@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://imsfjgg1bjix"]
+
+[ext_resource type="PackedScene" uid="uid://deun681dbi430" path="res://scenes/ui/buttons/_ToggleBase.tscn" id="1_hl2jq"]
+[ext_resource type="Texture2D" uid="uid://fwyr4rlu4is4" path="res://icons/dazzle/compress.svg" id="1_u2w0l"]
+[ext_resource type="Texture2D" uid="uid://bdhgwngxvtsx1" path="res://icons/dazzle/expand.svg" id="2_2f24t"]
+
+[node name="popouted" unique_id=1631341252 instance=ExtResource("1_hl2jq")]
+theme_override_icons/checked = ExtResource("1_u2w0l")
+theme_override_icons/unchecked = ExtResource("2_2f24t")

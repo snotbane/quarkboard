@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/hexagon_image.svg-d4a70b77651d592bc5a4447640d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

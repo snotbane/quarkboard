@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/video_plus.svg-8a77e3acdb427369a72247a7acca81
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

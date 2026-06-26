@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/badge_dollar.svg-1f6407b68648ee0acdf49364bf32
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

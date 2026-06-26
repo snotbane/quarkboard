@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cloud_up_arrow.svg-18830427946de476c42d03a67c
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

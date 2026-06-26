@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/flag_fill.svg-2d76a1f5e86c376f6969d24b074b247
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

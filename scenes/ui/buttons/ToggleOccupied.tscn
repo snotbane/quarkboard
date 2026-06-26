@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://xt40dt45tltm"]
+
+[ext_resource type="PackedScene" uid="uid://deun681dbi430" path="res://scenes/ui/buttons/_ToggleBase.tscn" id="1_mjiet"]
+[ext_resource type="Texture2D" uid="uid://dkcujimgj8llm" path="res://icons/dazzle/pen_fill.svg" id="2_mjiet"]
+[ext_resource type="Texture2D" uid="uid://c4nn51m7aw31i" path="res://icons/dazzle/pen.svg" id="3_rcbif"]
+
+[node name="occupied" unique_id=1631341252 instance=ExtResource("1_mjiet")]
+theme_override_icons/checked = ExtResource("2_mjiet")
+theme_override_icons/unchecked = ExtResource("3_rcbif")

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/hourglass_half.svg-29af5be4f8a75f3b7f90261f82
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

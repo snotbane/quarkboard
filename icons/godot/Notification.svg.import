@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/Notification.svg-88132cc60837df4c68a282acd1e7
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/atom.svg-d3f00d57fa0e648e173b49fea8e59904.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

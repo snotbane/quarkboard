@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/caret_right.svg-e00e3cfda0073fba25d0dcdabda00
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

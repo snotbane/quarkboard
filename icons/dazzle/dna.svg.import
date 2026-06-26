@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/dna.svg-7fe743320c1e11359fe921af3c5fd377.dpit
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

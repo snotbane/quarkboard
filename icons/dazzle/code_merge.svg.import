@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/code_merge.svg-26f29726aa4d72e6183545ec0b14fd
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

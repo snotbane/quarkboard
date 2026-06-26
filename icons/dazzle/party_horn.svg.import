@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/party_horn.svg-01bd48af2981564c61f744f9c735a9
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/sitemap.svg-bf324297c1617bea9d20169f03949bbe.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

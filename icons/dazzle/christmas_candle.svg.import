@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/christmas_candle.svg-46f84534c533cca0bd0be4ee
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/lamp_desk.svg-8170ab41927b73b38835902635e9bff
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

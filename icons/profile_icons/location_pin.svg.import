@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/location_pin.svg-0330a3f760da6cffcc060c2d3b9f
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

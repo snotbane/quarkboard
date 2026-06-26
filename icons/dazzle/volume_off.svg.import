@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/volume_off.svg-65be9640fd6b4d1196b8f381e80900
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/notebook.svg-429ce5bf106c3249a83bd502a036f97d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

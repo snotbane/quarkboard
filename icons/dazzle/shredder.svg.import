@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/shredder.svg-342d35f8f1fb3530494d78e1502e592d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

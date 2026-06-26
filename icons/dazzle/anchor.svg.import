@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/anchor.svg-3f2374a951cc0db4849fa1d8db7db943.d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

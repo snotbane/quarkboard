@@ -2,13 +2,7 @@ extends Control
 
 var board: Board:
 	get: return $board.resource
-	set(value):
-		$board.resource = value
 
-func populate(element: Board) -> void:
-	if not is_node_ready():
-		await ready
 
-	board = element
-
-	# show.call_deferred()
+func create_new_quark() -> void:
+	board.create_new_quark()

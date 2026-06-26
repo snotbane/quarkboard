@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/moon.svg-16154928287926eaa273ffd5ace9c2cb.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

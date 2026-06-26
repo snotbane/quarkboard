@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://deun681dbi430"]
+
+[ext_resource type="Script" uid="uid://d3f8jstcrmiht" path="res://addons/myth/scripts/component/ResourcePropertyComponent.gd" id="1_17o6d"]
+
+[node name="toggle" type="CheckButton" unique_id=1631341252]
+
+[node name="button_pressed" type="Node" parent="." unique_id=758710558]
+script = ExtResource("1_17o6d")
+fallback_type = 1
+metadata/_custom_type_script = "uid://d3f8jstcrmiht"

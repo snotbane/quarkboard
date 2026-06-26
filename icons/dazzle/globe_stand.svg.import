@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/globe_stand.svg-2c9ab33b460d9451e1181828112be
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/sun_alt.svg-653324b90383f957fb95555218fb9d74.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

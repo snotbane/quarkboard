@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/coffin_cross.svg-0d44c31a9332385f264b1cd8fb27
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

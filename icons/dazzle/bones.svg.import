@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/bones.svg-cd6a1dc0386577f30155c60fd501c46e.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

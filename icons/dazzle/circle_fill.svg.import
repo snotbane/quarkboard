@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/circle_fill.svg-d1da9362e891958a6eba899d4cef6
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

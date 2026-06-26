@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cedi_sign.svg-650634d18b1ff1749662d3033314e04
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

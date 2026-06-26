@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/award.svg-1f66fa3cce9e4019d26e25a5b8f21df4.dp
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

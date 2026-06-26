@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/satellite_dish.svg-5acebe8fa09bbba6396be41eaa
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

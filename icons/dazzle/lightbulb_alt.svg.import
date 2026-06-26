@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/lightbulb_alt.svg-5c6be37d818131b73bdc39dc1e7
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

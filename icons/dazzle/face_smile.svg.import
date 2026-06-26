@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/face_smile.svg-b46ee990e45c806bb271828fe00897
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

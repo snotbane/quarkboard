@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/webcam_alt.svg-0f0944f8d1ed33ff65062c873d56d7
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

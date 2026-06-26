@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/gift.svg-e9d65fb9b0b614f9997bdb9c39f39351.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

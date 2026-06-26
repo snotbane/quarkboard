@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/clipboard_xmark.svg-f610f2e331f6b8e1631192495
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

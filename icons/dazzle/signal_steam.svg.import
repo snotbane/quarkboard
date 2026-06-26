@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/signal_steam.svg-6e0136e435594b9be7c76c00e60d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

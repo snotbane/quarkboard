@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/candy_cane.svg-4165c3d82c4f88fdd54c1fee5dfa9c
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

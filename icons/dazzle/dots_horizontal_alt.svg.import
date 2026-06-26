@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/dots_horizontal_alt.svg-095700bb33378ca63186a
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

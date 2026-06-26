@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/circle_location_arrow.svg-bf8f49a5f0bb98b8b7b
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

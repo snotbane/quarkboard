@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/balloon.svg-f546b9153727e38b516294a515f6ee94.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

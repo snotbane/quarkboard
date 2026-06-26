@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/DistractionFree.svg-4fec73c89950cf0daa78b852b
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

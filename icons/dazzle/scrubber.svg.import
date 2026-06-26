@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/scrubber.svg-992a3b9190811f450b1f8e19dad90026
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/seal_exclamation.svg-e778bf300eb3e28645808a22
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

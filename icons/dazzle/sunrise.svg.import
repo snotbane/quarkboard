@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/sunrise.svg-abc69afc7b3a172a054a954046a38b02.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

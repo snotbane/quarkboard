@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/treasure_chest.svg-96e39a02683d7ec365744b405e
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

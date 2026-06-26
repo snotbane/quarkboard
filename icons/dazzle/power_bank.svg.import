@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/power_bank.svg-a6491e92d195ac772273a93c3f3d28
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

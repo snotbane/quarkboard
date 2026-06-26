@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/house_chimney_floor.svg-5079602e8555e21906cc4
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

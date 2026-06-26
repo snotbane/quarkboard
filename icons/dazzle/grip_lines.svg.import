@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/grip_lines.svg-64b6d2fc2cc009af1c659440d5dea6
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

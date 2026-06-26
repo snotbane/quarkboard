@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/cent_sign.svg-535e419a5629290f571004d584a7bf3
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

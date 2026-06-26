@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/bolt.svg-706a0c4633d1ae75e6302807f180b13f.dpi
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/graduation_hat_alt.svg-d67fcc135fc3665b57c0f6
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

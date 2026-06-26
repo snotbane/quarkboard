@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/arrow_rotate_right_24.svg-e0533aa19de8df613dc
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

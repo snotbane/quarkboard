@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/trash_undo.svg-399b5698c8073e289bd6fa8933541d
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

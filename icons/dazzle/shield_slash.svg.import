@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/shield_slash.svg-9c161ee78897d4927af84f1bfb6a
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

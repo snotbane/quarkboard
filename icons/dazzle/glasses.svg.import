@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/glasses.svg-03579faa0d32f3a7b8a00d2065c0d593.
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true

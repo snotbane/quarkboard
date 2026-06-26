@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c330eapythg32"]
+
+[ext_resource type="PackedScene" uid="uid://imsfjgg1bjix" path="res://scenes/ui/buttons/TogglePopouted.tscn" id="1_i03mr"]
+[ext_resource type="PackedScene" uid="uid://b7gi0ywdubcyx" path="res://scenes/ui/buttons/ToggleFlagged.tscn" id="3_swu58"]
+[ext_resource type="Script" uid="uid://eufi46qvlf6t" path="res://addons/myth/scripts/ui/SoloContainer.gd" id="4_i03mr"]
+[ext_resource type="Script" uid="uid://civqbiocmlry3" path="res://ui/ModifierSwapContainer.gd" id="5_swu58"]
+[ext_resource type="PackedScene" uid="uid://co4hswv71wjji" path="res://scenes/ui/buttons/ToggleArchived.tscn" id="6_58cqy"]
+[ext_resource type="PackedScene" uid="uid://c4sfqfw7o4udl" path="res://scenes/ui/buttons/ToggleRecycled.tscn" id="7_k7rdm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i03mr"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_58cqy"]
+device = -1
+keycode = 4194325
+
+[sub_resource type="Shortcut" id="Shortcut_xqkeo"]
+events = [SubResource("InputEventKey_58cqy")]
+
+[node name="quark_actions" type="PanelContainer" unique_id=339875958]
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_i03mr")
+
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=563476610]
+layout_mode = 2
+alignment = 1
+
+[node name="popouted" parent="h_box_container" unique_id=187197830 instance=ExtResource("1_i03mr")]
+layout_mode = 2
+
+[node name="flagged" parent="h_box_container" unique_id=1483070419 instance=ExtResource("3_swu58")]
+layout_mode = 2
+
+[node name="solo_container" type="Container" parent="h_box_container" unique_id=171536452]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+script = ExtResource("4_i03mr")
+current_tab = 1
+metadata/_custom_type_script = "uid://eufi46qvlf6t"
+
+[node name="modifier_swapper" type="Node" parent="h_box_container/solo_container" unique_id=1604834034 node_paths=PackedStringArray("default", "shortcuts")]
+script = ExtResource("5_swu58")
+default = NodePath("../archived")
+swap_toggled = true
+shortcuts = {
+SubResource("Shortcut_xqkeo"): NodePath("../recycled")
+}
+metadata/_custom_type_script = "uid://civqbiocmlry3"
+
+[node name="archived" parent="h_box_container/solo_container" unique_id=106270683 instance=ExtResource("6_58cqy")]
+layout_mode = 2
+
+[node name="recycled" parent="h_box_container/solo_container" unique_id=474904485 instance=ExtResource("7_k7rdm")]
+visible = false
+layout_mode = 2

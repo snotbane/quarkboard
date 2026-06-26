@@ -15,4 +15,6 @@ dest_files=["res://.godot/imported/grid_dividers.svg-cd81e916d9c52bc1eb4f8e5145a
 base_scale=1.0
 saturation=1.0
 color_map={}
+fix_alpha_border=false
+premult_alpha=false
 compress=true
